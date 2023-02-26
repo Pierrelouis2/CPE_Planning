@@ -13,12 +13,15 @@ let users = {};
 
 app.listen(8989, () => console.log('Example app listening on port 8989!'));
 
-app.get('/', (req, res) => res.send('<h1>Hello World!</h1>'));
+app.get('/', (req, res) => {
+    console.log(req)
+    res.send('<h1>Hello World!</h1>')
+});
 
 
 // Creates the endpoint for our webhook
 app.post('/webhook', (req, res) => {
-
+    console/log(req)
     let body = req.body;
 
     // Checks this is an event from a page subscription
@@ -56,7 +59,7 @@ app.post('/webhook', (req, res) => {
 
 // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
-
+    console.log(req)
     // Your verify token. Should be a random string.
     let VERIFY_TOKEN = "1476955067";
 
@@ -195,7 +198,7 @@ function callSendAPI(sender_psid, response, cb = null) {
 
     // Send the HTTP request to the Messenger Platform
     request({
-        "uri": "https://graph.facebook.com/v2.6/me/messages",
+        "uri": "https://graph.facebook.com/v16.0/me/messages",
         "qs": { "access_token": config.get('facebook.page.access_token') },
         "method": "POST",
         "json": request_body
