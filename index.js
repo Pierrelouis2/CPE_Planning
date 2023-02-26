@@ -13,7 +13,7 @@ let users = {};
 
 app.listen(8989, () => console.log('Example app listening on port 8989!'));
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.get('/', (req, res) => res.send('<h1>Hello World!</h1>'));
 
 
 // Creates the endpoint for our webhook
@@ -67,14 +67,11 @@ app.get('/webhook', (req, res) => {
 
     // Checks if a token and mode is in the query string of the request
     if (mode && token) {
-
         // Checks the mode and token sent is correct
         if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-
             // Responds with the challenge token from the request
             console.log('WEBHOOK_VERIFIED');
             res.status(200).send(challenge);
-
         } else {
             // Responds with '403 Forbidden' if verify tokens do not match
             res.sendStatus(403);
