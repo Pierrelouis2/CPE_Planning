@@ -19,9 +19,7 @@ convertapi.convert('csv', { File: 'edt.pdf' , EnableOcr: 'None'})
   .then(function(result) {
     // get converted file url
     console.log("Converted file url: " + result.file.url);
-
     // save to file
-    console.log(result.File)
     return result.file.save('edt.csv');
   })
   .then(function(file) {
