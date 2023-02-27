@@ -11,17 +11,15 @@ app.use(bodyParser.json());
 
 let users = {};
 
-app.listen(8989, () => console.log('Example app listening on port 8989!'));
+app.listen(8989,'0.0.0.0' ,() => console.log('Example app listening on port 8989!'));
 
 app.get('/', (req, res) => {
-    console.log(req)
     res.send('<h1>Hello World!</h1>')
 });
 
 
 // Creates the endpoint for our webhook
 app.post('/webhook', (req, res) => {
-    console/log(req)
     let body = req.body;
 
     // Checks this is an event from a page subscription
@@ -29,18 +27,16 @@ app.post('/webhook', (req, res) => {
 
         // Iterates over each entry - there may be multiple if batched
         body.entry.forEach(function(entry) {
-
             // Gets the message. entry.messaging is an array, but
             // will only ever contain one message, so we get index 0
             let webhook_event = entry.messaging[0];
-            console.log(webhook_event);
-
             // Get the sender PSID
             let sender_psid = webhook_event.sender.id;
             console.log('Sender PSID: ' + sender_psid);
 
             // Check if the event is a message or postback and
             // pass the event to the appropriate handler function
+            console.log(webhook_event.message)
             if (webhook_event.message) {
                 handleMessage(sender_psid, webhook_event.message);
             } else if (webhook_event.postback) {
@@ -59,10 +55,8 @@ app.post('/webhook', (req, res) => {
 
 // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
-    console.log(req)
     // Your verify token. Should be a random string.
     let VERIFY_TOKEN = "1476955067";
-
     // Parse the query params
     let mode = req.query['hub.mode'];
     let token = req.query['hub.verify_token'];
@@ -97,7 +91,6 @@ function getImage(type, sender_id){
         user = users[sender_id], // // user requesting image
         user_type_count = user[type+'_count'];
 
-
     // update user before returning image
     let updated_user = {
         [sender_id] : Object.assign(user, {
@@ -106,7 +99,6 @@ function getImage(type, sender_id){
     };
     // update users
     users = Object.assign(users, updated_user);
-
     console.log(users);
     return images[type][user_type_count];
 }
@@ -150,14 +142,11 @@ function imageTemplate(type, sender_id){
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
     let response;
-
     // Check if the message contains text
     if (received_message.text) {
-
         // Create the payload for a basic text message
-        response = askTemplate();
+        response = askTemplate(received_message.text);
     }
-
     // Sends the response message
     callSendAPI(sender_psid, response);
 }
@@ -193,7 +182,7 @@ function callSendAPI(sender_psid, response, cb = null) {
         "recipient": {
             "id": sender_psid
         },
-        "message": response
+        "message": response,
     };
 
     // Send the HTTP request to the Messenger Platform
