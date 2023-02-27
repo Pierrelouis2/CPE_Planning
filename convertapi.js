@@ -11,21 +11,32 @@ function read_csv(file){
     /* parse data */
     console.log(data)
 });
-    
-  }
+}
 
-
-convertapi.convert('csv', { File: 'edt.pdf' , EnableOcr: 'None'})
-  .then(function(result) {
-    // get converted file url
-    console.log("Converted file url: " + result.file.url);
-    // save to file
-    return result.file.save('edt.csv');
-  })
-  .then(function(file) {
+async function convertFile(file, format){
+    result = await convertapi.convert(format, { File: file , EnableOcr: 'true'});
+    if (result.error) {
+        console.log("Error: " + result.error);
+        return "error";
+    }
+    file = await result.file.save(`${file.split('.')[0]}.${format}`);
     console.log("File saved: " + file);
-    read_csv(file)
-  })
-  .catch(function(e) {
-    console.error(e.toString());
-  });
+    return file;
+};
+
+
+async function main () {
+    file_xlsx = await convertFile('edt.pdf', 'xls');
+    if (file_xlsx == "error") {
+        console.log("Error ");
+        return;
+    }
+    file_csv = await convertFile(file_xlsx, 'csv');
+    if (file_csv == "error") {
+        console.log("Error");
+        return;
+    }
+    read_csv(file_csv);
+    };
+
+main();
