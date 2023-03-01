@@ -82,10 +82,7 @@ function getImage(type, sender_id){
     // create user if doesn't exist
     if(users[sender_id] === undefined){
         users = Object.assign({
-            [sender_id] : {
-                'cats_count' : 0,
-                'dogs_count' : 0
-            }
+            [sender_id] : { 'cats_count' : 0, 'dogs_count' : 0}
         }, users);
     }
 
@@ -95,9 +92,7 @@ function getImage(type, sender_id){
 
     // update user before returning image
     let updated_user = {
-        [sender_id] : Object.assign(user, {
-            [type+'_count'] : count === user_type_count + 1 ? 0 : user_type_count + 1
-        })
+        [sender_id] : Object.assign(user, {[type+'_count'] : count === user_type_count + 1 ? 0 : user_type_count + 1})
     };
     // update users
     users = Object.assign(users, updated_user);
@@ -106,23 +101,14 @@ function getImage(type, sender_id){
 }
 
 function askTemplate(text){
-    return {
-        "attachment":{
+    return {"attachment":{
             "type":"template",
             "payload":{
                 "template_type":"button",
                 "text": text,
                 "buttons":[
-                    {
-                        "type":"postback",
-                        "title":"Cats",
-                        "payload":"CAT_PICS"
-                    },
-                    {
-                        "type":"postback",
-                        "title":"Dogs",
-                        "payload":"DOG_PICS"
-                    }
+                    { "type":"postback", "title":"Cats", "payload":"CAT_PICS"},
+                    { "type":"postback", "title":"Dogs", "payload":"DOG_PICS"}
                 ]
             }
         }
@@ -133,9 +119,7 @@ function imageTemplate(type, sender_id){
     return {
         "attachment":{
             "type":"image",
-            "payload":{
-                "url": getImage(type, sender_id),
-                "is_reusable":true
+            "payload":{ "url": getImage(type, sender_id), "is_reusable":true
             }
         }
     }
