@@ -3,18 +3,17 @@ let express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
     request = require('request'),
-    config = require('config'),
-    images = require('./pics');
+    config = require('config');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let users = {};
 
-app.listen(8989,'0.0.0.0' ,() => console.log('Example app listening on port 8989!'));
+app.listen(8989,'0.0.0.0' ,() => console.log('App listening on port 8989!'));
 
 app.get('/', (req, res) => {
-    res.send('<h1>Hello World!</h1>')
+    res.send('<h1>Hello World!, This is not a website just quit it plz</h1> \n <h2><i> The admin </i></h2>')
 });
 
 
@@ -109,10 +108,11 @@ function imageTemplate(){
 
 // Handles messages events
 function handleMessage(sender_psid) {
-    console.log('asking template');
-    let response = askTemplate();
-    console.log(response)
-    console.log('sending template');
+    // console.log('asking template');
+    // let response = askTemplate();
+    // console.log(response)
+    // console.log('sending template');
+    let response = {"attachment":{"text": "test"}}
     callSendAPI(sender_psid, response);
     return;
 }
