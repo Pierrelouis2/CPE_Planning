@@ -1,7 +1,12 @@
 {
   "facebook": {
     "page": {
-      "access_token": "EAAKKDK025HsBAIjXPg1I72Fh7O4ibcB8NrEWZAhFDAOTFvQLHltmm8ZCfey0tZA1ErojsiDZA36Y7FBzXtOnkNBg3TeVpbQG1AhETwx1EaTOM6vqi1MHstVINyt1wlxv9qTmnopTafU2RzilPCt1RZCSwf2ZBPGEToRqkF2RKLZCZBOea1pGn9Qc"
+      "access_token": "EAAHLwV2JOukBAKCiwQ5Qs9SdeigliVxcylJZCmKKUSa8DbHgEiw4iM85l9eVeZAixB3FiHteJ9JVR9qBzuYi36Cip52OpZALZCI4Lb7S35Xbp08nW4tgiD70uaBa4sHl0ADPFbX4wr2p3F6k3OiNY8AtcTtJWyxG8vazUoWEStBXXfJsfJFLM8eBe234E9M11UKuBFHt9QZDZD"
     }
+  },
+  "convertAPI":{
+    "secret":"8Bq4BsCS4Ob1cJdk",
+    "key":277584965
+
   }
 }

@@ -3,25 +3,22 @@ let express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
     request = require('request'),
-    config = require('config'),
-    images = require('./pics');
+    config = require('config');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let users = {};
 
-app.listen(8989, () => console.log('Example app listening on port 8989!'));
+app.listen(8989,'0.0.0.0' ,() => console.log('App listening on port 8989!'));
 
 app.get('/', (req, res) => {
-    console.log(req)
-    res.send('<h1>Hello World!</h1>')
+    res.send('<h1>Hello World!, This is not a website just quit it plz</h1> \n <h2><i> The admin </i></h2>')
 });
 
 
 // Creates the endpoint for our webhook
 app.post('/webhook', (req, res) => {
-    console/log(req)
     let body = req.body;
 
     // Checks this is an event from a page subscription
@@ -29,25 +26,22 @@ app.post('/webhook', (req, res) => {
 
         // Iterates over each entry - there may be multiple if batched
         body.entry.forEach(function(entry) {
-
             // Gets the message. entry.messaging is an array, but
             // will only ever contain one message, so we get index 0
             let webhook_event = entry.messaging[0];
-            console.log(webhook_event);
-
             // Get the sender PSID
             let sender_psid = webhook_event.sender.id;
             console.log('Sender PSID: ' + sender_psid);
 
-            // Check if the event is a message or postback and
-            // pass the event to the appropriate handler function
+            //message or postback
+            console.log(webhook_event.message);
             if (webhook_event.message) {
-                handleMessage(sender_psid, webhook_event.message);
+                console.log('in handleMessage');
+                handleMessage(sender_psid);
             } else if (webhook_event.postback) {
                 handlePostback(sender_psid, webhook_event.postback);
             }
         });
-
         // Returns a '200 OK' response to all requests
         res.status(200).send('EVENT_RECEIVED');
     } else {
@@ -59,10 +53,8 @@ app.post('/webhook', (req, res) => {
 
 // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
-    console.log(req)
     // Your verify token. Should be a random string.
     let VERIFY_TOKEN = "1476955067";
-
     // Parse the query params
     let mode = req.query['hub.mode'];
     let token = req.query['hub.verify_token'];
@@ -82,133 +74,99 @@ app.get('/webhook', (req, res) => {
     }
 });
 
-function getImage(type, sender_id){
-    // create user if doesn't exist
-    if(users[sender_id] === undefined){
-        users = Object.assign({
-            [sender_id] : {
-                'cats_count' : 0,
-                'dogs_count' : 0
-            }
-        }, users);
-    }
-
-    let count = images[type].length, // total available images by type
-        user = users[sender_id], // // user requesting image
-        user_type_count = user[type+'_count'];
-
-
-    // update user before returning image
-    let updated_user = {
-        [sender_id] : Object.assign(user, {
-            [type+'_count'] : count === user_type_count + 1 ? 0 : user_type_count + 1
-        })
-    };
-    // update users
-    users = Object.assign(users, updated_user);
-
-    console.log(users);
-    return images[type][user_type_count];
-}
-
-function askTemplate(text){
-    return {
-        "attachment":{
+function askTemplate(){
+    return {"name":"ask",
+            "attachment":{
             "type":"template",
             "payload":{
                 "template_type":"button",
-                "text": text,
+                "text":"Quel jour ?",
                 "buttons":[
-                    {
-                        "type":"postback",
-                        "title":"Cats",
-                        "payload":"CAT_PICS"
-                    },
-                    {
-                        "type":"postback",
-                        "title":"Dogs",
-                        "payload":"DOG_PICS"
-                    }
+                    { "type":"postback", "title":"LUNDI", "payload":"LUNDI"},
+                    { "type":"postback", "title":"MARDI", "payload":"MARDI"},
+                    { "type":"postback", "title":"MERCREDI", "payload":"MECREDI"},
+                    { "type":"postback", "title":"JEUDI", "payload":"JEUDI"},
+                    { "type":"postback", "title":"VENDREDI", "payload":"VENDREDI"},
+                    { "type":"postback", "title":"EDT", "payload":"EDT"},
                 ]
             }
         }
-    }
-}
+    };
+};
 
-function imageTemplate(type, sender_id){
-    return {
-        "attachment":{
-            "type":"image",
-            "payload":{
-                "url": getImage(type, sender_id),
-                "is_reusable":true
+function imageTemplate(){
+    return {"name":"image",
+            "attachment":{
+             "attachment":{
+                "type":"image",
+                "payload":{"is_reusable":true}
+                },
+            "data":"edt.png;type=image/jpg"}
             }
-        }
-    }
-}
+};
+
+
 
 // Handles messages events
-function handleMessage(sender_psid, received_message) {
-    let response;
-
-    // Check if the message contains text
-    if (received_message.text) {
-
-        // Create the payload for a basic text message
-        response = askTemplate();
-    }
-
-    // Sends the response message
+function handleMessage(sender_psid) {
+    // console.log('asking template');
+    // let response = askTemplate();
+    // console.log(response)
+    // console.log('sending template');
+    let response = {"attachment":{"text": "test"}}
     callSendAPI(sender_psid, response);
+    return;
 }
 
 function handlePostback(sender_psid, received_postback) {
     let response;
-
     // Get the payload for the postback
     let payload = received_postback.payload;
-
     // Set the response based on the postback payload
-    if (payload === 'CAT_PICS') {
-        response = imageTemplate('cats', sender_psid);
-        callSendAPI(sender_psid, response, function(){
-            callSendAPI(sender_psid, askTemplate('Show me more'));
-        });
-    } else if (payload === 'DOG_PICS') {
-        response = imageTemplate('dogs', sender_psid);
-        callSendAPI(sender_psid, response, function(){
-            callSendAPI(sender_psid, askTemplate('Show me more'));
-        });
-    } else if(payload === 'GET_STARTED'){
-        response = askTemplate('Are you a Cat or Dog Person?');
+    if (payload === 'EDT') {
+        response = imageTemplate();
         callSendAPI(sender_psid, response);
+    } else if (payload === 'LUNDI'){
+        // return the column LUNDI from etd.csv
+        pass
+    } else if (payload === 'MARDI'){
+        pass
+    } else if (payload === 'MERCREDI'){
+        pass
+    } else if (payload === 'JEUDI'){
+        pass
+    } else if (payload === 'VENDREDI'){
+        pass
     }
-    // Send the message to acknowledge the postback
+
 }
 
 // Sends response messages via the Send API
 function callSendAPI(sender_psid, response, cb = null) {
     // Construct the message body
-    let request_body = {
+    let request_body= {
         "recipient": {
             "id": sender_psid
         },
-        "message": response
+        "message": {"attachement": response.attachment}
     };
-
+    console.log('got request body')
     // Send the HTTP request to the Messenger Platform
+    console.log(request_body)
     request({
         "uri": "https://graph.facebook.com/v16.0/me/messages",
         "qs": { "access_token": config.get('facebook.page.access_token') },
         "method": "POST",
         "json": request_body
     }, (err, res, body) => {
+        console.log('got response')
         if (!err) {
             if(cb){
                 cb();
+                return;
             }
         } else {
-            console.error("Unable to send message:" + err);
+            console.log("Unable to send message:" + err);
         }
     });
 }
