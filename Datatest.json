@@ -1,41 +1,77 @@
 [
     {
         "NomMajeurs": "CONCEP.LOGICIELLE/BIG DATA",
-        "jour": "VENDREDI-03-f\u00e9vr",
         "semaine": {
             "VENDREDI-03-f\u00e9vr": {
-                "Matin": "VENDREDI-03-f\u00e9vr",
-                "Aprem": "VENDREDI-03-f\u00e9vr"
+                "Matin": [
+                    "IMAGE ",
+                    "Conditionnement ",
+                    "S.MAZAURIC",
+                    "  8h- 10h Salle E109 ",
+                    "  10h15- 12h15 Salle G108"
+                ],
+                "Aprem": [
+                    "13h30-17h45",
+                    "IMAGE ",
+                    "Pas de cours"
+                ]
             }
         }
     },
     {
         "NomMajeurs": "ROBOTIQUE",
-        "jour": "VENDREDI-03-f\u00e9vr",
         "semaine": {
             "VENDREDI-03-f\u00e9vr": {
-                "Matin": "VENDREDI-03-f\u00e9vr",
-                "Aprem": "VENDREDI-03-f\u00e9vr"
+                "Matin": [
+                    "IMAGE ",
+                    "Conditionnement ",
+                    "S.MAZAURIC",
+                    "  8h- 10h Salle E109 ",
+                    "  10h15- 12h15 Salle G108"
+                ],
+                "Aprem": [
+                    "13h30-17h45",
+                    "IMAGE ",
+                    "Pas de cours"
+                ]
             }
         }
     },
     {
         "NomMajeurs": "ELECTRONIQUE ET SYST EMB",
-        "jour": "VENDREDI-03-f\u00e9vr",
         "semaine": {
             "VENDREDI-03-f\u00e9vr": {
-                "Matin": "VENDREDI-03-f\u00e9vr",
-                "Aprem": "VENDREDI-03-f\u00e9vr"
+                "Matin": [
+                    "IMAGE ",
+                    "Conditionnement ",
+                    "S.MAZAURIC",
+                    "  8h- 10h Salle E109 ",
+                    "  10h15- 12h15 Salle G108"
+                ],
+                "Aprem": [
+                    "13h30-17h45",
+                    "IMAGE ",
+                    "Pas de cours"
+                ]
             }
         }
     },
     {
         "NomMajeurs": "INFRA DES RESEAUX",
-        "jour": "VENDREDI-03-f\u00e9vr",
         "semaine": {
             "VENDREDI-03-f\u00e9vr": {
-                "Matin": "VENDREDI-03-f\u00e9vr",
-                "Aprem": "VENDREDI-03-f\u00e9vr"
+                "Matin": [
+                    "IMAGE ",
+                    "Conditionnement ",
+                    "S.MAZAURIC",
+                    "  8h- 10h Salle E109 ",
+                    "  10h15- 12h15 Salle G108"
+                ],
+                "Aprem": [
+                    "13h30-17h45",
+                    "IMAGE ",
+                    "Pas de cours"
+                ]
             }
         }
     },
@@ -43,8 +79,18 @@
         "NomMajeurs": "IMAGE",
         "semaine": {
             "VENDREDI-03-f\u00e9vr": {
-                "Matin": "VENDREDI-03-f\u00e9vr",
-                "Aprem": "VENDREDI-03-f\u00e9vr"
+                "Matin": [
+                    "IMAGE ",
+                    "Conditionnement ",
+                    "S.MAZAURIC",
+                    "  8h- 10h Salle E109 ",
+                    "  10h15- 12h15 Salle G108"
+                ],
+                "Aprem": [
+                    "13h30-17h45",
+                    "IMAGE ",
+                    "Pas de cours"
+                ]
             }
         }
     }

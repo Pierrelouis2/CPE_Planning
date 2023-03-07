@@ -1,0 +1,173 @@
+[
+    {
+        "jour":"LUNDI-30-janv",
+        "Matin":[
+            "8h-12h15",
+            "Introduction",
+            "Administration Syst\u00e8me",
+            "G.MOREL",
+            "Grp A  Salle G102 ",
+            "Grp B  Salle G108 ",
+            "Grp C  Salle I304 ",
+            "Grp D  Salle G103"
+        ],
+        "Aprem":[
+            "13h10-18h",
+            "LV",
+            "(Voir planning)"
+        ]
+    },
+    {
+        "jour":"MARDI-31-janv",
+        "Matin":[
+            "8h-12h15",
+            "Introduction",
+            "Administration Syst\u00e8me",
+            "G.MOREL",
+            "Grp A  Salle G102 ",
+            "Grp B  Salle I300",
+            "Grp C  Salle I207 ",
+            "Grp D  Salle G103"
+        ],
+        "Aprem":[
+            "13h30-17h45",
+            "CONCEP.LOGICIELLE\/BIG DATA",
+            "Bases de Donn\u00e9es ",
+            "J.CHEVALIER\/M.LAGARRIGUE",
+            "Salles  G102- G103",
+            "ROBOTIQUE",
+            "Administration syst\u00e8me et gestion de codes",
+            "F.JUMEL",
+            "Salle G108",
+            "ELECTRONIQUE ET SYST EMB",
+            "Pas de cours",
+            "INFRA DES RESEAUX ",
+            "Architecture des r\u00e9seaux locaux LAN",
+            "N.DANIEL ",
+            "Salle B121",
+            "R.FANTAUZZI",
+            "Salle I304",
+            "IMAGE ",
+            "Rentr\u00e9e ",
+            "13h30 - 14h30",
+            "Optimisation num\u00e9rique et probl\u00e8me inverse",
+            "14h45 - 17h45",
+            "E.VAN REETH \/S.MAZAURIC",
+            "Salle F002"
+        ]
+    },
+    {
+        "jour":"MERCREDI-01-f\u00e9vr",
+        "Matin":[
+            "8h-12h15",
+            "Introduction",
+            "Administration Syst\u00e8me",
+            "G.MOREL",
+            "Grp A  Salle G108 ",
+            "Grp B  Salle I300",
+            "Grp C  Salle I207 ",
+            "Grp D  Salle G103"
+        ],
+        "Aprem":[
+            "13h30-17h45",
+            "CONCEP.LOGICIELLE\/BIG DATA",
+            "Administration Syst\u00e8me",
+            "G.MOREL",
+            "Salles  G102- G103",
+            "ROBOTIQUE",
+            "Administration syst\u00e8me et gestion de codes",
+            "F.JUMEL",
+            "Salle G108",
+            "ELECTRONIQUE ET SYST EMB",
+            "Pas de cours",
+            "INFRA DES RESEAUX ",
+            "S\u00e9curit\u00e9 ",
+            "M.EL BERMIL",
+            "Salle G103",
+            "P.BULLIAN",
+            "Salle I306",
+            "IMAGE ",
+            "Programmation g\u00e9n\u00e9rique en C++",
+            "T.DUPONT",
+            "Salle I304"
+        ]
+    },
+    {
+        "jour":"JEUDI-02-f\u00e9vr",
+        "Matin":[
+            "8h-12h15",
+            "CONCEP.LOGICIELLE\/BIG DATA",
+            "Administration Syst\u00e8me",
+            "G.MOREL",
+            "Salles  G102- G103",
+            "ROBOTIQUE",
+            "Administration syst\u00e8me et gestion de codes",
+            "F.JUMEL",
+            "Salle G108",
+            "ELECTRONIQUE ET SYST EMB",
+            "Composants \u00e9lectroniques",
+            "A. GACI",
+            "Salle E109",
+            "INFRA DES RESEAUX ",
+            "S\u00e9curit\u00e9 syst\u00e8mes\/r\u00e9seaux",
+            "P. BULLIAN",
+            "Salle I306",
+            "IMAGE ",
+            "Optimisation",
+            "E.VAN REETH \/S.MAZAURIC",
+            "Salle  I304",
+            "13h00-14h30",
+            "Pr\u00e9sentation C\u00e9sure en Imagerie M\u00e9dicale ",
+            "KITWARE",
+            "M.JORROT",
+            "Salle F002"
+        ],
+        "Aprem":[
+
+        ]
+    },
+    {
+        "jour":"VENDREDI-03-f\u00e9vr",
+        "Matin":[
+            "8h-12h15",
+            "CONCEP.LOGICIELLE\/BIG DATA",
+            "pas de cours",
+            "ROBOTIQUE",
+            "pas de cours",
+            "ELECTRONIQUE ET SYST EMB",
+            "pas de cours",
+            "INFRA DES RESEAUX ",
+            "Cloud et Virtualisation",
+            "O.CARRILLO",
+            "Salle I302",
+            "IMAGE ",
+            "Conditionnement ",
+            "S.MAZAURIC",
+            "  8h- 10h Salle E109 ",
+            "  10h15- 12h15 Salle G108"
+        ],
+        "Aprem":[
+            "13h30-17h45",
+            "CONCEP.LOGICIELLE\/BIG DATA",
+            "Bases de Donn\u00e9es ",
+            "J.CHEVALIER\/M.LAGARRIGUE",
+            "Salles  G102- G105",
+            "ROBOTIQUE",
+            "Administration syst\u00e8me et gestion de codes",
+            "F.JUMEL",
+            "Salle G108",
+            "ELECTRONIQUE ET SYST EMB",
+            "Techniques avanc\u00e9es de conception des syst\u00e8mes num\u00e9riques",
+            "A. MASSOURI",
+            "Salle I203",
+            "INFRA DES RESEAUX ",
+            "Cloud et Virtualisation",
+            "P.GAXATTE ? ",
+            "Salle info ",
+            "O.CARRILLO",
+            "Salle I302",
+            "IMAGE ",
+            "Pas de cours"
+        ]
+    }
+]
