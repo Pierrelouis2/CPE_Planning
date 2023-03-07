@@ -3,14 +3,15 @@ let express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
     request = require('request'),
-    config = require('config');
+    config = require('config'),
+    fs = require('fs');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let users = {};
 
-app.listen(8989,'0.0.0.0' ,() => console.log('App listening on port 8989!'));
+app.listen(8989,'0.0.0.0' ,() => console.log('App listening on port 8989!'), set_get_started());
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello World!, This is not a website just quit it plz</h1> \n <h2><i> The admin </i></h2>')
@@ -24,7 +25,7 @@ app.post('/webhook', (req, res) => {
 
     // Checks this is an event from a page subscription
     if (body.object === 'page') {
-
+        
         // Iterates over each entry - there may be multiple if batched
         body.entry.forEach(function(entry) {
             // Gets the message. entry.messaging is an array, but
@@ -33,7 +34,7 @@ app.post('/webhook', (req, res) => {
             // Get the sender PSID
             let sender_psid = webhook_event.sender.id;
             console.log('Sender PSID: ' + sender_psid);
-
+            set_persistent_menu(sender_psid);
             //message or postback
             console.log(webhook_event.message);
             if (webhook_event.message) {
@@ -75,86 +76,165 @@ app.get('/webhook', (req, res) => {
     }
 });
 
-function askTemplate(){
-    return {"name":"ask",
-            "attachment":{
-            "type":"template",
-            "payload":{
-                "template_type":"button",
-                "text":"Quel jour ?",
-                "buttons":[
-                    { "type":"postback", "title":"LUNDI", "payload":"LUNDI"},
-                    { "type":"postback", "title":"MARDI", "payload":"MARDI"},
-                    { "type":"postback", "title":"MERCREDI", "payload":"MECREDI"},
-                    { "type":"postback", "title":"JEUDI", "payload":"JEUDI"},
-                    { "type":"postback", "title":"VENDREDI", "payload":"VENDREDI"},
-                    { "type":"postback", "title":"EDT", "payload":"EDT"},
+function set_get_started(){
+    let get_started = {"get_started": {"payload": "GET_STARTED"}}
+    request({
+        "uri": "https://graph.facebook.com/v16.0/me/messenger_profile",
+        "qs": { "access_token": config.get('facebook.page.access_token') },
+        "method": "POST",
+        "json": get_started
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('get_started set')
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+    });
+}
+
+function set_persistent_menu(psid){
+    let menu = {"psid": psid,
+            "persistent_menu": [
+            {
+                "locale": "default",
+                "composer_input_disabled": false,
+                "call_to_actions": [
+                    {
+                        "type": "postback",
+                        "title": "LUNDI",
+                        "payload": "LUNDI"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "Outfit suggestions",
+                        "payload": "CURATION"
+                    },
+                    {
+                        "type": "web_url",
+                        "title": "Shop now",
+                        "url": "https://www.originalcoastclothing.com/",
+                        "webview_height_ratio": "full"
+                    }
                 ]
             }
+        ]
+    }
+    request({
+        "uri": "https://graph.facebook.com/v16.0/me/messenger_profile",
+        "qs": { "access_token": config.get('facebook.page.access_token') },
+        "method": "POST",
+        "json": menu
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('menu set')
+        } else {
+            console.error("Unable to send message:" + err);
         }
-    };
+    }
+    );
+}
+
+function askTemplate(){
+    return [{"name":"ask",
+            "attachment":{
+                "type":"template",
+                "payload":{
+                    "template_type":"button",
+                    "text":"Quel jour ?",
+                    "buttons":[
+                        { "type":"postback", "title":"LUNDI", "payload":"LUNDI"},
+                        { "type":"postback", "title":"MARDI", "payload":"MARDI"},
+                        { "type":"postback", "title":"MERCREDI", "payload":"MECREDI"}
+                    ]
+                }
+            }
+        },
+        {"name":"ask",
+            "attachment":{
+                "type":"template",
+                "payload":{
+                    "template_type":"button",
+                    "text":"ou",
+                    "buttons":[
+                        { "type":"postback", "title":"JEUDI", "payload":"JEUDI"},
+                        { "type":"postback", "title":"VENDREDI", "payload":"VENDREDI"},
+                        { "type":"postback", "title":"TOUT", "payload":"TOUT"}
+                    ]
+                }
+            }
+        }]
 };
 
-function imageTemplate(){
+function imageTemplate(psid){
+    // utilisation d'une url discord pour l'image
     return {"name":"image",
             "attachment":{
-             "attachment":{
                 "type":"image",
-                "payload":{"is_reusable":true}
+                "payload":{
+                    "url": "https://cdn.discordapp.com/attachments/900449490539016233/1078715007648403610/Screenshot_20230224_172800_PDF_Viewer_Lite.jpg",
+                    "is_reusable":true
                 },
-            "data":"edt.png;type=image/jpg"}
             }
-};
+        }
+}
 
 
 
 // Handles messages events
-function handleMessage(sender_psid) {
-    // console.log('asking template');
-    // let response = askTemplate();
-    // console.log(response)
-    // console.log('sending template');
-    let response = {"attachment":{"text": "test"}}
-    callSendAPI(sender_psid, response);
+async function handleMessage(sender_psid) {
+    let response = askTemplate();
+    await callSendAPI(sender_psid, response[0]);
+    await callSendAPI(sender_psid, response[1]);
     return;
 }
 
-function handlePostback(sender_psid, received_postback) {
+async function handlePostback(sender_psid, received_postback) {
     let response;
     // Get the payload for the postback
     let payload = received_postback.payload;
     // Set the response based on the postback payload
-    if (payload === 'EDT') {
-        response = imageTemplate();
-        callSendAPI(sender_psid, response);
+    if (payload === 'TOUT') {
+        // return
+        let message = {"text": "Voici le planning de la semaine: "};
+        await callSendAPI(sender_psid, message);
+        let response = imageTemplate();
+        await callSendAPI(sender_psid, response);
     } else if (payload === 'LUNDI'){
         // return the column LUNDI from etd.csv
-        pass
+        return
     } else if (payload === 'MARDI'){
-        pass
+        return
     } else if (payload === 'MERCREDI'){
-        pass
+        return
     } else if (payload === 'JEUDI'){
-        pass
+        return
     } else if (payload === 'VENDREDI'){
-        pass
+        return
+    } else if (payload === 'GET_STARTED'){
+        let response = askTemplate();
+        await callSendAPI(sender_psid, response[0]);
+        await callSendAPI(sender_psid, response[1]);
     }
 
 }
 
 // Sends response messages via the Send API
-function callSendAPI(sender_psid, response, cb = null) {
+async function callSendAPI(sender_psid, response, cb = null) {
     // Construct the message body
     let request_body= {
         "recipient": {
             "id": sender_psid
         },
-        "message": {"attachement": response.attachment}
+        "message": null //{"attachment": response.attachment} // for buttons or images
     };
-    console.log('got request body')
-    // Send the HTTP request to the Messenger Platform
+    if(response.attachment){
+        request_body.message = {"attachment": response.attachment}
+    } else if (response.text){
+        request_body.message = {"text": response.text}
+    }
     console.log(request_body)
-    request({
+    // Send the HTTP request to the Messenger Platform
+    await request({
         "uri": "https://graph.facebook.com/v16.0/me/messages",
         "qs": { "access_token": config.get('facebook.page.access_token') },
         "method": "POST",
@@ -170,4 +250,5 @@ function callSendAPI(sender_psid, response, cb = null) {
             console.log("Unable to send message:" + err);
         }
     });
+    return
 }
