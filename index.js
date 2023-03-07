@@ -106,6 +106,7 @@ function imageTemplate(){
 };
 
 
+
 // Handles messages events
 function handleMessage(sender_psid) {
     // console.log('asking template');
