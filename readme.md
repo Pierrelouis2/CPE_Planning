@@ -18,8 +18,18 @@ Fist you need a Facebook page connected with messenger to get a personnal token.
 
 # Usage
 
+The **get_started** button is the first thing you see when you open the chat bot. It's a simple button that register the user in the database while asking for his promotion and groupa and Major if necessary.
+For the database, are we using a simple json file ?, an sqlite database ? or a docker database ? ? ? We don't know yet.  
+We are reccording the user's :
+ - id
+ - promotion
+ - group
+ - major 
+ - name
+ - username
+ - firstname
+ - lastname.
 
-
-
+Then we send to the user a message with a button for each day of the week. When the user click on a button, we send him a message with the timetable of the day according to his promotion and group.
 
 # Screenshots
