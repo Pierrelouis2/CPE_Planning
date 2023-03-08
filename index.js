@@ -3,8 +3,7 @@ let express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
     request = require('request'),
-    config = require('config'),
-    fs = require('fs');
+    config = require('config');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -22,10 +21,8 @@ app.get('/', (req, res) => {
 app.post('/webhook', (req, res) => {
     console.log('got webhook')
     let body = req.body;
-
     // Checks this is an event from a page subscription
     if (body.object === 'page') {
-        
         // Iterates over each entry - there may be multiple if batched
         body.entry.forEach(function(entry) {
             // Gets the message. entry.messaging is an array, but
@@ -33,10 +30,10 @@ app.post('/webhook', (req, res) => {
             let webhook_event = entry.messaging[0];
             // Get the sender PSID
             let sender_psid = webhook_event.sender.id;
+            console.log(body.webhook_event)
             console.log('Sender PSID: ' + sender_psid);
             set_persistent_menu(sender_psid);
             //message or postback
-            console.log(webhook_event.message);
             if (webhook_event.message) {
                 console.log('in handleMessage');
                 handleMessage(sender_psid);
@@ -97,7 +94,7 @@ function set_persistent_menu(psid){
             "persistent_menu": [
             {
                 "locale": "default",
-                "composer_input_disabled": false,
+                "composer_input_disabled": true, // activate/deactivate the keayboard
                 "call_to_actions": [
                     {
                         "type": "postback",
@@ -106,21 +103,35 @@ function set_persistent_menu(psid){
                     },
                     {
                         "type": "postback",
-                        "title": "Outfit suggestions",
-                        "payload": "CURATION"
+                        "title": "MARDI",
+                        "payload": "MARDI"
                     },
                     {
-                        "type": "web_url",
-                        "title": "Shop now",
-                        "url": "https://www.originalcoastclothing.com/",
-                        "webview_height_ratio": "full"
-                    }
+                        "type": "postback",
+                        "title": "MERCREDI",
+                        "payload": "MERCREDI"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "JEUDI",
+                        "payload": "JEUDI"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "VENDREDI",
+                        "payload": "VENDREDI"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "TOUT 🗓",
+                        "payload": "TOUT"
+                    },
                 ]
             }
         ]
     }
     request({
-        "uri": "https://graph.facebook.com/v16.0/me/messenger_profile",
+        "uri": "https://graph.facebook.com/v16.0/me/custom_user_settings",
         "qs": { "access_token": config.get('facebook.page.access_token') },
         "method": "POST",
         "json": menu
@@ -158,7 +169,7 @@ function askTemplate(){
                     "buttons":[
                         { "type":"postback", "title":"JEUDI", "payload":"JEUDI"},
                         { "type":"postback", "title":"VENDREDI", "payload":"VENDREDI"},
-                        { "type":"postback", "title":"TOUT", "payload":"TOUT"}
+                        { "type":"postback", "title":"TOUT 🗓", "payload":"TOUT"}
                     ]
                 }
             }
@@ -183,72 +194,92 @@ function imageTemplate(psid){
 // Handles messages events
 async function handleMessage(sender_psid) {
     let response = askTemplate();
-    await callSendAPI(sender_psid, response[0]);
-    await callSendAPI(sender_psid, response[1]);
+    let r;
+    r = await callSendAPI(sender_psid, response[0]);
+    r = await callSendAPI(sender_psid, response[1]);
     return;
 }
 
 async function handlePostback(sender_psid, received_postback) {
     let response;
+    let message;
+    let r;
     // Get the payload for the postback
     let payload = received_postback.payload;
     // Set the response based on the postback payload
-    if (payload === 'TOUT') {
-        // return
-        let message = {"text": "Voici le planning de la semaine: "};
-        await callSendAPI(sender_psid, message);
-        let response = imageTemplate();
-        await callSendAPI(sender_psid, response);
-    } else if (payload === 'LUNDI'){
-        // return the column LUNDI from etd.csv
-        return
-    } else if (payload === 'MARDI'){
-        return
-    } else if (payload === 'MERCREDI'){
-        return
-    } else if (payload === 'JEUDI'){
-        return
-    } else if (payload === 'VENDREDI'){
-        return
-    } else if (payload === 'GET_STARTED'){
-        let response = askTemplate();
-        await callSendAPI(sender_psid, response[0]);
-        await callSendAPI(sender_psid, response[1]);
+    // if (payload === 'TOUT') {
+    //     // return
+    //     let message = {"text": "Voici le planning de la semaine: "};
+    //     r = await callSendAPI(sender_psid, message);
+    //     let response = imageTemplate();
+    //     r = await callSendAPI(sender_psid, response);
+    // } else if (payload === 'LUNDI'){
+    //     // return the column LUNDI from etd.csv
+    //     return
+    // } else if (payload === 'MARDI'){
+    //     return
+    // } else if (payload === 'MERCREDI'){
+    //     return
+    // } else if (payload === 'JEUDI'){
+    //     return
+    // } else if (payload === 'VENDREDI'){
+    //     return
+    // } else if (payload === 'GET_STARTED'){
+    //     let response = askTemplate();
+    //     await callSendAPI(sender_psid, response[0]);
+    //     await callSendAPI(sender_psid, response[1]);
+    // }
+    switch (payload) {
+        case 'TOUT':
+            message = {"text": "Voici le planning de la semaine: "};
+            r = await callSendAPI(sender_psid, message);
+            response = imageTemplate();
+            r = await callSendAPI(sender_psid, response);
+            break;
+        case 'LUNDI':
+            // return the column LUNDI from etd.csv
+            break;
+        case 'MARDI':
+            break;
+        case 'MERCREDI':
+            break;
+        case 'JEUDI':
+            break;
+        case 'VENDREDI':
+            break;
+        case 'GET_STARTED':
+            response = askTemplate();
+            await callSendAPI(sender_psid, response[0]);
+            await callSendAPI(sender_psid, response[1]);
+            break;
+        default:
+            break;
     }
 
 }
 
 // Sends response messages via the Send API
-async function callSendAPI(sender_psid, response, cb = null) {
+async function callSendAPI(sender_psid, response) {
     // Construct the message body
-    let request_body= {
-        "recipient": {
-            "id": sender_psid
-        },
-        "message": null //{"attachment": response.attachment} // for buttons or images
-    };
+    let request_body= { "recipient": {"id": sender_psid}, "message": null };
+    // attach the appropriate message to the request body
     if(response.attachment){
         request_body.message = {"attachment": response.attachment}
     } else if (response.text){
         request_body.message = {"text": response.text}
     }
-    console.log(request_body)
     // Send the HTTP request to the Messenger Platform
-    await request({
+    let err, res, body = await request({
         "uri": "https://graph.facebook.com/v16.0/me/messages",
         "qs": { "access_token": config.get('facebook.page.access_token') },
         "method": "POST",
         "json": request_body
-    }, (err, res, body) => {
-        console.log('got response')
-        if (!err) {
-            if(cb){
-                cb();
-                return;
-            }
-        } else {
-            console.log("Unable to send message:" + err);
-        }
     });
+    // handling errors
+    if (!err) {
+        console.log('message sent!')
+    } else {
+        console.error("Unable to send message:" + err);
+    }
     return
 }
