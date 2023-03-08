@@ -189,9 +189,6 @@ function imageTemplate(psid){
         }
 }
 
-
-
-// Handles messages events
 async function handleMessage(sender_psid) {
     let response = askTemplate();
     let r;
@@ -206,29 +203,6 @@ async function handlePostback(sender_psid, received_postback) {
     let r;
     // Get the payload for the postback
     let payload = received_postback.payload;
-    // Set the response based on the postback payload
-    // if (payload === 'TOUT') {
-    //     // return
-    //     let message = {"text": "Voici le planning de la semaine: "};
-    //     r = await callSendAPI(sender_psid, message);
-    //     let response = imageTemplate();
-    //     r = await callSendAPI(sender_psid, response);
-    // } else if (payload === 'LUNDI'){
-    //     // return the column LUNDI from etd.csv
-    //     return
-    // } else if (payload === 'MARDI'){
-    //     return
-    // } else if (payload === 'MERCREDI'){
-    //     return
-    // } else if (payload === 'JEUDI'){
-    //     return
-    // } else if (payload === 'VENDREDI'){
-    //     return
-    // } else if (payload === 'GET_STARTED'){
-    //     let response = askTemplate();
-    //     await callSendAPI(sender_psid, response[0]);
-    //     await callSendAPI(sender_psid, response[1]);
-    // }
     switch (payload) {
         case 'TOUT':
             message = {"text": "Voici le planning de la semaine: "};
@@ -255,10 +229,8 @@ async function handlePostback(sender_psid, received_postback) {
         default:
             break;
     }
-
 }
 
-// Sends response messages via the Send API
 async function callSendAPI(sender_psid, response) {
     // Construct the message body
     let request_body= { "recipient": {"id": sender_psid}, "message": null };
@@ -267,6 +239,8 @@ async function callSendAPI(sender_psid, response) {
         request_body.message = {"attachment": response.attachment}
     } else if (response.text){
         request_body.message = {"text": response.text}
+    } else {
+        console.log("error: no message to send")
     }
     // Send the HTTP request to the Messenger Platform
     let err, res, body = await request({
