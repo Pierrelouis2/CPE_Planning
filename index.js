@@ -237,7 +237,10 @@ async function handlePostback(sender_psid, received_postback) {
         case 'VENDREDI':
             break;
         case 'GET_STARTED':
-            // ask for filiere
+            // verify is the sender is known
+            response = askTemplate();
+            r = await callSendAPI(sender_psid, response[0]);
+            r = await callSendAPI(sender_psid, response[1]);
             break;
         case 'ETI', 'CGP':
             // set the user filiere to payload
