@@ -47,13 +47,12 @@ app.post('/webhook', (req, res) => {
         // Returns a '404 Not Found' if event is not from a page subscription
         res.sendStatus(404);
     }
-
 });
 
-// Adds support for GET requests to our webhook
+
 app.get('/webhook', (req, res) => {
-    // Your verify token. Should be a random string.
-    let VERIFY_TOKEN = "1476955067";
+    // Adds support for GET requests to our webhook
+    let VERIFY_TOKEN = config.get('facebook.page.secret');
     // Parse the query params
     let mode = req.query['hub.mode'];
     let token = req.query['hub.verify_token'];
@@ -74,22 +73,23 @@ app.get('/webhook', (req, res) => {
 });
 
 function set_get_started(){
+    // Set up Get Started button
     let get_started = {"get_started": {"payload": "GET_STARTED"}}
-    request({
+    let err, res, body = request({
         "uri": "https://graph.facebook.com/v16.0/me/messenger_profile",
         "qs": { "access_token": config.get('facebook.page.access_token') },
         "method": "POST",
         "json": get_started
-    }, (err, res, body) => {
-        if (!err) {
-            console.log('get_started set')
-        } else {
-            console.error("Unable to send message:" + err);
-        }
     });
+    // handling errors
+    if (!err) {
+        console.log('get_started set')
+    } else {
+        console.error("Unable to send message:" + err);
+    }
 }
 
-function set_persistent_menu(psid){
+async function set_persistent_menu(psid){
     let menu = {"psid": psid,
             "persistent_menu": [
             {
@@ -130,19 +130,18 @@ function set_persistent_menu(psid){
             }
         ]
     }
-    request({
+    let err, res, body = await request({
         "uri": "https://graph.facebook.com/v16.0/me/custom_user_settings",
         "qs": { "access_token": config.get('facebook.page.access_token') },
         "method": "POST",
         "json": menu
-    }, (err, res, body) => {
-        if (!err) {
-            console.log('menu set')
-        } else {
-            console.error("Unable to send message:" + err);
-        }
+    });
+    // handling errors
+    if (!err) {
+        console.log('menu set')
+    } else {
+        console.error("Unable to send message:" + err);
     }
-    );
 }
 
 function askTemplate(){
