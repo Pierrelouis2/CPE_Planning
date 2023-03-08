@@ -10,11 +10,11 @@ The first version was made by @waleedahmad with his [Aww-Bot | Github](https://g
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Screenshots](#screenshots)
 - [Judiciaire](#judiciaire)
 
 # Installation
 
+/!\ It is really complicated to install a chat bot on messenger, be ready to spend a lot of time on it. /!\
 Fist you need a Facebook page connected with messenger to get a personnal token. Then you need to create a server with an https address (you can use `ngrok`, `localtunnel`, or a personnal domain). Then run a nodejs server (I first tried with python... no sucess) where the url `/webhook` verify the token. Finally your chat bot can be used.
 
 # Usage
@@ -33,7 +33,6 @@ We are reccording the user's :
 
 Then we send to the user a message with a button for each day of the week. When the user click on a button, we send him a message with the timetable of the day according to his promotion and group.
 
-# Screenshots
 
 # Judiciaire
 
