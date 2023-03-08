@@ -3,12 +3,14 @@ let express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
     request = require('request'),
-    config = require('config');
+    config = require('config'),
+    fs = require('fs');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let users = {};
+let db = 'db.json';
 
 app.listen(8989,'0.0.0.0' ,() => console.log('App listening on port 8989!'), set_get_started());
 
@@ -30,7 +32,6 @@ app.post('/webhook', (req, res) => {
             let webhook_event = entry.messaging[0];
             // Get the sender PSID
             let sender_psid = webhook_event.sender.id;
-            console.log(body.webhook_event)
             console.log('Sender PSID: ' + sender_psid);
             set_persistent_menu(sender_psid);
             //message or postback
@@ -175,6 +176,22 @@ function askTemplate(){
         }]
 };
 
+function askTemplateNewUserPromo(){
+    return {"name":"ask",
+    "attachment":{
+        "type":"template",
+        "payload":{
+            "template_type":"button",
+            "text":"Quel Promo ?",
+            "buttons":[
+                { "type":"postback", "title":"3A", "payload":"3A"},
+                { "type":"postback", "title":"4A", "payload":"4A"}
+            ]
+        }
+    }
+}
+}
+
 function imageTemplate(psid){
     // utilisation d'une url discord pour l'image
     return {"name":"image",
@@ -221,10 +238,25 @@ async function handlePostback(sender_psid, received_postback) {
         case 'VENDREDI':
             break;
         case 'GET_STARTED':
-            response = askTemplate();
-            await callSendAPI(sender_psid, response[0]);
-            await callSendAPI(sender_psid, response[1]);
+            // verify is the sender is known
+            let users = await fs.readFileSync(db);
+            for (let i = 0; i < users.length; i++)
+                if (users[i].id == sender_psid){
+                    response = askTemplate();
+                    await callSendAPI(sender_psid, response[0]);
+                    await callSendAPI(sender_psid, response[1]);
+                    break;
+                }
+            // if not, add him to the db
+            let user = {"id": sender_psid, "promo": null};
+            users.push(user);
+            await fs.writeFileSync(db, users);
+            response = askTemplateNewUserPromo();
+            await callSendAPI(sender_psid, response);
             break;
+        case '3A':
+            // set the user promo to 3A
+            
         default:
             break;
     }
