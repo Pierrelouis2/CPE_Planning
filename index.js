@@ -239,20 +239,9 @@ async function handlePostback(sender_psid, received_postback) {
             break;
         case 'GET_STARTED':
             // verify is the sender is known
-            let users = await fs.readFileSync(db);
-            for (let i = 0; i < users.length; i++)
-                if (users[i].id == sender_psid){
-                    response = askTemplate();
-                    await callSendAPI(sender_psid, response[0]);
-                    await callSendAPI(sender_psid, response[1]);
-                    break;
-                }
-            // if not, add him to the db
-            let user = {"id": sender_psid, "promo": null};
-            users.push(user);
-            await fs.writeFileSync(db, users);
-            response = askTemplateNewUserPromo();
-            await callSendAPI(sender_psid, response);
+            response = askTemplate();
+            r = await callSendAPI(sender_psid, response[0]);
+            r = await callSendAPI(sender_psid, response[1]);
             break;
         case '3A':
             // set the user promo to 3A

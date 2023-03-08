@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "fs": "^0.0.1-security"
+    "config": "^3.3.9",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "reequest": "^0.0.1-security",
+    "request": "^2.88.2"
   }
 }
