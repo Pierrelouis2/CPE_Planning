@@ -3,8 +3,7 @@ let express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
     request = require('request'),
-    config = require('config'),
-    fs = require('fs');
+    config = require('config');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -238,25 +237,25 @@ async function handlePostback(sender_psid, received_postback) {
         case 'VENDREDI':
             break;
         case 'GET_STARTED':
-            // verify is the sender is known
-            let users = await fs.readFileSync(db);
-            for (let i = 0; i < users.length; i++)
-                if (users[i].id == sender_psid){
-                    response = askTemplate();
-                    await callSendAPI(sender_psid, response[0]);
-                    await callSendAPI(sender_psid, response[1]);
-                    break;
-                }
-            // if not, add him to the db
-            let user = {"id": sender_psid, "promo": null};
-            users.push(user);
-            await fs.writeFileSync(db, users);
-            response = askTemplateNewUserPromo();
-            await callSendAPI(sender_psid, response);
+            // ask for filiere
             break;
-        case '3A':
-            // set the user promo to 3A
-            
+        case 'ETI', 'CGP':
+            // set the user filiere to payload
+
+            // ask for promo
+            break;
+        case '3A', '4A':
+            // set the user promo to payload
+
+            // ask for group 
+            // and if in 4A-ETI, ask for major
+            break;
+        case 'A', 'B', 'C', 'D':
+            // set the user group to payload
+
+            // ask for group
+            break;
+        
         default:
             break;
     }
