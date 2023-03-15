@@ -3,20 +3,23 @@ let express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
     request = require('request'),
-    config = require('config');
+    config = require('config'),
+    sqlite3 = require('sqlite3');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let users = {};
-let db = 'db.json';
+// let db_file = 'db.db';
+let db = new sqlite3.Database('db.db'); // db in memory
 
-app.listen(8989,'0.0.0.0' ,() => console.log('App listening on port 8989!'), set_get_started());
+// let sql_get_user = 'SELECT user_id FROM users WHERE id = ?';
+
+app.listen(8989,'0.0.0.0' ,() => console.log('App listening on port 8989!'), set_get_started(), create_db());
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello World!, This is not a website just quit it plz</h1> \n <h2><i> The admin </i></h2>')
 });
-
 
 // Creates the endpoint for our webhook
 app.post('/webhook', (req, res) => {
@@ -49,7 +52,6 @@ app.post('/webhook', (req, res) => {
     }
 });
 
-
 app.get('/webhook', (req, res) => {
     // Adds support for GET requests to our webhook
     let VERIFY_TOKEN = config.get('facebook.page.secret');
@@ -71,6 +73,43 @@ app.get('/webhook', (req, res) => {
         }
     }
 });
+
+async function create_db(){
+    // Create db
+    db.serialize(function() {
+        let sql, res, err
+        sql = `CREATE TABLE IF NOT EXISTS users (user_id INTEGER NOT NULL PRIMARY KEY, annee INTEGER NULL check(annee in (3,4)), filiere TEXT NULL check(filiere in ('ETI', 'CGP')), majeur TEXT NULL);`;
+        res = db.run(sql, [], (err) => {
+            if (err){console.log(err);}
+        });
+        // test
+        let user = {user_id: 5, annee: 4, filiere: 'CGP', majeur: 'test'};
+        let user_data = [];
+        for (let key in user) {
+            user_data.push(user[key]);
+        }
+        console.log(user_data)
+        sql = `INSERT INTO users (user_id, annee, filiere, majeur) VALUES (?, ?, ?, ?)`;
+        db.run(sql, user_data, (res, err) => {
+            if (err){
+                console.log(err.message);
+                // rollback on error 
+                db.run('ROLLBACK');
+            }
+
+        sql = `SELECT * FROM users`;
+        db.all(sql, [], (err, rows) => {
+            if (err) {
+                console.log(err.message);
+            } else {
+                rows.forEach((row) => {
+                    console.log(row);
+                })
+            }
+            });
+        });
+    });
+}
 
 function set_get_started(){
     // Set up Get Started button
@@ -173,7 +212,7 @@ function askTemplate(){
                 }
             }
         }]
-};
+}
 
 function askTemplateNewUserPromo(){
     return {"name":"ask",
@@ -238,9 +277,8 @@ async function handlePostback(sender_psid, received_postback) {
             break;
         case 'GET_STARTED':
             // verify is the sender is known
-            response = askTemplate();
-            r = await callSendAPI(sender_psid, response[0]);
-            r = await callSendAPI(sender_psid, response[1]);
+            
+
             break;
         case 'ETI', 'CGP':
             // set the user filiere to payload
@@ -250,13 +288,8 @@ async function handlePostback(sender_psid, received_postback) {
         case '3A', '4A':
             // set the user promo to payload
 
-            // ask for group 
-            // and if in 4A-ETI, ask for major
-            break;
-        case 'A', 'B', 'C', 'D':
-            // set the user group to payload
-
             // ask for group
+            // and if in 4A-ETI, ask for major
             break;
         
         default:

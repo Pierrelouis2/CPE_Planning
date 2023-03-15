@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "config": "^3.3.9",
+    "request": "^2.88.2",
+    "sqlite3": "^5.1.4"
+  }
+}
