@@ -42,3 +42,47 @@ Webgenarator : [app.privacypolicies.com](https://app.privacypolicies.com/profile
   - or in Markdown localy : [Here](./Docs/PrivacyPolicy.md)
 - Service requirement webhosted [Here](https://www.privacypolicies.com/live/897d7376-61c0-473c-834b-cfcf6d0d0dcd)
   - or in Markdown localy = [Here](./Docs/ServiceRequirement.md)
+
+
+# DATABASE
+## Database structure V1
+
+For the first version of the data base we use a sqlite database. This first version only works for 4ETI students.
+The database is composed of 2 tables :
+ - `users` : 
+    - `ID_user` : the user's id
+    - `Promo` : the user's promotion
+    - `Filliere` : the user's fillière
+    - `group` : the user's group
+ - `4ETI` :
+  - `ID_user` : the user's id
+  - `Major`: the user's major
+  - `MSO`: the user's MSO
+
+![Database structure V1](ReadmeImages/DBV1.png)
+
+## Database structure V2
+
+For the second version of the data base we use a sqlite database. This version works for all students. with a jointture table for the MSO.
+
+- `users` : 
+    - `ID_user` : the user's id
+    - `Promo` : the user's promotion
+    - `Filliere` : the user's fillière
+    - `group` : the user's group
+    - `Major`: the user's major
+- `TJ_User_MSO` :
+  - `ID_user` : the user's id
+  - `MSO`: the user's MSO
+- `MSO` :
+  - `ID_MSO` : the MSO's id
+  - `MSO` : the MSO's name
+
+![Database structure V1](ReadmeImages/DBV2.png)
+
+# TODO
+
+- [ ] Manage CGP Table
+- [ ] Manage LV lessons
+- [ ] Manage 3A lessons
+- [ ] Create MSO TABLE

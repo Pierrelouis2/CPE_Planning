@@ -11,11 +11,11 @@ app.use(bodyParser.json());
 
 let users = {};
 // let db_file = 'db.db';
-let db = new sqlite3.Database('db.db'); // db in memory
+let db = new sqlite3.Database('users.db'); // db in memory
 
-// let sql_get_user = 'SELECT user_id FROM users WHERE id = ?';
+// let sql_get_user = 'SELECT id_user FROM users WHERE id = ?';
 
-app.listen(8989,'0.0.0.0' ,() => console.log('App listening on port 8989!'), set_get_started(), create_db());
+app.listen(8989,'0.0.0.0' ,() => console.log('App listening on port 8989!'), set_get_started());
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello World!, This is not a website just quit it plz</h1> \n <h2><i> The admin </i></h2>')
@@ -74,41 +74,15 @@ app.get('/webhook', (req, res) => {
     }
 });
 
-async function create_db(){
-    // Create db
-    db.serialize(function() {
-        let sql, res, err
-        sql = `CREATE TABLE IF NOT EXISTS users (user_id INTEGER NOT NULL PRIMARY KEY, annee INTEGER NULL check(annee in (3,4)), filiere TEXT NULL check(filiere in ('ETI', 'CGP')), majeur TEXT NULL);`;
-        res = db.run(sql, [], (err) => {
-            if (err){console.log(err);}
-        });
-        // test
-        let user = {user_id: 5, annee: 4, filiere: 'CGP', majeur: 'test'};
-        let user_data = [];
-        for (let key in user) {
-            user_data.push(user[key]);
-        }
-        console.log(user_data)
-        sql = `INSERT INTO users (user_id, annee, filiere, majeur) VALUES (?, ?, ?, ?)`;
-        db.run(sql, user_data, (res, err) => {
-            if (err){
-                console.log(err.message);
-                // rollback on error 
-                db.run('ROLLBACK');
-            }
-
-        sql = `SELECT * FROM users`;
-        db.all(sql, [], (err, rows) => {
-            if (err) {
-                console.log(err.message);
-            } else {
-                rows.forEach((row) => {
-                    console.log(row);
-                })
-            }
-            });
-        });
-    });
+async function isKnownUser(sender_psid){
+    let sql_get_user = `SELECT id_user FROM user WHERE id_user = ${sender_psid}`;
+    let user = await db.get(sql_get_user);
+    console.log(user);
+    if (user === sender_psid ){
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function set_get_started(){
@@ -183,7 +157,7 @@ async function set_persistent_menu(psid){
     }
 }
 
-function askTemplate(){
+function askTemplateJour(){
     return [{"name":"ask",
             "attachment":{
                 "type":"template",
@@ -222,14 +196,99 @@ function askTemplateNewUserPromo(){
             "template_type":"button",
             "text":"Quel Promo ?",
             "buttons":[
-                { "type":"postback", "title":"3A", "payload":"3A"},
-                { "type":"postback", "title":"4A", "payload":"4A"}
+                { "type":"postback", "title":"3A", "payload":"3"},
+                { "type":"postback", "title":"4A", "payload":"4"}
             ]
         }
     }
 }
 }
 
+function askTemplateGroupe(){
+    return [{"name":"ask",
+    "attachment":{
+        "type":"template",
+        "payload":{
+            "template_type":"button",
+            "text":"Quel Groupe ?",
+            "buttons":[
+                { "type":"postback", "title":"groupe A", "payload":"A"},
+                { "type":"postback", "title":"groupe B", "payload":"B"},
+                { "type":"postback", "title":"groupe C", "payload":"C"}
+            ]
+        }
+    }
+},
+    {"name":"ask",
+    "attachment":{
+        "type":"template",
+        "payload":{
+            "template_type":"button",
+            "text":"",
+            "buttons":[
+                { "type":"postback", "title":"groupe D", "payload":"D"},
+            ]
+        }
+    }
+    }]
+}
+
+async function is4ETI(sender_psid){
+    let sql_get_user = 'SELECT promo FROM user WHERE id = ?';
+    let promo = await db.get(sql_get_user, [sender_psid]);
+    if (promo === "4"){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function askTemplateFilliere(){
+    return {"name":"ask",
+    "attachment":{
+        "type":"template",
+        "payload":{
+            "template_type":"button",
+            "text":"Quel fillière ?",
+            "buttons":[
+                { "type":"postback", "title":"ETI", "payload":"ETI"},
+                { "type":"postback", "title":"CGP", "payload":"CGP"}
+            ]
+        }
+    }
+}
+}
+
+function askTemplateMajeureETI(){
+    return [{"name":"ask",
+    "attachment":{
+        "type":"template",
+        "payload":{
+            "template_type":"button",
+            "text":"Quel majeure ?",
+            "buttons":[
+                { "type":"postback", "title":"CBD", "payload":"GL"},
+                { "type":"postback", "title":"Réseau", "payload":"GL"},
+                { "type":"postback", "title":"Image", "payload":"GL"}
+            ]
+        }
+    }
+},
+    {"name":"ask",
+        "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text":"Quel majeure ?",
+                "buttons":[
+                    { "type":"postback", "title":"Robot", "payload":"GL"},
+                    { "type":"postback", "title":"Electronique", "payload":"GL"},
+                ]
+            }
+        }
+    }]
+
+}
 function imageTemplate(psid){
     // utilisation d'une url discord pour l'image
     return {"name":"image",
@@ -244,7 +303,7 @@ function imageTemplate(psid){
 }
 
 async function handleMessage(sender_psid) {
-    let response = askTemplate();
+    let response = askTemplateJour();
     let r;
     r = await callSendAPI(sender_psid, response[0]);
     r = await callSendAPI(sender_psid, response[1]);
@@ -319,21 +378,59 @@ async function handlePostback(sender_psid, received_postback) {
             break;
         case 'GET_STARTED':
             // verify is the sender is known
+            if (await isKnownUser(sender_psid)){
+                // send the user the menu
+                console.log('known user')
+                response = askTemplateJour();
+                r = await callSendAPI(sender_psid, response[0]);
+                r = await callSendAPI(sender_psid, response[1]);
+            }
+            else {
+                //create new user
+                let sql_new_user = `INSERT INTO user (id_user) VALUES (${sender_psid})`;
+                db.exec(sql_new_user);
+                // ask for information
+                response = askTemplateNewUserPromo();
+                r = await callSendAPI(sender_psid, response);
+            }
+
+            break;
+        case 'ETI' : //4ETI Majerue
             
-
-            break;
-        case 'ETI', 'CGP':
             // set the user filiere to payload
-
-            // ask for promo
+            let sql_set_filiere = `UPDATE user SET filiere = ${payload} WHERE id_user = ${sender_psid}`;
+            db.exec(sql_set_filiere);
+            // ask for majeure
+            if (await is4ETI(sender_psid)){
+                response = askTemplateJour();
+                r = await callSendAPI(sender_psid, response[0]);
+                r = await callSendAPI(sender_psid, response[1]);
+                //response = askTemplateMajeureETI();
+                //r = await callSendAPI(sender_psid, response);
+            }
             break;
-        case '3A', '4A':
-            // set the user promo to payload
-
-            // ask for group
-            // and if in 4A-ETI, ask for major
+        case 'CGP':
+            response = askTemplateJour();
+            r = await callSendAPI(sender_psid, response[0]);
+            r = await callSendAPI(sender_psid, response[1]);
+            break
+        case '3', '4':
+            //Write payload into database
+            let sql_set_promo = `UPDATE user SET promo = ${payload} WHERE id_user = ${sender_psid}`;
+            db.exec(sql_set_promo);
+            //ask for user groupe
+            response = askTemplateGroupe();
+            r = await callSendAPI(sender_psid, response[0]);
+            r = await callSendAPI(sender_psid, response[1]);
             break;
-        
+        case 'A','B','C','D' :
+            //Write payload into database
+            let sql_set_groupe = `UPDATE user SET groupe = ${payload} WHERE id_user = ${sender_psid}`;
+            db.exec(sql_set_groupe);
+            //ask for user filliere
+            response = askTemplateFilliere();
+            r = await callSendAPI(sender_psid, response);
+            break
         default:
             break;
     }
