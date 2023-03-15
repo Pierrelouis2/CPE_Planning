@@ -255,6 +255,8 @@ async function handlePostback(sender_psid, received_postback) {
     let response;
     let message;
     let r;
+    let planningJour;
+    let rep;
     // Get the payload for the postback
     let payload = received_postback.payload;
     switch (payload) {
@@ -265,15 +267,55 @@ async function handlePostback(sender_psid, received_postback) {
             r = await callSendAPI(sender_psid, response);
             break;
         case 'LUNDI':
+            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI','IMAGE',payload);
+            rep = await ConstructMessage(planningJour);
+            message = {"text": `Voici le planning de ${payload} : `};
+            r = await callSendAPI(sender_psid, message);
+            message = {"text": `Matin : ${rep[0]}`};
+            r = await callSendAPI(sender_psid, message);
+            message = {"text": `Après-midi : ${rep[1]}`};
+            r = await callSendAPI(sender_psid, message);
             // return the column LUNDI from etd.csv
             break;
         case 'MARDI':
+            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI','IMAGE',payload);
+            rep = await ConstructMessage(planningJour);
+            message = {"text": `Voici le planning de ${payload} : `};
+            r = await callSendAPI(sender_psid, message);
+            message = {"text": `Matin : ${rep[0]}`};
+            r = await callSendAPI(sender_psid, message);
+            message = {"text": `Après-midi : ${rep[1]}`};
+            r = await callSendAPI(sender_psid, message);
             break;
         case 'MERCREDI':
+            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI','IMAGE',payload);
+            rep = await ConstructMessage(planningJour);
+            message = {"text": `Voici le planning de ${payload} : `};
+            r = await callSendAPI(sender_psid, message);
+            message = {"text": `Matin : ${rep[0]}`};
+            r = await callSendAPI(sender_psid, message);
+            message = {"text": `Après-midi : ${rep[1]}`};
+            r = await callSendAPI(sender_psid, message);
             break;
         case 'JEUDI':
+            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI','IMAGE',payload);
+            rep = await ConstructMessage(planningJour);
+            message = {"text": `Voici le planning de ${payload} : `};
+            r = await callSendAPI(sender_psid, message);
+            message = {"text": `Matin : ${rep[0]}`};
+            r = await callSendAPI(sender_psid, message);
+            message = {"text": `Après-midi : ${rep[1]}`};
+            r = await callSendAPI(sender_psid, message);
             break;
         case 'VENDREDI':
+            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI','IMAGE',payload);
+            rep = await ConstructMessage(planningJour);
+            message = {"text": `Voici le planning de ${payload} : `};
+            r = await callSendAPI(sender_psid, message);
+            message = {"text": `Matin : ${rep[0]}`};
+            r = await callSendAPI(sender_psid, message);
+            message = {"text": `Après-midi : ${rep[1]}`};
+            r = await callSendAPI(sender_psid, message);
             break;
         case 'GET_STARTED':
             // verify is the sender is known
@@ -322,4 +364,48 @@ async function callSendAPI(sender_psid, response) {
         console.error("Unable to send message:" + err);
     }
     return
+}
+
+
+
+async function readCsv(dir,Annee,Filliere,Majeur="",Jour) {
+    let planningRen = {}
+    const fs = require('fs');
+    let rawdata = fs.readFileSync(dir);
+    let planningG = JSON.parse(rawdata);
+    for(let i in planningG) {
+        if (i.includes(Jour)){
+            var Date = i
+        }
+    }
+    if (planningG[Date]["Matin"][Majeur].length == 0 ){
+        planningRen["Matin"] = planningG[Date]["Matin"]["Pour tous"]
+    }
+    else{
+        planningRen["Matin"] = planningG[Date]["Matin"][Majeur]
+    }
+    console.log(planningG[Date]["Aprem"][Majeur])
+    if (planningG[Date]["Aprem"][Majeur] == 0 ){
+        planningRen["Aprem"] = planningG[Date]["Aprem"]["Pour tous"]
+        console.log("Pour tous")
+    }
+    else{
+        planningRen["Aprem"] = planningG[Date]["Aprem"][Majeur]
+    }
+    return planningRen
+}
+
+async function ConstructMessage(planning){
+    let messageMat = ""
+    let messageAprem = ""
+    for (let matiere in planning["Matin"]){
+        messageMat += planning["Matin"][matiere] + "\n"
+    }
+    for (let matiere in planning["Aprem"]){
+        messageAprem += planning["Aprem"][matiere] + "\n"
+        if (planning["Aprem"][matiere].includes("Salle")){
+            messageAprem += "\n"
+        }
+    }
+    return [messageMat,messageAprem]
 }
