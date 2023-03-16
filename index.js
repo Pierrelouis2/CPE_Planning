@@ -329,7 +329,7 @@ function askTemplateMajeureETI(){
             "type":"template",
             "payload":{
                 "template_type":"button",
-                "text":"Quel majeure ?",
+                "text":"",
                 "buttons":[
                     { "type":"postback", "title":"Robot", "payload":"ROSE"},
                     { "type":"postback", "title":"Electronique", "payload":"ESE"},
