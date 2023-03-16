@@ -1,33 +1,86 @@
 {
-    "LUNDI-03-avr": {
+    "LUNDI-20-mars": {
         "Matin": {
-            "CONCEP.LOGICIELLE/BIG DATA": [
-                "CONCEP.LOGICIELLE/BIG DATA",
-                "Pas de cours"
-            ],
+            "CONCEP.LOGICIELLE/BIG DATA": [],
             "ROBOTIQUE": [
                 "ROBOTIQUE",
-                "Pas de cours"
+                "Data Mining",
+                "J.SAMUEL",
+                "Salle G108",
+                "J.SAMUEL\nSalle G108\n10h30-12h30"
             ],
             "ELECTRONIQUE ET SYST EMB": [
                 "ELECTRONIQUE ET SYST EMB",
-                "Communications num\u00e9riques",
-                "N.LEBEDEV",
-                "Salle",
-                "08h00 \u00e0 10h00"
+                "Composants \u00e9lectroniques",
+                "A.GACI",
+                "Salle H001",
+                "A.GACI\nSalle H001\n9h00-10h00"
             ],
             "INFRA DES RESEAUX": [
                 "INFRA DES RESEAUX",
-                "Communications num\u00e9riques",
-                "N.LEBEDEV",
-                "Salle",
-                "08h00 \u00e0 10h00"
+                "Cloud et Virtualisation",
+                "O.CARRILLO",
+                "Salle G108",
+                "O.CARRILLO\nSalle G108\n8h00-10h00"
             ],
             "IMAGE": [
                 "IMAGE",
                 "Traitement d'images",
-                "E. VAN REETH /M.FOARE",
-                "10h30 \u00e0 12h30 :  Salleinfo"
+                "E. VAN REETH",
+                "Traitement d'images\nE. VAN REETH\nSalle I304"
+            ],
+            "Pour tous": [
+                "8h-12h15",
+                "C ONCEP.LOGICIELLE/BIG DATA",
+                "Data Mining",
+                "J.SAMUEL",
+                "Salles G103 + I300",
+                "J.SAMUEL\nSalles G103 + I300\n10h30-12h30"
+            ]
+        },
+        "Aprem": {
+            "CONCEP.LOGICIELLE/BIG DATA": [],
+            "ROBOTIQUE": [],
+            "ELECTRONIQUE ET SYST EMB": [],
+            "INFRA DES RESEAUX": [],
+            "IMAGE": [],
+            "Pour tous": [
+                "13h10-18h",
+                "LV",
+                "(Voir planning)",
+                "LV\n(Voir planning)"
+            ]
+        }
+    },
+    "MARDI-21-mars": {
+        "Matin": {
+            "CONCEP.LOGICIELLE/BIG DATA": [
+                "CONCEP.LOGICIELLE/BIG DATA",
+                "TIDAL",
+                "Y.JOLY",
+                "Salle I203"
+            ],
+            "ROBOTIQUE": [
+                "ROBOTIQUE",
+                "TIDAL",
+                "Y.JOLY",
+                "Salle I207"
+            ],
+            "ELECTRONIQUE ET SYST EMB": [
+                "ELECTRONIQUE ET SYST EMB",
+                "Pas de cours"
+            ],
+            "INFRA DES RESEAUX": [
+                "INFRA DES RESEAUX",
+                "Le routage dans les r\u00e9seaux IP",
+                "T.ASFOUR",
+                "Salle G103"
+            ],
+            "IMAGE": [
+                "IMAGE",
+                "Optimisation",
+                "E. VAN REETH / S.MAZAURIC",
+                "Salle I105"
             ],
             "Pour tous": [
                 "8h-12h15"
@@ -40,65 +93,34 @@
             "INFRA DES RESEAUX": [],
             "IMAGE": [],
             "Pour tous": [
-                "13h10-18h",
-                "LV",
-                "(Voir planning)"
-            ]
-        }
-    },
-    "MARDI-04-avr": {
-        "Matin": {
-            "CONCEP.LOGICIELLE/BIG DATA": [
-                "CONCEP.LOGICIELLE/BIG DATA",
-                "GROUPE C &D",
-                "Conception Orient\u00e9e Objet et Design Patterns",
-                "B.MASCRET",
-                "Salle info"
-            ],
-            "ROBOTIQUE": [],
-            "ELECTRONIQUE ET SYST EMB": [],
-            "INFRA DES RESEAUX": [],
-            "IMAGE": [],
-            "Pour tous": [
-                "8h-12h15",
-                "GROUPE A",
-                "Projet",
-                "F. JOLY",
-                "Salle info"
-            ]
-        },
-        "Aprem": {
-            "CONCEP.LOGICIELLE/BIG DATA": [
-                "CONCEP.LOGICIELLE/BIG DATA",
-                "GROUPE A&B",
-                "Conception Orient\u00e9e Objet et Design Patterns",
-                "B.MASCRET",
-                "Salle info"
-            ],
-            "ROBOTIQUE": [],
-            "ELECTRONIQUE ET SYST EMB": [],
-            "INFRA DES RESEAUX": [],
-            "IMAGE": [],
-            "Pour tous": [
                 "13h30-17h45",
                 "GROUPE C&D",
                 "Projet",
                 "F. JOLY",
-                "Salles infos"
+                "Salle I105 - Groupe C",
+                "Salle I200 - Groupe D"
             ]
         }
     },
-    "MERCREDI-05-avr": {
+    "MERCREDI-22-mars": {
         "Matin": {
             "CONCEP.LOGICIELLE/BIG DATA": [],
             "ROBOTIQUE": [
                 "ROBOTIQUE",
                 "GROUPE C&D",
+                "ROBOTIQUE\nGROUPE C&D",
                 "Interaction Homme/Robot",
                 "F.JUMEL",
-                "Salle info"
+                "Salle I102"
             ],
-            "ELECTRONIQUE ET SYST EMB": [],
+            "ELECTRONIQUE ET SYST EMB": [
+                "ELECTRONIQUE ET SYST EMB",
+                "Electronique analogique",
+                "int\u00e9gr\u00e9e",
+                "R.CELLIER",
+                "CIMIRLY (INSA)",
+                "Groupe C-D"
+            ],
             "INFRA DES RESEAUX": [],
             "IMAGE": [],
             "Pour tous": [
@@ -106,7 +128,9 @@
                 "GROUPE A & B",
                 "Projet",
                 "F. JOLY",
-                "Salles info"
+                "Salle I105 - Groupe A",
+                "Salle I200 - Groupe B",
+                "8h-12h15"
             ]
         },
         "Aprem": {
@@ -116,40 +140,46 @@
             ],
             "ROBOTIQUE": [
                 "ROBOTIQUE",
-                "Pas de cours"
+                "Interaction Homme/Robot",
+                "F.JUMEL",
+                "Salle I207"
             ],
             "ELECTRONIQUE ET SYST EMB": [
                 "ELECTRONIQUE ET SYST EMB",
-                "Communications num\u00e9riques",
-                "N.LEBEDEV",
-                "Salle"
+                "Electronique analogique",
+                "int\u00e9gr\u00e9e",
+                "R.CELLIER",
+                "CIMIRLY (INSA)",
+                "GroupeA-B"
             ],
             "INFRA DES RESEAUX": [
                 "INFRA DES RESEAUX",
-                "Communications num\u00e9riques",
-                "N.LEBEDEV",
-                "Salle"
+                "Le routage dans les r\u00e9seaux",
+                "IP",
+                "T.ASFOUR",
+                "Salle G103"
             ],
             "IMAGE": [
                 "IMAGE",
-                "Programmation g\u00e9n\u00e9rique en C++",
-                "T.DUPONT",
-                "Salle info"
+                "Traitement d'images",
+                "E. VAN REETH",
+                "salle G108"
             ],
             "Pour tous": [
                 "13h30-17h45"
             ]
         }
     },
-    "JEUDI-06-avr": {
+    "JEUDI-23-mars": {
         "Matin": {
             "CONCEP.LOGICIELLE/BIG DATA": [],
             "ROBOTIQUE": [
                 "ROBOTIQUE",
-                "GROUPE A & B",
+                "GROUPE A&B",
+                "ROBOTIQUE\nGROUPE A&B",
                 "Interaction Homme/Robot",
                 "F.JUMEL",
-                "Salle info"
+                "Salle I102"
             ],
             "ELECTRONIQUE ET SYST EMB": [],
             "INFRA DES RESEAUX": [],
@@ -159,7 +189,8 @@
                 "GROUPE C",
                 "Projet",
                 "F. JOLY",
-                "Salle info"
+                "Salle I105",
+                "8h-12h15"
             ]
         },
         "Aprem": {
@@ -169,44 +200,44 @@
             "INFRA DES RESEAUX": [],
             "IMAGE": [],
             "Pour tous": [
-                "13h30-17h45",
-                "TP TSA",
-                "S\u00e9ance de Rattrapages",
-                "P.GONCALVES  /M.FOARE",
-                "Salle B121"
+                "13h30-17h45"
             ]
         }
     },
-    "VENDREDI-07-avr": {
+    "VENDREDI-24-mars": {
         "Matin": {
             "CONCEP.LOGICIELLE/BIG DATA": [
                 "CONCEP.LOGICIELLE/BIG DATA",
-                "Pas de cours"
+                "Administration Syst\u00e8me",
+                "G.MOREL",
+                "Salles I300 +I306",
+                "10h30 - 12h30"
             ],
             "ROBOTIQUE": [
                 "ROBOTIQUE",
                 "Mod\u00e9lisation des Robots",
                 "R.LEBER",
-                "Salle",
-                "15h00 \u00e0 17h45"
+                "Salle G108"
             ],
             "ELECTRONIQUE ET SYST EMB": [
                 "ELECTRONIQUE ET SYST EMB",
                 "Communications num\u00e9riques",
                 "N.LEBEDEV",
-                "Salle"
+                "Salle F004/005",
+                "10h15 \u00e0 12h15"
             ],
             "INFRA DES RESEAUX": [
                 "INFRA DES RESEAUX",
                 "Communications num\u00e9riques",
                 "N.LEBEDEV",
-                "Salle"
+                "Salle F004/005",
+                "10h15 \u00e0 12h15"
             ],
             "IMAGE": [
                 "IMAGE",
-                "Analyse Num\u00e9rique",
+                "Interpolation",
                 "S.MAZAURIC",
-                "10h30 \u00e0 12h30 :  Salle"
+                "Salle G105"
             ],
             "Pour tous": [
                 "8h-12h15"
@@ -222,23 +253,24 @@
                 "13h30-17h45",
                 "MSO1 OUVERTURE",
                 "AWS Cloud Foundations",
-                "O.CARRILLO /  G.MOREL",
-                "Amphi puis",
-                "Salle info",
+                "T.AUFORT / Y.COSSIN/",
+                "T.PONTHIEU",
+                "Salle G102",
                 "Information g\u00e9ographique",
-                "13h00-17h00",
-                "L. DUPONT",
-                "Salle info",
+                "13h00 \u00e0 17h00",
+                "L. DUPONT / F.NICOLLET",
+                "Salle G103",
                 "Conception architecture",
                 "syst\u00e8me",
                 "L. GUILLEMAUD",
-                "Salle",
+                "Salle Grand Conseil",
                 "Information quantique",
                 "B. FEDRICI",
-                "Salle G102",
-                "Algorithmique et Informatique Th\u00e9orique",
+                "Salle G108",
+                "Algorithmique et Informatique",
+                "Th\u00e9orique",
                 "G.MOREL",
-                "Salle info"
+                "Salle I302"
             ]
         }
     }
