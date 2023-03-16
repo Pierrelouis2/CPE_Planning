@@ -86,7 +86,6 @@ app.get('/webhook', (req, res) => {
 async function isKnownUser(sender_psid){
     let sql_get_user = `SELECT * FROM user WHERE id_user = ?`;
     const user = (await queryDB(sql_get_user, sender_psid))[0];
-    console.log("user", user)
     if (user === undefined){
         console.log("user undefined")
         return false;
@@ -189,8 +188,6 @@ async function set_persistent_menu(psid){
 async function is4A(sender_psid){
     let sql_get_user = 'SELECT promo FROM user WHERE id_user=?';
     let user = (await queryDB(sql_get_user, [sender_psid]))[0];
-    console.log(user);
-    console.log(user.promo);
     if (user.promo === "4"){
         console.log("is4A");
         return true;
@@ -468,10 +465,7 @@ async function handlePostback(sender_psid, received_postback) {
             break;
         case 'GET_STARTED':
             // verify is the sender is known
-            let test = true
-            console.log(test)
             let knownUser = await isKnownUser(sender_psid);
-            console.log(knownUser)
             if (knownUser){
                 // send the user the menu
                 console.log('known user')
@@ -555,8 +549,6 @@ async function handlePostback(sender_psid, received_postback) {
         case 'Majeurs' :
             let sql_set_majeur = `UPDATE user SET majeur=? WHERE id_user=?`;
             let majeur = MAJEURS[payload];
-            console.log('ESE')
-            console.log(majeur)
             db.run(sql_set_majeur, [majeur, sender_psid]);
             response = askTemplateJour();
             r = await callSendAPI(sender_psid, response[0]);
