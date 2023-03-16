@@ -88,6 +88,10 @@ async function isKnownUser(sender_psid){
     let sql_get_user = `SELECT * FROM user WHERE id_user = ?`;
     const user = (await queryDB(sql_get_user, sender_psid))[0];
     console.log("user", user)
+    if (user === undefined){
+        console.log("user not found")
+        return false;
+    }
     if (user === [] || 
         user.promo === null ||
         user.majeur === null ||
@@ -101,7 +105,6 @@ async function isKnownUser(sender_psid){
             callSendAPI(sender_psid, message);
             return false;
     }
-
     if (user.id_user === sender_psid){
         return true;
     } else {
@@ -265,7 +268,7 @@ function askTemplateGroupe(){
 async function is4A(sender_psid){
     let sql_get_user = 'SELECT promo FROM user WHERE id_user=?';
     let user = (await queryDB(sql_get_user, [sender_psid]))[0];
-    // console.log(user);
+    console.log(user);
     if (user.promo === "4"){
         return true;
     } else {
@@ -478,6 +481,7 @@ async function handlePostback(sender_psid, received_postback) {
             sql_set_filiere = `UPDATE user SET filliere=? WHERE id_user=?`;
             db.run(sql_set_filiere, [payload, sender_psid]);
             if (await is4A(sender_psid)){
+                console.log('4ETI')
                 response = askTemplateMajeureETI();
                 r = await callSendAPI(sender_psid, response[0]);
                 r = await callSendAPI(sender_psid, response[1]);
@@ -490,8 +494,8 @@ async function handlePostback(sender_psid, received_postback) {
             }
         case 'CGP': 
             // set the user filliere to payload
-            sql_set_filiere = `UPDATE user SET filliere = ${payload} WHERE id_user = ${sender_psid}`;
-            db.exec(sql_set_filiere);
+            sql_set_filiere = `UPDATE user SET filliere=? WHERE id_user=?`;
+            db.run(sql_set_filiere, [payload, sender_psid]);
             response = askTemplateJour();
             r = await callSendAPI(sender_psid, response[0]);
             r = await callSendAPI(sender_psid, response[1]);
@@ -504,7 +508,7 @@ async function handlePostback(sender_psid, received_postback) {
             let sql_set_majeur = `UPDATE user SET majeur=? WHERE id_user=?`;
             let majeur = MAJEURS[payload];
             console.log(majeur)
-            db.run(sql_set_majeur, [majeur, sender_psid]);$
+            db.run(sql_set_majeur, [majeur, sender_psid]);
             break;
         default:
             console.log("unknown payload")
