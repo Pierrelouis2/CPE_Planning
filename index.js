@@ -643,7 +643,7 @@ async function ConstructMessage(planning){
         messageAprem += planning["Aprem"][matiere]
         console.log(planning["Aprem"][matiere])
         if (planning["Aprem"][matiere].includes('Salle')){
-            messageAprem.concat("      \000      ")
+            messageAprem.concat("      @      ")
         }
     }
     console.log(messageMat)
