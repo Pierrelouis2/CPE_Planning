@@ -1,0 +1,170 @@
+[
+    {
+        "jour":"LUNDI-03-avr",
+        "Matin":[
+            "8h-12h15",
+            "CONCEP.LOGICIELLE\/BIG DATA",
+            "Pas de cours ",
+            "ROBOTIQUE",
+            "Pas de cours ",
+            "ELECTRONIQUE ET SYST EMB",
+            "Communications num\u00e9riques",
+            "N.LEBEDEV",
+            " Salle ",
+            "08h00 \u00e0 10h00",
+            "INFRA DES RESEAUX ",
+            "Communications num\u00e9riques",
+            "N.LEBEDEV",
+            " Salle ",
+            "08h00 \u00e0 10h00",
+            "IMAGE ",
+            "Traitement d'images ",
+            "E. VAN REETH \/M.FOARE ",
+            "10h30 \u00e0 12h30 :  Salleinfo "
+        ],
+        "Aprem":[
+            "13h10-18h",
+            "LV",
+            "(Voir planning)"
+        ]
+    },
+    {
+        "jour":"MARDI-04-avr",
+        "Matin":[
+            "8h-12h15",
+            "GROUPE A",
+            "Projet ",
+            "F. JOLY",
+            "Salle info",
+            "CONCEP.LOGICIELLE\/BIG DATA",
+            "GROUPE C &D",
+            "Conception Orient\u00e9e Objet et Design Patterns",
+            "B.MASCRET",
+            " Salle info"
+        ],
+        "Aprem":[
+            "13h30-17h45",
+            "GROUPE C&D",
+            "Projet ",
+            "F. JOLY",
+            "Salles infos",
+            "CONCEP.LOGICIELLE\/BIG DATA",
+            "GROUPE A&B",
+            "Conception Orient\u00e9e Objet et Design Patterns",
+            "B.MASCRET",
+            " Salle info"
+        ]
+    },
+    {
+        "jour":"MERCREDI-05-avr",
+        "Matin":[
+            "8h-12h15",
+            "GROUPE A & B",
+            "Projet ",
+            "F. JOLY",
+            "Salles info",
+            "ROBOTIQUE",
+            "GROUPE C&D",
+            "Interaction Homme\/Robot",
+            "F.JUMEL",
+            " Salle info"
+        ],
+        "Aprem":[
+            "13h30-17h45",
+            "CONCEP.LOGICIELLE\/BIG DATA",
+            "Pas de cours ",
+            "ROBOTIQUE",
+            "Pas de cours ",
+            "ELECTRONIQUE ET SYST EMB",
+            "Communications num\u00e9riques",
+            "N.LEBEDEV",
+            " Salle ",
+            "INFRA DES RESEAUX ",
+            "Communications num\u00e9riques",
+            "N.LEBEDEV",
+            " Salle ",
+            "IMAGE ",
+            "Programmation g\u00e9n\u00e9rique en C++",
+            "T.DUPONT",
+            "Salle info "
+        ]
+    },
+    {
+        "jour":"JEUDI-06-avr",
+        "Matin":[
+            "8h-12h15",
+            "GROUPE C",
+            "Projet ",
+            "F. JOLY",
+            "Salle info",
+            "ROBOTIQUE",
+            "GROUPE A & B",
+            "Interaction Homme\/Robot",
+            "F.JUMEL",
+            " Salle info"
+        ],
+        "Aprem":[
+            "13h30-17h45",
+            "TP TSA ",
+            "S\u00e9ance de Rattrapages ",
+            "P.GONCALVES  \/M.FOARE ",
+            "Salle B121"
+        ]
+    },
+    {
+        "jour":"VENDREDI-07-avr",
+        "Matin":[
+            "8h-12h15",
+            "CONCEP.LOGICIELLE\/BIG DATA",
+            "Pas de cours ",
+            "ROBOTIQUE",
+            "Mod\u00e9lisation des Robots",
+            "R.LEBER",
+            "Salle",
+            "15h00 \u00e0 17h45",
+            "ELECTRONIQUE ET SYST EMB",
+            "Communications num\u00e9riques",
+            "N.LEBEDEV",
+            " Salle ",
+            "INFRA DES RESEAUX ",
+            "Communications num\u00e9riques",
+            "N.LEBEDEV",
+            " Salle ",
+            "IMAGE ",
+            "Analyse Num\u00e9rique",
+            "S.MAZAURIC ",
+            "10h30 \u00e0 12h30 :  Salle"
+        ],
+        "Aprem":[
+            "13h30-17h45",
+            "MSO1 OUVERTURE",
+            "AWS Cloud Foundations",
+            "O.CARRILLO \/  G.MOREL",
+            " Amphi puis",
+            "Salle info",
+            "Information g\u00e9ographique",
+            "13h00-17h00",
+            "L. DUPONT",
+            "Salle info",
+            "Conception architecture",
+            "syst\u00e8me",
+            "L. GUILLEMAUD",
+            "Salle  ",
+            "Information quantique",
+            "B. FEDRICI",
+            "Salle G102",
+            "Algorithmique et Informatique Th\u00e9orique ",
+            "G.MOREL",
+            "Salle info "
+        ]
+    },
+    {
+        "jour":"VENDREDI-07-avr",
+        "Matin":[
+
+        ],
+        "Aprem":[
+
+        ]
+    }
+]
