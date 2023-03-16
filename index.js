@@ -89,7 +89,7 @@ async function isKnownUser(sender_psid){
     const user = (await queryDB(sql_get_user, sender_psid))[0];
     console.log("user", user)
     if (user === undefined){
-        console.log("user not found")
+        console.log("user undefined")
         return false;
     }
     if (user === [] || 
@@ -105,7 +105,7 @@ async function isKnownUser(sender_psid){
             callSendAPI(sender_psid, message);
             return false;
     }
-    if (user.id_user === sender_psid){
+    if (user.id_user.toString() === sender_psid){
         return true;
     } else {
         return false;
@@ -269,7 +269,9 @@ async function is4A(sender_psid){
     let sql_get_user = 'SELECT promo FROM user WHERE id_user=?';
     let user = (await queryDB(sql_get_user, [sender_psid]))[0];
     console.log(user);
+    console.log(user.promo);
     if (user.promo === "4"){
+        console.log("is4A");
         return true;
     } else {
         return false;
@@ -385,7 +387,7 @@ async function handlePostback(sender_psid, received_postback) {
             break;
         case 'LUNDI':
             // get parametre from user_id in db: promo, filliere, majeure
-            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI',payload,'IMAGE');
+            planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
             rep = await ConstructMessage(planningJour);
             message = {"text": `Voici le planning de ${payload}: `};
             r = await callSendAPI(sender_psid, message);
@@ -396,7 +398,7 @@ async function handlePostback(sender_psid, received_postback) {
             // return the column LUNDI from etd.csv
             break;
         case 'MARDI':
-            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI',payload,'IMAGE');
+            planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
             rep = await ConstructMessage(planningJour);
             message = {"text": `Voici le planning de ${payload} : `};
             r = await callSendAPI(sender_psid, message);
@@ -406,7 +408,7 @@ async function handlePostback(sender_psid, received_postback) {
             r = await callSendAPI(sender_psid, message);
             break;
         case 'MERCREDI':
-            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI',payload,'IMAGE');
+            planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
             rep = await ConstructMessage(planningJour);
             message = {"text": `Voici le planning de ${payload} : `};
             r = await callSendAPI(sender_psid, message);
@@ -416,7 +418,7 @@ async function handlePostback(sender_psid, received_postback) {
             r = await callSendAPI(sender_psid, message);
             break;
         case 'JEUDI':
-            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI',payload,'IMAGE');
+            planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
             rep = await ConstructMessage(planningJour);
             message = {"text": `Voici le planning de ${payload} : `};
             r = await callSendAPI(sender_psid, message);
@@ -426,7 +428,7 @@ async function handlePostback(sender_psid, received_postback) {
             r = await callSendAPI(sender_psid, message);
             break;
         case 'VENDREDI':
-            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI',payload,'IMAGE');
+            planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
             rep = await ConstructMessage(planningJour);
             message = {"text": `Voici le planning de ${payload} : `};
             r = await callSendAPI(sender_psid, message);
@@ -437,7 +439,10 @@ async function handlePostback(sender_psid, received_postback) {
             break;
         case 'GET_STARTED':
             // verify is the sender is known
+            let test = true
+            console.log(test)
             let knownUser = await isKnownUser(sender_psid);
+            console.log(knownUser)
             if (knownUser){
                 // send the user the menu
                 console.log('known user')
@@ -485,12 +490,15 @@ async function handlePostback(sender_psid, received_postback) {
                 response = askTemplateMajeureETI();
                 r = await callSendAPI(sender_psid, response[0]);
                 r = await callSendAPI(sender_psid, response[1]);
+                break;
             } 
             // give days menu
             else {
+                console.log('3ETI')
                 response = askTemplateJour();
                 r = await callSendAPI(sender_psid, response[0]);
                 r = await callSendAPI(sender_psid, response[1]);
+                break;
             }
         case 'CGP': 
             // set the user filliere to payload
@@ -500,15 +508,21 @@ async function handlePostback(sender_psid, received_postback) {
             r = await callSendAPI(sender_psid, response[0]);
             r = await callSendAPI(sender_psid, response[1]);
             break;
+        // Comportement bizarre, le payload est bien 'CBD' mais le switch passe a la suite jusqu'a 'ESE'
         case 'CBD':
         case 'INFRA':
         case 'IMI':
         case 'ROSE':
         case 'ESE':
+        case 'Majeurs' :
             let sql_set_majeur = `UPDATE user SET majeur=? WHERE id_user=?`;
             let majeur = MAJEURS[payload];
+            console.log('ESE')
             console.log(majeur)
             db.run(sql_set_majeur, [majeur, sender_psid]);
+            response = askTemplateJour();
+            r = await callSendAPI(sender_psid, response[0]);
+            r = await callSendAPI(sender_psid, response[1]);
             break;
         default:
             console.log("unknown payload")
@@ -543,7 +557,7 @@ async function callSendAPI(sender_psid, response) {
     return
 }
 
-async function readCsv(dir,Annee,Filliere,Jour, Majeur="Pour tous") {
+async function readCsv(dir,Jour,sender_psid) {
     let planningRen = {}
     let rawdata = fs.readFileSync(dir);
     let planningG = JSON.parse(rawdata);
@@ -554,24 +568,32 @@ async function readCsv(dir,Annee,Filliere,Jour, Majeur="Pour tous") {
             Date = day
         }
     }
+    //get the info on the user
+    let sql_get_user = `SELECT * FROM user WHERE id_user = ?`;
+    let user = (await queryDB(sql_get_user,sender_psid))[0];
+    console.log(user)
+    let Majeur = user.majeur;
+    console.log(Majeur,"MAJEUR")
     //init matin
     planningRen["Matin"] = []
     // on verifie si on a qqch dans la majeure, si oui on prend que le planning de la majeure
-    if (planningG[Date]["Matin"][Majeur].length != 0 && Majeur != "Pour tous"){
+    if (planningG[Date]["Matin"][Majeur].length != 0 ){
         planningRen["Matin"].push(planningG[Date]["Matin"][Majeur])
     }
-    // peut import la majeur on prend le planning Pour tous du matin
-    planningRen["Matin"].push(planningG[Date]["Matin"][Majeur])
+    else {
+        planningRen["Matin"].push(planningG[Date]["Matin"]["Pour tous"])
+    }
 
     // console.log(planningG[Date]["Aprem"][Majeur])
     //init aprem
     planningRen["Aprem"] = []
-    if (planningG[Date]["Aprem"][Majeur] != 0 && Majeur != "Pour tous"){
-        planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"])
+    if (planningG[Date]["Aprem"][Majeur] != 0 ){
+        planningRen["Aprem"].push(planningG[Date]["Aprem"][Majeur])
         // console.log("Pour tous")
     }
-    // peut import la majeur on prend le planning Pour tous de l'aprem
-    planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"])
+    else {
+        planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"])
+    }
 
     return planningRen
 }
