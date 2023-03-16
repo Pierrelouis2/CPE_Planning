@@ -630,9 +630,8 @@ async function readCsv(dir,Jour,sender_psid) {
         planningRen["Aprem"].push(planningG[Date]["Aprem"][Majeur])
         // console.log("Pour tous")
     }
-    else {
-        planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"])
-    }
+    
+    planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"])
 
     return planningRen
 }
