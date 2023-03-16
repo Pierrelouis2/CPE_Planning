@@ -87,6 +87,7 @@ app.get('/webhook', (req, res) => {
 async function isKnownUser(sender_psid){
     let sql_get_user = `SELECT * FROM user WHERE id_user = ?`;
     const user = (await queryDB(sql_get_user, sender_psid))[0];
+    console.log("user", user);
     if (user === [] || 
         user.promo === null ||
         user.majeur === null ||
@@ -367,10 +368,7 @@ async function handlePostback(sender_psid, received_postback) {
     let planningJour;
     let rep;
     let sql_set_filiere
-    if ( !isKnownUser(sender_psid)){
-        console.log("WARNING: handle postback while user not in db");
-        return
-    }
+   
     // Get the payload for the postback
     let payload = received_postback.payload;
     switch (payload) {
