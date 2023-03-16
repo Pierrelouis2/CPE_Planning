@@ -611,7 +611,6 @@ async function readCsv(dir,Jour,sender_psid) {
     let user = (await queryDB(sql_get_user,sender_psid))[0];
     console.log(user)
     let Majeur = user.majeur;
-    console.log(Majeur,"MAJEUR")
     //init matin
     planningRen["Matin"] = []
     // on verifie si on a qqch dans la majeure, si oui on prend que le planning de la majeure
@@ -620,17 +619,14 @@ async function readCsv(dir,Jour,sender_psid) {
     }
     planningRen["Matin"].push(planningG[Date]["Matin"]["Pour tous"]) // on  push le pour tous dans tout les cas flemme de gerer les groupes
 
-
     // console.log(planningG[Date]["Aprem"][Majeur])
     //init aprem
     planningRen["Aprem"] = []
     if (planningG[Date]["Aprem"][Majeur] !==  null ){
         planningRen["Aprem"].push(planningG[Date]["Aprem"][Majeur])
-        // console.log("Pour tous")
     }
-    
     planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"])
-
+    console.log(planningRen)
     return planningRen
 }
 
@@ -638,15 +634,18 @@ async function ConstructMessage(planning){
     let messageMat = ""
     let messageAprem = ""
     for (let matiere in planning["Matin"]){
-        //TODO
-        // vaiment besoin de <planning["Matin"][matiere] + "\n"> ? pas just <matiere + "\n"> ?
         messageMat += planning["Matin"][matiere] + "\n"
+        if (planning["Matin"][matiere].includes("Salle")){
+            messageMat += "\n\n"
+        }
     }
     for (let matiere in planning["Aprem"]){
         messageAprem += planning["Aprem"][matiere] + "\n"
         if (planning["Aprem"][matiere].includes("Salle")){
-            messageAprem += "\n"
+            messageAprem += "\n\n"
         }
     }
+    console.log(messageMat)
+    console.log(messageAprem)
     return [messageMat,messageAprem]
 }
