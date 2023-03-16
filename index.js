@@ -381,12 +381,22 @@ async function handlePostback(sender_psid, received_postback) {
     console.log("payload: ", payload);
     switch (payload) {
         case 'TOUT':
+            if (!(await isKnownUser(sender_psid)))  {
+                response = askTemplateStart();
+                r = await callSendAPI(sender_psid, response);
+                break;
+            }
             message = {"text": "Voici le planning de la semaine: "};
             r = await callSendAPI(sender_psid, message);
             response = imageTemplate();
             r = await callSendAPI(sender_psid, response);
             break;
         case 'LUNDI':
+            if (!(await isKnownUser(sender_psid)))  {
+                response = askTemplateStart();
+                r = await callSendAPI(sender_psid, response);
+                break;
+            }
             // get parametre from user_id in db: promo, filliere, majeure
             planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
             rep = await ConstructMessage(planningJour);
@@ -399,6 +409,11 @@ async function handlePostback(sender_psid, received_postback) {
             // return the column LUNDI from etd.csv
             break;
         case 'MARDI':
+            if (!(await isKnownUser(sender_psid)))  {
+                response = askTemplateStart();
+                r = await callSendAPI(sender_psid, response);
+                break;
+            }
             planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
             rep = await ConstructMessage(planningJour);
             message = {"text": `Voici le planning de ${payload} : `};
@@ -409,6 +424,11 @@ async function handlePostback(sender_psid, received_postback) {
             r = await callSendAPI(sender_psid, message);
             break;
         case 'MERCREDI':
+            if (!(await isKnownUser(sender_psid)))  {
+                response = askTemplateStart();
+                r = await callSendAPI(sender_psid, response);
+                break;
+            }
             planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
             rep = await ConstructMessage(planningJour);
             message = {"text": `Voici le planning de ${payload} : `};
@@ -419,6 +439,11 @@ async function handlePostback(sender_psid, received_postback) {
             r = await callSendAPI(sender_psid, message);
             break;
         case 'JEUDI':
+            if (!(await isKnownUser(sender_psid)))  {
+                response = askTemplateStart();
+                r = await callSendAPI(sender_psid, response);
+                break;
+            }
             planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
             rep = await ConstructMessage(planningJour);
             message = {"text": `Voici le planning de ${payload} : `};
@@ -429,6 +454,11 @@ async function handlePostback(sender_psid, received_postback) {
             r = await callSendAPI(sender_psid, message);
             break;
         case 'VENDREDI':
+            if (!(await isKnownUser(sender_psid)))  {
+                response = askTemplateStart();
+                r = await callSendAPI(sender_psid, response);
+                break;
+            }
             planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
             rep = await ConstructMessage(planningJour);
             message = {"text": `Voici le planning de ${payload} : `};
@@ -496,18 +526,27 @@ async function handlePostback(sender_psid, received_postback) {
             // give days menu
             else {
                 console.log('3ETI')
-                response = askTemplateJour();
+                message = {"text": `Le planning pour les 3A n'est pas encore disponible. On fait au plus vite ! `};
+                r = await callSendAPI(sender_psid, message);
+                message = {"text": `Signé : les dev en SUSU`};
+                r = await callSendAPI(sender_psid, message);
+                /*response = askTemplateJour();
                 r = await callSendAPI(sender_psid, response[0]);
-                r = await callSendAPI(sender_psid, response[1]);
+                r = await callSendAPI(sender_psid, response[1]);*/
                 break;
             }
         case 'CGP': 
             // set the user filliere to payload
             sql_set_filiere = `UPDATE user SET filliere=? WHERE id_user=?`;
             db.run(sql_set_filiere, [payload, sender_psid]);
-            response = askTemplateJour();
+            message = {"text": `Le planning pour les CGP n'est pas encore disponible. On fait au plus vite ! `};
+            r = await callSendAPI(sender_psid, message);
+           message = {"text": `Signé : les dev en SUSU`}; 
+           r = await callSendAPI(sender_psid, message);
+            
+           /* response = askTemplateJour();
             r = await callSendAPI(sender_psid, response[0]);
-            r = await callSendAPI(sender_psid, response[1]);
+            r = await callSendAPI(sender_psid, response[1]);*/
             break;
         // Comportement bizarre, le payload est bien 'CBD' mais le switch passe a la suite jusqu'a 'ESE'
         case 'CBD':
