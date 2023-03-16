@@ -11,13 +11,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let users = {};
-let db = new sqlite3.Database('users.db');
-db.query = function (sql, params, callback) {
-    if (!Array.isArray(params)) throw new Error("params is not an array!");
-    this.all(sql, params, function (err, rows) {
-      callback(err, { rows: rows });
-    });
-};
+// let db = new sqlite3.Database('users.db');
+const db = require('better-sqlite3')('users.db');
 
 let port = 8989;
 app.listen(port,'0.0.0.0' ,() => console.log(`App listening on port ${port}!`), set_get_started());
@@ -27,13 +22,13 @@ app.get('/', (req, res) => {
 });
 
 // Creates the endpoint for our webhook to facebook
-app.post('/webhook', (req, res) => {
+app.post('/webhook', async (req, res) => {
     console.log('got webhook post')
     let body = req.body;
     // Checks this is an event from a page subscription
     if (body.object === 'page') {
         // Iterates over each entry - there may be multiple if batched
-        body.entry.forEach(function(entry) {
+        body.entry.forEach(async function(entry) {
             // Gets the message. entry.messaging is an array, but
             // will only ever contain one message, so we get index 0
             let webhook_event = entry.messaging[0];
@@ -46,7 +41,7 @@ app.post('/webhook', (req, res) => {
                 console.log('in handleMessage');
                 handleMessage(sender_psid);
             } else if (webhook_event.postback) {
-                handlePostback(sender_psid, webhook_event.postback);
+                await handlePostback(sender_psid, webhook_event.postback);
             }
         });
         // Returns a '200 OK' response to all requests
@@ -82,18 +77,23 @@ app.get('/webhook', (req, res) => {
 
 async function isKnownUser(sender_psid){
     let sql_get_user = `SELECT id_user FROM user WHERE id_user = ${sender_psid}`;
-    let test = await db.get(sql_get_user,(err, user)=>{
-        console.log(user);
-        console.log(`user n°${user} is known`);
+    let test = `Select * from user`
+    const user =  db.prepare(test).all();
+    console.log("user: ")
+    console.log(user);
+    // console.log("err: ")
+    // console.log(err);
+    console.log(user.id_user)
     if (user === {} ){
+        console.log("the user is not known")
+        return "not known";
+    } else if (user.id_user === sender_psid) {
+        console.log("the user is known")
+        return "known";
+    } else {
+        console.log("nothing happened")
         return false;
-    } else if (user['id_user'] === sender_psid) {
-        
-        return true;
     }
-      });
-    console.log(test);
-    return test;
 }
 
 function set_get_started(){
@@ -249,7 +249,6 @@ function askTemplateGroupe(){
 // TODO
 // on sait qui si il est en 4A pas si il est en ETI ...
 // changer le nom de la fct ?
-
 async function is4ETI(sender_psid){
     let sql_get_user = 'SELECT promo FROM user WHERE id = ?';
     let promo = await db.get(sql_get_user, [sender_psid]);
@@ -342,7 +341,7 @@ async function handlePostback(sender_psid, received_postback) {
     // Get the payload for the postback
     let payload = received_postback.payload;
     switch (payload) {
-        case 'TOUT':
+        case 'TOUT2':
             message = {"text": "Voici le planning de la semaine: "};
             r = await callSendAPI(sender_psid, message);
             response = imageTemplate();
@@ -400,9 +399,11 @@ async function handlePostback(sender_psid, received_postback) {
             message = {"text": `Après-midi : ${rep[1]}`};
             r = await callSendAPI(sender_psid, message);
             break;
-        case 'GET_STARTED':
+        case 'TOUT':
             // verify is the sender is known
-            if (await isKnownUser(sender_psid)){
+            let knownUser = new Boolean(false);
+            knownUser = await isKnownUser(sender_psid);
+            if (knownUser){
                 // send the user the menu
                 console.log('known user')
                 response = askTemplateJour();
