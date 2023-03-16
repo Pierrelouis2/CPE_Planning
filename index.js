@@ -81,15 +81,19 @@ app.get('/webhook', (req, res) => {
 });
 
 async function isKnownUser(sender_psid){
-    const sql_get_user = `SELECT id_user FROM user WHERE id_user = ${sender_psid}`;
-    let row = await db.query(sql_get_user, []);
-    console.log(row.rows);
-    if (row.id_user === sender_psid){
-        console.log(`user n°${row.id_user} is known`);
-        return true;
-    } else {
+    let sql_get_user = `SELECT id_user FROM user WHERE id_user = ${sender_psid}`;
+    let test = await db.get(sql_get_user,(err, user)=>{
+        console.log(user);
+        console.log(`user n°${user} is known`);
+    if (user === {} ){
         return false;
+    } else if (user['id_user'] === sender_psid) {
+        
+        return true;
     }
+      });
+    console.log(test);
+    return test;
 }
 
 function set_get_started(){
