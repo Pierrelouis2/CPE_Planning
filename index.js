@@ -378,6 +378,7 @@ async function handlePostback(sender_psid, received_postback) {
     // }
     // Get the payload for the postback
     let payload = received_postback.payload;
+    console.log("payload: ", payload);
     switch (payload) {
         case 'TOUT':
             message = {"text": "Voici le planning de la semaine: "};
@@ -577,17 +578,16 @@ async function readCsv(dir,Jour,sender_psid) {
     //init matin
     planningRen["Matin"] = []
     // on verifie si on a qqch dans la majeure, si oui on prend que le planning de la majeure
-    if (planningG[Date]["Matin"][Majeur].length != 0 ){
+    if (planningG[Date]["Matin"][Majeur] !== null ){
         planningRen["Matin"].push(planningG[Date]["Matin"][Majeur])
     }
-    else {
-        planningRen["Matin"].push(planningG[Date]["Matin"]["Pour tous"])
-    }
+    planningRen["Matin"].push(planningG[Date]["Matin"]["Pour tous"]) // on  push le pour tous dans tout les cas flemme de gerer les groupes
+
 
     // console.log(planningG[Date]["Aprem"][Majeur])
     //init aprem
     planningRen["Aprem"] = []
-    if (planningG[Date]["Aprem"][Majeur] != 0 ){
+    if (planningG[Date]["Aprem"][Majeur] !==  null ){
         planningRen["Aprem"].push(planningG[Date]["Aprem"][Majeur])
         // console.log("Pour tous")
     }
