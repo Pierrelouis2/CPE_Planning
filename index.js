@@ -347,7 +347,7 @@ function imageTemplate(psid){
             "attachment":{
                 "type":"image",
                 "payload":{
-                    "url": "https://cdn.discordapp.com/attachments/900449490539016233/1078715007648403610/Screenshot_20230224_172800_PDF_Viewer_Lite.jpg",
+                    "url": "https://cdn.discordapp.com/attachments/1086031543790751836/1086032229106471043/CPEPlanning20-mars.jpg",
                     "is_reusable":true
                 },
             }
