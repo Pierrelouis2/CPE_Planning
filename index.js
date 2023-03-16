@@ -6,6 +6,7 @@ let express = require('express'),
     config = require('config'),
     sqlite3 = require('sqlite3'),
     fs = require('fs');
+    const { promisify } = require("util");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -80,21 +81,35 @@ app.get('/webhook', (req, res) => {
     }
 });
 
+const query = promisify(db.all).bind(db);
+
+
 async function isKnownUser(sender_psid){
-    let sql_get_user = `SELECT id_user FROM user WHERE id_user = ${sender_psid}`;
-    let test = await db.get(sql_get_user,(err, user)=>{
-        console.log(user);
-        console.log(`user n°${user} is known`);
-    if (user === {} ){ 
-        return false;
-    } else if (user['id_user'] === sender_psid) {
-        
-        return true;
-    }
-      });
+    let sql_get_user = `SELECT * FROM user`;
+
+    const test = await query(sql_get_user)
     console.log(test);
-    return test;
+
+    return false;
 }
+
+async function isKnownUser2(userId) {
+    try {
+      const sql = `SELECT id_user FROM user WHERE id_user = ${userId}`;
+      const user = await db.get(sql);
+      console.log(user);
+      if (user == undefined) {
+        console.log("User is not known");
+        return false;
+      }
+      
+      console.log(`User with id ${user.id_user} is known`);
+      return true;
+    } catch (err) {
+      console.error(`Error while fetching user with id ${userId}: ${err}`);
+      return false;
+    }
+  }
 
 function set_get_started(){
     // Set up Get Started button
@@ -342,7 +357,7 @@ async function handlePostback(sender_psid, received_postback) {
     // Get the payload for the postback
     let payload = received_postback.payload;
     switch (payload) {
-        case 'TOUT':
+        case 'TOUT2':
             message = {"text": "Voici le planning de la semaine: "};
             r = await callSendAPI(sender_psid, message);
             response = imageTemplate();
@@ -400,7 +415,7 @@ async function handlePostback(sender_psid, received_postback) {
             message = {"text": `Après-midi : ${rep[1]}`};
             r = await callSendAPI(sender_psid, message);
             break;
-        case 'GET_STARTED':
+        case 'TOUT':
             // verify is the sender is known
             if (await isKnownUser(sender_psid)){
                 // send the user the menu
