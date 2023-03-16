@@ -44,7 +44,6 @@ app.post('/webhook', async (req, res) => {
             // Get the sender PSID
             let sender_psid = webhook_event.sender.id;
             console.log('Sender PSID: ' + sender_psid);
-            set_persistent_menu(sender_psid);
             //message or postback
             if (webhook_event.message) {
                 console.log('in handleMessage');
@@ -185,6 +184,22 @@ async function set_persistent_menu(psid){
 }
 
 // TODO
+// on sait qui si il est en 4A pas si il est en ETI ...
+// changer le nom de la fct ?
+async function is4A(sender_psid){
+    let sql_get_user = 'SELECT promo FROM user WHERE id_user=?';
+    let user = (await queryDB(sql_get_user, [sender_psid]))[0];
+    console.log(user);
+    console.log(user.promo);
+    if (user.promo === "4"){
+        console.log("is4A");
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// TODO
 // on a deja le menu persistent, on peut donc le supprimer ?
 function askTemplateJour(){
     return [{"name":"ask",
@@ -253,29 +268,13 @@ function askTemplateGroupe(){
         "type":"template",
         "payload":{
             "template_type":"button",
-            "text":"",
+            "text":" ",
             "buttons":[
-                { "type":"postback", "title":"groupe D", "payload":"D"},
+                {"type":"postback", "title":"groupe D", "payload":"D"},
             ]
         }
     }
     }]
-}
-
-// TODO
-// on sait qui si il est en 4A pas si il est en ETI ...
-// changer le nom de la fct ?
-async function is4A(sender_psid){
-    let sql_get_user = 'SELECT promo FROM user WHERE id_user=?';
-    let user = (await queryDB(sql_get_user, [sender_psid]))[0];
-    console.log(user);
-    console.log(user.promo);
-    if (user.promo === "4"){
-        console.log("is4A");
-        return true;
-    } else {
-        return false;
-    }
 }
 
 function askTemplateStart(){
@@ -329,7 +328,7 @@ function askTemplateMajeureETI(){
             "type":"template",
             "payload":{
                 "template_type":"button",
-                "text":"",
+                "text":" ",
                 "buttons":[
                     { "type":"postback", "title":"Robot", "payload":"ROSE"},
                     { "type":"postback", "title":"Electronique", "payload":"ESE"},
@@ -372,10 +371,9 @@ async function handlePostback(sender_psid, received_postback) {
     let planningJour;
     let rep;
     let sql_set_filiere
-    // if ( !isKnownUser(sender_psid)){
-    //     console.log("WARNING: handle postback while user not in db");
-    //     return
-    // }
+    if (isKnownUser(sender_psid)){
+        set_persistent_menu(sender_psid);
+    }
     // Get the payload for the postback
     let payload = received_postback.payload;
     console.log("payload: ", payload);
