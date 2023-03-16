@@ -85,11 +85,21 @@ app.get('/webhook', (req, res) => {
 });
 
 async function isKnownUser(sender_psid){
-    let sql_get_user = `SELECT id_user FROM user WHERE id_user = ?`;
+    let sql_get_user = `SELECT * FROM user WHERE id_user = ?`;
     const user = (await queryDB(sql_get_user, sender_psid))[0];
-    if (user === []){
-        return false;
-    } 
+    if (user === [] || 
+        user.promo === null ||
+        user.majeur === null ||
+        user.groupe === null){
+            let sql_delete_user = `DELETE FROM user WHERE id_user = ?`;
+            db.exec(sql_delete_user, sender_psid);
+            let message = {"text": "Votre compte n'est pas complet, veuillez le refaire"}
+            callSendAPI(sender_psid, message);
+            message = askTemplateStart();
+            callSendAPI(sender_psid, message);
+            return false;
+    }
+
     if (user.id_user === sender_psid){
         return true;
     } else {
@@ -263,6 +273,21 @@ async function is4A(sender_psid){
     }
 }
 
+function askTemplateStart(){
+    return {"name":"ask",
+    "attachment":{
+        "type":"template",
+        "payload":{
+            "template_type":"button",
+            "text":"Redémarrer le bot",
+            "buttons":[
+                { "type":"postback", "title":"Démarrez", "payload":"GET_STARTED"},
+            ]
+        }
+    }
+}
+}
+
 function askTemplateFilliere(){
     return {"name":"ask",
     "attachment":{
@@ -342,6 +367,10 @@ async function handlePostback(sender_psid, received_postback) {
     let planningJour;
     let rep;
     let sql_set_filiere
+    if ( !isKnownUser(sender_psid)){
+        console.log("WARNING: handle postback while user not in db");
+        return
+    }
     // Get the payload for the postback
     let payload = received_postback.payload;
     switch (payload) {
