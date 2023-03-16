@@ -12,6 +12,12 @@ app.use(bodyParser.json());
 
 let users = {};
 let db = new sqlite3.Database('users.db');
+db.query = function (sql, params, callback) {
+    if (!Array.isArray(params)) throw new Error("params is not an array!");
+    this.all(sql, params, function (err, rows) {
+      callback(err, { rows: rows });
+    });
+};
 
 let port = 8989;
 app.listen(port,'0.0.0.0' ,() => console.log(`App listening on port ${port}!`), set_get_started());
@@ -22,7 +28,7 @@ app.get('/', (req, res) => {
 
 // Creates the endpoint for our webhook to facebook
 app.post('/webhook', (req, res) => {
-    console.log('got webhook')
+    console.log('got webhook post')
     let body = req.body;
     // Checks this is an event from a page subscription
     if (body.object === 'page') {
@@ -52,6 +58,7 @@ app.post('/webhook', (req, res) => {
 });
 
 app.get('/webhook', (req, res) => {
+    console.log('got webhook get')
     // Adds support for GET requests to our webhook
     let VERIFY_TOKEN = config.get('facebook.page.secret');
     // Parse the query params
@@ -74,10 +81,11 @@ app.get('/webhook', (req, res) => {
 });
 
 async function isKnownUser(sender_psid){
-    let sql_get_user = `SELECT id_user FROM user WHERE id_user = ${sender_psid}`;
-    let user = await db.get(sql_get_user);
-    console.log(`user n°${user} is known`);
-    if (user === sender_psid ){
+    const sql_get_user = `SELECT id_user FROM user WHERE id_user = ${sender_psid}`;
+    let row = await db.query(sql_get_user, []);
+    console.log(row.rows);
+    if (row.id_user === sender_psid){
+        console.log(`user n°${row.id_user} is known`);
         return true;
     } else {
         return false;
@@ -406,7 +414,8 @@ async function handlePostback(sender_psid, received_postback) {
                 r = await callSendAPI(sender_psid, response);
             }
             break;
-        case '3', '4':
+        case '3':
+        case '4':
             //Write payload into database
             let sql_set_promo = `UPDATE user SET promo = ${payload} WHERE id_user = ${sender_psid}`;
             db.exec(sql_set_promo);
@@ -415,7 +424,10 @@ async function handlePostback(sender_psid, received_postback) {
             r = await callSendAPI(sender_psid, response[0]);
             r = await callSendAPI(sender_psid, response[1]);
             break;
-        case 'A','B','C','D':
+        case 'A':
+        case 'B':
+        case 'C':
+        case 'D':
             //Write payload into database
             let sql_set_groupe = `UPDATE user SET groupe = ${payload} WHERE id_user = ${sender_psid}`;
             db.exec(sql_set_groupe);
@@ -423,7 +435,8 @@ async function handlePostback(sender_psid, received_postback) {
             response = askTemplateFilliere();
             r = await callSendAPI(sender_psid, response);
             break
-        case 'ETI', 'CGP': //4ETI Majeure
+        case 'ETI': //4ETI -> get Majeure
+        case 'CGP': 
             // set the user filiere to payload
             let sql_set_filiere = `UPDATE user SET filiere = ${payload} WHERE id_user = ${sender_psid}`;
             db.exec(sql_set_filiere);
@@ -474,30 +487,36 @@ async function callSendAPI(sender_psid, response) {
     return
 }
 
-async function readCsv(dir,Annee,Filliere,Jour, Majeur=null) {
+async function readCsv(dir,Annee,Filliere,Jour, Majeur="Pour tous") {
     let planningRen = {}
     let rawdata = fs.readFileSync(dir);
     let planningG = JSON.parse(rawdata);
-    
-    for(let i in planningG) {
-        if (i.includes(Jour)){
-            var Date = i
+    let Date;
+    // parcour des jours to get the desired day
+    for(let day in planningG) {
+        if (day.includes(Jour)){
+            Date = day
         }
     }
-    if (planningG[Date]["Matin"][Majeur].length == 0 ){
-        planningRen["Matin"] = planningG[Date]["Matin"]["Pour tous"]
+    //init matin
+    planningRen["Matin"] = []
+    // on verifie si on a qqch dans la majeure, si oui on prend que le planning de la majeure
+    if (planningG[Date]["Matin"][Majeur].length != 0 && Majeur != "Pour tous"){
+        planningRen["Matin"].push(planningG[Date]["Matin"][Majeur])
     }
-    else{
-        planningRen["Matin"] = planningG[Date]["Matin"][Majeur]
+    // peut import la majeur on prend le planning Pour tous du matin
+    planningRen["Matin"].push(planningG[Date]["Matin"][Majeur])
+
+    // console.log(planningG[Date]["Aprem"][Majeur])
+    //init aprem
+    planningRen["Aprem"] = []
+    if (planningG[Date]["Aprem"][Majeur] != 0 && Majeur != "Pour tous"){
+        planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"])
+        // console.log("Pour tous")
     }
-    console.log(planningG[Date]["Aprem"][Majeur])
-    if (planningG[Date]["Aprem"][Majeur] == 0 ){
-        planningRen["Aprem"] = planningG[Date]["Aprem"]["Pour tous"]
-        console.log("Pour tous")
-    }
-    else{
-        planningRen["Aprem"] = planningG[Date]["Aprem"][Majeur]
-    }
+    // peut import la majeur on prend le planning Pour tous de l'aprem
+    planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"])
+
     return planningRen
 }
 
@@ -505,6 +524,8 @@ async function ConstructMessage(planning){
     let messageMat = ""
     let messageAprem = ""
     for (let matiere in planning["Matin"]){
+        //TODO
+        // vaiment besoin de <planning["Matin"][matiere] + "\n"> ? pas just <matiere + "\n"> ?
         messageMat += planning["Matin"][matiere] + "\n"
     }
     for (let matiere in planning["Aprem"]){

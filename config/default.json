@@ -1,14 +1,13 @@
 {
-    "facebook": {
-      "page": {
-        "access_token": "EAAKKDK025HsBAGbtIV1F7QZBzNSXCIriYAMaZAii56oz5ucaKXrwyD1bZC7ybTte1HGv3W5cdBCdupeqoOF6NHYmPuBsEx3FGjTlfQcPDx6iAN2EDK4I0ZB47ntK84RfzWDFznlErP4kf5XeuPLpoBhoRUjZBusull25GOBJL8t9igFLjhrir",
-        "secret":"685ddb45847b82372936f413e5eddf51"
-      }
-    },
-    "convertAPI":{
-      "secret":"8Bq4BsCS4Ob1cJdk",
-      "key":277584965
-  
+  "facebook": {
+    "page": {
+      "access_token": "EAAHLwV2JOukBAEzckKknoG0ZC3PfU4VSattOZAMdWmGhueZBzOrrwgU6MmRvG14WoqNZB7n8VsLjZAk9ZAZCgk6E2BR1s507xt4DZAHQAZBJoL0mrOxvpzhNCnyYenTXL9MHahsAOeztFOStS1wgJSFTLpZBkEgN8x8mW1HHp1BsM63J307gWvVtU096OVchppy0HdZA4j7u71GtAZDZD",
+      "secret":"4fee51f1bdcd72f2200aa19c8669bdb0"
     }
+  },
+  "convertAPI":{
+    "secret":"8Bq4BsCS4Ob1cJdk",
+    "key":277584965
+
   }
-  
+}
