@@ -626,7 +626,6 @@ async function readCsv(dir,Jour,sender_psid) {
         planningRen["Aprem"].push(planningG[Date]["Aprem"][Majeur])
     }
     planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"])
-    console.log(planningRen)
     return planningRen
 }
 
@@ -634,17 +633,19 @@ async function ConstructMessage(planning){
     let messageMat = ""
     let messageAprem = ""
     for (let matiere in planning["Matin"]){
-        messageMat += planning["Matin"][matiere]
+        console.log(planning["Matin"][matiere])
         if (planning["Matin"][matiere].includes("Salle")){
             messageMat.concat("     @    ")
         }
+        messageMat += planning["Matin"][matiere]
     }
     for (let matiere in planning["Aprem"]){
-        messageAprem += planning["Aprem"][matiere]
-        console.log(planning["Aprem"][matiere])
         if (planning["Aprem"][matiere].includes('Salle')){
             messageAprem.concat("      @      ")
         }
+        messageAprem += planning["Aprem"][matiere]
+        console.log(planning["Aprem"][matiere])
+        
     }
     console.log(messageMat)
     console.log(messageAprem)
