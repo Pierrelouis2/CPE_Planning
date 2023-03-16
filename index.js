@@ -641,7 +641,7 @@ async function ConstructMessage(planning){
     }
     for (let matiere in planning["Aprem"]){
         messageAprem += planning["Aprem"][matiere] + "\n"
-        print(planning["Aprem"][matiere])
+        console.log(planning["Aprem"][matiere])
         if (planning["Aprem"][matiere].includes('Salle')){
             messageAprem += "\n\n"
         }
