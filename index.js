@@ -78,12 +78,16 @@ app.get('/webhook', (req, res) => {
 });
 
 async function isKnownUser(sender_psid){
-    let sql_get_user = `SELECT * FROM user`;
-
-    const test = await queryDB(sql_get_user)
-    console.log(test);
-
-    return false;
+    let sql_get_user = `SELECT id_user FROM user WHERE id_user = ?`;
+    const user = await queryDB(sql_get_user, sender_psid)
+    if (user === []){
+        return false;
+    } 
+    if (user.id_user === sender_psid){
+        return true;
+    } else {
+        return false;
+    }
 }
 
 
