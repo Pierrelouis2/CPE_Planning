@@ -6,6 +6,7 @@ let express = require('express'),
     config = require('config'),
     sqlite3 = require('sqlite3'),
     fs = require('fs');
+    const { promisify } = require("util");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -75,26 +76,19 @@ app.get('/webhook', (req, res) => {
     }
 });
 
+const query = promisify(db.all).bind(db);
+
+
 async function isKnownUser(sender_psid){
-    let sql_get_user = `SELECT id_user FROM user WHERE id_user = ${sender_psid}`;
-    let test = `Select * from user`
-    const user =  db.prepare(test).all();
-    console.log("user: ")
-    console.log(user);
-    // console.log("err: ")
-    // console.log(err);
-    console.log(user.id_user)
-    if (user === {} ){
-        console.log("the user is not known")
-        return "not known";
-    } else if (user.id_user === sender_psid) {
-        console.log("the user is known")
-        return "known";
-    } else {
-        console.log("nothing happened")
-        return false;
-    }
+    let sql_get_user = `SELECT * FROM user`;
+
+    const test = await query(sql_get_user)
+    console.log(test);
+
+    return false;
 }
+
+
 
 function set_get_started(){
     // Set up Get Started button
