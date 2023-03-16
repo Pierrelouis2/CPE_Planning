@@ -13,8 +13,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let users = {};
-// let db = new sqlite3.Database('users.db');
-const db = require('better-sqlite3')('users.db');
+let db = new sqlite3.Database('users.db');
+const queryDB = promisify(db.all).bind(db);
+
+const MAJEURS = { "CBD": "CONCEP.LOGICIELLE/BIG DATA",
+    "ROSE": "ROBOTIQUE",
+    "ESE": "ELECTRONIQUE ET SYST EMB",
+    "INFRA": "INFRA DES RESEAUX",
+    "IMI": "IMAGE",
+};
 
 let port = 8989;
 app.listen(port,'0.0.0.0' ,() => console.log(`App listening on port ${port}!`), set_get_started());
@@ -77,16 +84,27 @@ app.get('/webhook', (req, res) => {
     }
 });
 
-const query = promisify(db.all).bind(db);
-
-
 async function isKnownUser(sender_psid){
-    let sql_get_user = `SELECT * FROM user`;
+    let sql_get_user = `SELECT * FROM user WHERE id_user = ?`;
+    const user = (await queryDB(sql_get_user, sender_psid))[0];
+    if (user === [] || 
+        user.promo === null ||
+        user.majeur === null ||
+        user.groupe === null){
+            let sql_delete_user = `DELETE FROM user WHERE id_user = ?`;
+            db.exec(sql_delete_user, sender_psid);
+            let message = {"text": "Votre compte n'est pas complet, veuillez le refaire"}
+            callSendAPI(sender_psid, message);
+            message = askTemplateStart();
+            callSendAPI(sender_psid, message);
+            return false;
+    }
 
-    const test = await query(sql_get_user);
-    console.log(test);
-
-    return false;
+    if (user.id_user === sender_psid){
+        return true;
+    } else {
+        return false;
+    }
 }
 
 
@@ -244,15 +262,30 @@ function askTemplateGroupe(){
 // TODO
 // on sait qui si il est en 4A pas si il est en ETI ...
 // changer le nom de la fct ?
-async function is4ETI(sender_psid){
+async function is4A(sender_psid){
     let sql_get_user = 'SELECT promo FROM user WHERE id = ?';
-    let promo = await db.get(sql_get_user, [sender_psid]);
-    console.log(promo);
-    if (promo === "4"){
+    let user = (await queryDB.get(sql_get_user, [sender_psid]))[0];
+    console.log(user);
+    if (user.promo === "4"){
         return true;
     } else {
         return false;
     }
+}
+
+function askTemplateStart(){
+    return {"name":"ask",
+    "attachment":{
+        "type":"template",
+        "payload":{
+            "template_type":"button",
+            "text":"Redémarrer le bot",
+            "buttons":[
+                { "type":"postback", "title":"Démarrez", "payload":"GET_STARTED"},
+            ]
+        }
+    }
+}
 }
 
 function askTemplateFilliere(){
@@ -279,9 +312,9 @@ function askTemplateMajeureETI(){
             "template_type":"button",
             "text":"Quel majeure ?",
             "buttons":[
-                { "type":"postback", "title":"CBD", "payload":"GL"},
-                { "type":"postback", "title":"Réseau", "payload":"GL"},
-                { "type":"postback", "title":"Image", "payload":"GL"}
+                { "type":"postback", "title":"CBD", "payload":"CBD"},
+                { "type":"postback", "title":"Réseau", "payload":"INFRA"},
+                { "type":"postback", "title":"Image", "payload":"IMI"}
             ]
         }
     }
@@ -293,8 +326,8 @@ function askTemplateMajeureETI(){
                 "template_type":"button",
                 "text":"Quel majeure ?",
                 "buttons":[
-                    { "type":"postback", "title":"Robot", "payload":"GL"},
-                    { "type":"postback", "title":"Electronique", "payload":"GL"},
+                    { "type":"postback", "title":"Robot", "payload":"ROSE"},
+                    { "type":"postback", "title":"Electronique", "payload":"ESE"},
                 ]
             }
         }
@@ -333,10 +366,15 @@ async function handlePostback(sender_psid, received_postback) {
     let r;
     let planningJour;
     let rep;
+    let sql_set_filiere
+    if ( !isKnownUser(sender_psid)){
+        console.log("WARNING: handle postback while user not in db");
+        return
+    }
     // Get the payload for the postback
     let payload = received_postback.payload;
     switch (payload) {
-        case 'TOUT2':
+        case 'TOUT':
             message = {"text": "Voici le planning de la semaine: "};
             r = await callSendAPI(sender_psid, message);
             response = imageTemplate();
@@ -394,11 +432,9 @@ async function handlePostback(sender_psid, received_postback) {
             message = {"text": `Après-midi : ${rep[1]}`};
             r = await callSendAPI(sender_psid, message);
             break;
-        case 'TOUT':
+        case 'GET_STARTED':
             // verify is the sender is known
-            let knownUser = new Boolean(false);
-            knownUser = await isKnownUser(sender_psid);
-            if (knownUser){
+            if ( isKnownUser(sender_psid )){
                 // send the user the menu
                 console.log('known user')
                 response = askTemplateJour();
@@ -407,8 +443,8 @@ async function handlePostback(sender_psid, received_postback) {
             }
             //create new user
             else {
-                let sql_new_user = `INSERT INTO user (id_user) VALUES (${sender_psid})`;
-                db.exec(sql_new_user);
+                let sql_new_user = `INSERT INTO user (id_user) VALUES (?))`;
+                db.exec(sql_new_user, [sender_psid]);
                 // ask for promo (3 or 4)
                 response = askTemplateNewUserPromo();
                 r = await callSendAPI(sender_psid, response);
@@ -435,27 +471,40 @@ async function handlePostback(sender_psid, received_postback) {
             response = askTemplateFilliere();
             r = await callSendAPI(sender_psid, response);
             break
-        case 'ETI': //4ETI -> get Majeure
-        case 'CGP': 
+        case 'ETI': //4A -> get Majeure
             // set the user filiere to payload
-            let sql_set_filiere = `UPDATE user SET filiere = ${payload} WHERE id_user = ${sender_psid}`;
+            sql_set_filiere = `UPDATE user SET filiere = ${payload} WHERE id_user = ${sender_psid}`;
             db.exec(sql_set_filiere);
-            // ask for majeure
-            if (await is4ETI(sender_psid)){
-                // response = askTemplateJour();
+            if (await is4A(sender_psid)){
                 response = askTemplateMajeureETI();
                 r = await callSendAPI(sender_psid, response[0]);
                 r = await callSendAPI(sender_psid, response[1]);
-                //response = askTemplateMajeureETI();
-                //r = await callSendAPI(sender_psid, response);
+            } 
+            // give days menu
+            else {
+                response = askTemplateJour();
+                r = await callSendAPI(sender_psid, response[0]);
+                r = await callSendAPI(sender_psid, response[1]);
             }
+        case 'CGP': 
+            // set the user filiere to payload
+            sql_set_filiere = `UPDATE user SET filiere = ${payload} WHERE id_user = ${sender_psid}`;
+            db.exec(sql_set_filiere);
+            response = askTemplateJour();
+            r = await callSendAPI(sender_psid, response[0]);
+            r = await callSendAPI(sender_psid, response[1]);
             break;
-        // case 'CGP':
-        //     response = askTemplateJour();
-        //     r = await callSendAPI(sender_psid, response[0]);
-        //     r = await callSendAPI(sender_psid, response[1]);
-        //     break
+        case 'CBD':
+        case 'INFRA':
+        case 'IMI':
+        case 'ROSE':
+        case 'ESE':
+            let sql_set_majeur = `UPDATE user SET majeur = ? WHERE id_user = ?`;
+            let majeur = MAJEURS[payload];
+            db.exec(sql_set_majeur, [majeur, sender_psid]);$
+            break;
         default:
+            console.log("unknown payload")
             break;
     }
 }
