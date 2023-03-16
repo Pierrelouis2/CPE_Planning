@@ -83,7 +83,7 @@ const query = promisify(db.all).bind(db);
 async function isKnownUser(sender_psid){
     let sql_get_user = `SELECT * FROM user`;
 
-    const test = await query(sql_get_user)
+    const test = await query(sql_get_user);
     console.log(test);
 
     return false;
