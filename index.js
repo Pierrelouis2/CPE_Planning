@@ -78,7 +78,7 @@ async function isKnownUser(sender_psid){
     let test = await db.get(sql_get_user,(err, user)=>{
         console.log(user);
         console.log(`user n°${user} is known`);
-    if (user === {} ){
+    if (user === {} ){ 
         return false;
     } else if (user['id_user'] === sender_psid) {
         
