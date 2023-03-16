@@ -504,7 +504,7 @@ async function handlePostback(sender_psid, received_postback) {
             let sql_set_majeur = `UPDATE user SET majeur=? WHERE id_user=?`;
             let majeur = MAJEURS[payload];
             console.log(majeur)
-            db.exec(sql_set_majeur, [majeur, sender_psid]);$
+            db.run(sql_set_majeur, [majeur, sender_psid]);$
             break;
         default:
             console.log("unknown payload")
