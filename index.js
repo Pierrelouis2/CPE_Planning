@@ -635,7 +635,7 @@ async function ConstructMessage(planning){
     for (let matiere in planning["Matin"]){
         for (let cellule in planning["Matin"][matiere]){
             if (planning["Matin"][matiere][cellule].includes('Salle') || planning["Matin"][matiere][cellule].includes('Salles')){
-                messageMat += "\n" + planning["Matin"][matiere][cellule]+ ".\n";
+                messageMat += planning["Matin"][matiere][cellule]+ ".\n\n";
             } else {
                 messageMat += planning["Matin"][matiere][cellule]+ ",\n";
             }
@@ -646,7 +646,7 @@ async function ConstructMessage(planning){
     for (let matiere in planning["Aprem"]){
         for (let cellule in planning["Aprem"][matiere]){
             if (planning["Aprem"][matiere][cellule].includes('Salle') || planning["Aprem"][matiere][cellule].includes('Salles')){
-                messageAprem += "\n" + planning["Aprem"][matiere][cellule]+ ".\n\n";
+                messageAprem += planning["Aprem"][matiere][cellule]+ ".\n\n";
             } else {
                 messageAprem += planning["Aprem"][matiere][cellule]+ ",\n";
             }
