@@ -44,7 +44,6 @@ app.post('/webhook', async (req, res) => {
             // Get the sender PSID
             let sender_psid = webhook_event.sender.id;
             console.log('Sender PSID: ' + sender_psid);
-            set_persistent_menu(sender_psid);
             //message or postback
             if (webhook_event.message) {
                 console.log('in handleMessage');
@@ -372,10 +371,9 @@ async function handlePostback(sender_psid, received_postback) {
     let planningJour;
     let rep;
     let sql_set_filiere
-    // if ( !isKnownUser(sender_psid)){
-    //     console.log("WARNING: handle postback while user not in db");
-    //     return
-    // }
+    if (isKnownUser(sender_psid)){
+        set_persistent_menu(sender_psid);
+    }
     // Get the payload for the postback
     let payload = received_postback.payload;
     console.log("payload: ", payload);
