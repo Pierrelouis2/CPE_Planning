@@ -16,6 +16,13 @@ let users = {};
 let db = new sqlite3.Database('users.db');
 const queryDB = promisify(db.all).bind(db);
 
+const MAJEURS = { "CBD": "CONCEP.LOGICIELLE/BIG DATA",
+    "ROSE": "ROBOTIQUE",
+    "ESE": "ELECTRONIQUE ET SYST EMB",
+    "INFRA": "INFRA DES RESEAUX",
+    "IMI": "IMAGE",
+};
+
 let port = 8989;
 app.listen(port,'0.0.0.0' ,() => console.log(`App listening on port ${port}!`), set_get_started());
 
@@ -245,11 +252,11 @@ function askTemplateGroupe(){
 // TODO
 // on sait qui si il est en 4A pas si il est en ETI ...
 // changer le nom de la fct ?
-async function is4ETI(sender_psid){
-    let sql_get_user = 'SELECT promo, filiere FROM user WHERE id = ?';
+async function is4A(sender_psid){
+    let sql_get_user = 'SELECT promo FROM user WHERE id = ?';
     let user = (await queryDB.get(sql_get_user, [sender_psid]))[0];
     console.log(user);
-    if (user.promo === "4" && user.filiere === "ETI"){
+    if (user.promo === "4"){
         return true;
     } else {
         return false;
@@ -280,9 +287,9 @@ function askTemplateMajeureETI(){
             "template_type":"button",
             "text":"Quel majeure ?",
             "buttons":[
-                { "type":"postback", "title":"CBD", "payload":"GL"},
-                { "type":"postback", "title":"Réseau", "payload":"GL"},
-                { "type":"postback", "title":"Image", "payload":"GL"}
+                { "type":"postback", "title":"CBD", "payload":"CBD"},
+                { "type":"postback", "title":"Réseau", "payload":"INFRA"},
+                { "type":"postback", "title":"Image", "payload":"IMI"}
             ]
         }
     }
@@ -294,8 +301,8 @@ function askTemplateMajeureETI(){
                 "template_type":"button",
                 "text":"Quel majeure ?",
                 "buttons":[
-                    { "type":"postback", "title":"Robot", "payload":"GL"},
-                    { "type":"postback", "title":"Electronique", "payload":"GL"},
+                    { "type":"postback", "title":"Robot", "payload":"ROSE"},
+                    { "type":"postback", "title":"Electronique", "payload":"ESE"},
                 ]
             }
         }
@@ -334,6 +341,7 @@ async function handlePostback(sender_psid, received_postback) {
     let r;
     let planningJour;
     let rep;
+    let sql_set_filiere
     // Get the payload for the postback
     let payload = received_postback.payload;
     switch (payload) {
@@ -434,26 +442,37 @@ async function handlePostback(sender_psid, received_postback) {
             response = askTemplateFilliere();
             r = await callSendAPI(sender_psid, response);
             break
-        case 'ETI': //4ETI -> get Majeure
-        case 'CGP': 
+        case 'ETI': //4A -> get Majeure
             // set the user filiere to payload
-            let sql_set_filiere = `UPDATE user SET filiere = ${payload} WHERE id_user = ${sender_psid}`;
+            sql_set_filiere = `UPDATE user SET filiere = ${payload} WHERE id_user = ${sender_psid}`;
             db.exec(sql_set_filiere);
-            // ask for majeure
-            if (await is4ETI(sender_psid)){
-                // response = askTemplateJour();
+            if (await is4A(sender_psid)){
                 response = askTemplateMajeureETI();
                 r = await callSendAPI(sender_psid, response[0]);
                 r = await callSendAPI(sender_psid, response[1]);
-                //response = askTemplateMajeureETI();
-                //r = await callSendAPI(sender_psid, response);
+            } 
+            // give days menu
+            else {
+                response = askTemplateJour();
+                r = await callSendAPI(sender_psid, response[0]);
+                r = await callSendAPI(sender_psid, response[1]);
             }
+        case 'CGP': 
+            // set the user filiere to payload
+            sql_set_filiere = `UPDATE user SET filiere = ${payload} WHERE id_user = ${sender_psid}`;
+            db.exec(sql_set_filiere);
+            response = askTemplateJour();
+            r = await callSendAPI(sender_psid, response[0]);
+            r = await callSendAPI(sender_psid, response[1]);
             break;
-        // case 'CGP':
-        //     response = askTemplateJour();
-        //     r = await callSendAPI(sender_psid, response[0]);
-        //     r = await callSendAPI(sender_psid, response[1]);
-        //     break
+        case 'CBD':
+        case 'INFRA':
+        case 'IMI':
+        case 'ROSE':
+        case 'ESE':
+            let sql_set_majeur = `UPDATE user SET majeur = ? WHERE id_user = ?`;
+            let majeur = MAJEURS[payload];
+            db.exec(sql_set_majeur, [majeur, sender_psid]);
         default:
             break;
     }
