@@ -184,6 +184,22 @@ async function set_persistent_menu(psid){
 }
 
 // TODO
+// on sait qui si il est en 4A pas si il est en ETI ...
+// changer le nom de la fct ?
+async function is4A(sender_psid){
+    let sql_get_user = 'SELECT promo FROM user WHERE id_user=?';
+    let user = (await queryDB(sql_get_user, [sender_psid]))[0];
+    console.log(user);
+    console.log(user.promo);
+    if (user.promo === "4"){
+        console.log("is4A");
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// TODO
 // on a deja le menu persistent, on peut donc le supprimer ?
 function askTemplateJour(){
     return [{"name":"ask",
@@ -252,29 +268,13 @@ function askTemplateGroupe(){
         "type":"template",
         "payload":{
             "template_type":"button",
-            "text":"",
+            "text":" ",
             "buttons":[
-                { "type":"postback", "title":"groupe D", "payload":"D"},
+                {"type":"postback", "title":"groupe D", "payload":"D"},
             ]
         }
     }
     }]
-}
-
-// TODO
-// on sait qui si il est en 4A pas si il est en ETI ...
-// changer le nom de la fct ?
-async function is4A(sender_psid){
-    let sql_get_user = 'SELECT promo FROM user WHERE id_user=?';
-    let user = (await queryDB(sql_get_user, [sender_psid]))[0];
-    console.log(user);
-    console.log(user.promo);
-    if (user.promo === "4"){
-        console.log("is4A");
-        return true;
-    } else {
-        return false;
-    }
 }
 
 function askTemplateStart(){
