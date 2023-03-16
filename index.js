@@ -633,8 +633,9 @@ async function ConstructMessage(planning){
     let messageMat = ""
     let messageAprem = ""
     for (let matiere in planning["Matin"]){
-        console.log(planning["Matin"][matiere])
+        console.log(matiere)
         if (planning["Matin"][matiere].includes("Salle")){
+            console.log("Got Salle !")
             messageMat.concat("     @    ")
         }
         messageMat += planning["Matin"][matiere]
@@ -644,8 +645,6 @@ async function ConstructMessage(planning){
             messageAprem.concat("      @      ")
         }
         messageAprem += planning["Aprem"][matiere]
-        console.log(planning["Aprem"][matiere])
-        
     }
     console.log(messageMat)
     console.log(messageAprem)
