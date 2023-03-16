@@ -633,18 +633,23 @@ async function ConstructMessage(planning){
     let messageMat = ""
     let messageAprem = ""
     for (let matiere in planning["Matin"]){
-        console.log(matiere)
-        if (planning["Matin"][matiere].includes("Salle")){
-            console.log("Got Salle !")
-            messageMat.concat("     @    ")
+        for (let cellule in planning["Matin"][matiere]){
+            if (cellule.includes('Salle') || cellule.includes('Salles')){
+                console.log("Got Salle !")
+                messageMat.concat("\n")
+            }
+            messageMat += cellule
         }
-        messageMat += planning["Matin"][matiere]
     }
+
     for (let matiere in planning["Aprem"]){
-        if (planning["Aprem"][matiere].includes('Salle')){
-            messageAprem.concat("      @      ")
+        for (let cellule in planning["Aprem"][matiere]){
+            if (cellule.includes('Salle') || cellule.includes('Salles')){
+                console.log("Got Salle !")
+                messageMat.concat("\n")
+            }
+            messageAprem += cellule
         }
-        messageAprem += planning["Aprem"][matiere]
     }
     console.log(messageMat)
     console.log(messageAprem)
