@@ -328,7 +328,7 @@ function askTemplateMajeureETI(){
             "type":"template",
             "payload":{
                 "template_type":"button",
-                "text":"Quel majeure ?",
+                "text":"",
                 "buttons":[
                     { "type":"postback", "title":"Robot", "payload":"ROSE"},
                     { "type":"postback", "title":"Electronique", "payload":"ESE"},
@@ -628,9 +628,8 @@ async function readCsv(dir,Jour,sender_psid) {
         planningRen["Aprem"].push(planningG[Date]["Aprem"][Majeur])
         // console.log("Pour tous")
     }
-    else {
-        planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"])
-    }
+    
+    planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"])
 
     return planningRen
 }
