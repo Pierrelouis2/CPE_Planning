@@ -621,37 +621,36 @@ async function readCsv(dir,Jour,sender_psid) {
 
     // console.log(planningG[Date]["Aprem"][Majeur])
     //init aprem
-    planningRen["Aprem"] = []
+    planningRen["Aprem"] = [];
     if (planningG[Date]["Aprem"][Majeur] !==  null ){
-        planningRen["Aprem"].push(planningG[Date]["Aprem"][Majeur])
+        planningRen["Aprem"].push(planningG[Date]["Aprem"][Majeur]);
     }
-    planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"])
+    planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"]);
     return planningRen
 }
 
 async function ConstructMessage(planning){
-    let messageMat = ""
-    let messageAprem = ""
+    let messageMat = "";
+    let messageAprem = "";
     for (let matiere in planning["Matin"]){
         for (let cellule in planning["Matin"][matiere]){
             if (planning["Matin"][matiere][cellule].includes('Salle') || planning["Matin"][matiere][cellule].includes('Salles')){
-                console.log("Got Salle !")
-                messageMat +="\n@"
+                messageMat += "\n" + planning["Matin"][matiere][cellule]+ ".\n";
+            } else {
+                messageMat += planning["Matin"][matiere][cellule]+ ", ";
             }
-            messageMat += planning["Matin"][matiere][cellule]+ ", "
+            
         }
     }
 
     for (let matiere in planning["Aprem"]){
         for (let cellule in planning["Aprem"][matiere]){
             if (planning["Aprem"][matiere][cellule].includes('Salle') || planning["Aprem"][matiere][cellule].includes('Salles')){
-                console.log("Got Salle !")
-                messageAprem += "\n@"
+                messageAprem += "\n" + planning["Aprem"][matiere][cellule]+ ".\n";
+            } else {
+                messageAprem += planning["Aprem"][matiere][cellule]+ ", ";
             }
-            messageAprem += planning["Aprem"][matiere][cellule]+ ", "
         }
     }
-    console.log(messageMat)
-    console.log(messageAprem)
     return [messageMat,messageAprem]
 }
