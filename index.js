@@ -87,12 +87,13 @@ app.get('/webhook', (req, res) => {
 async function isKnownUser(sender_psid){
     let sql_get_user = `SELECT * FROM user WHERE id_user = ?`;
     const user = (await queryDB(sql_get_user, sender_psid))[0];
+    console.log("user", user)
     if (user === [] || 
         user.promo === null ||
         user.majeur === null ||
         user.groupe === null){
             let sql_delete_user = `DELETE FROM user WHERE id_user = ?`;
-            db.exec(sql_delete_user, sender_psid);
+            db.run(sql_delete_user, sender_psid);
             let message = {"text": "Votre compte n'est pas complet, veuillez le refaire"}
             callSendAPI(sender_psid, message);
             message = askTemplateStart();
@@ -106,8 +107,6 @@ async function isKnownUser(sender_psid){
         return false;
     }
 }
-
-
 
 function set_get_started(){
     // Set up Get Started button
@@ -367,10 +366,10 @@ async function handlePostback(sender_psid, received_postback) {
     let planningJour;
     let rep;
     let sql_set_filiere
-    if ( !isKnownUser(sender_psid)){
-        console.log("WARNING: handle postback while user not in db");
-        return
-    }
+    // if ( !isKnownUser(sender_psid)){
+    //     console.log("WARNING: handle postback while user not in db");
+    //     return
+    // }
     // Get the payload for the postback
     let payload = received_postback.payload;
     switch (payload) {
@@ -443,6 +442,7 @@ async function handlePostback(sender_psid, received_postback) {
             }
             //create new user
             else {
+                console.log('new user')
                 let sql_new_user = `INSERT INTO user (id_user) VALUES (?))`;
                 db.exec(sql_new_user, [sender_psid]);
                 // ask for promo (3 or 4)
