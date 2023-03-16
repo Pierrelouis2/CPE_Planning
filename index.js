@@ -79,7 +79,7 @@ app.get('/webhook', (req, res) => {
 
 async function isKnownUser(sender_psid){
     let sql_get_user = `SELECT id_user FROM user WHERE id_user = ?`;
-    const user = await queryDB(sql_get_user, sender_psid)
+    const user = (await queryDB(sql_get_user, sender_psid))[0];
     if (user === []){
         return false;
     } 
@@ -246,10 +246,10 @@ function askTemplateGroupe(){
 // on sait qui si il est en 4A pas si il est en ETI ...
 // changer le nom de la fct ?
 async function is4ETI(sender_psid){
-    let sql_get_user = 'SELECT promo FROM user WHERE id = ?';
-    let promo = await queryDB.get(sql_get_user, [sender_psid]);
-    console.log(promo);
-    if (promo === "4"){
+    let sql_get_user = 'SELECT promo, filiere FROM user WHERE id = ?';
+    let user = (await queryDB.get(sql_get_user, [sender_psid]))[0];
+    console.log(user);
+    if (user.promo === "4" && user.filiere === "ETI"){
         return true;
     } else {
         return false;
@@ -337,7 +337,7 @@ async function handlePostback(sender_psid, received_postback) {
     // Get the payload for the postback
     let payload = received_postback.payload;
     switch (payload) {
-        case 'TOUT2':
+        case 'TOUT':
             message = {"text": "Voici le planning de la semaine: "};
             r = await callSendAPI(sender_psid, message);
             response = imageTemplate();
@@ -395,11 +395,9 @@ async function handlePostback(sender_psid, received_postback) {
             message = {"text": `Après-midi : ${rep[1]}`};
             r = await callSendAPI(sender_psid, message);
             break;
-        case 'TOUT':
+        case 'GET_STARTED':
             // verify is the sender is known
-            let knownUser = new Boolean(false);
-            knownUser = await isKnownUser(sender_psid);
-            if (knownUser){
+            if ( isKnownUser(sender_psid )){
                 // send the user the menu
                 console.log('known user')
                 response = askTemplateJour();
@@ -408,8 +406,8 @@ async function handlePostback(sender_psid, received_postback) {
             }
             //create new user
             else {
-                let sql_new_user = `INSERT INTO user (id_user) VALUES (${sender_psid})`;
-                db.exec(sql_new_user);
+                let sql_new_user = `INSERT INTO user (id_user) VALUES (?))`;
+                db.exec(sql_new_user, [sender_psid]);
                 // ask for promo (3 or 4)
                 response = askTemplateNewUserPromo();
                 r = await callSendAPI(sender_psid, response);
