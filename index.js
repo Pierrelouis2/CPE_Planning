@@ -86,7 +86,7 @@ app.get('/webhook', (req, res) => {
 
 async function isKnownUser(sender_psid){
     let sql_get_user = `SELECT * FROM user WHERE id_user = ?`;
-    const user = (await queryDB(sql_get_user, sender_psid))[0];
+    const user = await queryDB(sql_get_user, sender_psid);
     console.log("user", user)
     if (user === [] || 
         user.promo === null ||
@@ -433,7 +433,7 @@ async function handlePostback(sender_psid, received_postback) {
             break;
         case 'GET_STARTED':
             // verify is the sender is known
-            if ( isKnownUser(sender_psid )){
+            if ( await isKnownUser(sender_psid) ){
                 // send the user the menu
                 console.log('known user')
                 response = askTemplateJour();
@@ -443,8 +443,8 @@ async function handlePostback(sender_psid, received_postback) {
             //create new user
             else {
                 console.log('new user')
-                let sql_new_user = `INSERT INTO user (id_user) VALUES (?))`;
-                db.exec(sql_new_user, [sender_psid]);
+                let sql_new_user = `INSERT INTO user (id_user) VALUES (?)`;
+                db.run(sql_new_user, sender_psid);
                 // ask for promo (3 or 4)
                 response = askTemplateNewUserPromo();
                 r = await callSendAPI(sender_psid, response);
