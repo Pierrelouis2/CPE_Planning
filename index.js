@@ -12,8 +12,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let users = {};
-// let db = new sqlite3.Database('users.db');
-const db = require('better-sqlite3')('users.db');
+let db = new sqlite3.Database('users.db');
+const queryDB = promisify(db.all).bind(db);
 
 let port = 8989;
 app.listen(port,'0.0.0.0' ,() => console.log(`App listening on port ${port}!`), set_get_started());
@@ -76,13 +76,10 @@ app.get('/webhook', (req, res) => {
     }
 });
 
-const query = promisify(db.all).bind(db);
-
-
 async function isKnownUser(sender_psid){
     let sql_get_user = `SELECT * FROM user`;
 
-    const test = await query(sql_get_user)
+    const test = await queryDB(sql_get_user)
     console.log(test);
 
     return false;
@@ -245,7 +242,7 @@ function askTemplateGroupe(){
 // changer le nom de la fct ?
 async function is4ETI(sender_psid){
     let sql_get_user = 'SELECT promo FROM user WHERE id = ?';
-    let promo = await db.get(sql_get_user, [sender_psid]);
+    let promo = await queryDB.get(sql_get_user, [sender_psid]);
     console.log(promo);
     if (promo === "4"){
         return true;
