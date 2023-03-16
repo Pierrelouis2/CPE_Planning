@@ -86,3 +86,4 @@ For the second version of the data base we use a sqlite database. This version w
 - [ ] Manage LV lessons
 - [ ] Manage 3A lessons
 - [ ] Create MSO TABLE
+- [ ] Manage groups
