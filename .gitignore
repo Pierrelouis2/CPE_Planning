@@ -1,4 +1,4 @@
 .idea
 node_modules
 ngrok
-config/*
+config/default.json
