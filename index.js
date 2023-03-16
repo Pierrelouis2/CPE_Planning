@@ -4,24 +4,23 @@ let express = require('express'),
     app = express(),
     request = require('request'),
     config = require('config'),
-    sqlite3 = require('sqlite3');
+    sqlite3 = require('sqlite3'),
+    fs = require('fs');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let users = {};
-// let db_file = 'db.db';
-let db = new sqlite3.Database('users.db'); // db in memory
+let db = new sqlite3.Database('users.db');
 
-// let sql_get_user = 'SELECT id_user FROM users WHERE id = ?';
-
-app.listen(8989,'0.0.0.0' ,() => console.log('App listening on port 8989!'), set_get_started());
+let port = 8989;
+app.listen(port,'0.0.0.0' ,() => console.log(`App listening on port ${port}!`), set_get_started());
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello World!, This is not a website just quit it plz</h1> \n <h2><i> The admin </i></h2>')
 });
 
-// Creates the endpoint for our webhook
+// Creates the endpoint for our webhook to facebook
 app.post('/webhook', (req, res) => {
     console.log('got webhook')
     let body = req.body;
@@ -77,7 +76,7 @@ app.get('/webhook', (req, res) => {
 async function isKnownUser(sender_psid){
     let sql_get_user = `SELECT id_user FROM user WHERE id_user = ${sender_psid}`;
     let user = await db.get(sql_get_user);
-    console.log(user);
+    console.log(`user n°${user} is known`);
     if (user === sender_psid ){
         return true;
     } else {
@@ -157,6 +156,8 @@ async function set_persistent_menu(psid){
     }
 }
 
+// TODO
+// on a deja le menu persistent, on peut donc le supprimer ?
 function askTemplateJour(){
     return [{"name":"ask",
             "attachment":{
@@ -233,9 +234,14 @@ function askTemplateGroupe(){
     }]
 }
 
+// TODO
+// on sait qui si il est en 4A pas si il est en ETI ...
+// changer le nom de la fct ?
+
 async function is4ETI(sender_psid){
     let sql_get_user = 'SELECT promo FROM user WHERE id = ?';
     let promo = await db.get(sql_get_user, [sender_psid]);
+    console.log(promo);
     if (promo === "4"){
         return true;
     } else {
@@ -289,6 +295,8 @@ function askTemplateMajeureETI(){
     }]
 
 }
+// TODO
+// changer le lien de l'image chaque semaine
 function imageTemplate(psid){
     // utilisation d'une url discord pour l'image
     return {"name":"image",
@@ -302,6 +310,9 @@ function imageTemplate(psid){
         }
 }
 
+// TODO
+// on a plus de message ...
+// on l'enleve ?
 async function handleMessage(sender_psid) {
     let response = askTemplateJour();
     let r;
@@ -326,9 +337,10 @@ async function handlePostback(sender_psid, received_postback) {
             r = await callSendAPI(sender_psid, response);
             break;
         case 'LUNDI':
-            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI','IMAGE',payload);
+            // get parametre from user_id in db: promo, filliere, majeure
+            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI',payload,'IMAGE');
             rep = await ConstructMessage(planningJour);
-            message = {"text": `Voici le planning de ${payload} : `};
+            message = {"text": `Voici le planning de ${payload}: `};
             r = await callSendAPI(sender_psid, message);
             message = {"text": `Matin : ${rep[0]}`};
             r = await callSendAPI(sender_psid, message);
@@ -337,7 +349,7 @@ async function handlePostback(sender_psid, received_postback) {
             // return the column LUNDI from etd.csv
             break;
         case 'MARDI':
-            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI','IMAGE',payload);
+            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI',payload,'IMAGE');
             rep = await ConstructMessage(planningJour);
             message = {"text": `Voici le planning de ${payload} : `};
             r = await callSendAPI(sender_psid, message);
@@ -347,7 +359,7 @@ async function handlePostback(sender_psid, received_postback) {
             r = await callSendAPI(sender_psid, message);
             break;
         case 'MERCREDI':
-            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI','IMAGE',payload);
+            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI',payload,'IMAGE');
             rep = await ConstructMessage(planningJour);
             message = {"text": `Voici le planning de ${payload} : `};
             r = await callSendAPI(sender_psid, message);
@@ -357,7 +369,7 @@ async function handlePostback(sender_psid, received_postback) {
             r = await callSendAPI(sender_psid, message);
             break;
         case 'JEUDI':
-            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI','IMAGE',payload);
+            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI',payload,'IMAGE');
             rep = await ConstructMessage(planningJour);
             message = {"text": `Voici le planning de ${payload} : `};
             r = await callSendAPI(sender_psid, message);
@@ -367,7 +379,7 @@ async function handlePostback(sender_psid, received_postback) {
             r = await callSendAPI(sender_psid, message);
             break;
         case 'VENDREDI':
-            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI','IMAGE',payload);
+            planningJour = await readCsv('./Output_Json/Datatest.json',4,'ETI',payload,'IMAGE');
             rep = await ConstructMessage(planningJour);
             message = {"text": `Voici le planning de ${payload} : `};
             r = await callSendAPI(sender_psid, message);
@@ -385,52 +397,51 @@ async function handlePostback(sender_psid, received_postback) {
                 r = await callSendAPI(sender_psid, response[0]);
                 r = await callSendAPI(sender_psid, response[1]);
             }
+            //create new user
             else {
-                //create new user
                 let sql_new_user = `INSERT INTO user (id_user) VALUES (${sender_psid})`;
                 db.exec(sql_new_user);
-                // ask for information
+                // ask for promo (3 or 4)
                 response = askTemplateNewUserPromo();
                 r = await callSendAPI(sender_psid, response);
             }
-
             break;
-        case 'ETI' : //4ETI Majerue
-            
+        case '3', '4':
+            //Write payload into database
+            let sql_set_promo = `UPDATE user SET promo = ${payload} WHERE id_user = ${sender_psid}`;
+            db.exec(sql_set_promo);
+            //ask for user groupe (A,B,C,D)
+            response = askTemplateGroupe();
+            r = await callSendAPI(sender_psid, response[0]);
+            r = await callSendAPI(sender_psid, response[1]);
+            break;
+        case 'A','B','C','D':
+            //Write payload into database
+            let sql_set_groupe = `UPDATE user SET groupe = ${payload} WHERE id_user = ${sender_psid}`;
+            db.exec(sql_set_groupe);
+            //ask for user filliere (CGP,ETI)
+            response = askTemplateFilliere();
+            r = await callSendAPI(sender_psid, response);
+            break
+        case 'ETI', 'CGP': //4ETI Majeure
             // set the user filiere to payload
             let sql_set_filiere = `UPDATE user SET filiere = ${payload} WHERE id_user = ${sender_psid}`;
             db.exec(sql_set_filiere);
             // ask for majeure
             if (await is4ETI(sender_psid)){
-                response = askTemplateJour();
+                // response = askTemplateJour();
+                response = askTemplateMajeureETI();
                 r = await callSendAPI(sender_psid, response[0]);
                 r = await callSendAPI(sender_psid, response[1]);
                 //response = askTemplateMajeureETI();
                 //r = await callSendAPI(sender_psid, response);
             }
             break;
-        case 'CGP':
-            response = askTemplateJour();
-            r = await callSendAPI(sender_psid, response[0]);
-            r = await callSendAPI(sender_psid, response[1]);
-            break
-        case '3', '4':
-            //Write payload into database
-            let sql_set_promo = `UPDATE user SET promo = ${payload} WHERE id_user = ${sender_psid}`;
-            db.exec(sql_set_promo);
-            //ask for user groupe
-            response = askTemplateGroupe();
-            r = await callSendAPI(sender_psid, response[0]);
-            r = await callSendAPI(sender_psid, response[1]);
-            break;
-        case 'A','B','C','D' :
-            //Write payload into database
-            let sql_set_groupe = `UPDATE user SET groupe = ${payload} WHERE id_user = ${sender_psid}`;
-            db.exec(sql_set_groupe);
-            //ask for user filliere
-            response = askTemplateFilliere();
-            r = await callSendAPI(sender_psid, response);
-            break
+        // case 'CGP':
+        //     response = askTemplateJour();
+        //     r = await callSendAPI(sender_psid, response[0]);
+        //     r = await callSendAPI(sender_psid, response[1]);
+        //     break
         default:
             break;
     }
@@ -463,13 +474,11 @@ async function callSendAPI(sender_psid, response) {
     return
 }
 
-
-
-async function readCsv(dir,Annee,Filliere,Majeur="",Jour) {
+async function readCsv(dir,Annee,Filliere,Jour, Majeur=null) {
     let planningRen = {}
-    const fs = require('fs');
     let rawdata = fs.readFileSync(dir);
     let planningG = JSON.parse(rawdata);
+    
     for(let i in planningG) {
         if (i.includes(Jour)){
             var Date = i
