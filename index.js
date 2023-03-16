@@ -86,12 +86,13 @@ app.get('/webhook', (req, res) => {
 
 async function isKnownUser(sender_psid){
     let sql_get_user = `SELECT * FROM user WHERE id_user = ?`;
-    const user = await queryDB(sql_get_user, sender_psid);
+    const user = (await queryDB(sql_get_user, sender_psid))[0];
     console.log("user", user)
     if (user === [] || 
         user.promo === null ||
         user.majeur === null ||
         user.groupe === null){
+            console.log("user not complete")
             let sql_delete_user = `DELETE FROM user WHERE id_user = ?`;
             db.run(sql_delete_user, sender_psid);
             let message = {"text": "Votre compte n'est pas complet, veuillez le refaire"}
@@ -262,9 +263,9 @@ function askTemplateGroupe(){
 // on sait qui si il est en 4A pas si il est en ETI ...
 // changer le nom de la fct ?
 async function is4A(sender_psid){
-    let sql_get_user = 'SELECT promo FROM user WHERE id = ?';
-    let user = (await queryDB.get(sql_get_user, [sender_psid]))[0];
-    console.log(user);
+    let sql_get_user = 'SELECT promo FROM user WHERE id_user=?';
+    let user = (await queryDB(sql_get_user, [sender_psid]))[0];
+    // console.log(user);
     if (user.promo === "4"){
         return true;
     } else {
@@ -433,7 +434,8 @@ async function handlePostback(sender_psid, received_postback) {
             break;
         case 'GET_STARTED':
             // verify is the sender is known
-            if ( await isKnownUser(sender_psid) ){
+            let knownUser = await isKnownUser(sender_psid);
+            if (knownUser){
                 // send the user the menu
                 console.log('known user')
                 response = askTemplateJour();
@@ -465,16 +467,16 @@ async function handlePostback(sender_psid, received_postback) {
         case 'C':
         case 'D':
             //Write payload into database
-            let sql_set_groupe = `UPDATE user SET groupe = ${payload} WHERE id_user = ${sender_psid}`;
-            db.exec(sql_set_groupe);
+            let sql_set_groupe = `UPDATE user SET groupe=? WHERE id_user=?`;
+            db.run(sql_set_groupe, [payload, sender_psid]);
             //ask for user filliere (CGP,ETI)
             response = askTemplateFilliere();
             r = await callSendAPI(sender_psid, response);
             break
         case 'ETI': //4A -> get Majeure
-            // set the user filiere to payload
-            sql_set_filiere = `UPDATE user SET filiere = ${payload} WHERE id_user = ${sender_psid}`;
-            db.exec(sql_set_filiere);
+            // set the user filliere to payload
+            sql_set_filiere = `UPDATE user SET filliere=? WHERE id_user=?`;
+            db.run(sql_set_filiere, [payload, sender_psid]);
             if (await is4A(sender_psid)){
                 response = askTemplateMajeureETI();
                 r = await callSendAPI(sender_psid, response[0]);
@@ -487,8 +489,8 @@ async function handlePostback(sender_psid, received_postback) {
                 r = await callSendAPI(sender_psid, response[1]);
             }
         case 'CGP': 
-            // set the user filiere to payload
-            sql_set_filiere = `UPDATE user SET filiere = ${payload} WHERE id_user = ${sender_psid}`;
+            // set the user filliere to payload
+            sql_set_filiere = `UPDATE user SET filliere = ${payload} WHERE id_user = ${sender_psid}`;
             db.exec(sql_set_filiere);
             response = askTemplateJour();
             r = await callSendAPI(sender_psid, response[0]);
@@ -499,8 +501,9 @@ async function handlePostback(sender_psid, received_postback) {
         case 'IMI':
         case 'ROSE':
         case 'ESE':
-            let sql_set_majeur = `UPDATE user SET majeur = ? WHERE id_user = ?`;
+            let sql_set_majeur = `UPDATE user SET majeur=? WHERE id_user=?`;
             let majeur = MAJEURS[payload];
+            console.log(majeur)
             db.exec(sql_set_majeur, [majeur, sender_psid]);$
             break;
         default:
