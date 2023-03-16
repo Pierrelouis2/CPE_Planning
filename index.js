@@ -93,23 +93,7 @@ async function isKnownUser(sender_psid){
     return false;
 }
 
-async function isKnownUser2(userId) {
-    try {
-      const sql = `SELECT id_user FROM user WHERE id_user = ${userId}`;
-      const user = await db.get(sql);
-      console.log(user);
-      if (user == undefined) {
-        console.log("User is not known");
-        return false;
-      }
-      
-      console.log(`User with id ${user.id_user} is known`);
-      return true;
-    } catch (err) {
-      console.error(`Error while fetching user with id ${userId}: ${err}`);
-      return false;
-    }
-  }
+
 
 function set_get_started(){
     // Set up Get Started button
