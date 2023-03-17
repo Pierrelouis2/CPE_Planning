@@ -91,10 +91,11 @@ async function isKnownUser(sender_psid){
         console.log("user undefined")
         return false;
     }
-    if (user === [] || 
+    if ((user === [] || 
         user.promo === null ||
         user.majeur === null ||
-        user.groupe === null){
+        user.groupe === null) && 
+        user.status !== "Inscription"){
             console.log("user not complete")
             let sql_delete_user = `DELETE FROM user WHERE id_user = ?`;
             db.run(sql_delete_user, sender_psid);
@@ -484,6 +485,8 @@ async function handlePostback(sender_psid, received_postback) {
                 console.log('new user')
                 let sql_new_user = `INSERT INTO user (id_user) VALUES (?)`;
                 db.run(sql_new_user, sender_psid);
+                let sql_uptade_status = 'UPDATE user SET status = Inscription WHERE id_user = ?';
+                db.run(sql_uptade_status, sender_psid);
                 // ask for promo (3 or 4)
                 response = askTemplateNewUserPromo();
                 r = await callSendAPI(sender_psid, response);
@@ -528,6 +531,8 @@ async function handlePostback(sender_psid, received_postback) {
                 r = await callSendAPI(sender_psid, message);
                 message = {"text": `Signé : les dev en SUSU`};
                 r = await callSendAPI(sender_psid, message);
+                let sql_uptade_statusEti = 'UPDATE user SET status = Inscrit WHERE id_user = ?';
+                db.run(sql_uptade_statusEti, sender_psid);
                 /*response = askTemplateJour();
                 r = await callSendAPI(sender_psid, response[0]);
                 r = await callSendAPI(sender_psid, response[1]);*/
@@ -537,6 +542,8 @@ async function handlePostback(sender_psid, received_postback) {
             // set the user filliere to payload
             sql_set_filiere = `UPDATE user SET filliere=? WHERE id_user=?`;
             db.run(sql_set_filiere, [payload, sender_psid]);
+            let sql_uptade_statusCgp = 'UPDATE user SET status = Inscrit WHERE id_user = ?';
+            db.run(sql_uptade_statusCgp, sender_psid);
             message = {"text": `Le planning pour les CGP n'est pas encore disponible. On fait au plus vite ! `};
             r = await callSendAPI(sender_psid, message);
            message = {"text": `Signé : les dev en SUSU`}; 
@@ -558,6 +565,8 @@ async function handlePostback(sender_psid, received_postback) {
             console.log('ESE')
             console.log(majeur)
             db.run(sql_set_majeur, [majeur, sender_psid]);
+            let sql_uptade_status = 'UPDATE user SET status = Inscrit WHERE id_user = ?';
+            db.run(sql_uptade_status, sender_psid);
             response = askTemplateJour();
             r = await callSendAPI(sender_psid, response[0]);
             r = await callSendAPI(sender_psid, response[1]);
