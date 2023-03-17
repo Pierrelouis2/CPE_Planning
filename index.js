@@ -372,6 +372,7 @@ function imageTemplate(psid){
 async function handleMessage(sender_psid) {
     let response = askTemplateJour();
     let r;
+    set_persistent_menu(sender_psid);
     r = await callSendAPI(sender_psid, response[0]);
     r = await callSendAPI(sender_psid, response[1]);
     return;
@@ -384,6 +385,7 @@ async function handlePostback(sender_psid, received_postback) {
     let planningJour;
     let rep;
     let sql_set_filiere
+    set_persistent_menu(sender_psid);
     if (isUserComplete(sender_psid)){
         set_persistent_menu(sender_psid);
     }
