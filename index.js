@@ -591,6 +591,10 @@ async function handlePostback(sender_psid, received_postback) {
             break;
         default:
             console.log("unknown payload")
+            let message = {"text": `Je n'ai pas compris votre demande. Veuillez réessayer.`};
+            r = await callSendAPI(sender_psid, message);
+            let start = askTemplateStart();
+            r = await callSendAPI(sender_psid, start);
             break;
     }
 }
