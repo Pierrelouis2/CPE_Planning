@@ -492,8 +492,9 @@ async function handlePostback(sender_psid, received_postback) {
                 console.log('new user')
                 let sql_new_user = `INSERT INTO user (id_user) VALUES (?)`;
                 db.run(sql_new_user, sender_psid);
-                let sql_uptade_status = 'UPDATE user SET status = Inscription WHERE id_user = ?';
-                db.run(sql_uptade_status, sender_psid);
+                let inscription = "Inscription";
+                let sql_uptade_status = 'UPDATE user SET status=? WHERE id_user=?';
+                db.run(sql_uptade_status, [inscription, sender_psid]);
                 // ask for promo (3 or 4)
                 response = askTemplateNewUserPromo();
                 r = await callSendAPI(sender_psid, response);
