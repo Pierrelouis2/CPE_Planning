@@ -188,6 +188,7 @@ async function set_persistent_menu(psid){
 async function is4A(sender_psid){
     let sql_get_user = 'SELECT promo FROM user WHERE id_user=?';
     let user = (await queryDB(sql_get_user, [sender_psid]))[0];
+    console.log("user is4A:"+ user)
     if (user.promo === "4"){
         console.log("is4A");
         return true;
@@ -265,7 +266,7 @@ function askTemplateGroupe(){
         "type":"template",
         "payload":{
             "template_type":"button",
-            "text":" ",
+            "text":"ou",
             "buttons":[
                 {"type":"postback", "title":"groupe D", "payload":"D"},
             ]
@@ -486,8 +487,8 @@ async function handlePostback(sender_psid, received_postback) {
         case '3':
         case '4':
             //Write payload into database
-            let sql_set_promo = `UPDATE user SET promo = ${payload} WHERE id_user = ${sender_psid}`;
-            db.exec(sql_set_promo);
+            let sql_set_promo = `UPDATE user SET promo=? WHERE id_user=?`;
+            db.run(sql_set_promo, [payload, sender_psid]);
             //ask for user groupe (A,B,C,D)
             response = askTemplateGroupe();
             r = await callSendAPI(sender_psid, response[0]);
