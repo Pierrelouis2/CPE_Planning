@@ -92,10 +92,9 @@ async function isKnownUser(sender_psid){
     }
     if (user === [] || 
         user.promo === null ||
-        user.majeur === null ||
         user.groupe === null){
             console.log("user not complete")
-            let sql_delete_user = `DELETE FROM user WHERE id_user = ?`;
+            let sql_delete_user = `UPDATE FROM user WHERE id_user = ?`;
             db.run(sql_delete_user, sender_psid);
             let message = {"text": "Votre compte n'est pas complet, veuillez le refaire"}
             callSendAPI(sender_psid, message);
@@ -108,6 +107,33 @@ async function isKnownUser(sender_psid){
     } else {
         return false;
     }
+}
+
+// TODO
+// on sait qui si il est en 4A pas si il est en ETI ...
+// changer le nom de la fct ?
+async function is4A(sender_psid){
+    let sql_get_user = 'SELECT promo FROM user WHERE id_user=?';
+    let user = (await queryDB(sql_get_user, [sender_psid]))[0];
+    console.log("user is4A:"+ user)
+    if (user.promo === "4"){
+        console.log("is4A");
+        return true;
+    } else {
+        return false;
+    }
+}
+
+async function isUserComplete(sender_psid){
+    let sql_get_user = 'SELECT * FROM user WHERE id_user=?';
+    let user = (await queryDB(sql_get_user, [sender_psid]))[0];
+    if (user === undefined || user === []){
+        return false;
+    }
+    if (user.promo !== null && user.groupe !== null){
+        return true;
+    }
+    return false;
 }
 
 function set_get_started(){
@@ -179,21 +205,6 @@ async function set_persistent_menu(psid){
         console.log('menu set')
     } else {
         console.error("Unable to send message:" + err);
-    }
-}
-
-// TODO
-// on sait qui si il est en 4A pas si il est en ETI ...
-// changer le nom de la fct ?
-async function is4A(sender_psid){
-    let sql_get_user = 'SELECT promo FROM user WHERE id_user=?';
-    let user = (await queryDB(sql_get_user, [sender_psid]))[0];
-    console.log("user is4A:"+ user)
-    if (user.promo === "4"){
-        console.log("is4A");
-        return true;
-    } else {
-        return false;
     }
 }
 
@@ -369,7 +380,7 @@ async function handlePostback(sender_psid, received_postback) {
     let planningJour;
     let rep;
     let sql_set_filiere
-    if (isKnownUser(sender_psid)){
+    if (isUserComplete(sender_psid)){
         set_persistent_menu(sender_psid);
     }
     // Get the payload for the postback
