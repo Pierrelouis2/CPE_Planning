@@ -115,7 +115,7 @@ async function isKnownUser(sender_psid){
 // on sait qui si il est en 4A pas si il est en ETI ...
 // changer le nom de la fct ?
 async function is4A(sender_psid){
-    let sql_get_user = 'SELECT promo FROM user WHERE id_user=?';
+    let sql_get_user = 'SELECT * FROM user WHERE id_user=?';
     let user = (await queryDB(sql_get_user, [sender_psid]))[0];
     console.log("user is4A:"+ user)
     if (user.promo === "4"){
@@ -339,7 +339,7 @@ function askTemplateMajeureETI(){
             "type":"template",
             "payload":{
                 "template_type":"button",
-                "text":" ",
+                "text":"ou",
                 "buttons":[
                     { "type":"postback", "title":"Robot", "payload":"ROSE"},
                     { "type":"postback", "title":"Electronique", "payload":"ESE"},
