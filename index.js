@@ -502,7 +502,7 @@ async function handlePostback(sender_psid, received_postback) {
                 r = await callSendAPI(sender_psid, response);
             }
             break;
-        case 'REINSCRIPTON':
+        case 'REINSCRIPTION':
             let sql_status_inscription = 'UPDATE user SET status=? WHERE id_user=?';
             db.run(sql_status_inscription, ['Inscription', sender_psid]);
             // ask for promo (3 or 4)
