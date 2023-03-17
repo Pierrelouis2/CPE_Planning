@@ -539,8 +539,9 @@ async function handlePostback(sender_psid, received_postback) {
                 r = await callSendAPI(sender_psid, message);
                 message = {"text": `Signé : les dev en SUSU`};
                 r = await callSendAPI(sender_psid, message);
-                let sql_uptade_statusEti = 'UPDATE user SET status = Inscrit WHERE id_user = ?';
-                db.run(sql_uptade_statusEti, sender_psid);
+                let inscription = "Inscrit";
+                let sql_uptade_statusEti = 'UPDATE user SET status=? WHERE id_user=?';
+                db.run(sql_uptade_statusEti, [inscription, sender_psid]);
                 /*response = askTemplateJour();
                 r = await callSendAPI(sender_psid, response[0]);
                 r = await callSendAPI(sender_psid, response[1]);*/
@@ -550,8 +551,9 @@ async function handlePostback(sender_psid, received_postback) {
             // set the user filliere to payload
             sql_set_filiere = `UPDATE user SET filliere=? WHERE id_user=?`;
             db.run(sql_set_filiere, [payload, sender_psid]);
-            let sql_uptade_statusCgp = 'UPDATE user SET status = Inscrit WHERE id_user = ?';
-            db.run(sql_uptade_statusCgp, sender_psid);
+            let inscription = "Inscrit";
+            let sql_uptade_statusCgp = 'UPDATE user SET status=? WHERE id_user=?';
+            db.run(sql_uptade_statusCgp, [inscription, sender_psid]);
             message = {"text": `Le planning pour les CGP n'est pas encore disponible. On fait au plus vite ! `};
             r = await callSendAPI(sender_psid, message);
            message = {"text": `Signé : les dev en SUSU`}; 
@@ -571,8 +573,9 @@ async function handlePostback(sender_psid, received_postback) {
             let sql_set_majeur = `UPDATE user SET majeur=? WHERE id_user=?`;
             let majeur = MAJEURS[payload];
             db.run(sql_set_majeur, [majeur, sender_psid]);
-            let sql_uptade_status = 'UPDATE user SET status = Inscrit WHERE id_user = ?';
-            db.run(sql_uptade_status, sender_psid);
+            let inscriptionMaj = "Inscrit";
+            let sql_uptade_statusMaj = 'UPDATE user SET status=? WHERE id_user=?';
+            db.run(sql_uptade_statusMaj, [inscriptionMaj, sender_psid]);
             response = askTemplateJour();
             r = await callSendAPI(sender_psid, response[0]);
             r = await callSendAPI(sender_psid, response[1]);
