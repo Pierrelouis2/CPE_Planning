@@ -192,6 +192,11 @@ async function set_persistent_menu(psid){
                         "title": "TOUT 🗓",
                         "payload": "TOUT"
                     },
+                    {
+                        "type": "postback",
+                        "title": "REINSCRIPTION",
+                        "payload": "REINSCRIPTION"
+                    }
                 ]
             }
         ]
@@ -499,6 +504,13 @@ async function handlePostback(sender_psid, received_postback) {
                 response = askTemplateNewUserPromo();
                 r = await callSendAPI(sender_psid, response);
             }
+            break;
+        case 'REINSCRIPTON':
+            let sql_status_inscription = 'UPDATE user SET status=? WHERE id_user=?';
+            db.run(sql_status_inscription, ['Inscription', sender_psid]);
+            // ask for promo (3 or 4)
+            response = askTemplateNewUserPromo();
+            r = await callSendAPI(sender_psid, response);
             break;
         case '3':
         case '4':
