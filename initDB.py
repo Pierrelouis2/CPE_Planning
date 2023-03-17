@@ -40,7 +40,8 @@ def main():
                                         promo text,
                                         filliere text,
                                         groupe text,
-                                        majeur text
+                                        majeur text,
+                                        status text
                                     ); """
 
     sql_create_tj_user_mso_table = """CREATE TABLE IF NOT EXISTS tj_user_mso (
