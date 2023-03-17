@@ -92,15 +92,12 @@ async function isKnownUser(sender_psid){
     }
     if ((user === [] || 
         user.promo === null ||
-        user.majeur === null ||
         user.groupe === null) && 
         user.status !== "Inscription"){
             console.log("user not complete")
-            let sql_delete_user = `UPDATE FROM user WHERE id_user = ?`;
-            db.run(sql_delete_user, sender_psid);
             let message = {"text": "Votre compte n'est pas complet, veuillez le refaire"}
             callSendAPI(sender_psid, message);
-            message = askTemplateStart();
+            message = askTemplateNewUserPromo();
             callSendAPI(sender_psid, message);
             return false;
     }
@@ -637,7 +634,7 @@ async function readCsv(dir,Jour,sender_psid) {
         }
     }
     //get the info on the user
-    let sql_get_user = `SELECT * FROM user WHERE id_user = ?`;
+    let sql_get_user = `SELECT * FROM user WHERE id_user=?`;
     let user = (await queryDB(sql_get_user,sender_psid))[0];
     console.log(user)
     let Majeur = user.majeur;
