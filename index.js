@@ -86,7 +86,6 @@ app.get('/webhook', (req, res) => {
 async function isKnownUser(sender_psid){
     let sql_get_user = `SELECT * FROM user WHERE id_user = ?`;
     const user = (await queryDB(sql_get_user, sender_psid))[0];
-    console.log("user", user)
     if (user === undefined){
         console.log("user undefined")
         return false;
@@ -190,8 +189,7 @@ async function set_persistent_menu(psid){
 async function is4A(sender_psid){
     let sql_get_user = 'SELECT promo FROM user WHERE id_user=?';
     let user = (await queryDB(sql_get_user, [sender_psid]))[0];
-    console.log(user);
-    console.log(user.promo);
+    console.log("user is4A:"+ user)
     if (user.promo === "4"){
         console.log("is4A");
         return true;
@@ -269,7 +267,7 @@ function askTemplateGroupe(){
         "type":"template",
         "payload":{
             "template_type":"button",
-            "text":" ",
+            "text":"ou",
             "buttons":[
                 {"type":"postback", "title":"groupe D", "payload":"D"},
             ]
@@ -469,10 +467,7 @@ async function handlePostback(sender_psid, received_postback) {
             break;
         case 'GET_STARTED':
             // verify is the sender is known
-            let test = true
-            console.log(test)
             let knownUser = await isKnownUser(sender_psid);
-            console.log(knownUser)
             if (knownUser){
                 // send the user the menu
                 console.log('known user')
@@ -495,8 +490,8 @@ async function handlePostback(sender_psid, received_postback) {
         case '3':
         case '4':
             //Write payload into database
-            let sql_set_promo = `UPDATE user SET promo = ${payload} WHERE id_user = ${sender_psid}`;
-            db.exec(sql_set_promo);
+            let sql_set_promo = `UPDATE user SET promo=? WHERE id_user=?`;
+            db.run(sql_set_promo, [payload, sender_psid]);
             //ask for user groupe (A,B,C,D)
             response = askTemplateGroupe();
             r = await callSendAPI(sender_psid, response[0]);
@@ -562,8 +557,6 @@ async function handlePostback(sender_psid, received_postback) {
         case 'Majeurs' :
             let sql_set_majeur = `UPDATE user SET majeur=? WHERE id_user=?`;
             let majeur = MAJEURS[payload];
-            console.log('ESE')
-            console.log(majeur)
             db.run(sql_set_majeur, [majeur, sender_psid]);
             let sql_uptade_status = 'UPDATE user SET status = Inscrit WHERE id_user = ?';
             db.run(sql_uptade_status, sender_psid);
@@ -620,7 +613,6 @@ async function readCsv(dir,Jour,sender_psid) {
     let user = (await queryDB(sql_get_user,sender_psid))[0];
     console.log(user)
     let Majeur = user.majeur;
-    console.log(Majeur,"MAJEUR")
     //init matin
     planningRen["Matin"] = []
     // on verifie si on a qqch dans la majeure, si oui on prend que le planning de la majeure
@@ -629,32 +621,37 @@ async function readCsv(dir,Jour,sender_psid) {
     }
     planningRen["Matin"].push(planningG[Date]["Matin"]["Pour tous"]) // on  push le pour tous dans tout les cas flemme de gerer les groupes
 
-
     // console.log(planningG[Date]["Aprem"][Majeur])
     //init aprem
-    planningRen["Aprem"] = []
+    planningRen["Aprem"] = [];
     if (planningG[Date]["Aprem"][Majeur] !==  null ){
-        planningRen["Aprem"].push(planningG[Date]["Aprem"][Majeur])
-        // console.log("Pour tous")
+        planningRen["Aprem"].push(planningG[Date]["Aprem"][Majeur]);
     }
-    
-    planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"])
-
+    planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"]);
     return planningRen
 }
 
 async function ConstructMessage(planning){
-    let messageMat = ""
-    let messageAprem = ""
+    let messageMat = "";
+    let messageAprem = "";
     for (let matiere in planning["Matin"]){
-        //TODO
-        // vaiment besoin de <planning["Matin"][matiere] + "\n"> ? pas just <matiere + "\n"> ?
-        messageMat += planning["Matin"][matiere] + "\n"
+        for (let cellule in planning["Matin"][matiere]){
+            if (planning["Matin"][matiere][cellule].includes('Salle') || planning["Matin"][matiere][cellule].includes('Salles')){
+                messageMat += planning["Matin"][matiere][cellule]+ ".\n\n";
+            } else {
+                messageMat += planning["Matin"][matiere][cellule]+ ",\n";
+            }
+            
+        }
     }
+
     for (let matiere in planning["Aprem"]){
-        messageAprem += planning["Aprem"][matiere] + "\n"
-        if (planning["Aprem"][matiere].includes("Salle")){
-            messageAprem += "\n"
+        for (let cellule in planning["Aprem"][matiere]){
+            if (planning["Aprem"][matiere][cellule].includes('Salle') || planning["Aprem"][matiere][cellule].includes('Salles')){
+                messageAprem += planning["Aprem"][matiere][cellule]+ ".\n\n";
+            } else {
+                messageAprem += planning["Aprem"][matiere][cellule]+ ",\n";
+            }
         }
     }
     return [messageMat,messageAprem]

@@ -5,26 +5,36 @@
             "ROBOTIQUE": [
                 "ROBOTIQUE",
                 "Data Mining",
+                "J.SAMUEL",
+                "Salle G108",
                 "J.SAMUEL\nSalle G108\n10h30-12h30"
             ],
             "ELECTRONIQUE ET SYST EMB": [
                 "ELECTRONIQUE ET SYST EMB",
                 "Composants \u00e9lectroniques",
+                "A.GACI",
+                "Salle H001",
                 "A.GACI\nSalle H001\n9h00-10h00"
             ],
             "INFRA DES RESEAUX": [
                 "INFRA DES RESEAUX",
                 "Cloud et Virtualisation",
+                "O.CARRILLO",
+                "Salle G108",
                 "O.CARRILLO\nSalle G108\n8h00-10h00"
             ],
             "IMAGE": [
                 "IMAGE",
+                "Traitement d'images",
+                "E. VAN REETH",
                 "Traitement d'images\nE. VAN REETH\nSalle I304"
             ],
             "Pour tous": [
                 "8h-12h15",
                 "C ONCEP.LOGICIELLE/BIG DATA",
                 "Data Mining",
+                "J.SAMUEL",
+                "Salles G103 + I300",
                 "J.SAMUEL\nSalles G103 + I300\n10h30-12h30"
             ]
         },
@@ -36,6 +46,8 @@
             "IMAGE": [],
             "Pour tous": [
                 "13h10-18h",
+                "LV",
+                "(Voir planning)",
                 "LV\n(Voir planning)"
             ]
         }
@@ -93,7 +105,14 @@
     "MERCREDI-22-mars": {
         "Matin": {
             "CONCEP.LOGICIELLE/BIG DATA": [],
-            "ROBOTIQUE": [],
+            "ROBOTIQUE": [
+                "ROBOTIQUE",
+                "GROUPE C&D",
+                "ROBOTIQUE\nGROUPE C&D",
+                "Interaction Homme/Robot",
+                "F.JUMEL",
+                "Salle I102"
+            ],
             "ELECTRONIQUE ET SYST EMB": [
                 "ELECTRONIQUE ET SYST EMB",
                 "Electronique analogique",
@@ -111,11 +130,7 @@
                 "F. JOLY",
                 "Salle I105 - Groupe A",
                 "Salle I200 - Groupe B",
-                "8h-12h15",
-                "ROBOTIQUE\nGROUPE C&D",
-                "Interaction Homme/Robot",
-                "F.JUMEL",
-                "Salle I102"
+                "8h-12h15"
             ]
         },
         "Aprem": {
@@ -158,7 +173,14 @@
     "JEUDI-23-mars": {
         "Matin": {
             "CONCEP.LOGICIELLE/BIG DATA": [],
-            "ROBOTIQUE": [],
+            "ROBOTIQUE": [
+                "ROBOTIQUE",
+                "GROUPE A&B",
+                "ROBOTIQUE\nGROUPE A&B",
+                "Interaction Homme/Robot",
+                "F.JUMEL",
+                "Salle I102"
+            ],
             "ELECTRONIQUE ET SYST EMB": [],
             "INFRA DES RESEAUX": [],
             "IMAGE": [],
@@ -168,11 +190,7 @@
                 "Projet",
                 "F. JOLY",
                 "Salle I105",
-                "8h-12h15",
-                "ROBOTIQUE\nGROUPE A&B",
-                "Interaction Homme/Robot",
-                "F.JUMEL",
-                "Salle I102"
+                "8h-12h15"
             ]
         },
         "Aprem": {
