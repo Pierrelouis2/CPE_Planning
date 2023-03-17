@@ -1,7 +1,13 @@
 {
     "LUNDI-20-mars": {
         "Matin": {
-            "CONCEP.LOGICIELLE/BIG DATA": [],
+            "CONCEP.LOGICIELLE/BIG DATA": [
+                "CONCEP.LOGICIELLE/BIG DATA",
+                "Data Mining",
+                "J.SAMUEL",
+                "Salles G103 + I300",
+                "J.SAMUEL\nSalles G103 + I300\n10h30-12h30"
+            ],
             "ROBOTIQUE": [
                 "ROBOTIQUE",
                 "Data Mining",
@@ -30,12 +36,7 @@
                 "Traitement d'images\nE. VAN REETH\nSalle I304"
             ],
             "Pour tous": [
-                "8h-12h15",
-                "C ONCEP.LOGICIELLE/BIG DATA",
-                "Data Mining",
-                "J.SAMUEL",
-                "Salles G103 + I300",
-                "J.SAMUEL\nSalles G103 + I300\n10h30-12h30"
+                "8h-12h15"
             ]
         },
         "Aprem": {
