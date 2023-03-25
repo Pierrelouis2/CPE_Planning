@@ -112,7 +112,7 @@ async function isKnownUser(sender_psid){
 // on sait qui si il est en 4A pas si il est en ETI ...
 // changer le nom de la fct ?
 async function isReady(sender_psid){
-    let lst_promo_ready = [4];
+    let lst_promo_ready = ["4"];
     let lst_filliere_ready = ["ETI"];
     let sql_get_user = 'SELECT * FROM user WHERE id_user=?';
     let user = (await queryDB(sql_get_user, [sender_psid]))[0];
