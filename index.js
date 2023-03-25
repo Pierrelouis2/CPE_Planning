@@ -111,12 +111,14 @@ async function isKnownUser(sender_psid){
 // TODO
 // on sait qui si il est en 4A pas si il est en ETI ...
 // changer le nom de la fct ?
-async function is4A(sender_psid){
+async function isReady(sender_psid){
+    let lst_promo_ready = ["4"];
+    let lst_filliere_ready = ["ETI"];
     let sql_get_user = 'SELECT * FROM user WHERE id_user=?';
     let user = (await queryDB(sql_get_user, [sender_psid]))[0];
     console.log("user is4A:"+ user)
-    if (user.promo === "4"){
-        console.log("is4A");
+    if (user.promo in lst_promo_ready && user.filliere in lst_filliere_ready){
+        console.log("isReady");
         return true;
     } else {
         return false;
@@ -386,9 +388,6 @@ async function handlePostback(sender_psid, received_postback) {
     let rep;
     let sql_set_filiere
     set_persistent_menu(sender_psid);
-    if (isUserComplete(sender_psid)){
-        set_persistent_menu(sender_psid);
-    }
     // Get the payload for the postback
     let payload = received_postback.payload;
     console.log("payload: ", payload);
@@ -397,6 +396,13 @@ async function handlePostback(sender_psid, received_postback) {
             if (!(await isKnownUser(sender_psid)))  {
                 response = askTemplateStart();
                 r = await callSendAPI(sender_psid, response);
+                break;
+            }
+            if(!(isReady(sender_psid))){
+                message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
+                r = await callSendAPI(sender_psid, message);
+                message = {"text": `Signé : les dev en SUSU`}; 
+                r = await callSendAPI(sender_psid, message);
                 break;
             }
             message = {"text": "Voici le planning de la semaine: "};
@@ -408,6 +414,13 @@ async function handlePostback(sender_psid, received_postback) {
             if (!(await isKnownUser(sender_psid)))  {
                 response = askTemplateStart();
                 r = await callSendAPI(sender_psid, response);
+                break;
+            }
+            if(!(isReady(sender_psid))){
+                message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
+                r = await callSendAPI(sender_psid, message);
+                message = {"text": `Signé : les dev en SUSU`}; 
+                r = await callSendAPI(sender_psid, message);
                 break;
             }
             // get parametre from user_id in db: promo, filliere, majeure
@@ -427,6 +440,13 @@ async function handlePostback(sender_psid, received_postback) {
                 r = await callSendAPI(sender_psid, response);
                 break;
             }
+            if(!(isReady(sender_psid))){
+                message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
+                r = await callSendAPI(sender_psid, message);
+                message = {"text": `Signé : les dev en SUSU`}; 
+                r = await callSendAPI(sender_psid, message);
+                break;
+            }
             planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
             rep = await ConstructMessage(planningJour);
             message = {"text": `Voici le planning de ${payload} : `};
@@ -440,6 +460,13 @@ async function handlePostback(sender_psid, received_postback) {
             if (!(await isKnownUser(sender_psid)))  {
                 response = askTemplateStart();
                 r = await callSendAPI(sender_psid, response);
+                break;
+            }
+            if(!(isReady(sender_psid))){
+                message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
+                r = await callSendAPI(sender_psid, message);
+                message = {"text": `Signé : les dev en SUSU`}; 
+                r = await callSendAPI(sender_psid, message);
                 break;
             }
             planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
@@ -457,6 +484,13 @@ async function handlePostback(sender_psid, received_postback) {
                 r = await callSendAPI(sender_psid, response);
                 break;
             }
+            if(!(isReady(sender_psid))){
+                message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
+                r = await callSendAPI(sender_psid, message);
+                message = {"text": `Signé : les dev en SUSU`}; 
+                r = await callSendAPI(sender_psid, message);
+                break;
+            }
             planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
             rep = await ConstructMessage(planningJour);
             message = {"text": `Voici le planning de ${payload} : `};
@@ -470,6 +504,13 @@ async function handlePostback(sender_psid, received_postback) {
             if (!(await isKnownUser(sender_psid)))  {
                 response = askTemplateStart();
                 r = await callSendAPI(sender_psid, response);
+                break;
+            }
+            if(!(isReady(sender_psid))){
+                message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
+                r = await callSendAPI(sender_psid, message);
+                message = {"text": `Signé : les dev en SUSU`}; 
+                r = await callSendAPI(sender_psid, message);
                 break;
             }
             planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
