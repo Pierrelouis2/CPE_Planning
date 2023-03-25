@@ -398,7 +398,7 @@ async function handlePostback(sender_psid, received_postback) {
                 r = await callSendAPI(sender_psid, response);
                 break;
             }
-            if(!(isReady(sender_psid))){
+            if(!(await isReady(sender_psid))){
                 message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
                 r = await callSendAPI(sender_psid, message);
                 message = {"text": `Signé : les dev en SUSU`}; 
@@ -416,7 +416,7 @@ async function handlePostback(sender_psid, received_postback) {
                 r = await callSendAPI(sender_psid, response);
                 break;
             }
-            if(!(isReady(sender_psid))){
+            if(!(await isReady(sender_psid))){
                 message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
                 r = await callSendAPI(sender_psid, message);
                 message = {"text": `Signé : les dev en SUSU`}; 
@@ -440,7 +440,7 @@ async function handlePostback(sender_psid, received_postback) {
                 r = await callSendAPI(sender_psid, response);
                 break;
             }
-            if(!(isReady(sender_psid))){
+            if(!(await isReady(sender_psid))){
                 message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
                 r = await callSendAPI(sender_psid, message);
                 message = {"text": `Signé : les dev en SUSU`}; 
@@ -462,7 +462,7 @@ async function handlePostback(sender_psid, received_postback) {
                 r = await callSendAPI(sender_psid, response);
                 break;
             }
-            if(!(isReady(sender_psid))){
+            if(!(await isReady(sender_psid))){
                 message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
                 r = await callSendAPI(sender_psid, message);
                 message = {"text": `Signé : les dev en SUSU`}; 
@@ -484,7 +484,7 @@ async function handlePostback(sender_psid, received_postback) {
                 r = await callSendAPI(sender_psid, response);
                 break;
             }
-            if(!(isReady(sender_psid))){
+            if(!(await isReady(sender_psid))){
                 message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
                 r = await callSendAPI(sender_psid, message);
                 message = {"text": `Signé : les dev en SUSU`}; 
@@ -506,7 +506,7 @@ async function handlePostback(sender_psid, received_postback) {
                 r = await callSendAPI(sender_psid, response);
                 break;
             }
-            if(!(isReady(sender_psid))){
+            if(!(await isReady(sender_psid))){
                 message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
                 r = await callSendAPI(sender_psid, message);
                 message = {"text": `Signé : les dev en SUSU`}; 
@@ -577,7 +577,7 @@ async function handlePostback(sender_psid, received_postback) {
             // set the user filliere to payload
             sql_set_filiere = `UPDATE user SET filliere=? WHERE id_user=?`;
             db.run(sql_set_filiere, [payload, sender_psid]);
-            if (await is4A(sender_psid)){
+            if (await isReady(sender_psid)){
                 console.log('4ETI')
                 response = askTemplateMajeureETI();
                 r = await callSendAPI(sender_psid, response[0]);
