@@ -634,6 +634,7 @@ async function readCsv(dir,Jour,sender_psid) {
     let planningG = JSON.parse(rawdata);
     let Date;
     // parcour des jours to get the desired day
+    
     for(let day in planningG) {
         if (day.includes(Jour)){
             Date = day
