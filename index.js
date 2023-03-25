@@ -117,6 +117,7 @@ async function isReady(sender_psid){
     let sql_get_user = 'SELECT * FROM user WHERE id_user=?';
     let user = (await queryDB(sql_get_user, [sender_psid]))[0];
     console.log("user is4A:"+ user)
+    console.log("user is4A:"+ user.promo)
     if (user.promo in lst_promo_ready && user.filliere in lst_filliere_ready){
         console.log("isReady");
         return true;
