@@ -94,7 +94,7 @@ async function isKnownUser(sender_psid){
         user.promo === null ||
         user.groupe === null) && 
         user.status !== "Inscription"){
-            console.log("user not  ")
+            console.log("user not in db")
             let message = {"text": "Votre compte n'est pas complet, veuillez le refaire"}
             callSendAPI(sender_psid, message);
             message = askTemplateNewUserPromo();
