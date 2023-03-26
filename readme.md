@@ -89,3 +89,9 @@ For the second version of the data base we use a sqlite database. This version w
 - [ ] Manage groups
 - [ ] manage data base backup and restore
 - [ ] script to send planning automatically
+- [ ] Manage SQL errors (try catch)
+- [ ] Make a better readme 
+- [ ] Make a better code
+- [ ] Make more comments in the code so it's easier to understand when you come back to it after a long time
+- [ ] Don't share the token on github !!!!!!!!!
+- [ ] don't share the code to  ETI students !!!!!!!!!
