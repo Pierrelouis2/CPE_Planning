@@ -87,3 +87,5 @@ For the second version of the data base we use a sqlite database. This version w
 - [ ] Manage 3A lessons
 - [ ] Create MSO TABLE
 - [ ] Manage groups
+- [ ] manage data base backup and restore
+- [ ] script to send planning automatically
