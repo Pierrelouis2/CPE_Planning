@@ -385,8 +385,6 @@ async function handlePostback(sender_psid, received_postback) {
     let response;
     let message;
     let r;
-    let planningJour;
-    let rep;
     let sql_set_filiere
     set_persistent_menu(sender_psid);
     // Get the payload for the postback
@@ -577,10 +575,10 @@ async function callSendAPI(sender_psid, response) {
 }
 
 async function sendPlanningDay(payload, sender_psid){
-    planningJour = await readCsv('./Output_Json/Planning27_03.json',payload,sender_psid);
-    rep = await ConstructMessage(planningJour);
-    message = {"text": `Voici le planning de ${payload} : `};
-    r = await callSendAPI(sender_psid, message);
+    let planningJour = await readCsv('./Output_Json/Planning27_03.json',payload,sender_psid);
+    let rep = await ConstructMessage(planningJour);
+    let message = {"text": `Voici le planning de ${payload} : `};
+    let r = await callSendAPI(sender_psid, message);
     message = {"text": `Matin : ${rep[0]}`};
     r = await callSendAPI(sender_psid, message);
     message = {"text": `Après-midi : ${rep[1]}`};
