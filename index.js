@@ -362,8 +362,8 @@ function imageTemplate(psid){
             "attachment":{
                 "type":"image",
                 "payload":{
-                    "url": "https://cdn.discordapp.com/attachments/1086031543790751836/1086032229106471043/CPEPlanning20-mars.jpg",
-                    "is_reusable":true
+                    "url": "https://cdn.discordapp.com/attachments/1086031543790751836/1089619426007072899/27_mars_au_31_mars.jpg",
+                    "is_reusable": true
                 },
             }
         }
@@ -400,10 +400,7 @@ async function handlePostback(sender_psid, received_postback) {
                 break;
             }
             if(!(await isReady(sender_psid))){
-                message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
-                r = await callSendAPI(sender_psid, message);
-                message = {"text": `Signé : les dev en SUSU`}; 
-                r = await callSendAPI(sender_psid, message);
+                await planningNotReady(sender_psid);
                 break;
             }
             message = {"text": "Voici le planning de la semaine: "};
@@ -418,10 +415,7 @@ async function handlePostback(sender_psid, received_postback) {
                 break;
             }
             if(!(await isReady(sender_psid))){
-                message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
-                r = await callSendAPI(sender_psid, message);
-                message = {"text": `Signé : les dev en SUSU`}; 
-                r = await callSendAPI(sender_psid, message);
+                await planningNotReady(sender_psid);
                 break;
             }
             // get parametre from user_id in db: promo, filliere, majeure
@@ -442,10 +436,7 @@ async function handlePostback(sender_psid, received_postback) {
                 break;
             }
             if(!(await isReady(sender_psid))){
-                message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
-                r = await callSendAPI(sender_psid, message);
-                message = {"text": `Signé : les dev en SUSU`}; 
-                r = await callSendAPI(sender_psid, message);
+                await planningNotReady(sender_psid);
                 break;
             }
             planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
@@ -464,10 +455,7 @@ async function handlePostback(sender_psid, received_postback) {
                 break;
             }
             if(!(await isReady(sender_psid))){
-                message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
-                r = await callSendAPI(sender_psid, message);
-                message = {"text": `Signé : les dev en SUSU`}; 
-                r = await callSendAPI(sender_psid, message);
+                await planningNotReady(sender_psid);
                 break;
             }
             planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
@@ -486,10 +474,7 @@ async function handlePostback(sender_psid, received_postback) {
                 break;
             }
             if(!(await isReady(sender_psid))){
-                message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
-                r = await callSendAPI(sender_psid, message);
-                message = {"text": `Signé : les dev en SUSU`}; 
-                r = await callSendAPI(sender_psid, message);
+                await planningNotReady(sender_psid);
                 break;
             }
             planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
@@ -508,10 +493,7 @@ async function handlePostback(sender_psid, received_postback) {
                 break;
             }
             if(!(await isReady(sender_psid))){
-                message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
-                r = await callSendAPI(sender_psid, message);
-                message = {"text": `Signé : les dev en SUSU`}; 
-                r = await callSendAPI(sender_psid, message);
+                await planningNotReady(sender_psid);
                 break;
             }
             planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
@@ -588,10 +570,7 @@ async function handlePostback(sender_psid, received_postback) {
             // give days menu
             else {
                 console.log('3ETI')
-                message = {"text": `Le planning pour les 3A n'est pas encore disponible. On fait au plus vite ! `};
-                r = await callSendAPI(sender_psid, message);
-                message = {"text": `Signé : les dev en SUSU`};
-                r = await callSendAPI(sender_psid, message);
+                await planningNotReady(sender_psid);
                 let inscription = "Inscrit";
                 let sql_uptade_statusEti = 'UPDATE user SET status=? WHERE id_user=?';
                 db.run(sql_uptade_statusEti, [inscription, sender_psid]);
@@ -641,6 +620,14 @@ async function handlePostback(sender_psid, received_postback) {
             r = await callSendAPI(sender_psid, start);
             break;
     }
+}
+
+async function planningNotReady(sender_psid){
+    message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
+    r = await callSendAPI(sender_psid, message);
+    message = {"text": `Signé : les dev en SUSU`}; 
+    r = await callSendAPI(sender_psid, message);
+    return
 }
 
 async function callSendAPI(sender_psid, response) {
