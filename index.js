@@ -409,83 +409,9 @@ async function handlePostback(sender_psid, received_postback) {
             r = await callSendAPI(sender_psid, response);
             break;
         case 'LUNDI':
-            if (!(await isKnownUser(sender_psid)))  {
-                response = askTemplateStart();
-                r = await callSendAPI(sender_psid, response);
-                break;
-            }
-            if(!(await isReady(sender_psid))){
-                await planningNotReady(sender_psid);
-                break;
-            }
-            // get parametre from user_id in db: promo, filliere, majeure
-            planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
-            rep = await ConstructMessage(planningJour);
-            message = {"text": `Voici le planning de ${payload}: `};
-            r = await callSendAPI(sender_psid, message);
-            message = {"text": `Matin : ${rep[0]}`};
-            r = await callSendAPI(sender_psid, message);
-            message = {"text": `Après-midi : ${rep[1]}`};
-            r = await callSendAPI(sender_psid, message);
-            // return the column LUNDI from etd.csv
-            break;
         case 'MARDI':
-            if (!(await isKnownUser(sender_psid)))  {
-                response = askTemplateStart();
-                r = await callSendAPI(sender_psid, response);
-                break;
-            }
-            if(!(await isReady(sender_psid))){
-                await planningNotReady(sender_psid);
-                break;
-            }
-            planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
-            rep = await ConstructMessage(planningJour);
-            message = {"text": `Voici le planning de ${payload} : `};
-            r = await callSendAPI(sender_psid, message);
-            message = {"text": `Matin : ${rep[0]}`};
-            r = await callSendAPI(sender_psid, message);
-            message = {"text": `Après-midi : ${rep[1]}`};
-            r = await callSendAPI(sender_psid, message);
-            break;
         case 'MERCREDI':
-            if (!(await isKnownUser(sender_psid)))  {
-                response = askTemplateStart();
-                r = await callSendAPI(sender_psid, response);
-                break;
-            }
-            if(!(await isReady(sender_psid))){
-                await planningNotReady(sender_psid);
-                break;
-            }
-            planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
-            rep = await ConstructMessage(planningJour);
-            message = {"text": `Voici le planning de ${payload} : `};
-            r = await callSendAPI(sender_psid, message);
-            message = {"text": `Matin : ${rep[0]}`};
-            r = await callSendAPI(sender_psid, message);
-            message = {"text": `Après-midi : ${rep[1]}`};
-            r = await callSendAPI(sender_psid, message);
-            break;
         case 'JEUDI':
-            if (!(await isKnownUser(sender_psid)))  {
-                response = askTemplateStart();
-                r = await callSendAPI(sender_psid, response);
-                break;
-            }
-            if(!(await isReady(sender_psid))){
-                await planningNotReady(sender_psid);
-                break;
-            }
-            planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
-            rep = await ConstructMessage(planningJour);
-            message = {"text": `Voici le planning de ${payload} : `};
-            r = await callSendAPI(sender_psid, message);
-            message = {"text": `Matin : ${rep[0]}`};
-            r = await callSendAPI(sender_psid, message);
-            message = {"text": `Après-midi : ${rep[1]}`};
-            r = await callSendAPI(sender_psid, message);
-            break;
         case 'VENDREDI':
             if (!(await isKnownUser(sender_psid)))  {
                 response = askTemplateStart();
@@ -496,14 +422,7 @@ async function handlePostback(sender_psid, received_postback) {
                 await planningNotReady(sender_psid);
                 break;
             }
-            planningJour = await readCsv('./Output_Json/Datatest.json',payload,sender_psid);
-            rep = await ConstructMessage(planningJour);
-            message = {"text": `Voici le planning de ${payload} : `};
-            r = await callSendAPI(sender_psid, message);
-            message = {"text": `Matin : ${rep[0]}`};
-            r = await callSendAPI(sender_psid, message);
-            message = {"text": `Après-midi : ${rep[1]}`};
-            r = await callSendAPI(sender_psid, message);
+            await sendPlanningDay(payload, sender_psid);
             break;
         case 'GET_STARTED':
             // verify is the sender is known
@@ -657,6 +576,18 @@ async function callSendAPI(sender_psid, response) {
     return
 }
 
+async function sendPlanningDay(payload, sender_psid){
+    planningJour = await readCsv('./Output_Json/Datatest27_03.json',payload,sender_psid);
+    rep = await ConstructMessage(planningJour);
+    message = {"text": `Voici le planning de ${payload} : `};
+    r = await callSendAPI(sender_psid, message);
+    message = {"text": `Matin : ${rep[0]}`};
+    r = await callSendAPI(sender_psid, message);
+    message = {"text": `Après-midi : ${rep[1]}`};
+    r = await callSendAPI(sender_psid, message);
+    return
+}
+
 async function readCsv(dir,Jour,sender_psid) {
     let planningRen = {}
     let rawdata = fs.readFileSync(dir);
@@ -705,7 +636,6 @@ async function ConstructMessage(planning){
             
         }
     }
-
     for (let matiere in planning["Aprem"]){
         for (let cellule in planning["Aprem"][matiere]){
             if (planning["Aprem"][matiere][cellule].includes('Salle') || planning["Aprem"][matiere][cellule].includes('Salles')){
