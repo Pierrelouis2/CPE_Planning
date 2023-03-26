@@ -577,7 +577,7 @@ async function callSendAPI(sender_psid, response) {
 }
 
 async function sendPlanningDay(payload, sender_psid){
-    planningJour = await readCsv('./Output_Json/Datatest27_03.json',payload,sender_psid);
+    planningJour = await readCsv('./Output_Json/Planning27_03.json',payload,sender_psid);
     rep = await ConstructMessage(planningJour);
     message = {"text": `Voici le planning de ${payload} : `};
     r = await callSendAPI(sender_psid, message);
