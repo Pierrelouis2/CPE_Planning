@@ -540,8 +540,8 @@ async function handlePostback(sender_psid, received_postback) {
 }
 
 async function planningNotReady(sender_psid){
-    message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
-    r = await callSendAPI(sender_psid, message);
+    let message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
+    let r = await callSendAPI(sender_psid, message);
     message = {"text": `Signé : les dev en SUSU`}; 
     r = await callSendAPI(sender_psid, message);
     return
