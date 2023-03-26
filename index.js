@@ -356,7 +356,7 @@ function askTemplateMajeureETI(){
 }
 // TODO
 // changer le lien de l'image chaque semaine
-function imageTemplate(psid){
+function imageTemplate(){
     // utilisation d'une url discord pour l'image
     return {"name":"image",
             "attachment":{
