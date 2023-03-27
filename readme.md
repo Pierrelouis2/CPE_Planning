@@ -84,14 +84,14 @@ The database is composed of 3 tables:
 - [ ] Manage 3A lessons
 - [ ] Create MSO TABLE
 - [ ] Manage groups
-- [ ] Manage database backup and restore
+- [ ] Manage database backup and restore (cron?)
 - [ ] Use another file to store templates
-- [ ] Script to send planning automatically a 7h30am
+- [ ] Script to send planning automatically at 7h30am
 - [ ] Manage SQL errors (try catch)
 - [X] Make a better readme 
 - [ ] Make a better code
 - [ ] For the future : make a web interface for CPE admin to post the planning (manage the time)
-- [ ] Make more comments in the code so it's easier to understand when you come back to it after a long time
+- [X] Make more comments in the code so it's easier to understand when you come back to it after a long time
 - [ ] Don't share the token on github !!!!!!!!!
-- [ ] don't share the code to  ETI students !!!!!!!!!
-- [ ] Regex expression for hours 
+- [ ] Don't share the code to  ETI students !!!!!!!!!
+- [ ] Regex expression for hours  

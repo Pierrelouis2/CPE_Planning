@@ -13,7 +13,10 @@ let express = require('express'),
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 let port = 8989;
-app.listen(port,'0.0.0.0' ,() => console.log(`App listening on port ${port}!`), set_get_started());
+app.listen(port,'0.0.0.0' ,() => {
+    console.log(`App listening on port ${port}!`);
+    set_get_started();
+});
 
 //INIT DB
 let db = new sqlite3.Database('users.db');
@@ -111,7 +114,6 @@ async function isKnownUser(sender_psid){
         return false;
     }
 }
-
 
 // verify if the timetable is ready or not
 async function isReady(sender_psid){
@@ -229,7 +231,7 @@ function askTemplateJour(){
                     "buttons":[
                         { "type":"postback", "title":"LUNDI", "payload":"LUNDI"},
                         { "type":"postback", "title":"MARDI", "payload":"MARDI"},
-                        { "type":"postback", "title":"MERCREDI", "payload":"MECREDI"}
+                        { "type":"postback", "title":"MERCREDI", "payload":"MERCREDI"}
                     ]
                 }
             }
@@ -297,7 +299,7 @@ function askTemplateGroupe(){
     }]
 }
 
-
+// Set up message to handle unknown user or unknown event
 function askTemplateStart(){
     return {"name":"ask",
     "attachment":{
@@ -313,6 +315,7 @@ function askTemplateStart(){
 }
 }
 
+// Set up message to get the user filliere
 function askTemplateFilliere(){
     return {"name":"ask",
     "attachment":{
@@ -329,6 +332,7 @@ function askTemplateFilliere(){
 }
 }
 
+// Set up message to get the user majeure for 4ETI
 function askTemplateMajeureETI(){
     return [{"name":"ask",
     "attachment":{
@@ -359,6 +363,7 @@ function askTemplateMajeureETI(){
     }]
 
 }
+
 // TODO
 // changer le lien de l'image chaque semaine
 function imageTemplate(){
@@ -374,9 +379,7 @@ function imageTemplate(){
         }
 }
 
-// TODO
-// on a plus de message ...
-// on l'enleve ?
+// Handling the message when a user send text and not a postback
 async function handleMessage(sender_psid) {
     let response = askTemplateJour();
     let r;
@@ -386,15 +389,17 @@ async function handleMessage(sender_psid) {
     return;
 }
 
+// Handling the message when a user send a postback
 async function handlePostback(sender_psid, received_postback) {
     let response;
     let message;
     let r;
     let sql_set_filiere
-    set_persistent_menu(sender_psid);
+    set_persistent_menu(sender_psid); // Needed here ?
     // Get the payload for the postback
     let payload = received_postback.payload;
     console.log("payload: ", payload);
+    // Handle all payloads
     switch (payload) {
         case 'TOUT':
             if (!(await isKnownUser(sender_psid)))  {
@@ -428,7 +433,7 @@ async function handlePostback(sender_psid, received_postback) {
             await sendPlanningDay(payload, sender_psid);
             break;
         case 'GET_STARTED':
-            // verify is the sender is known
+            // verify is the sender is known29687.bot_messenger
             let knownUser = await isKnownUser(sender_psid);
             if (knownUser){
                 // send the user the menu
@@ -451,7 +456,7 @@ async function handlePostback(sender_psid, received_postback) {
             }
             break;
         case 'REINSCRIPTION':
-            let sql_status_inscription = 'UPDATE user SET status=? WHERE id_user=?';
+            let sql_status_inscription = 'UPDATE user SET status=? WHERE id_user=?';  // TODO : change all other params to None
             db.run(sql_status_inscription, ['Inscription', sender_psid]);
             // ask for promo (3 or 4)
             response = askTemplateNewUserPromo();
@@ -459,7 +464,6 @@ async function handlePostback(sender_psid, received_postback) {
             break;
         case '3':
         case '4':
-            //Write payload into database
             let sql_set_promo = `UPDATE user SET promo=? WHERE id_user=?`;
             db.run(sql_set_promo, [payload, sender_psid]);
             //ask for user groupe (A,B,C,D)
@@ -471,7 +475,6 @@ async function handlePostback(sender_psid, received_postback) {
         case 'B':
         case 'C':
         case 'D':
-            //Write payload into database
             let sql_set_groupe = `UPDATE user SET groupe=? WHERE id_user=?`;
             db.run(sql_set_groupe, [payload, sender_psid]);
             //ask for user filliere (CGP,ETI)
@@ -496,9 +499,6 @@ async function handlePostback(sender_psid, received_postback) {
                 let inscription = "Inscrit";
                 let sql_uptade_statusEti = 'UPDATE user SET status=? WHERE id_user=?';
                 db.run(sql_uptade_statusEti, [inscription, sender_psid]);
-                /*response = askTemplateJour();
-                r = await callSendAPI(sender_psid, response[0]);
-                r = await callSendAPI(sender_psid, response[1]);*/
                 break;
             }
         case 'CGP': 
@@ -510,20 +510,14 @@ async function handlePostback(sender_psid, received_postback) {
             db.run(sql_uptade_statusCgp, [inscription, sender_psid]);
             message = {"text": `Le planning pour les CGP n'est pas encore disponible. On fait au plus vite ! `};
             r = await callSendAPI(sender_psid, message);
-           message = {"text": `Signé : les dev en SUSU`}; 
-           r = await callSendAPI(sender_psid, message);
-            
-           /* response = askTemplateJour();
-            r = await callSendAPI(sender_psid, response[0]);
-            r = await callSendAPI(sender_psid, response[1]);*/
+            message = {"text": `Signé : les dev en SUSU`}; 
+            r = await callSendAPI(sender_psid, message);
             break;
-        // Comportement bizarre, le payload est bien 'CBD' mais le switch passe a la suite jusqu'a 'ESE'
         case 'CBD':
         case 'INFRA':
         case 'IMI':
         case 'ROSE':
         case 'ESE':
-        case 'Majeurs' :
             let sql_set_majeur = `UPDATE user SET majeur=? WHERE id_user=?`;
             let majeur = MAJEURS[payload];
             db.run(sql_set_majeur, [majeur, sender_psid]);
@@ -544,6 +538,7 @@ async function handlePostback(sender_psid, received_postback) {
     }
 }
 
+// Set up message for users that filliere/promo is not ready
 async function planningNotReady(sender_psid){
     let message = {"text": `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `};
     let r = await callSendAPI(sender_psid, message);
@@ -552,6 +547,7 @@ async function planningNotReady(sender_psid){
     return
 }
 
+// Send message to user
 async function callSendAPI(sender_psid, response) {
     // Construct the message body
     let request_body= { "recipient": {"id": sender_psid}, "message": null };
@@ -579,6 +575,7 @@ async function callSendAPI(sender_psid, response) {
     return
 }
 
+// read the planning json data to send Am and Pm
 async function sendPlanningDay(payload, sender_psid){
     let planningJour = await readCsv('./Output_Json/Planning27_03.json',payload,sender_psid);
     let rep = await ConstructMessage(planningJour);
@@ -591,13 +588,13 @@ async function sendPlanningDay(payload, sender_psid){
     return
 }
 
+// load the planning json file
 async function readCsv(dir,Jour,sender_psid) {
     let planningRen = {}
     let rawdata = fs.readFileSync(dir);
     let planningG = JSON.parse(rawdata);
     let Date;
-    // parcour des jours to get the desired day
-    
+    // loop days to get the desired day // May be a better way to do this
     for(let day in planningG) {
         if (day.includes(Jour)){
             Date = day
@@ -607,25 +604,25 @@ async function readCsv(dir,Jour,sender_psid) {
     let sql_get_user = `SELECT * FROM user WHERE id_user=?`;
     let user = (await queryDB(sql_get_user,sender_psid))[0];
     console.log(user)
-    let Majeur = user.majeur;
+    let majeur = user.majeur;
     //init matin
     planningRen["Matin"] = []
-    // on verifie si on a qqch dans la majeure, si oui on prend que le planning de la majeure
-    if (planningG[Date]["Matin"][Majeur] !== null ){
-        planningRen["Matin"].push(planningG[Date]["Matin"][Majeur])
+    // Check if there is something for the majeur
+    if (planningG[Date]["Matin"][majeur] !== null ){
+        planningRen["Matin"].push(planningG[Date]["Matin"][majeur])
     }
-    planningRen["Matin"].push(planningG[Date]["Matin"]["Pour tous"]) // on  push le pour tous dans tout les cas flemme de gerer les groupes
-
-    // console.log(planningG[Date]["Aprem"][Majeur])
+    planningRen["Matin"].push(planningG[Date]["Matin"]["Pour tous"])
     //init aprem
     planningRen["Aprem"] = [];
-    if (planningG[Date]["Aprem"][Majeur] !==  null ){
-        planningRen["Aprem"].push(planningG[Date]["Aprem"][Majeur]);
+    // Check if there is something for the majeur
+    if (planningG[Date]["Aprem"][majeur] !==  null ){
+        planningRen["Aprem"].push(planningG[Date]["Aprem"][majeur]);
     }
     planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"]);
     return planningRen
 }
 
+// Formatting data to send to get something readable
 async function ConstructMessage(planning){
     let messageMat = "";
     let messageAprem = "";
