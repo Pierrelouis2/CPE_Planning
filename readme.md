@@ -12,7 +12,6 @@ The first version was made by @waleedahmad with his [Aww-Bot | Github](https://g
     - [_Summary_](#summary)
   - [Installation](#installation)
   - [Usage](#usage)
-    - [Registre users](#registre-users)
 - [Legal](#legal)
 - [DATABASE](#database)
   - [Database structure V1](#database-structure-v1)
@@ -34,12 +33,7 @@ We are reccording the user's :
  - group (A, B, C or D)
  - major (only for 4ETI students)
 
-Then we send to the user a message with a button for each day of the week. When the user click on a button, we send him a message with the timetable of the day according to his promotion and group.
-
-### Registre users
-
-Utilisastion d'un json comme pour la config du bot.  
-Depuis le bouton de démarrage, on verifie que l'`id` existe dans la DB, si non on l'ajoute et on lui demande sa promotion, son groupe et sa filière si nécessaire grace a une série de messages avec un `postback`. 
+Then we send to the user a message with a button for each day of the week. When the user click on a button, we send him a message with the timetable of the day according to his promotion and major. The group is not taken into account for the moment it is way too complicated because of the pdf file and too many of unplanned format.
 
 # Legal
 
