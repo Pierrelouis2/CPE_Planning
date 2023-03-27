@@ -13,7 +13,7 @@ let express = require('express'),
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 let port = 8989;
-app.listen(port,'0.0.0.0' ,() => console.log(`App listening on port ${port}!`), set_get_started());
+app.listen(port,'0.0.0.0' ,() => {console.log(`App listening on port ${port}!`); set_get_started()});
 
 //INIT DB
 let db = new sqlite3.Database('users.db');
