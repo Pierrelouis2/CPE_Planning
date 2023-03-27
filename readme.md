@@ -1,3 +1,6 @@
+![]
+
+
 # Messenger chat bot for student timetable
 
 With [@jo-pouradier](https://github.com/jo-pouradier), we created a chat bot for Messenger to help students to get their timetable on messenger which is much eassier than a long and fastidious excel file. 
