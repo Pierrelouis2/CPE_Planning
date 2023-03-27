@@ -78,6 +78,7 @@ The database is composed of 3 tables:
 
 ## TODO
 
+- [ ] Repair isKnown function
 - [ ] Manage CGP Table
 - [ ] Manage LV lessons
 - [ ] Manage 3A lessons
