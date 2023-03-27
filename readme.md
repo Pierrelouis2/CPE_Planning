@@ -6,16 +6,17 @@ It's a 24/7 chat bot running with Nodejs on our personnal home lab.
 
 The first version was made by @waleedahmad with his [Aww-Bot | Github](https://github.com/waleedahmad/Aww-Bot).
 
-### _Summary_
+## _Summary_
 
 - [Messenger chat bot for student timetable](#messenger-chat-bot-for-student-timetable)
-    - [_Summary_](#summary)
+  - [_Summary_](#summary)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Legal](#legal)
-  - [DATABASE](#database)
-  - [](#)
-- [TODO](#todo)
+  - [Database](#database)
+    - [Database MPD](#database-mpd)
+  - [Recovery of the planning from pdf](#recovery-of-the-planning-from-pdf)
+  - [TODO](#todo)
 
 ## Installation
 
@@ -45,7 +46,7 @@ Webgenarator : [app.privacypolicies.com](https://app.privacypolicies.com/profile
   - or in Markdown localy : [Here](./Docs/PrivacyPolicyCPEPlanning.md)
 
 
-## DATABASE
+## Database
 
 For the database we are using an sqlite database. This version works for all students. For the MSO we are using a joint table because of the number of MSO (about thirty).
 /!\ The database is not finished yet, we are still working on it. 
@@ -62,13 +63,17 @@ The database is composed of 3 tables:
   - `mso`: the user's MSO
 - `MSO` :
   - `id_mso` : the MSO's id
-  - `mso` : the MSO's name
+  - `mso` : the MSO's name 
+  
+### Database MPD
 
-![Database structure V1](ReadmeImages/DBV2.png)
+![Database structure V1](./Docs/ReadmeImages/DBV2.png)
 
-## 
+## Recovery of the planning from pdf
 
-# TODO
+<img src="./Docs/ReadmeImages/confidential-ge984ebf2f_1280.png"  width="400" height="250">
+
+## TODO
 
 - [ ] Manage CGP Table
 - [ ] Manage LV lessons
