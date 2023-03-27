@@ -231,7 +231,7 @@ function askTemplateJour(){
                     "buttons":[
                         { "type":"postback", "title":"LUNDI", "payload":"LUNDI"},
                         { "type":"postback", "title":"MARDI", "payload":"MARDI"},
-                        { "type":"postback", "title":"MERCREDI", "payload":"MECREDI"}
+                        { "type":"postback", "title":"MERCREDI", "payload":"MERCREDI"}
                     ]
                 }
             }
@@ -433,7 +433,7 @@ async function handlePostback(sender_psid, received_postback) {
             await sendPlanningDay(payload, sender_psid);
             break;
         case 'GET_STARTED':
-            // verify is the sender is known
+            // verify is the sender is known29687.bot_messenger
             let knownUser = await isKnownUser(sender_psid);
             if (knownUser){
                 // send the user the menu
