@@ -12,10 +12,8 @@ The first version was made by @waleedahmad with his [Aww-Bot | Github](https://g
     - [_Summary_](#summary)
   - [Installation](#installation)
   - [Usage](#usage)
-- [Legal](#legal)
-- [DATABASE](#database)
-  - [Database structure V1](#database-structure-v1)
-  - [Database structure V2](#database-structure-v2)
+  - [Legal](#legal)
+  - [DATABASE](#database)
 - [TODO](#todo)
 
 ## Installation
@@ -35,37 +33,19 @@ We are reccording the user's :
 
 Then we send to the user a message with a button for each day of the week. When the user click on a button, we send him a message with the timetable of the day according to his promotion and major. The group is not taken into account for the moment it is way too complicated because of the pdf file and too many of unplanned format.
 
-# Legal
+## Legal
 
-To make your app accessible to anyone, you need to submit it to Facebook for review, with a privacy policy. You can use [PrivacyPolicies.com](https://www.privacypolicies.com/) to create your privacy policy.
+To make your app accessible to anyone, you need to submit it to Facebook for review, with a privacy policy. You can use [PrivacyPolicies.com](https://www.privacypolicies.com/) to create your privacy policy. It is free and easy to use.
 Below is our privacy policy and service requirement.
 Webgenarator : [app.privacypolicies.com](https://app.privacypolicies.com/profile/agreements)
-- Privacy policy webhosted : [Here](https://www.privacypolicies.com/live/b31b8520-640b-40d1-b43c-52033d7e05fa)
-  - or in Markdown localy : [Here](./Docs/PrivacyPolicy.md)
-- Service requirement webhosted [Here](https://www.privacypolicies.com/live/897d7376-61c0-473c-834b-cfcf6d0d0dcd)
-  - or in Markdown localy : [Here](./Docs/ServiceRequirement.md)
+- Privacy policy webhosted : [Here](https://www.privacypolicies.com/live/bcce1178-a9c6-4135-988c-ef12048878fa)
+  - or in Markdown localy : [Here](./Docs/PrivacyPolicyCPEPlanning.md)
 
 
-# DATABASE
-## Database structure V1
+## DATABASE
 
-For the first version of the data base we use a sqlite database. This first version only works for 4ETI students.
+For the database we are using an sqlite database. This version works for all students. For the MSO we are using a joint table because of the number of MSO (about thirty).
 The database is composed of 2 tables :
- - `users` : 
-    - `ID_user` : the user's id
-    - `Promo` : the user's promotion
-    - `Filliere` : the user's fillière
-    - `group` : the user's group
- - `4ETI` :
-  - `ID_user` : the user's id
-  - `Major`: the user's major
-  - `MSO`: the user's MSO
-
-![Database structure V1](ReadmeImages/DBV1.png)
-
-## Database structure V2
-
-For the second version of the data base we use a sqlite database. This version works for all students. with a jointture table for the MSO.
 
 - `users` : 
     - `ID_user` : the user's id
