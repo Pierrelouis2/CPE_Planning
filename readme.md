@@ -14,6 +14,7 @@ The first version was made by @waleedahmad with his [Aww-Bot | Github](https://g
   - [Usage](#usage)
   - [Legal](#legal)
   - [DATABASE](#database)
+  - [](#)
 - [TODO](#todo)
 
 ## Installation
@@ -31,7 +32,9 @@ We are reccording the user's :
  - group (A, B, C or D)
  - major (only for 4ETI students)
 
-Then we send to the user a message with a button for each day of the week. When the user click on a button, we send him a message with the timetable of the day according to his promotion and major. The group is not taken into account for the moment it is way too complicated because of the pdf file and too many of unplanned format.
+Then we send to the user a message with a button for each day of the week. When the user click on a button, we send him a message with the timetable of the day according to his promotion and major. The group is not taken into account for the moment it is way too complicated because of the pdf file and too many of unplanned format.  
+
+For the moment the timetable is only available for 4ETI students. We are working on it to make it available for all students.
 
 ## Legal
 
@@ -45,22 +48,25 @@ Webgenarator : [app.privacypolicies.com](https://app.privacypolicies.com/profile
 ## DATABASE
 
 For the database we are using an sqlite database. This version works for all students. For the MSO we are using a joint table because of the number of MSO (about thirty).
-The database is composed of 2 tables :
+/!\ The database is not finished yet, we are still working on it. 
+The database is composed of 3 tables:  
 
 - `users` : 
-    - `ID_user` : the user's id
-    - `Promo` : the user's promotion
-    - `Filliere` : the user's fillière
-    - `group` : the user's group
-    - `Major`: the user's major
+    - `id_user` : the user's id
+    - `promo` : the user's promotion
+    - `filliere` : the user's fillière
+    - `groupe` : the user's group
+    - `majeur`: the user's major
 - `TJ_User_MSO` :
-  - `ID_user` : the user's id
-  - `MSO`: the user's MSO
+  - `id_user` : the user's id
+  - `mso`: the user's MSO
 - `MSO` :
-  - `ID_MSO` : the MSO's id
-  - `MSO` : the MSO's name
+  - `id_mso` : the MSO's id
+  - `mso` : the MSO's name
 
 ![Database structure V1](ReadmeImages/DBV2.png)
+
+## 
 
 # TODO
 
