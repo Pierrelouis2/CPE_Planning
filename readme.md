@@ -86,7 +86,7 @@ The database is composed of 3 tables:
 - [ ] manage data base backup and restore
 - [ ] script to send planning automatically
 - [ ] Manage SQL errors (try catch)
-- [ ] Make a better readme 
+- [X] Make a better readme 
 - [ ] Make a better code
 - [ ] For the future : make a web interface for CPE admin to post the planning (manage the time)
 - [ ] Make more comments in the code so it's easier to understand when you come back to it after a long time
