@@ -9,13 +9,17 @@ let express = require('express'),
     fs = require('fs');
     const { promisify } = require("util");
 
+// INIT APP
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+let port = 8989;
+app.listen(port,'0.0.0.0' ,() => console.log(`App listening on port ${port}!`), set_get_started());
 
-let users = {};
+//INIT DB
 let db = new sqlite3.Database('users.db');
 const queryDB = promisify(db.all).bind(db);
 
+let users = {};
 const MAJEURS = { "CBD": "CONCEP.LOGICIELLE/BIG DATA",
     "ROSE": "ROBOTIQUE",
     "ESE": "ELECTRONIQUE ET SYST EMB",
@@ -23,9 +27,7 @@ const MAJEURS = { "CBD": "CONCEP.LOGICIELLE/BIG DATA",
     "IMI": "IMAGE",
 };
 
-let port = 8989;
-app.listen(port,'0.0.0.0' ,() => console.log(`App listening on port ${port}!`), set_get_started());
-
+// Creation of a minimalist website for somone who might visit the url
 app.get('/', (req, res) => {
     res.send('<h1>Hello World!, This is not a website just quit it plz</h1> \n <h2><i> The admin </i></h2>')
 });
@@ -38,13 +40,12 @@ app.post('/webhook', async (req, res) => {
     if (body.object === 'page') {
         // Iterates over each entry - there may be multiple if batched
         body.entry.forEach(async function(entry) {
-            // Gets the message. entry.messaging is an array, but
-            // will only ever contain one message, so we get index 0
+            // only reading the message 
             let webhook_event = entry.messaging[0];
             // Get the sender PSID
             let sender_psid = webhook_event.sender.id;
             console.log('Sender PSID: ' + sender_psid);
-            //message or postback
+            //message or postback ?
             if (webhook_event.message) {
                 console.log('in handleMessage');
                 handleMessage(sender_psid);
@@ -52,7 +53,7 @@ app.post('/webhook', async (req, res) => {
                 await handlePostback(sender_psid, webhook_event.postback);
             }
         });
-        // Returns a '200 OK' response to all requests
+        // Returns a '200' (=OK) response to all requests
         res.status(200).send('EVENT_RECEIVED');
     } else {
         // Returns a '404 Not Found' if event is not from a page subscription
@@ -60,6 +61,7 @@ app.post('/webhook', async (req, res) => {
     }
 });
 
+// Creation of the endpoint for our facebook webhook verification
 app.get('/webhook', (req, res) => {
     console.log('got webhook get')
     // Adds support for GET requests to our webhook
@@ -68,7 +70,6 @@ app.get('/webhook', (req, res) => {
     let mode = req.query['hub.mode'];
     let token = req.query['hub.verify_token'];
     let challenge = req.query['hub.challenge'];
-
     // Checks if a token and mode is in the query string of the request
     if (mode && token) {
         // Checks the mode and token sent is correct
@@ -83,6 +84,7 @@ app.get('/webhook', (req, res) => {
     }
 });
 
+// Check if the user is in our database
 async function isKnownUser(sender_psid){
     let sql_get_user = `SELECT * FROM user WHERE id_user = ?`;
     const user = (await queryDB(sql_get_user, sender_psid))[0];
@@ -91,6 +93,7 @@ async function isKnownUser(sender_psid){
         console.log("user undefined")
         return false;
     }
+    // check that all fields are filled
     if ((user === [] || 
         user.promo === null ||
         user.groupe === null) && 
@@ -109,16 +112,14 @@ async function isKnownUser(sender_psid){
     }
 }
 
-// TODO
-// on sait qui si il est en 4A pas si il est en ETI ...
-// changer le nom de la fct ?
+
+// verify if the timetable is ready or not
 async function isReady(sender_psid){
     let lst_promo_ready = ["4"];
     let lst_filliere_ready = ["ETI"];
     let sql_get_user = 'SELECT * FROM user WHERE id_user=?';
     let user = (await queryDB(sql_get_user, [sender_psid]))[0];
-    console.log("user is4A:"+ user)
-    console.log("user is4A:"+ user.promo)
+    console.log(`user is4A: ${user}`);
     if ( (lst_promo_ready.includes(user.promo)) && (lst_filliere_ready.includes(user.filliere))){
         console.log("isReady");
         return true;
@@ -127,6 +128,7 @@ async function isReady(sender_psid){
     }
 }
 
+// verify if the user is complete or not
 async function isUserComplete(sender_psid){
     let sql_get_user = 'SELECT * FROM user WHERE id_user=?';
     let user = (await queryDB(sql_get_user, [sender_psid]))[0];
@@ -139,8 +141,8 @@ async function isUserComplete(sender_psid){
     return false;
 }
 
+// Set up the Get Started button
 function set_get_started(){
-    // Set up Get Started button
     let get_started = {"get_started": {"payload": "GET_STARTED"}}
     let err, res, body = request({
         "uri": "https://graph.facebook.com/v16.0/me/messenger_profile",
@@ -148,7 +150,6 @@ function set_get_started(){
         "method": "POST",
         "json": get_started
     });
-    // handling errors
     if (!err) {
         console.log('get_started set')
     } else {
@@ -156,6 +157,7 @@ function set_get_started(){
     }
 }
 
+// Set up the persistent menu
 async function set_persistent_menu(psid){
     let menu = {"psid": psid,
             "persistent_menu": [
@@ -216,8 +218,7 @@ async function set_persistent_menu(psid){
     }
 }
 
-// TODO
-// on a deja le menu persistent, on peut donc le supprimer ?
+// Set up the message when a user send text and not a postback
 function askTemplateJour(){
     return [{"name":"ask",
             "attachment":{
@@ -249,6 +250,7 @@ function askTemplateJour(){
         }]
 }
 
+// Set up message for new user
 function askTemplateNewUserPromo(){
     return {"name":"ask",
     "attachment":{
@@ -265,6 +267,7 @@ function askTemplateNewUserPromo(){
 }
 }
 
+// Set up message to get the user group
 function askTemplateGroupe(){
     return [{"name":"ask",
     "attachment":{
@@ -293,6 +296,7 @@ function askTemplateGroupe(){
     }
     }]
 }
+
 
 function askTemplateStart(){
     return {"name":"ask",
@@ -417,7 +421,7 @@ async function handlePostback(sender_psid, received_postback) {
                 r = await callSendAPI(sender_psid, response);
                 break;
             }
-            if(!(await isReady(sender_psid))){
+            if (!(await isReady(sender_psid))){
                 await planningNotReady(sender_psid);
                 break;
             }
