@@ -573,7 +573,7 @@ async function callSendAPI(sender_psid, response) {
     return
 }
 
-// read the planning json data to chose the 
+// read the planning json data to send Am and Pm
 async function sendPlanningDay(payload, sender_psid){
     let planningJour = await readCsv('./Output_Json/Planning27_03.json',payload,sender_psid);
     let rep = await ConstructMessage(planningJour);
@@ -609,9 +609,10 @@ async function readCsv(dir,Jour,sender_psid) {
     if (planningG[Date]["Matin"][majeur] !== null ){
         planningRen["Matin"].push(planningG[Date]["Matin"][majeur])
     }
-    planningRen["Matin"].push(planningG[Date]["Matin"]["Pour tous"]) // on  push le pour tous dans tout les cas flemme de gerer les groupes
+    planningRen["Matin"].push(planningG[Date]["Matin"]["Pour tous"])
     //init aprem
     planningRen["Aprem"] = [];
+    // Check if there is something for the majeur
     if (planningG[Date]["Aprem"][majeur] !==  null ){
         planningRen["Aprem"].push(planningG[Date]["Aprem"][majeur]);
     }
@@ -619,6 +620,7 @@ async function readCsv(dir,Jour,sender_psid) {
     return planningRen
 }
 
+// Formatting data to send to get something readable
 async function ConstructMessage(planning){
     let messageMat = "";
     let messageAprem = "";
