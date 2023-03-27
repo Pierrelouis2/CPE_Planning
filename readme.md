@@ -83,7 +83,7 @@ The database is composed of 3 tables:
 - [ ] Manage 3A lessons
 - [ ] Create MSO TABLE
 - [ ] Manage groups
-- [ ] manage data base backup and restore
+- [ ] Manage database backup and restore
 - [ ] script to send planning automatically
 - [ ] Manage SQL errors (try catch)
 - [X] Make a better readme 
