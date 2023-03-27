@@ -112,7 +112,6 @@ async function isKnownUser(sender_psid){
     }
 }
 
-
 // verify if the timetable is ready or not
 async function isReady(sender_psid){
     let lst_promo_ready = ["4"];
