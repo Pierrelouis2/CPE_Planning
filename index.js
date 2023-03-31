@@ -8,6 +8,7 @@ let express = require('express'),
     sqlite3 = require('sqlite3'),
     fs = require('fs');
     const { promisify } = require("util");
+    templates = require('./templates.js')
 
 // INIT APP
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -403,7 +404,7 @@ async function handlePostback(sender_psid, received_postback) {
     switch (payload) {
         case 'TOUT':
             if (!(await isKnownUser(sender_psid)))  {
-                response = askTemplateStart();
+                response = templates.askTemplateStart();
                 r = await callSendAPI(sender_psid, response);
                 break;
             }
