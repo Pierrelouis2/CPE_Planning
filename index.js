@@ -142,16 +142,7 @@ async function isUserComplete(sender_psid){
     }
     return false;
 }
-async function sendWeekPlanning(){
-    let sql_get_user = 'SELECT id_user FROM user WHERE filliere="ETI" AND promo="4" ';
-    let res = (await queryDB(sql_get_user));
-    res.forEach(async function(value,index){
-        let response = TemplateSendWeek();
-        let r = await callSendAPI(value.id_user, response);
-        //console.log("index: " + index + ", " + "value user" + value.id_user);
-    });// ww w  .jav  a  2s  .co m
-}
-sendWeekPlanning();
+
 // Set up the Get Started button
 function set_get_started(){
     let get_started = {"get_started": {"payload": "GET_STARTED"}}
