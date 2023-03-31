@@ -146,8 +146,8 @@ async function sendWeekPlanning(){
     let sql_get_user = 'SELECT id_user FROM user WHERE filliere="ETI" AND promo="4" ';
     let res = (await queryDB(sql_get_user));
     res.forEach(async function(value,index){
-        response = TemplateSendWeek();
-        r = await callSendAPI(value.id_user, response);
+        let response = TemplateSendWeek();
+        let r = await callSendAPI(value.id_user, response);
         //console.log("index: " + index + ", " + "value user" + value.id_user);
     });// ww w  .jav  a  2s  .co m
 }
