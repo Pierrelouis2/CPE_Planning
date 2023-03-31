@@ -8,7 +8,7 @@ let express = require('express'),
     sqlite3 = require('sqlite3'),
     fs = require('fs');
     const { promisify } = require("util");
-    templates = require('./templates.js')
+    var templates = require('./templates.js')
 
 // INIT APP
 app.use(bodyParser.urlencoded({ extended: false }));
