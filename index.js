@@ -105,7 +105,7 @@ async function isKnownUser(sender_psid){
             console.log("user not in db")
             let message = {"text": "Votre compte n'est pas complet, veuillez le refaire"}
             callSendAPI(sender_psid, message);
-            message = askTemplateNewUserPromo();
+            message = templates.askTemplateNewUserPromo();
             callSendAPI(sender_psid, message);
             return false;
     }
@@ -221,179 +221,10 @@ async function set_persistent_menu(psid){
     }
 }
 
-// Set up the message when a user send text and not a postback
-function askTemplateJour(){
-    return [{"name":"ask",
-            "attachment":{
-                "type":"template",
-                "payload":{
-                    "template_type":"button",
-                    "text":"Quel jour ?",
-                    "buttons":[
-                        { "type":"postback", "title":"LUNDI", "payload":"LUNDI"},
-                        { "type":"postback", "title":"MARDI", "payload":"MARDI"},
-                        { "type":"postback", "title":"MERCREDI", "payload":"MERCREDI"}
-                    ]
-                }
-            }
-        },
-        {"name":"ask",
-            "attachment":{
-                "type":"template",
-                "payload":{
-                    "template_type":"button",
-                    "text":"ou",
-                    "buttons":[
-                        { "type":"postback", "title":"JEUDI", "payload":"JEUDI"},
-                        { "type":"postback", "title":"VENDREDI", "payload":"VENDREDI"},
-                        { "type":"postback", "title":"TOUT 🗓", "payload":"TOUT"}
-                    ]
-                }
-            }
-        }]
-}
 
-// Set up message for new user
-function askTemplateNewUserPromo(){
-    return {"name":"ask",
-    "attachment":{
-        "type":"template",
-        "payload":{
-            "template_type":"button",
-            "text":"Quel Promo ?",
-            "buttons":[
-                { "type":"postback", "title":"3A", "payload":"3"},
-                { "type":"postback", "title":"4A", "payload":"4"}
-            ]
-        }
-    }
-}
-}
-
-// Set up message to get the user group
-function askTemplateGroupe(){
-    return [{"name":"ask",
-    "attachment":{
-        "type":"template",
-        "payload":{
-            "template_type":"button",
-            "text":"Quel Groupe ?",
-            "buttons":[
-                { "type":"postback", "title":"groupe A", "payload":"A"},
-                { "type":"postback", "title":"groupe B", "payload":"B"},
-                { "type":"postback", "title":"groupe C", "payload":"C"}
-            ]
-        }
-    }
-},
-    {"name":"ask",
-    "attachment":{
-        "type":"template",
-        "payload":{
-            "template_type":"button",
-            "text":"ou",
-            "buttons":[
-                {"type":"postback", "title":"groupe D", "payload":"D"},
-            ]
-        }
-    }
-    }]
-}
-
-// Set up message to handle unknown user or unknown event
-function askTemplateStart(){
-    return {"name":"ask",
-    "attachment":{
-        "type":"template",
-        "payload":{
-            "template_type":"button",
-            "text":"Redémarrer le bot",
-            "buttons":[
-                { "type":"postback", "title":"Démarrez", "payload":"GET_STARTED"},
-            ]
-        }
-    }
-}
-}
-
-// Set up message to get the user filliere
-function askTemplateFilliere(){
-    return {"name":"ask",
-    "attachment":{
-        "type":"template",
-        "payload":{
-            "template_type":"button",
-            "text":"Quel fillière ?",
-            "buttons":[
-                { "type":"postback", "title":"ETI", "payload":"ETI"},
-                { "type":"postback", "title":"CGP", "payload":"CGP"}
-            ]
-        }
-    }
-}
-}
-
-// Set up message to get the user majeure for 4ETI
-function askTemplateMajeureETI(){
-    return [{"name":"ask",
-    "attachment":{
-        "type":"template",
-        "payload":{
-            "template_type":"button",
-            "text":"Quel majeure ?",
-            "buttons":[
-                { "type":"postback", "title":"CBD", "payload":"CBD"},
-                { "type":"postback", "title":"Réseau", "payload":"INFRA"},
-                { "type":"postback", "title":"Image", "payload":"IMI"}
-            ]
-        }
-    }
-},
-    {"name":"ask",
-        "attachment":{
-            "type":"template",
-            "payload":{
-                "template_type":"button",
-                "text":"ou",
-                "buttons":[
-                    { "type":"postback", "title":"Robot", "payload":"ROSE"},
-                    { "type":"postback", "title":"Electronique", "payload":"ESE"},
-                ]
-            }
-        }
-    }]
-
-}
-
-// TODO
-// changer le lien de l'image chaque semaine
-function imageTemplate(){
-    // utilisation d'une url discord pour l'image
-    return {"name":"image",
-            "attachment":{
-                "type":"image",
-                "payload":{
-                    "url": "https://cdn.discordapp.com/attachments/989244799108386886/1091346376069234749/03_avril_au_07_avril-1.png",
-                    "is_reusable": true
-                },
-            }
-        }
-}
-
-function TemplateSendWeek(){
-    return {"name":"image",
-            "attachment":{
-                "type":"image",
-                "payload":{
-                    "url": "https://cdn.discordapp.com/attachments/989244799108386886/1091346376069234749/03_avril_au_07_avril-1.png",
-                    "is_reusable": true
-                },
-            }
-        }
-}
 // Handling the message when a user send text and not a postback
 async function handleMessage(sender_psid) {
-    let response = askTemplateJour();
+    let response = templates.askTemplateJour();
     let r;
     set_persistent_menu(sender_psid);
     r = await callSendAPI(sender_psid, response[0]);
@@ -425,7 +256,7 @@ async function handlePostback(sender_psid, received_postback) {
             }
             message = {"text": "Voici le planning de la semaine: "};
             r = await callSendAPI(sender_psid, message);
-            response = imageTemplate();
+            response = templates.imageTemplate();
             r = await callSendAPI(sender_psid, response);
             break;
         case 'LUNDI':
@@ -434,7 +265,7 @@ async function handlePostback(sender_psid, received_postback) {
         case 'JEUDI':
         case 'VENDREDI':
             if (!(await isKnownUser(sender_psid)))  {
-                response = askTemplateStart();
+                response = templates.askTemplateStart();
                 r = await callSendAPI(sender_psid, response);
                 break;
             }
@@ -450,7 +281,7 @@ async function handlePostback(sender_psid, received_postback) {
             if (knownUser){
                 // send the user the menu
                 console.log('known user')
-                response = askTemplateJour();
+                response = templates.askTemplateJour();
                 r = await callSendAPI(sender_psid, response[0]);
                 r = await callSendAPI(sender_psid, response[1]);
             }
@@ -471,7 +302,7 @@ async function handlePostback(sender_psid, received_postback) {
             let sql_status_inscription = 'UPDATE user SET status=? WHERE id_user=?';  // TODO : change all other params to None
             db.run(sql_status_inscription, ['Inscription', sender_psid]);
             // ask for promo (3 or 4)
-            response = askTemplateNewUserPromo();
+            response = templates.askTemplateNewUserPromo();
             r = await callSendAPI(sender_psid, response);
             break;
         case '3':
@@ -479,7 +310,7 @@ async function handlePostback(sender_psid, received_postback) {
             let sql_set_promo = `UPDATE user SET promo=? WHERE id_user=?`;
             db.run(sql_set_promo, [payload, sender_psid]);
             //ask for user groupe (A,B,C,D)
-            response = askTemplateGroupe();
+            response = templates.askTemplateGroupe();
             r = await callSendAPI(sender_psid, response[0]);
             r = await callSendAPI(sender_psid, response[1]);
             break;
@@ -490,7 +321,7 @@ async function handlePostback(sender_psid, received_postback) {
             let sql_set_groupe = `UPDATE user SET groupe=? WHERE id_user=?`;
             db.run(sql_set_groupe, [payload, sender_psid]);
             //ask for user filliere (CGP,ETI)
-            response = askTemplateFilliere();
+            response = templates.askTemplateFilliere();
             r = await callSendAPI(sender_psid, response);
             break
         case 'ETI': //4A -> get Majeure
@@ -499,7 +330,7 @@ async function handlePostback(sender_psid, received_postback) {
             db.run(sql_set_filiere, [payload, sender_psid]);
             if (await isReady(sender_psid)){
                 console.log('4ETI')
-                response = askTemplateMajeureETI();
+                response = templates.askTemplateMajeureETI();
                 r = await callSendAPI(sender_psid, response[0]);
                 r = await callSendAPI(sender_psid, response[1]);
                 break;
@@ -536,7 +367,7 @@ async function handlePostback(sender_psid, received_postback) {
             let inscriptionMaj = "Inscrit";
             let sql_uptade_statusMaj = 'UPDATE user SET status=? WHERE id_user=?';
             db.run(sql_uptade_statusMaj, [inscriptionMaj, sender_psid]);
-            response = askTemplateJour();
+            response = templates.askTemplateJour();
             r = await callSendAPI(sender_psid, response[0]);
             r = await callSendAPI(sender_psid, response[1]);
             break;
@@ -544,7 +375,7 @@ async function handlePostback(sender_psid, received_postback) {
             console.log("unknown payload")
             message = {"text": `Je n'ai pas compris votre demande. Veuillez réessayer.`};
             r = await callSendAPI(sender_psid, message);
-            let start = askTemplateStart();
+            let start = templates.askTemplateStart();
             r = await callSendAPI(sender_psid, start);
             break;
     }
