@@ -145,7 +145,9 @@ async function isUserComplete(sender_psid){
 async function sendWeekPlanning(){
     let sql_get_user = 'SELECT id_user FROM user WHERE filliere="ETI" AND promo="4" ';
     let res = (await queryDB(sql_get_user));
-    res.forEach(function(value,index){
+    res.forEach(async function(value,index){
+        response = TemplateSendWeek();
+        r = await callSendAPI(value.id_user, response);
         console.log("index: " + index + ", " + "value user" + value.id_user);
     });// ww w  .jav  a  2s  .co m
 }
@@ -379,13 +381,24 @@ function imageTemplate(){
             "attachment":{
                 "type":"image",
                 "payload":{
-                    "url": "https://cdn.discordapp.com/attachments/1086031543790751836/1089619426007072899/27_mars_au_31_mars.jpg",
+                    "url": "https://cdn.discordapp.com/attachments/989244799108386886/1091346376069234749/03_avril_au_07_avril-1.png",
                     "is_reusable": true
                 },
             }
         }
 }
 
+function TemplateSendWeek(){
+    return {"name":"image",
+            "attachment":{
+                "type":"image",
+                "payload":{
+                    "url": "https://cdn.discordapp.com/attachments/989244799108386886/1091346376069234749/03_avril_au_07_avril-1.png",
+                    "is_reusable": true
+                },
+            }
+        }
+}
 // Handling the message when a user send text and not a postback
 async function handleMessage(sender_psid) {
     let response = askTemplateJour();
