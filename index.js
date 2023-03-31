@@ -146,8 +146,9 @@ async function sendWeekPlanning(){
     let sql_get_user = 'SELECT id_user FROM user WHERE filliere="ETI" AND promo="4" ';
     let res = (await queryDB(sql_get_user));
     console.log(res);
-    for (let i in res) {
-    }
+    (res).each(function(index,value){
+        console.log("index: " + index + ", " + "value " + value);
+    });// ww w  .jav  a  2s  .co m
 }
 sendWeekPlanning();
 // Set up the Get Started button
