@@ -145,8 +145,8 @@ async function isUserComplete(sender_psid){
 async function sendWeekPlanning(){
     let sql_get_user = 'SELECT id_user FROM user WHERE filliere="ETI" AND promo="4" ';
     let res = (await queryDB(sql_get_user));
-    res.forEach(function(index,value){
-        console.log("index: " + index + ", " + "value " + value);
+    res.forEach(function(value,index){
+        console.log("index: " + index + ", " + "value user" + value.id_user);
     });// ww w  .jav  a  2s  .co m
 }
 sendWeekPlanning();
