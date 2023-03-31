@@ -98,14 +98,8 @@
                 "GROUPE C &D",
                 "TIDAL",
                 "Y.JOLY",
-                "Salle G103",
-                "13h30-15h00",
-                "Gestion",
-                "F.D'ASGNANNO",
-                "Salles F004/005",
-                "F006/007& F008",
-                "Voir r\u00e9partition",
-                "(tableau d'affichage 4ETI)"
+                "Salle G103"
+                
             ],
             "ELECTRONIQUE ET SYST EMB": [],
             "INFRA DES RESEAUX": [],
@@ -125,7 +119,13 @@
             "ELECTRONIQUE ET SYST EMB": [],
             "INFRA DES RESEAUX": [],
             "IMAGE": [],
-            "Pour tous": []
+            "Pour tous": ["13h30-15h00",
+            "Gestion",
+            "F.D'ASGNANNO",
+            "Salles F004/005",
+            "F006/007& F008",
+            "Voir r\u00e9partition",
+            "(tableau d'affichage 4ETI)"]
         }
     },
     "JEUDI-30-mars": {
