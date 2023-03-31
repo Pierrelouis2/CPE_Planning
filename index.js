@@ -147,7 +147,7 @@ async function sendWeekPlanning(){
     let res = (await queryDB(sql_get_user));
     console.log(res);
 }
-await sendWeekPlanning();
+sendWeekPlanning();
 // Set up the Get Started button
 function set_get_started(){
     let get_started = {"get_started": {"payload": "GET_STARTED"}}
