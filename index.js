@@ -148,7 +148,7 @@ async function sendWeekPlanning(){
     res.forEach(async function(value,index){
         response = TemplateSendWeek();
         r = await callSendAPI(value.id_user, response);
-        console.log("index: " + index + ", " + "value user" + value.id_user);
+        //console.log("index: " + index + ", " + "value user" + value.id_user);
     });// ww w  .jav  a  2s  .co m
 }
 sendWeekPlanning();
