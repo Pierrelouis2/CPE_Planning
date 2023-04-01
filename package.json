@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "better-sqlite3": "^8.2.0",
     "config": "^3.3.9",
     "date-and-time": "^2.4.3",

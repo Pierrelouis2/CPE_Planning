@@ -1,0 +1,22 @@
+<!-- Simple website that ask for a login and a password -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin</title>
+</head>
+<body>
+    <h1>Admin</h1>
+    <p>Enter your login and password</p>
+    <form action="http://localhost:3000/form" method="post">
+        <label for="login">Login</label>
+        <input type="text" name="user" id="login" required>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+        <label for="function">Fonction à activer</label>
+        <input type="text" name="function" id="function" required>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>
