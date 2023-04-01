@@ -6,8 +6,9 @@ let express = require('express'),
     request = require('request'),
     config = require('config'),
     sqlite3 = require('sqlite3'),
-    fs = require('fs');
-    const { promisify } = require("util");
+    fs = require('fs'),
+    { promisify } = require('util'),
+    Date = require('date-and-time');
 
 // INIT APP
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -446,13 +447,21 @@ async function handlePostback(sender_psid, received_postback) {
             else {
                 console.log('new user')
                 let sql_new_user = `INSERT INTO user (id_user) VALUES (?)`;
-                db.run(sql_new_user, sender_psid);
-                let inscription = "Inscription";
-                let sql_uptade_status = 'UPDATE user SET status=? WHERE id_user=?';
-                db.run(sql_uptade_status, [inscription, sender_psid]);
-                // ask for promo (3 or 4)
-                response = askTemplateNewUserPromo();
-                r = await callSendAPI(sender_psid, response);
+                try {
+                    db.run(sql_new_user, sender_psid);
+                    let inscription = "Inscription";
+                    let sql_uptade_status = 'UPDATE user SET status=? WHERE id_user=?';
+                    db.run(sql_uptade_status, [inscription, sender_psid]);
+                    // ask for promo (3 or 4)
+                    response = askTemplateNewUserPromo();
+                    r = await callSendAPI(sender_psid, response);
+                } catch (e) {
+                    console.log(`error while inserting new user, date = ${getCurrentDate()}`)
+                    console.log("error: " + e);
+                    let message_error = "Il y a eu un probleme lors de votre inscription, rééssayez, si le probleme persiste contactez un administrateur";
+                    let r = await callSendAPI(sender_psid, message_error); 
+                }
+                
             }
             break;
         case 'REINSCRIPTION':
@@ -647,3 +656,16 @@ async function ConstructMessage(planning){
     }
     return [messageMat,messageAprem]
 }
+
+// function to get the current date in the format : 'YYYY/MM/DD HH:mm:ss'
+function getCurrentDate(){
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+    return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`
+}
+
