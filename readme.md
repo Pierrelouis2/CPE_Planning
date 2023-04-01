@@ -85,7 +85,7 @@ The database is composed of 3 tables:
 - [ ] Create MSO TABLE
 - [ ] Manage groups
 - [ ] Manage database backup and restore (cron?)
-- [ ] Use another file to store templates
+- [X] Use another file to store templates
 - [ ] Script to send planning automatically at 7h30am
 - [ ] Manage SQL errors (try catch)
 - [X] Make a better readme 
