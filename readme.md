@@ -87,7 +87,7 @@ The database is composed of 3 tables:
 - [ ] Manage database backup and restore (cron?)
 - [X] Use another file to store templates
 - [ ] Script to send planning automatically at 7h30am
-- [ ] Manage SQL errors (try catch)
+- [X] Manage SQL errors (try catch)
 - [X] Make a better readme 
 - [ ] Make a better code
 - [ ] For the future : make a web interface for CPE admin to post the planning (manage the time)
