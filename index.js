@@ -163,51 +163,7 @@ function set_get_started(){
 
 // Set up the persistent menu
 async function set_persistent_menu(psid){
-    let menu = {"psid": psid,
-            "persistent_menu": [
-            {
-                "locale": "default",
-                "composer_input_disabled": true, // activate/deactivate the keayboard
-                "call_to_actions": [
-                    {
-                        "type": "postback",
-                        "title": "LUNDI",
-                        "payload": "LUNDI"
-                    },
-                    {
-                        "type": "postback",
-                        "title": "MARDI",
-                        "payload": "MARDI"
-                    },
-                    {
-                        "type": "postback",
-                        "title": "MERCREDI",
-                        "payload": "MERCREDI"
-                    },
-                    {
-                        "type": "postback",
-                        "title": "JEUDI",
-                        "payload": "JEUDI"
-                    },
-                    {
-                        "type": "postback",
-                        "title": "VENDREDI",
-                        "payload": "VENDREDI"
-                    },
-                    {
-                        "type": "postback",
-                        "title": "TOUT 🗓",
-                        "payload": "TOUT"
-                    },
-                    {
-                        "type": "postback",
-                        "title": "REINSCRIPTION",
-                        "payload": "REINSCRIPTION"
-                    }
-                ]
-            }
-        ]
-    }
+    let menu = templates.askTemplateMenu();
     let err, res, body = await request({
         "uri": "https://graph.facebook.com/v16.0/me/custom_user_settings",
         "qs": { "access_token": config.get('facebook.page.access_token') },
