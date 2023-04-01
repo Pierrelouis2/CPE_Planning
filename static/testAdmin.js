@@ -32,10 +32,9 @@ app.post('/form', async function(req, res) {
     res.status(200).send(html);
 });
 
-
+// hash password
 async function hashPassword(plaintextPassword) {
     const hash = await bcrypt.hash(plaintextPassword, 10);
-    // Store hash in the database
     return hash;
 }
 
