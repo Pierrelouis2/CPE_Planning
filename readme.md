@@ -82,7 +82,7 @@ The database is composed of 3 tables:
 - [ ] Manage CGP Table
 - [ ] Manage LV lessons
 - [X] Manage 3A lessons
-- [ ] Create MSO TABLE
+- [ ] Create MSO TABLE (WIP)
 - [X] Manage groups but not for 4A
 - [ ] Manage database backup and restore (cron?)
 - [X] Use another file to store templates

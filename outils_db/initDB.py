@@ -67,6 +67,43 @@ def main():
 
         # create tasks table
         create_table(conn, sql_create_mso_table)
+
+        # insert data
+        mso = {
+            "SSO": "Stratégie de synthèse organique",
+            "CO2": "Chimie Organometallique 2, approche orbitalaire",
+            "IM": "Ingénierie Macromoléculaire",
+            "SSP": "Simulation stationnaire des procédés",
+            "CMH": "Chimie médicinale et hétérocycles",
+            "GRCA": "Génie de la réaction chimique avancée",
+            "TE": "Transition énergétique",
+            "AL": "Analyses en lignes",
+            "SM": "Synthèse Macromoléculaire",
+            "SMB": "Synthèse de molécules bioactives",
+            "NN": "Nanochimie, nanomatériaux",
+            "CN": "Chimie nucléaire",
+            "ADNSC": "Analyse de données - le numérique au service de la chimie",
+            "CAM": "Conception et application du médicament",
+            "TSA": "Techniques séparatives avancées",
+            "CDD": "Catalyse et développement durable",
+            "GP": "Génie de la polymérisation",
+            "RMN": "RMN appliquée à la chimie moléculaire",
+            "MN": "Méthodes Numériques"
+        }
+        # create dict of name_mso: id_mso
+        msod = {i: list(mso.values())[i] for i in range(len(mso.values()))}
+
+        c = conn.cursor()
+        sql_add_mso = "INSERT INTO mso (id_mso, name_mso) VALUES (?, ?)"
+        for key, value in msod.items():
+            print(key, value)
+            try:
+                c.execute(sql_add_mso, [key, value])
+            except sqlite3.IntegrityError as e:
+                print("Value already exists")
+                pass
+            
+        conn.commit()
     else:
         print("Error! cannot create the database connection.")
     
