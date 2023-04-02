@@ -72,7 +72,15 @@ async function constructMessage(planning) {
 // read the planning json data to send Am and Pm
 async function sendPlanningDay(payload, sender_psid) {
     let user = await userInfo.getUser(sender_psid);
-    let planningJour = await readCsv(`./Output_Json/Planning${user.promo}${user.filliere}${variables.constant.DATE}.json`,
+    let promo;
+    try {
+        promo = user.promo.toString();
+    } catch (e) {
+        console.log(e);
+        promo = "3";
+    }
+    let filliere = user.filliere;
+    let planningJour = await readCsv(`./Output_Json/Planning${promo}${user.filliere}${variables.constant.DATE}.json`,
         payload,
         sender_psid,
         user

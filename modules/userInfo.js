@@ -9,7 +9,13 @@ let lst_promo_ready = ["4ETI", "3ETI", "3CGP"];
 let sql_get_user = "SELECT * FROM user WHERE id_user=?";
 let user = (await queryDB(sql_get_user, [sender_psid]))[0];
 console.log(`user is4A: ${user}`);
-let PF = user.promo.toString() + user.filliere;
+let PF;
+try{
+  PF = user.promo.toString() + user.filliere;
+} catch (e) {
+  console.log(e);
+  return false;
+}
 console.log(`PF: ${PF}`)
 if (lst_promo_ready.includes(PF)) {
     console.log("isReady");
