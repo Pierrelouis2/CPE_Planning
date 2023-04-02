@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 
 app.get('/admin', function(req, res) {
     //read file
-    let html = fs.readFileSync('./admin.html', 'utf8');
+    let html = fs.readFileSync('./static/admin.html', 'utf8');
     //send file
     res.status(200).send(html);
 });
@@ -52,7 +52,7 @@ app.post('/admin/form', async function(req, res) {
     let function_to_do = req.body.function;
     console.log(body);
     //console.log(hashedPassword.password.hashjo);
-    let html = fs.readFileSync('./admin.html', 'utf8');
+    let html = fs.readFileSync('./static/admin.html', 'utf8');
     res.status(200).send(html);
 });
 
