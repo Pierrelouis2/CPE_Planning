@@ -10,7 +10,8 @@ let express = require("express"),
   { promisify } = require("util"),
   userInfo = require("./modules/userInfo"),
   writeMessage = require("./modules/writeMessage"),
-  templates = require("./modules/templates");
+  templates = require("./modules/templates"),
+  imageLink = require("./modules/planningLink");
   
 // INIT APP
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -223,6 +224,11 @@ async function handlePostback(sender_psid, received_postback) {
       message = { text: "Voici le planning de la semaine: " };
       r = await callSendAPI(sender_psid, message);
       response = templates.askTemplateImage();
+      user = await userInfo.getUser(sender_psid);
+      let PF = user.promo.toString() + user.filiere;
+      console.log(`PF = ${PF}`);
+      console.log(imageLink.PF)
+      response.attachment.payload.url = imageLink.PF;
       r = await callSendAPI(sender_psid, response);
       break;
     case "LUNDI":

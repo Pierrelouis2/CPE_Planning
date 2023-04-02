@@ -162,7 +162,7 @@ function askTemplateImage() {
     attachment: {
       type: "image",
       payload: {
-        url: "https://cdn.discordapp.com/attachments/989244799108386886/1091346376069234749/03_avril_au_07_avril-1.png",
+        url: "",
         is_reusable: true,
       },
     },
@@ -175,7 +175,7 @@ function askTemplateSendWeek() {
     attachment: {
       type: "image",
       payload: {
-        url: "https://cdn.discordapp.com/attachments/989244799108386886/1091346376069234749/03_avril_au_07_avril-1.png",
+        url: "",
         is_reusable: true,
       },
     },
