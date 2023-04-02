@@ -31,6 +31,7 @@ const MAJEURS = { "CBD": "CONCEP.LOGICIELLE/BIG DATA",
     "INFRA": "INFRA DES RESEAUX",
     "IMI": "IMAGE",
 };
+const DATE = "01_04";
 
 // Creation of a minimalist website for somone who might visit the url
 app.get('/', (req, res) => {
@@ -405,7 +406,7 @@ async function callSendAPI(sender_psid, response) {
 
 // read the planning json data to send Am and Pm
 async function sendPlanningDay(payload, sender_psid){
-    let planningJour = await readCsv('./Output_Json/Planning27_03.json',payload,sender_psid);
+    let planningJour = await readCsv(`./Output_Json/Planning${DATE}.json`,payload,sender_psid);
     let rep = await ConstructMessage(planningJour);
     let message = {"text": `Voici le planning de ${payload} : `};
     let r = await callSendAPI(sender_psid, message);
