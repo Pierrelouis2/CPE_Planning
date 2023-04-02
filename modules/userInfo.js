@@ -1,5 +1,6 @@
 let sqlite3 = require("sqlite3"),
     { promisify } = require("util");
+
 let db = new sqlite3.Database("users.db");
 const queryDB = promisify(db.all).bind(db);
 
@@ -50,9 +51,17 @@ async function isUserComplete(sender_psid) {
     return false;
 }
 
+async function getUser(sender_psid) {
+    let sql_get_user = "SELECT * FROM user WHERE id_user=?";
+    let user = (await queryDB(sql_get_user, [sender_psid]))[0];
+    return user;
+}
+
+
 module.exports = {
     isUserComplete,
     isReady,
     is4ETI,
     is4CGP,
+    getUser
 }
