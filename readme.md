@@ -18,7 +18,7 @@ The first version was made by @waleedahmad with his [Aww-Bot | Github](https://g
   - [Legal](#legal)
   - [Database](#database)
     - [Database MPD](#database-mpd)
-  - [Recovery of the planning from pdf](#recovery-of-the-planning-from-pdf)
+  - [Recover timetable data from pdf](#recover-timetable-data-from-pdf)
   - [TODO](#todo)
 
 ## Installation
@@ -72,13 +72,13 @@ The database is composed of 3 tables:
 
 ![Database structure V1](./Docs/ReadmeImages/DBV2.png)
 
-## Recovery of the planning from pdf
+## Recover timetable data from pdf
 
 <img src="./Docs/ReadmeImages/confidential-ge984ebf2f_1280.png"  width="400" height="250">
 
 ## TODO
-- [ ] Make json file for all variables
-- [ ] Repair isKnown function
+- [X] Make json file for all variables
+- [X] Repair isKnown function
 - [ ] Manage CGP Table
 - [ ] Manage LV lessons
 - [X] Manage 3A lessons
