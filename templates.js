@@ -234,3 +234,16 @@ function askTemplateMenu(psid) {
 function test(){
     console.log("test templates")
 }
+
+module.exports = {
+    askTemplateStart,
+    askTemplateFilliere,
+    askTemplateGroupe,
+    askTemplateMajeureETI,
+    askTemplateNewUserPromo,
+    askTemplateSendWeek,
+    askTemplateMenu,
+    imageTemplate,
+    test
+}
+
