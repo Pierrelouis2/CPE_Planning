@@ -76,7 +76,7 @@ app.post("/webhook", async (req, res) => {
       //message or postback ?
       if (webhook_event.message) {
         console.log("in handleMessage");
-        handleMessage(sender_psid);
+        await handleMessage(sender_psid);
       } else if (webhook_event.postback) {
         await handlePostback(sender_psid, webhook_event.postback);
       }
