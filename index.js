@@ -8,8 +8,7 @@ let express = require("express"),
   sqlite3 = require("sqlite3"),
   fs = require("fs"),
   { promisify } = require("util"),
-  templates = require("./templates"),
-  Date = require("date-and-time");
+  templates = require("./templates");
   
 // INIT APP
 app.use(bodyParser.urlencoded({ extended: false }));
