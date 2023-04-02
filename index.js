@@ -8,9 +8,9 @@ let express = require("express"),
   sqlite3 = require("sqlite3"),
   fs = require("fs"),
   { promisify } = require("util"),
+  templates = require("./templates"),
   Date = require("date-and-time");
   
-import { templates } from "./templates.js";
 
 templates.test();
 // INIT APP
