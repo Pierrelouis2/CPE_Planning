@@ -97,5 +97,5 @@ df_planningMaj = pd.DataFrame(PlanningMajeur)
 
 # ----------------------------------------------------------------
 # on envoyer le planning au format json
-with open(f"../../Output_Json/Planning4ETI{date}.json", 'w+') as f:
+with open(f"../../../Output_Json/Planning4ETI{date}.json", 'w+') as f:
     json.dump(PlanningMajeur, f, indent=4, cls=NumpyEncoder)

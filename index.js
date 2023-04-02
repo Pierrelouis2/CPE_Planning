@@ -288,11 +288,11 @@ async function handlePostback(sender_psid, received_postback) {
           // ask for promo (3 or 4)
           response = askTemplateNewUserPromo();
           r = await callSendAPI(sender_psid, response);
-        } catch (e) {
+        } catch (err) {
           console.log(
             `error while inserting new user, date = ${getCurrentDate()}`
           );
-          console.log("error: " + e);
+          console.log("error: " + err);
           let message_error =
             "Il y a eu un probleme lors de votre inscription, rééssayez, si le probleme persiste contactez un administrateur";
           let r = await callSendAPI(sender_psid, message_error);
@@ -300,8 +300,13 @@ async function handlePostback(sender_psid, received_postback) {
       }
       break;
     case "REINSCRIPTION":
-      let sql_status_inscription = "UPDATE user SET status=? WHERE id_user=?"; // TODO : change all other params to None
-      db.run(sql_status_inscription, ["Inscription", sender_psid]);
+      let sql_status_inscription = "UPDATE user SET promo=?, filliere=?, groupe=?, majeur=?, status=? WHERE id_user=?"; // TODO : change all other params to None
+      try {
+        db.run(sql_status_inscription, ["None","None","None","None","Inscription", sender_psid]); 
+      } catch (err) {
+        console.log( `error while updating REINSCRIPTION, date = ${getCurrentDate()} error: ${err}`);
+      }
+
       // ask for promo (3 or 4)
       response = templates.askTemplateNewUserPromo();
       r = await callSendAPI(sender_psid, response);
@@ -430,12 +435,13 @@ async function callSendAPI(sender_psid, response) {
 // read the planning json data to send Am and Pm
 async function sendPlanningDay(payload, sender_psid) {
   let sql_get_user = `SELECT * FROM user WHERE id_user=?`;
-  let user = await db.get(sql_get_user, [sender_psid]);
+  let user = (await queryDB(sql_get_user, [sender_psid]))[0];
   try { 
   let planningJour = await readCsv(
     `./Output_Json/Planning${user.promo}${user.filliere}${DATE}.json`,
     payload,
-    sender_psid
+    sender_psid,
+    user
   );
   } catch (err) {
     console.log(getCurrentDate() ,"  error in readCsv", DATE, "sender PSID : ", sender_psid);
@@ -452,7 +458,7 @@ async function sendPlanningDay(payload, sender_psid) {
 }
 
 // load the planning json file
-async function readCsv(dir, Jour, sender_psid) {
+async function readCsv(dir, Jour, sender_psid,user) {
   let planningRen = {};
   let rawdata = fs.readFileSync(dir);
   let planningG = JSON.parse(rawdata);
@@ -463,27 +469,30 @@ async function readCsv(dir, Jour, sender_psid) {
       Date = day;
     }
   }
-  //get the info on the user
-  let sql_get_user = `SELECT * FROM user WHERE id_user=?`;
-  let user = (await queryDB(sql_get_user, sender_psid))[0];
-  console.log(user);
+  console.log(getCurrentDate() , "readCsv user : ", user); 
   let majeur = user.majeur;
-  //init matin
-  planningRen["Matin"] = [];
-  // Check if there is something for the majeur
-  if (planningG[Date]["Matin"][majeur] !== null) {
-    planningRen["Matin"].push(planningG[Date]["Matin"][majeur]);
+
+
+
+
+  
+  const demi_jour = ["Matin", "Aprem"];
+  for (dj of demi_jour) { 
+    planningRen[dj] = []; 
+    if (planningG[Date][dj][majeur] !== null) {
+      planningRen[dj].push(planningG[Date][dj][majeur]);
+    }
+    planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
   }
-  planningRen["Matin"].push(planningG[Date]["Matin"]["Pour tous"]);
-  //init aprem
-  planningRen["Aprem"] = [];
-  // Check if there is something for the majeur
-  if (planningG[Date]["Aprem"][majeur] !== null) {
-    planningRen["Aprem"].push(planningG[Date]["Aprem"][majeur]);
-  }
-  planningRen["Aprem"].push(planningG[Date]["Aprem"]["Pour tous"]);
   return planningRen;
 }
+
+
+
+
+
+
+
 
 // Formatting data to send to get something readable
 async function ConstructMessage(planning) {

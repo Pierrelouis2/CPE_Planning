@@ -102,6 +102,6 @@ def filtreMaj(pLstSemaine):
 
 PlanningGroupe = filtreMaj(copy.deepcopy(LstSemaine)) # KK
 
-with open(f'../../Output_Json/Planning3ETI{date}.json', 'w+') as f:
+with open(f'../../../Output_Json/Planning3ETI{date}.json', 'w+') as f:
     json.dump(PlanningGroupe, f, indent=4, cls=NumpyEncoder)
 
