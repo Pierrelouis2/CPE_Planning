@@ -171,7 +171,7 @@ function TemplateSendWeek(){
             },
         }
     }
-}
+};
 
 function askTemplateMenu(){
     return {"psid": psid,
