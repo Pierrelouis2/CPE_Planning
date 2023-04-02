@@ -155,7 +155,7 @@ function askTemplateMajeureETI() {
 }
 
 // changer le lien de l'image chaque semaine
-function imageTemplate() {
+function askTemplateImage() {
   // utilisation d'une url discord pour l'image
   return {
     name: "image",
@@ -233,13 +233,13 @@ function askTemplateMenu(psid) {
 
 module.exports = {
     askTemplateJour,
+    askTemplateNewUserPromo,
+    askTemplateGroupe,
     askTemplateStart,
     askTemplateFilliere,
-    askTemplateGroupe,
     askTemplateMajeureETI,
-    askTemplateNewUserPromo,
+    askTemplateImage,
     askTemplateSendWeek,
-    askTemplateMenu,
-    imageTemplate
+    askTemplateMenu
 }
 
