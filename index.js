@@ -34,11 +34,6 @@ const MAJEURS = {
   INFRA: "INFRA DES RESEAUX",
   IMI: "IMAGE",
 };
-const GROUPE3CGP = {
-  "A": "Groupe 1",
-  "B": "Groupe 2",
-  "C": "Groupe 3"
-};
 const DATE = "03_04";
 
 // Creation of a minimalist website for somone who might visit the url

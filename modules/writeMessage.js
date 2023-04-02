@@ -4,6 +4,12 @@ let userInfo = require("./userInfo"),
   config = require("config"),
   request = require("request");
 
+const GROUPE3CGP = {
+  "A": "Groupe 1",
+  "B": "Groupe 2",
+  "C": "Groupe 3"
+};
+
 async function readCsv(dir, Jour, sender_psid,user) {
     let planningRen = {};
     let rawdata;
