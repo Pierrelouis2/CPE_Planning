@@ -261,7 +261,7 @@ async function handlePostback(sender_psid, received_postback) {
           let sql_uptade_status = "UPDATE user SET status=? WHERE id_user=?";
           db.run(sql_uptade_status, [inscription, sender_psid]);
           // ask for promo (3 or 4)
-          response = askTemplateNewUserPromo();
+          response = templates.askTemplateNewUserPromo();
           r = await callSendAPI(sender_psid, response);
         } catch (err) {
           console.log(
