@@ -30,16 +30,15 @@ async function readCsv(dir, Jour, sender_psid,user) {
     console.log(getCurrentDate() , "readCsv user : ", user); 
     const demi_jour = ["Matin", "Aprem"];
     let GM = user.groupe;
-    if (user.filliere = 'ETI'){
-      if (user.promo = 4){
+    if (user.filliere === 'ETI'){
+      if (user.promo === '4'){
          GM = user.majeur;
       }
     } else {
-      if (user.promo = 3){
+      if (user.promo === '3'){
         GM = GROUPE3CGP[user.groupe];
         console.log("GM = ", GM)
-      }
-      if (user.promo = 4){
+      } else {
         return;
       }
     }
