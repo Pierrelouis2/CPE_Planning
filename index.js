@@ -184,7 +184,7 @@ function set_get_started(){
 
 // Set up the persistent menu
 async function set_persistent_menu(psid){
-    let menu = templates.askTemplateMenu();
+    let menu = templates.askTemplateMenu(psid);
     let err, res, body = await request({
         "uri": "https://graph.facebook.com/v16.0/me/custom_user_settings",
         "qs": { "access_token": config.get('facebook.page.access_token') },

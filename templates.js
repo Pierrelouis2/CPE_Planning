@@ -173,7 +173,7 @@ function TemplateSendWeek(){
     }
 };
 
-function askTemplateMenu(){
+function askTemplateMenu(psid){
     return {"psid": psid,
         "persistent_menu": [
             {
