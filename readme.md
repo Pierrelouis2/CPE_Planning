@@ -95,3 +95,4 @@ The database is composed of 3 tables:
 - [ ] Don't share the token on github !!!!!!!!!
 - [ ] Don't share the code to  ETI students !!!!!!!!!
 - [ ] Regex expression for hours  
+- [ ] React site si y a vraiment plus rien à faire

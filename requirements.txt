@@ -3,3 +3,7 @@ request
 convertapi
 sqlite3
 date-and-time
+less
+bcrypt
+express-session
+cookie-parser

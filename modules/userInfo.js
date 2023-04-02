@@ -57,10 +57,40 @@ async function getUser(sender_psid) {
 }
 
 
+// Check if the user is in our database
+async function isKnownUser(sender_psid) {
+  const user = await userInfo.getUser(sender_psid);
+  console.log("user isKnownUser test : " + sender_psid);
+  if (user === undefined) {
+    console.log("user undefined");
+    return false;
+  }
+  // check that all fields are filled
+  if (
+    (user === [] || user.promo === null || user.groupe === null) &&
+    user.status !== "Inscription"
+  ) {
+    console.log("user not in db");
+    let message = {
+      text: "Votre compte n'est pas complet, veuillez le refaire",
+    };
+    writeMessage.callSendAPI(sender_psid, message);
+    message = templates.askTemplateNewUserPromo();
+    writeMessage.callSendAPI(sender_psid, message);
+    return false;
+  }
+  if (user.id_user.toString() === sender_psid) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 module.exports = {
     isUserComplete,
     isReady,
     is4ETI,
     is4CGP,
-    getUser
+    getUser,
+    isKnownUser
 }
