@@ -7,6 +7,7 @@ let  express = require('express'),
     hashedPassword = require('./hashedPassword');
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
+const path = require('path');
 
 let app = express();
 
@@ -33,7 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //serving public file
-app.use(express.static(__dirname));
+app.use(express.static('public'));
 
 // cookie parser middleware
 app.use(cookieParser());
@@ -55,8 +56,8 @@ app.get('/', function(req, res) {
 app.get('/admin', function(req, res) {
     session = req.session;
     if (session.userid){
-        let homepage = fs.readFileSync('.public/html/home.html', 'utf8');
-        res.send(homepage);
+        // let homepage = fs.readFileSync('.public/html/home.html', 'utf8');
+        res.sendFile('public/html/home.html', {root: __dirname});;
     }
     else {
         res.redirect('/login');
@@ -70,11 +71,9 @@ app.get('/admin', function(req, res) {
 
 
 // app path to handle a form post
-app.post('/login',(req, res) =>{
-    //read file
-    let html = fs.readFileSync('.static/html/login.html', 'utf8');
-    //send file
-    res.status(200).send(html);
+app.get('/login',function(req, res){
+    
+    res.sendFile(__dirname + "/" + 'public/html/login.html');
 
     if (req.body.user == myusername && req.body.password == mypassword){
         session = req.session;
@@ -83,7 +82,7 @@ app.post('/login',(req, res) =>{
         res.redirect('/admin');
     }
     else {
-        
+        res.send(html);
     }
 
 
