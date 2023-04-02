@@ -208,13 +208,14 @@ async function set_persistent_menu(psid) {
   } else {
     console.error("Unable to send message:" + err);
   }
+  return;
 }
 
 // Handling the message when a user send text and not a postback
 async function handleMessage(sender_psid) {
   let response = templates.askTemplateJour();
   let r;
-  await set_persistent_menu(sender_psid);
+  let res = await set_persistent_menu(sender_psid);
   r = await callSendAPI(sender_psid, response[0]);
   r = await callSendAPI(sender_psid, response[1]);
   return;
@@ -226,7 +227,7 @@ async function handlePostback(sender_psid, received_postback) {
   let message;
   let r;
   let sql_set_filiere;
-  await set_persistent_menu(sender_psid); // Needed here ?
+  let res = await set_persistent_menu(sender_psid); // Needed here ?
   // Get the payload for the postback
   let payload = received_postback.payload;
   console.log("payload: ", payload);
