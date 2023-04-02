@@ -20,11 +20,11 @@ app.listen(port, "0.0.0.0", () => {
   set_get_started();
 });
 
-//INIT DB
+// INIT DB
 let db = new sqlite3.Database("users.db");
 const queryDB = promisify(db.all).bind(db);
 
-let users = {};
+// INIT CONSTANTS
 const MAJEURS = {
   CBD: "CONCEP.LOGICIELLE/BIG DATA",
   ROSE: "ROBOTIQUE",
@@ -32,7 +32,12 @@ const MAJEURS = {
   INFRA: "INFRA DES RESEAUX",
   IMI: "IMAGE",
 };
-const DATE = "01_04";
+const GROUPE3CGP = {
+  "A": "Groupe 1",
+  "B": "Groupe 2",
+  "C": "Groupe 3"
+};
+const DATE = "03_04";
 
 // Creation of a minimalist website for somone who might visit the url
 app.get("/", (req, res) => {
@@ -146,15 +151,12 @@ async function isKnownUser(sender_psid) {
 
 // verify if the timetable is ready or not
 async function isReady(sender_psid) {
-  let lst_promo_ready = ["4"];
-  let lst_filliere_ready = ["ETI"];
+  let lst_promo_ready = ["4ETI", "3ETI", "3CGP"];
   let sql_get_user = "SELECT * FROM user WHERE id_user=?";
   let user = (await queryDB(sql_get_user, [sender_psid]))[0];
   console.log(`user is4A: ${user}`);
-  if (
-    lst_promo_ready.includes(user.promo) &&
-    lst_filliere_ready.includes(user.filliere)
-  ) {
+  let PF = user.promo + user.filliere;
+  if (lst_promo_ready.includes(PF)) {
     console.log("isReady");
     return true;
   } else {
@@ -470,17 +472,24 @@ async function readCsv(dir, Jour, sender_psid,user) {
     }
   }
   console.log(getCurrentDate() , "readCsv user : ", user); 
-  let majeur = user.majeur;
-
-
-
-
-  
   const demi_jour = ["Matin", "Aprem"];
+  let GM = user.groupe;
+  if (user.filliere = 'ETI'){
+    if (user.promo = 4){
+       GM = user.majeur;
+    }
+  } else {
+    if (user.promo = 3){
+      GM = GROUPE3CGP[user.groupe];
+    }
+    if (user.promo = 4){
+      return;
+    }
+  }
   for (dj of demi_jour) { 
     planningRen[dj] = []; 
-    if (planningG[Date][dj][majeur] !== null) {
-      planningRen[dj].push(planningG[Date][dj][majeur]);
+    if (planningG[Date][dj][GM] !== null) {
+      planningRen[dj].push(planningG[Date][dj][GM]);
     }
     planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
   }

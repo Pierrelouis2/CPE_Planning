@@ -4,7 +4,7 @@ from numpyencoder import NumpyEncoder
 
 # Read csv file
 date = input("Date du planning (ex: 01_04) : ")
-Df  = pd.read_csv(f'{date}.csv', sep=';')
+Df  = pd.read_csv(f'./{date}.csv', sep=';')
 # Filter columns and rows
 Df.reset_index()
 Df.fillna(0, inplace=True)
