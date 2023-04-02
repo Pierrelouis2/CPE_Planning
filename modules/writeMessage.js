@@ -37,6 +37,7 @@ async function readCsv(dir, Jour, sender_psid,user) {
     } else {
       if (user.promo = 3){
         GM = GROUPE3CGP[user.groupe];
+        console.log("GM = ", GM)
       }
       if (user.promo = 4){
         return;
