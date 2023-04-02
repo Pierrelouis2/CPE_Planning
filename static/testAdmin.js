@@ -49,13 +49,17 @@ var session;
 
 
 app.get('/', function(req, res) {
+    res.redirect('/login');
+ 
+});
+app.get('/admin', function(req, res) {
     session = req.session;
     if (session.userid){
-        let homepage = fs.readFileSync('./home.html', 'utf8');
+        let homepage = fs.readFileSync('.public/html/home.html', 'utf8');
         res.send(homepage);
     }
     else {
-        res.send('Please login to view this page!');
+        res.redirect('/login');
     }
 
     // //read file
@@ -63,27 +67,23 @@ app.get('/', function(req, res) {
     // //send file
     // res.status(200).send(html);
 });
-app.get('/admin', function(req, res) {
-    //read file
-    let html = fs.readFileSync('./admin.html', 'utf8');
-    //send file
-    res.status(200).send(html);
-});
 
 
 // app path to handle a form post
-app.post('/form',(req, res) =>{
-
+app.post('/login',(req, res) =>{
+    //read file
+    let html = fs.readFileSync('.static/html/login.html', 'utf8');
+    //send file
+    res.status(200).send(html);
 
     if (req.body.user == myusername && req.body.password == mypassword){
         session = req.session;
         session.userid = req.body.user;
         console.log(req.session);
-        let homepage = fs.readFileSync('./home.html', 'utf8');
-        res.send(homepage);
+        res.redirect('/admin');
     }
     else {
-        res.send('Incorrect Username and/or Password!');
+        
     }
 
 
