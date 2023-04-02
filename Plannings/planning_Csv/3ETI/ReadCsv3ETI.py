@@ -72,7 +72,7 @@ def filtreMaj(pLstSemaine):
 
         print(f'{jour["jour"]=}')
         Semaine[jour["jour"]] = {}
-        demi_jour = "Matin", "Aprem"
+        demi_jour = ("Matin", "Aprem")
         # parcours de la matinée et on les ajoute au majeur correspondant 
 
         for dj in demi_jour:

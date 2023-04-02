@@ -67,7 +67,8 @@ import copy
 def filtreMaj(pLstSemaine):
     Semaine =  {}
     lstMajeursinit = ['CONCEP.LOGICIELLE/BIG DATA','ROBOTIQUE','ELECTRONIQUE ET SYST EMB','INFRA DES RESEAUX','IMAGE','Pour tous']
-    
+    demi_jour = ("Matin", "Aprem")
+
     # creation dico {majeur: {grp: [], ...}, ...}
     dicMajinit = {}
     for maj in lstMajeursinit:
@@ -75,28 +76,17 @@ def filtreMaj(pLstSemaine):
 
     # parcours des jours de la semaine
     for jour in pLstSemaine :
-        dicMaj = copy.deepcopy(dicMajinit)
-        print(f'{jour["jour"]=}')
-        Majeur = "Pour tous" #on initialise le majeur à tous
         Semaine[jour["jour"]] = {}
+        for dj in demi_jour :
+            dicMaj = copy.deepcopy(dicMajinit)
+            Majeur = "Pour tous" #on initialise le majeur à tous
 
         # parcours de la matinée et on les ajoute au majeur correspondant 
-        for Case in jour["Matin"]:
-            # print(f'{Case=}')
-            if Case in lstMajeursinit:
-                Majeur = Case
-            # print(f'{Majeur} - {grp} - {Case}')
-            dicMaj[Majeur].append(Case)
-        Semaine[jour["jour"]]["Matin"] = copy.deepcopy(dicMaj)
-
-        # parcours de l'aprem et on les ajoute au majeur correspondant
-        dicMaj = copy.deepcopy(dicMajinit)
-        Majeur = "Pour tous" #on initialise le majeur à tous
-        for Case in jour["Aprem"]:
-            if Case in lstMajeursinit:
-                Majeur = Case
-            dicMaj[Majeur].append(Case)
-        Semaine[jour["jour"]]["Aprem"] = copy.deepcopy(dicMaj)
+            for Case in jour[dj]:
+                if Case in lstMajeursinit:
+                    Majeur = Case
+                dicMaj[Majeur].append(Case)
+            Semaine[jour["jour"]][dj] = copy.deepcopy(dicMaj)
 
     print('fin')
     return Semaine

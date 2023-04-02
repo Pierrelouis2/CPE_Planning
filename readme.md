@@ -81,9 +81,9 @@ The database is composed of 3 tables:
 - [ ] Repair isKnown function
 - [ ] Manage CGP Table
 - [ ] Manage LV lessons
-- [ ] Manage 3A lessons
+- [X] Manage 3A lessons
 - [ ] Create MSO TABLE
-- [ ] Manage groups
+- [X] Manage groups but not for 4A
 - [ ] Manage database backup and restore (cron?)
 - [X] Use another file to store templates
 - [ ] Script to send planning automatically at 7h30am
