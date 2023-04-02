@@ -270,7 +270,7 @@ async function handlePostback(sender_psid, received_postback) {
           r = await callSendAPI(sender_psid, response);
         } catch (err) {
           console.log(
-            `error while inserting new user, date = ${getCurrentDate()}`
+            `error while inserting new user, date = ${writeMessage.getCurrentDate()}`
           );
           console.log("error: " + err);
           let message_error =
@@ -284,7 +284,7 @@ async function handlePostback(sender_psid, received_postback) {
       try {
         db.run(sql_status_inscription, ["None","None","None","None","Inscription", sender_psid]); 
       } catch (err) {
-        console.log( `error while updating REINSCRIPTION, date = ${getCurrentDate()} error: ${err}`);
+        console.log( `error while updating REINSCRIPTION, date = ${writeMessage.getCurrentDate()} error: ${err}`);
       }
 
       // ask for promo (3 or 4)
@@ -430,15 +430,3 @@ async function callSendAPI(sender_psid, response) {
   return;
 }
 
-
-// function to get the current date in the format : 'YYYY/MM/DD HH:mm:ss'
-function getCurrentDate() {
-  let date = new Date();
-  let year = date.getFullYear();
-  let month = date.getMonth() + 1;
-  let day = date.getDate();
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
-  let seconds = date.getSeconds();
-  return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
-}

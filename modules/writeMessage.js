@@ -96,8 +96,21 @@ async function sendPlanningDay(payload, sender_psid) {
     return;
   }
 
+// function to get the current date in the format : 'YYYY/MM/DD HH:mm:ss'
+function getCurrentDate() {
+  let date = new Date();
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let seconds = date.getSeconds();
+  return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+}
+
 module.exports = {
     sendPlanningDay,
     readCsv,
-    constructMessage
+    constructMessage,
+    getCurrentDate
 };
