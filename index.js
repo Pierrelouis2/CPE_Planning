@@ -214,7 +214,7 @@ async function set_persistent_menu(psid) {
 async function handleMessage(sender_psid) {
   let response = templates.askTemplateJour();
   let r;
-  set_persistent_menu(sender_psid);
+  await set_persistent_menu(sender_psid);
   r = await callSendAPI(sender_psid, response[0]);
   r = await callSendAPI(sender_psid, response[1]);
   return;
@@ -226,7 +226,7 @@ async function handlePostback(sender_psid, received_postback) {
   let message;
   let r;
   let sql_set_filiere;
-  set_persistent_menu(sender_psid); // Needed here ?
+  await set_persistent_menu(sender_psid); // Needed here ?
   // Get the payload for the postback
   let payload = received_postback.payload;
   console.log("payload: ", payload);
