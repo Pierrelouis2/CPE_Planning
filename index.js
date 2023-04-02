@@ -11,7 +11,7 @@ let express = require("express"),
   userInfo = require("./modules/userInfo"),
   writeMessage = require("./modules/writeMessage"),
   templates = require("./modules/templates"),
-  imageLink = require("./modules/planningLink");
+  variables = require("./modules/variables");
   
 // INIT APP
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -226,8 +226,8 @@ async function handlePostback(sender_psid, received_postback) {
       let user = await userInfo.getUser(sender_psid);
       let PF = user.promo.toString() + user.filiere;
       console.log(`PF = ${PF}`);
-      console.log(imageLink.PF)
-      response.attachment.payload.url = imageLink.PF;
+      console.log(variables.link.PF)
+      response.attachment.payload.url = variables.link.PF;
       r = await callSendAPI(sender_psid, response);
       break;
     case "LUNDI":
