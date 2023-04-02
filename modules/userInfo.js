@@ -57,7 +57,12 @@ async function isUserComplete(sender_psid) {
 
 async function getUser(sender_psid) {
     let sql_get_user = "SELECT * FROM user WHERE id_user=?";
-    let user = (await queryDB(sql_get_user, [sender_psid]))[0];
+    let user;
+    try {
+      user = (await queryDB(sql_get_user, [sender_psid]))[0];
+    } catch (error) {
+      console.log(error);
+    }
     return user;
 }
 
