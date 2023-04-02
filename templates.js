@@ -231,10 +231,6 @@ function askTemplateMenu(psid) {
   };
 }
 
-function test(){
-    console.log("test templates")
-}
-
 module.exports = {
     askTemplateStart,
     askTemplateFilliere,
@@ -243,7 +239,6 @@ module.exports = {
     askTemplateNewUserPromo,
     askTemplateSendWeek,
     askTemplateMenu,
-    imageTemplate,
-    test
+    imageTemplate
 }
 

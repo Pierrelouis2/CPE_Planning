@@ -11,8 +11,6 @@ let express = require("express"),
   templates = require("./templates"),
   Date = require("date-and-time");
   
-
-templates.test();
 // INIT APP
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -69,7 +67,9 @@ app.post("/webhook", async (req, res) => {
   // Checks this is an event from a page subscription
   if (body.object === "page") {
     // Iterates over each entry - there may be multiple if batched
+    console.log('sarting for loop')
     for (const entry of body.entry) {
+      console.log("entry: " + entry)
       // only reading the message
       let webhook_event = entry.messaging[0];
       // Get the sender PSID
