@@ -37,6 +37,26 @@ app.get('/', (req, res) => {
     res.send('<h1>Hello World!, This is not a website just quit it plz</h1> \n <h2><i> The admin </i></h2>')
 });
 
+app.get('/admin', function(req, res) {
+    //read file
+    let html = fs.readFileSync('./admin.html', 'utf8');
+    //send file
+    res.status(200).send(html);
+});
+
+// app path to handle a form post
+app.post('/admin/form', async function(req, res) {
+    let body = req.body;
+    let password = req.body.password;
+    let user = req.body.user;
+    let function_to_do = req.body.function;
+    console.log(body);
+    //console.log(hashedPassword.password.hashjo);
+    let html = fs.readFileSync('./admin.html', 'utf8');
+    res.status(200).send(html);
+});
+
+
 // Creates the endpoint for our webhook to facebook
 app.post('/webhook', async (req, res) => {
     console.log('got webhook post')
