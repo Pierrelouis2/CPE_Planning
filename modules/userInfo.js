@@ -1,4 +1,8 @@
-// verify if the timetable is ready or not
+let sqlite3 = require("sqlite3"),
+    { promisify } = require("util");
+let db = new sqlite3.Database("users.db");
+const queryDB = promisify(db.all).bind(db);
+
 async function isReady(sender_psid) {
 let lst_promo_ready = ["4ETI", "3ETI", "3CGP"];
 let sql_get_user = "SELECT * FROM user WHERE id_user=?";
