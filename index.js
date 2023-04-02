@@ -116,35 +116,6 @@ app.get("/webhook", (req, res) => {
   }
 });
 
-// Check if the user is in our database
-async function isKnownUser(sender_psid) {
-  const user = await userInfo.getUser(sender_psid);
-  console.log("user isKnownUser test : " + sender_psid);
-  if (user === undefined) {
-    console.log("user undefined");
-    return false;
-  }
-  // check that all fields are filled
-  if (
-    (user === [] || user.promo === null || user.groupe === null) &&
-    user.status !== "Inscription"
-  ) {
-    console.log("user not in db");
-    let message = {
-      text: "Votre compte n'est pas complet, veuillez le refaire",
-    };
-    writeMessage.callSendAPI(sender_psid, message);
-    message = templates.askTemplateNewUserPromo();
-    writeMessage.callSendAPI(sender_psid, message);
-    return false;
-  }
-  if (user.id_user.toString() === sender_psid) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
 // Set up the Get Started button
 function set_get_started() {
   let get_started = { get_started: { payload: "GET_STARTED" } };
@@ -207,7 +178,7 @@ async function handlePostback(sender_psid, received_postback) {
   // Handle all payloads
   switch (payload) {
     case "TOUT":
-      if (!(await isKnownUser(sender_psid))) {
+      if (!(await userInfo.isKnownUser(sender_psid))) {
         response = templates.askTemplateStart();
         r = await writeMessage.callSendAPI(sender_psid, response);
         break;
@@ -229,7 +200,7 @@ async function handlePostback(sender_psid, received_postback) {
     case "MERCREDI":
     case "JEUDI":
     case "VENDREDI":
-      if (!(await isKnownUser(sender_psid))) {
+      if (!(await userInfo.isKnownUser(sender_psid))) {
         response = templates.askTemplateStart();
         r = await writeMessage.callSendAPI(sender_psid, response);
         break;
@@ -244,7 +215,7 @@ async function handlePostback(sender_psid, received_postback) {
       break;
     case "GET_STARTED":
       // verify is the sender is known29687.bot_messenger
-      let knownUser = await isKnownUser(sender_psid);
+      let knownUser = await userInfo.isKnownUser(sender_psid);
       if (knownUser) {
         // send the user the menu
         console.log("known user");
