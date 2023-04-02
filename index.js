@@ -81,7 +81,7 @@ app.post("/webhook", async (req, res) => {
       //message or postback ?
       if (webhook_event.message) {
         console.log("in handleMessage");
-        let result = await handleMessage(sender_psid);
+        await handleMessage(sender_psid);
       } else if (webhook_event.postback) {
         await handlePostback(sender_psid, webhook_event.postback);
       }
@@ -92,6 +92,7 @@ app.post("/webhook", async (req, res) => {
     // Returns a '404 Not Found' if event is not from a page subscription
     res.sendStatus(404);
   }
+  return
 });
 
 // Creation of the endpoint for our facebook webhook verification
@@ -495,42 +496,29 @@ async function readCsv(dir, Jour, sender_psid,user) {
   return planningRen;
 }
 
-
-
-
-
-
-
-
 // Formatting data to send to get something readable
 async function ConstructMessage(planning) {
-  let messageMat = "";
-  let messageAprem = "";
-  for (let matiere in planning["Matin"]) {
-    for (let cellule in planning["Matin"][matiere]) {
-      if (
-        planning["Matin"][matiere][cellule].includes("Salle") ||
-        planning["Matin"][matiere][cellule].includes("Salles")
-      ) {
-        messageMat += planning["Matin"][matiere][cellule] + ".\n\n";
-      } else {
-        messageMat += planning["Matin"][matiere][cellule] + ",\n";
+  let demi_jour = ["Matin", "Aprem"];
+  let message = [[], []];
+  let i = 0;
+
+  for (let dj of demi_jour) {
+    for (let matiere in planning[dj]) {
+      for (let cellule in planning[dj][matiere]) {
+        if (
+          planning[dj][matiere][cellule].includes("Salle") ||
+          planning[dj][matiere][cellule].includes("Salles")
+        ) {
+          message[i] += planning[dj][matiere][cellule] + ".\n\n";
+        } else {
+          message[i] += planning[dj][matiere][cellule] + ",\n";
+        }
       }
     }
+    i++;
   }
-  for (let matiere in planning["Aprem"]) {
-    for (let cellule in planning["Aprem"][matiere]) {
-      if (
-        planning["Aprem"][matiere][cellule].includes("Salle") ||
-        planning["Aprem"][matiere][cellule].includes("Salles")
-      ) {
-        messageAprem += planning["Aprem"][matiere][cellule] + ".\n\n";
-      } else {
-        messageAprem += planning["Aprem"][matiere][cellule] + ",\n";
-      }
-    }
-  }
-  return [messageMat, messageAprem];
+  console.log("message = ", message);
+  return message;
 }
 
 // function to get the current date in the format : 'YYYY/MM/DD HH:mm:ss'
