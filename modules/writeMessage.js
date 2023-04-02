@@ -108,9 +108,40 @@ function getCurrentDate() {
   return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
 }
 
+// Send message to user
+async function callSendAPI(sender_psid, response) {
+  // Construct the message body
+  let request_body = { recipient: { id: sender_psid }, message: null };
+  // attach the appropriate message to the request body
+  if (response.attachment) {
+    request_body.message = { attachment: response.attachment };
+  } else if (response.text) {
+    request_body.message = { text: response.text };
+  } else {
+    console.log("error: no message to send");
+  }
+  // Send the HTTP request to the Messenger Platform
+  let err,
+    res,
+    body = await request({
+      uri: "https://graph.facebook.com/v16.0/me/messages",
+      qs: { access_token: config.get("facebook.page.access_token") },
+      method: "POST",
+      json: request_body,
+    });
+  // handling errors
+  if (!err) {
+    console.log("message sent!");
+  } else {
+    console.error("Unable to send message:" + err);
+  }
+  return;
+}
+
 module.exports = {
     sendPlanningDay,
     readCsv,
     constructMessage,
-    getCurrentDate
+    getCurrentDate,
+    callSendAPI,
 };

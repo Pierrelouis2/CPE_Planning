@@ -138,9 +138,9 @@ async function isKnownUser(sender_psid) {
     let message = {
       text: "Votre compte n'est pas complet, veuillez le refaire",
     };
-    callSendAPI(sender_psid, message);
+    writeMessage.callSendAPI(sender_psid, message);
     message = templates.askTemplateNewUserPromo();
-    callSendAPI(sender_psid, message);
+    writeMessage.callSendAPI(sender_psid, message);
     return false;
   }
   if (user.id_user.toString() === sender_psid) {
@@ -194,8 +194,8 @@ async function handleMessage(sender_psid) {
   let response = templates.askTemplateJour();
   let r;
   await set_persistent_menu(sender_psid);
-  r = await callSendAPI(sender_psid, response[0]);
-  r = await callSendAPI(sender_psid, response[1]);
+  r = await writeMessage.callSendAPI(sender_psid, response[0]);
+  r = await writeMessage.callSendAPI(sender_psid, response[1]);
 }
 
 // Handling the message when a user send a postback
@@ -213,7 +213,7 @@ async function handlePostback(sender_psid, received_postback) {
     case "TOUT":
       if (!(await isKnownUser(sender_psid))) {
         response = templates.askTemplateStart();
-        r = await callSendAPI(sender_psid, response);
+        r = await writeMessage.callSendAPI(sender_psid, response);
         break;
       }
       if (!(await userInfo.isReady(sender_psid))) {
@@ -221,14 +221,14 @@ async function handlePostback(sender_psid, received_postback) {
         break;
       }
       message = { text: "Voici le planning de la semaine: " };
-      r = await callSendAPI(sender_psid, message);
+      r = await writeMessage.callSendAPI(sender_psid, message);
       response = templates.askTemplateImage();
       let user = await userInfo.getUser(sender_psid);
       let PF = user.promo.toString() + user.filiere;
       console.log(`PF = ${PF}`);
       console.log(variables.link.PF)
       response.attachment.payload.url = variables.link.PF;
-      r = await callSendAPI(sender_psid, response);
+      r = await writeMessage.callSendAPI(sender_psid, response);
       break;
     case "LUNDI":
     case "MARDI":
@@ -237,7 +237,7 @@ async function handlePostback(sender_psid, received_postback) {
     case "VENDREDI":
       if (!(await isKnownUser(sender_psid))) {
         response = templates.askTemplateStart();
-        r = await callSendAPI(sender_psid, response);
+        r = await writeMessage.callSendAPI(sender_psid, response);
         break;
       }
       if (!(await userInfo.isReady(sender_psid))) {
@@ -253,8 +253,8 @@ async function handlePostback(sender_psid, received_postback) {
         // send the user the menu
         console.log("known user");
         response = templates.askTemplateJour();
-        r = await callSendAPI(sender_psid, response[0]);
-        r = await callSendAPI(sender_psid, response[1]);
+        r = await writeMessage.callSendAPI(sender_psid, response[0]);
+        r = await writeMessage.callSendAPI(sender_psid, response[1]);
       }
       //create new user
       else {
@@ -267,7 +267,7 @@ async function handlePostback(sender_psid, received_postback) {
           db.run(sql_uptade_status, [inscription, sender_psid]);
           // ask for promo (3 or 4)
           response = templates.askTemplateNewUserPromo();
-          r = await callSendAPI(sender_psid, response);
+          r = await writeMessage.callSendAPI(sender_psid, response);
         } catch (err) {
           console.log(
             `error while inserting new user, date = ${writeMessage.getCurrentDate()}`
@@ -275,7 +275,7 @@ async function handlePostback(sender_psid, received_postback) {
           console.log("error: " + err);
           let message_error =
             "Il y a eu un probleme lors de votre inscription, rééssayez, si le probleme persiste contactez un administrateur";
-          let r = await callSendAPI(sender_psid, message_error);
+          let r = await writeMessage.callSendAPI(sender_psid, message_error);
         }
       }
       break;
@@ -289,7 +289,7 @@ async function handlePostback(sender_psid, received_postback) {
 
       // ask for promo (3 or 4)
       response = templates.askTemplateNewUserPromo();
-      r = await callSendAPI(sender_psid, response);
+      r = await writeMessage.callSendAPI(sender_psid, response);
       break;
     case "3":
     case "4":
@@ -297,8 +297,8 @@ async function handlePostback(sender_psid, received_postback) {
       db.run(sql_set_promo, [payload, sender_psid]);
       //ask for user groupe (A,B,C,D)
       response = templates.askTemplateGroupe();
-      r = await callSendAPI(sender_psid, response[0]);
-      r = await callSendAPI(sender_psid, response[1]);
+      r = await writeMessage.callSendAPI(sender_psid, response[0]);
+      r = await writeMessage.callSendAPI(sender_psid, response[1]);
       break;
     case "A":
     case "B":
@@ -308,7 +308,7 @@ async function handlePostback(sender_psid, received_postback) {
       db.run(sql_set_groupe, [payload, sender_psid]);
       //ask for user filliere (CGP,ETI)
       response = templates.askTemplateFilliere();
-      r = await callSendAPI(sender_psid, response);
+      r = await writeMessage.callSendAPI(sender_psid, response);
       break;
     case "ETI": //4A -> get Majeure
       // set the user filliere to payload
@@ -317,8 +317,8 @@ async function handlePostback(sender_psid, received_postback) {
       if (await userInfo.is4ETI(sender_psid)) {
         console.log("4ETI");
         response = templates.askTemplateMajeureETI();
-        r = await callSendAPI(sender_psid, response[0]);
-        r = await callSendAPI(sender_psid, response[1]);
+        r = await writeMessage.callSendAPI(sender_psid, response[0]);
+        r = await writeMessage.callSendAPI(sender_psid, response[1]);
         break;
       }
       // give days menu
@@ -328,8 +328,8 @@ async function handlePostback(sender_psid, received_postback) {
         let sql_uptade_statusEti = "UPDATE user SET status=? WHERE id_user=?";
         db.run(sql_uptade_statusEti, [inscription, sender_psid]);
         response = templates.askTemplateJour();
-        r = await callSendAPI(sender_psid, response[0]);
-        r = await callSendAPI(sender_psid, response[1]);
+        r = await writeMessage.callSendAPI(sender_psid, response[0]);
+        r = await writeMessage.callSendAPI(sender_psid, response[1]);
         break;
       }
 
@@ -347,17 +347,17 @@ async function handlePostback(sender_psid, received_postback) {
         message = {
           text: `Le planning pour les CGP n'est pas encore disponible. On fait au plus vite ! `,
         };
-        r = await callSendAPI(sender_psid, message);
+        r = await writeMessage.callSendAPI(sender_psid, message);
         message = { text: `Signé : les dev en SUSU` };
-        r = await callSendAPI(sender_psid, message);
+        r = await writeMessage.callSendAPI(sender_psid, message);
         break;
       }
       // give days menu
       else {
         console.log("3CGP");
         response = templates.askTemplateJour();
-        r = await callSendAPI(sender_psid, response[0]);
-        r = await callSendAPI(sender_psid, response[1]);
+        r = await writeMessage.callSendAPI(sender_psid, response[0]);
+        r = await writeMessage.callSendAPI(sender_psid, response[1]);
         break;
       }
       
@@ -374,17 +374,17 @@ async function handlePostback(sender_psid, received_postback) {
       let sql_uptade_statusMaj = "UPDATE user SET status=? WHERE id_user=?";
       db.run(sql_uptade_statusMaj, [inscriptionMaj, sender_psid]);
       response = templates.askTemplateJour();
-      r = await callSendAPI(sender_psid, response[0]);
-      r = await callSendAPI(sender_psid, response[1]);
+      r = await writeMessage.callSendAPI(sender_psid, response[0]);
+      r = await writeMessage.callSendAPI(sender_psid, response[1]);
       break;
     default:
       console.log("unknown payload");
       message = {
         text: `Je n'ai pas compris votre demande. Veuillez réessayer.`,
       };
-      r = await callSendAPI(sender_psid, message);
+      r = await writeMessage.callSendAPI(sender_psid, message);
       let start = templates.askTemplateStart();
-      r = await callSendAPI(sender_psid, start);
+      r = await writeMessage.callSendAPI(sender_psid, start);
       break;
   }
 }
@@ -394,39 +394,9 @@ async function planningNotReady(sender_psid) {
   let message = {
     text: `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `,
   };
-  let r = await callSendAPI(sender_psid, message);
+  let r = await writeMessage.callSendAPI(sender_psid, message);
   message = { text: `Signé : les dev en SUSU` };
-  r = await callSendAPI(sender_psid, message);
-  return;
-}
-
-// Send message to user
-async function callSendAPI(sender_psid, response) {
-  // Construct the message body
-  let request_body = { recipient: { id: sender_psid }, message: null };
-  // attach the appropriate message to the request body
-  if (response.attachment) {
-    request_body.message = { attachment: response.attachment };
-  } else if (response.text) {
-    request_body.message = { text: response.text };
-  } else {
-    console.log("error: no message to send");
-  }
-  // Send the HTTP request to the Messenger Platform
-  let err,
-    res,
-    body = await request({
-      uri: "https://graph.facebook.com/v16.0/me/messages",
-      qs: { access_token: config.get("facebook.page.access_token") },
-      method: "POST",
-      json: request_body,
-    });
-  // handling errors
-  if (!err) {
-    console.log("message sent!");
-  } else {
-    console.error("Unable to send message:" + err);
-  }
+  r = await writeMessage.callSendAPI(sender_psid, message);
   return;
 }
 
