@@ -225,8 +225,8 @@ function askTemplateMenu(psid) {
             title: "REINSCRIPTION",
             payload: "REINSCRIPTION",
           },
-        ],
-      },
-    ],
+        ]
+      }
+    ]
   };
 }
