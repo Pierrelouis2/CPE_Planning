@@ -155,6 +155,7 @@ async function isReady(sender_psid) {
   let user = (await queryDB(sql_get_user, [sender_psid]))[0];
   console.log(`user is4A: ${user}`);
   let PF = user.promo + user.filliere;
+  console.log(`PF: ${PF}`)
   if (lst_promo_ready.includes(PF)) {
     console.log("isReady");
     return true;
