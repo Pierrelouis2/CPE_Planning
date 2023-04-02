@@ -8,8 +8,8 @@ let express = require("express"),
   sqlite3 = require("sqlite3"),
   fs = require("fs"),
   { promisify } = require("util"),
-  userInfo = require("./modules/userInfo");
-  writeMessage = require("./modules/writeMessage");
+  userInfo = require("./modules/userInfo"),
+  writeMessage = require("./modules/writeMessage"),
   templates = require("./modules/templates");
   
 // INIT APP

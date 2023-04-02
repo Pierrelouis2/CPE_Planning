@@ -42,7 +42,7 @@ async function readCsv(dir, Jour, sender_psid,user) {
   }
 
 // Formatting data to send to get something readable
-async function ConstructMessage(planning) {
+async function constructMessage(planning) {
     let demi_jour = ["Matin", "Aprem"];
     let message = [[], []];
     let i = 0;
@@ -88,5 +88,5 @@ async function sendPlanningDay(payload, sender_psid) {
 module.exports = {
     sendPlanningDay,
     readCsv,
-    ConstructMessage
+    constructMessage
 };
