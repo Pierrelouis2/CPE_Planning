@@ -1,3 +1,5 @@
+let userInfo = require("./userInfo");
+
 async function readCsv(dir, Jour, sender_psid,user) {
     let planningRen = {};
     let rawdata;
@@ -68,8 +70,7 @@ async function constructMessage(planning) {
 
 // read the planning json data to send Am and Pm
 async function sendPlanningDay(payload, sender_psid) {
-    let sql_get_user = `SELECT * FROM user WHERE id_user=?`;
-    let user = (await queryDB(sql_get_user, [sender_psid]))[0];
+    let sql_get_user = await userInfo.getUser(sender_psid);
     let planningJour = await readCsv(`./Output_Json/Planning${user.promo}${user.filliere}${DATE}.json`,
         payload,
         sender_psid,
