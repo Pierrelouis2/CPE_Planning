@@ -437,16 +437,11 @@ async function callSendAPI(sender_psid, response) {
 async function sendPlanningDay(payload, sender_psid) {
   let sql_get_user = `SELECT * FROM user WHERE id_user=?`;
   let user = (await queryDB(sql_get_user, [sender_psid]))[0];
-  try { 
   let planningJour = await readCsv(`./Output_Json/Planning${user.promo}${user.filliere}${DATE}.json`,
-    payload,
-    sender_psid,
-    user
+      payload,
+      sender_psid,
+      user
   );
-  } catch (err) {
-    console.log(getCurrentDate() ,"  error in readCsv", DATE, "sender PSID : ", sender_psid);
-    console.log(err);
-  }
   let rep = await ConstructMessage(planningJour);
   let message = { text: `Voici le planning de ${payload} : ` };
   let r = await callSendAPI(sender_psid, message);
@@ -460,7 +455,12 @@ async function sendPlanningDay(payload, sender_psid) {
 // load the planning json file
 async function readCsv(dir, Jour, sender_psid,user) {
   let planningRen = {};
-  let rawdata = fs.readFileSync(dir);
+  let rawdata;
+  try {
+    rawdata = fs.readFileSync(dir);
+  } catch (err) {
+    console.log(err);
+  }
   let planningG = JSON.parse(rawdata);
   console.log(planningG)
   let Date;
