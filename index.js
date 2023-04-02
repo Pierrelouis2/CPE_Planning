@@ -169,6 +169,7 @@ async function handlePostback(sender_psid, received_postback) {
   let response;
   let message;
   let r;
+  let user;
   let sql_set_filiere;
   await set_persistent_menu(sender_psid); // Needed here ?
   // Get the payload for the postback
@@ -189,7 +190,7 @@ async function handlePostback(sender_psid, received_postback) {
       message = { text: "Voici le planning de la semaine: " };
       r = await writeMessage.callSendAPI(sender_psid, message);
       response = templates.askTemplateImage();
-      let user = await userInfo.getUser(sender_psid);
+      user = await userInfo.getUser(sender_psid);
       let PF = user.promo.toString() + user.filliere;
       response.attachment.payload.url = variables.link[PF];
       r = await writeMessage.callSendAPI(sender_psid, response);
@@ -208,7 +209,9 @@ async function handlePostback(sender_psid, received_postback) {
         await planningNotReady(sender_psid);
         break;
       }
-      await writeMessage.sendPlanningDay(payload, sender_psid);
+      //get user
+      user = await userInfo.getUser(sender_psid);
+      await writeMessage.sendPlanningDay(payload, sender_psid, user);
       break;
     case "GET_STARTED":
       // verify is the sender is known29687.bot_messenger

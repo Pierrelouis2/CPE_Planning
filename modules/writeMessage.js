@@ -79,17 +79,10 @@ async function constructMessage(planning) {
   }
 
 // read the planning json data to send Am and Pm
-async function sendPlanningDay(payload, sender_psid) {
-    let user = await userInfo.getUser(sender_psid);
-    let promo;
-    try {
-        promo = user.promo.toString();
-    } catch (e) {
-        console.log(e);
-        promo = "3";
-    }
+async function sendPlanningDay(payload, sender_psid,user) {
+    let promo = user.promo;
     let filliere = user.filliere;
-    let planningJour = await readCsv(`./Output_Json/Planning${promo}${user.filliere}${variables.constant.DATE}.json`,
+    let planningJour = await readCsv(`./Output_Json/Planning${promo}${filliere}${variables.constant.DATE}.json`,
         payload,
         sender_psid,
         user
@@ -136,7 +129,7 @@ async function callSendAPI(sender_psid, response) {
       json: request_body,
     });
   // handling errors
-  if (!res) {
+  if (res) {
     console.log("message sent!");
   } else {
     console.error("Unable to send message:" + res.error);
