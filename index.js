@@ -247,7 +247,7 @@ async function handlePostback(sender_psid, received_postback) {
       }
       message = { text: "Voici le planning de la semaine: " };
       r = await callSendAPI(sender_psid, message);
-      response = templates.imageTemplate();
+      response = templates.askTemplateImage();
       r = await callSendAPI(sender_psid, response);
       break;
     case "LUNDI":
