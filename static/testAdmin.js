@@ -28,13 +28,16 @@ app.post('/form', async function(req, res) {
     let function_to_do = req.body.function;
     console.log(body);
     console.log(hashedPassword.password.hashjo);
+    let hash =  await hashPassword(password);
+    console.log(hash);
+    console.log(await comparePassword(password, "$2b$10$ZtQNnT5Vqmijvf8R9Sxheev6K6PZWkObGqJwQZILB4rKrtcKQY60m"));
     let html = fs.readFileSync('./admin.html', 'utf8');
     res.status(200).send(html);
 });
 
 // hash password
 async function hashPassword(plaintextPassword) {
-    const hash = await bcrypt.hash(plaintextPassword, 10);
+    const hash = await bcrypt.hash(plaintextPassword, "$2b$10$ZtQNnT5Vqmijvf8R9Sxhee");
     return hash;
 }
 
