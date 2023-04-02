@@ -67,7 +67,7 @@ app.post("/webhook", async (req, res) => {
   // Checks this is an event from a page subscription
   if (body.object === "page") {
     // Iterates over each entry - there may be multiple if batched
-    body.entry.forEach(async function (entry) {
+    await body.entry.forEach(async function (entry) {
       // only reading the message
       let webhook_event = entry.messaging[0];
       // Get the sender PSID
@@ -76,7 +76,7 @@ app.post("/webhook", async (req, res) => {
       //message or postback ?
       if (webhook_event.message) {
         console.log("in handleMessage");
-        handleMessage(sender_psid);
+        let result = await handleMessage(sender_psid);
       } else if (webhook_event.postback) {
         await handlePostback(sender_psid, webhook_event.postback);
       }
@@ -208,16 +208,17 @@ async function set_persistent_menu(psid) {
   } else {
     console.error("Unable to send message:" + err);
   }
+  return None;
 }
 
 // Handling the message when a user send text and not a postback
 async function handleMessage(sender_psid) {
   let response = templates.askTemplateJour();
   let r;
-  await set_persistent_menu(sender_psid);
+  let result = await set_persistent_menu(sender_psid);
   r = await callSendAPI(sender_psid, response[0]);
   r = await callSendAPI(sender_psid, response[1]);
-  return;
+  return None;
 }
 
 // Handling the message when a user send a postback
@@ -226,7 +227,7 @@ async function handlePostback(sender_psid, received_postback) {
   let message;
   let r;
   let sql_set_filiere;
-  await set_persistent_menu(sender_psid); // Needed here ?
+  let result = await set_persistent_menu(sender_psid); // Needed here ?
   // Get the payload for the postback
   let payload = received_postback.payload;
   console.log("payload: ", payload);
