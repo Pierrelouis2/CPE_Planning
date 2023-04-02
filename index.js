@@ -67,7 +67,7 @@ app.post("/webhook", async (req, res) => {
   // Checks this is an event from a page subscription
   if (body.object === "page") {
     // Iterates over each entry - there may be multiple if batched
-    await body.entry.forEach(async function (entry) {
+    for (const entry of body.entry) {
       // only reading the message
       let webhook_event = entry.messaging[0];
       // Get the sender PSID
@@ -80,7 +80,7 @@ app.post("/webhook", async (req, res) => {
       } else if (webhook_event.postback) {
         await handlePostback(sender_psid, webhook_event.postback);
       }
-    });
+    }
     // Returns a '200' (=OK) response to all requests
     res.status(200).send("EVENT_RECEIVED");
   } else {
