@@ -129,7 +129,7 @@ async function callSendAPI(sender_psid, response) {
       json: request_body,
     });
   // handling errors
-  if (!res) {
+  if (res) {
     console.log("message sent!");
   } else {
     console.error("Unable to send message:" + res.error);
