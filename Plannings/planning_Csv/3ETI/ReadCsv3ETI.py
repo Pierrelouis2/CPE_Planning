@@ -12,8 +12,6 @@ Df.fillna(0, inplace=True)
 Df = Df.iloc[:, 0:5]
 #Df #Decommenter pour voir le tableau
 
-# ----------------------------------------------------------------
-# On récupère la liste de toutes les matière/prof/majeurs dans LstSemaine
 def createSchedule(Df):
     DicoJour = {}
     IsAprem = False
@@ -34,9 +32,9 @@ def createSchedule(Df):
                 # on ajoute le jour
                 DicoJour["jour"] = obj +"-" + value
             else :
-                if value in {'13h-14h30','13h30-17h45','13h10-18h', '13h30-15h30', '15h45-17h45', '13h30 - 14h30','13h30 - 17h45','13h30 - 17h30'} :
+                if value in {'13h-14h30','13h30-17h45','13h10-18h', '13h30-15h30', '15h45-17h45', '13h30 - 14h30','13h30 - 17h45','13h30 - 17h30','13h30-15h45','13h30 - 15h30'} :
                   IsAprem = True
-                elif value in {'8h-12h15','8h - 12h15', '8h30 - 10h00', '8h-10h', '10h15-12h15','10h15 - 12h15', '8h- 10h'}:
+                elif value in {'8h-12h15','8h - 12h15', '8h30 - 10h00', '8h-10h', '10h15-12h15','10h15 - 12h15','8h00 - 10h00', '8h- 10h','8h - 10h','8h00 - 12h15'}:
                     IsAprem = False
                 if "\n" in value :
                     # on ajoute les cours
@@ -58,54 +56,52 @@ def createSchedule(Df):
     return LstSemaine
 
 LstSemaine = createSchedule(Df)
-df_semaine = pd.DataFrame( LstSemaine)
-#df_semaine #Decommenter pour voir le tableau
 
-# ----------------------------------------------------------------
-# On filtres les majeurs de chaque jours
 import copy
 def filtreMaj(pLstSemaine):
     Semaine =  {}
-    lstMajeursinit = ['CONCEP.LOGICIELLE/BIG DATA','ROBOTIQUE','ELECTRONIQUE ET SYST EMB','INFRA DES RESEAUX','IMAGE','Pour tous']
+    lstGroupesinit = ['GROUPE A','GROUPE B','GROUPE C','GROUPE D','Pour tous']
     
     # creation dico {majeur: {grp: [], ...}, ...}
-    dicMajinit = {}
-    for maj in lstMajeursinit:
-        dicMajinit[maj] = []    
+    dicGrpinit = {}
+    for grp in lstGroupesinit:
+        dicGrpinit[grp] = []    
 
     # parcours des jours de la semaine
     for jour in pLstSemaine :
-        dicMaj = copy.deepcopy(dicMajinit)
+
         print(f'{jour["jour"]=}')
-        Majeur = "Pour tous" #on initialise le majeur à tous
         Semaine[jour["jour"]] = {}
-
+        demi_jour = "Matin", "Aprem"
         # parcours de la matinée et on les ajoute au majeur correspondant 
-        for Case in jour["Matin"]:
-            # print(f'{Case=}')
-            if Case in lstMajeursinit:
-                Majeur = Case
-            # print(f'{Majeur} - {grp} - {Case}')
-            dicMaj[Majeur].append(Case)
-        Semaine[jour["jour"]]["Matin"] = copy.deepcopy(dicMaj)
 
-        # parcours de l'aprem et on les ajoute au majeur correspondant
-        dicMaj = copy.deepcopy(dicMajinit)
-        Majeur = "Pour tous" #on initialise le majeur à tous
-        for Case in jour["Aprem"]:
-            if Case in lstMajeursinit:
-                Majeur = Case
-            dicMaj[Majeur].append(Case)
-        Semaine[jour["jour"]]["Aprem"] = copy.deepcopy(dicMaj)
+        for dj in demi_jour:
+            isGroupe = False
+            count = 0
+            dicGrp = copy.deepcopy(dicGrpinit)
+            Groupe = "Pour tous"
 
+            for i,Case in enumerate(jour[dj]):
+                # print(f'{Case=}')
+                if Case in lstGroupesinit:
+                    Groupe = Case
+                    isGroupe = True
+                    dicGrp[Groupe].append(jour[dj][i-1])
+                    dicGrp["Pour tous"].pop(-1)
+                elif count == 3:
+                    isGroupe = False
+                    count = 0
+                    Groupe = "Pour tous"
+                elif isGroupe:
+                    count += 1
+                # print(f'{Majeur} - {grp} - {Case}')
+                dicGrp[Groupe].append(Case)
+            Semaine[jour["jour"]][dj] = copy.deepcopy(dicGrp)
     print('fin')
     return Semaine
 
-PlanningMajeur = filtreMaj(copy.deepcopy(LstSemaine)) # KK
-df_planningMaj = pd.DataFrame(PlanningMajeur)
-#df_planningMaj #   #Decommenter pour voir le tableau
+PlanningGroupe = filtreMaj(copy.deepcopy(LstSemaine)) # KK
 
-# ----------------------------------------------------------------
-# on envoyer le planning au format json
-with open(f"../../Output_Json/Planning4ETI{date}.json", 'w+') as f:
-    json.dump(PlanningMajeur, f, indent=4, cls=NumpyEncoder)
+with open(f'../../Output_Json/Planning3ETI{date}.json', 'w+') as f:
+    json.dump(PlanningGroupe, f, indent=4, cls=NumpyEncoder)
+
