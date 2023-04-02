@@ -9,7 +9,7 @@ let express = require("express"),
   fs = require("fs"),
   { promisify } = require("util"),
   Date = require("date-and-time"),
-  templates = require("./templates.js");
+  templates = require("templates.js");
 
 templates.test();
 // INIT APP
