@@ -88,5 +88,5 @@ async function sendPlanningDay(payload, sender_psid) {
 module.exports = {
     sendPlanningDay,
     readCsv,
-    ConstructMessage,
+    ConstructMessage
 };
