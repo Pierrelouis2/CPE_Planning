@@ -8,9 +8,9 @@ let express = require("express"),
   sqlite3 = require("sqlite3"),
   fs = require("fs"),
   { promisify } = require("util"),
-  Date = require("date-and-time"),
-  templates = require("./templates.js");
-
+  templates = require("./templates"),
+  Date = require("date-and-time");
+  
 // INIT APP
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -67,7 +67,9 @@ app.post("/webhook", async (req, res) => {
   // Checks this is an event from a page subscription
   if (body.object === "page") {
     // Iterates over each entry - there may be multiple if batched
-    await body.entry.forEach(async function (entry) {
+    console.log('sarting for loop')
+    for (const entry of body.entry) {
+      console.log("entry: " + entry)
       // only reading the message
       let webhook_event = entry.messaging[0];
       // Get the sender PSID
@@ -80,7 +82,7 @@ app.post("/webhook", async (req, res) => {
       } else if (webhook_event.postback) {
         await handlePostback(sender_psid, webhook_event.postback);
       }
-    });
+    }
     // Returns a '200' (=OK) response to all requests
     res.status(200).send("EVENT_RECEIVED");
   } else {
@@ -189,6 +191,7 @@ function set_get_started() {
   } else {
     console.error("Unable to send message:" + err);
   }
+  return;
 }
 
 // Set up the persistent menu
@@ -208,17 +211,16 @@ async function set_persistent_menu(psid) {
   } else {
     console.error("Unable to send message:" + err);
   }
-  return None;
+  return;
 }
 
 // Handling the message when a user send text and not a postback
 async function handleMessage(sender_psid) {
   let response = templates.askTemplateJour();
   let r;
-  let result = await set_persistent_menu(sender_psid);
+  await set_persistent_menu(sender_psid);
   r = await callSendAPI(sender_psid, response[0]);
   r = await callSendAPI(sender_psid, response[1]);
-  return None;
 }
 
 // Handling the message when a user send a postback
@@ -227,7 +229,7 @@ async function handlePostback(sender_psid, received_postback) {
   let message;
   let r;
   let sql_set_filiere;
-  let result = await set_persistent_menu(sender_psid); // Needed here ?
+  await set_persistent_menu(sender_psid); // Needed here ?
   // Get the payload for the postback
   let payload = received_postback.payload;
   console.log("payload: ", payload);
@@ -245,7 +247,7 @@ async function handlePostback(sender_psid, received_postback) {
       }
       message = { text: "Voici le planning de la semaine: " };
       r = await callSendAPI(sender_psid, message);
-      response = templates.imageTemplate();
+      response = templates.askTemplateImage();
       r = await callSendAPI(sender_psid, response);
       break;
     case "LUNDI":
