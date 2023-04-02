@@ -232,6 +232,7 @@ function askTemplateMenu(psid) {
 }
 
 module.exports = {
+    askTemplateJour,
     askTemplateStart,
     askTemplateFilliere,
     askTemplateGroupe,
