@@ -123,8 +123,7 @@ app.get("/webhook", (req, res) => {
 
 // Check if the user is in our database
 async function isKnownUser(sender_psid) {
-  let sql_get_user = `SELECT * FROM user WHERE id_user = ?`;
-  const user = (await queryDB(sql_get_user, sender_psid))[0];
+  const user = await userInfo.getUser(sender_psid);
   console.log("user isKnownUser test : " + sender_psid);
   if (user === undefined) {
     console.log("user undefined");
@@ -224,7 +223,7 @@ async function handlePostback(sender_psid, received_postback) {
       message = { text: "Voici le planning de la semaine: " };
       r = await callSendAPI(sender_psid, message);
       response = templates.askTemplateImage();
-      user = await userInfo.getUser(sender_psid);
+      let user = await userInfo.getUser(sender_psid);
       let PF = user.promo.toString() + user.filiere;
       console.log(`PF = ${PF}`);
       console.log(imageLink.PF)
