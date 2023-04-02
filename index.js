@@ -224,9 +224,7 @@ async function handlePostback(sender_psid, received_postback) {
       r = await writeMessage.callSendAPI(sender_psid, message);
       response = templates.askTemplateImage();
       let user = await userInfo.getUser(sender_psid);
-      let PF = user.promo.toString() + user.filiere;
-      console.log(`PF = ${PF}`);
-      console.log(variables.link.PF)
+      let PF = user.promo.toString() + user.filliere;
       response.attachment.payload.url = variables.link.PF;
       r = await writeMessage.callSendAPI(sender_psid, response);
       break;
