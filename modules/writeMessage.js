@@ -95,12 +95,12 @@ async function sendPlanningDay(payload, sender_psid) {
         user
     );
     let rep = await constructMessage(planningJour);
-    let message = { text: `Voici le planning de ${payload} : ` };
-    let r = await callSendAPI(sender_psid, message);
+    let message = { text: `Voici le planning de ${payload} :`};
+    await callSendAPI(sender_psid, message);
     message = { text: `Matin : ${rep[0]}` };
-    r = await callSendAPI(sender_psid, message);
-    message = { text: `Après-midi : ${rep[1]}` };
-    r = await callSendAPI(sender_psid, message);
+    await callSendAPI(sender_psid, message);
+    message = { text: `Après-midi : ${rep[1]}`};
+    await callSendAPI(sender_psid, message);
     return;
   }
 
@@ -129,14 +129,13 @@ async function callSendAPI(sender_psid, response) {
     console.log("error: no message to send");
   }
   // Send the HTTP request to the Messenger Platform
-  let err,
-    res,
-    body = await request({
+  let err = await request({
       uri: "https://graph.facebook.com/v16.0/me/messages",
       qs: { access_token: config.get("facebook.page.access_token") },
       method: "POST",
       json: request_body,
     });
+  console.log(err)
   // handling errors
   if (!err) {
     console.log("message sent!");
