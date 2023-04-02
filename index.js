@@ -71,7 +71,6 @@ app.post("/webhook", async (req, res) => {
   // Checks this is an event from a page subscription
   if (body.object === "page") {
     // Iterates over each entry - there may be multiple if batched
-    console.log('sarting for loop')
     for (const entry of body.entry) {
       console.log("entry: " + entry)
       // only reading the message
@@ -438,8 +437,7 @@ async function sendPlanningDay(payload, sender_psid) {
   let sql_get_user = `SELECT * FROM user WHERE id_user=?`;
   let user = (await queryDB(sql_get_user, [sender_psid]))[0];
   try { 
-  let planningJour = await readCsv(
-    `./Output_Json/Planning${user.promo}${user.filliere}${DATE}.json`,
+  let planningJour = await readCsv(`./Output_Json/Planning${user.promo}${user.filliere}${DATE}.json`,
     payload,
     sender_psid,
     user
@@ -463,6 +461,7 @@ async function readCsv(dir, Jour, sender_psid,user) {
   let planningRen = {};
   let rawdata = fs.readFileSync(dir);
   let planningG = JSON.parse(rawdata);
+  console.log(planningG)
   let Date;
   // loop days to get the desired day // May be a better way to do this
   for (let day in planningG) {
@@ -492,6 +491,7 @@ async function readCsv(dir, Jour, sender_psid,user) {
     }
     planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
   }
+  console.log("planningRen = ", planningRen);
   return planningRen;
 }
 
