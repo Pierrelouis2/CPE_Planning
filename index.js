@@ -485,7 +485,7 @@ async function readCsv(dir, Jour, sender_psid,user) {
       return;
     }
   }
-  for (dj of demi_jour) { 
+  for (let dj of demi_jour) { 
     planningRen[dj] = []; 
     if (planningG[Date][dj][GM] !== null) {
       planningRen[dj].push(planningG[Date][dj][GM]);
