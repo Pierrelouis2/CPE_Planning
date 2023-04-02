@@ -225,7 +225,7 @@ async function handlePostback(sender_psid, received_postback) {
       response = templates.askTemplateImage();
       let user = await userInfo.getUser(sender_psid);
       let PF = user.promo.toString() + user.filliere;
-      response.attachment.payload.url = variables.link.PF;
+      response.attachment.payload.url = variables.link[PF];
       r = await writeMessage.callSendAPI(sender_psid, response);
       break;
     case "LUNDI":
