@@ -1,5 +1,10 @@
+
 let sqlite3 = require("sqlite3"),
-    { promisify } = require("util");
+    { promisify } = require("util"),
+    templates = require("./templates"),
+    writeMessage = require("./writeMessage");
+
+
 
 let db = new sqlite3.Database("users.db");
 const queryDB = promisify(db.all).bind(db);
@@ -59,7 +64,7 @@ async function getUser(sender_psid) {
 
 // Check if the user is in our database
 async function isKnownUser(sender_psid) {
-  const user = await userInfo.getUser(sender_psid);
+  const user = await getUser(sender_psid);
   console.log("user isKnownUser test : " + sender_psid);
   if (user === undefined) {
     console.log("user undefined");
