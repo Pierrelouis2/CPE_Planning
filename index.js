@@ -163,6 +163,14 @@ async function isReady(sender_psid) {
   }
 }
 
+async function is4ETI(sender_psid) {
+  let sql_get_user = "SELECT * FROM user WHERE id_user=?";
+  let user = (await queryDB(sql_get_user, [sender_psid]))[0];
+  if (user.promo === "4" && user.filliere === "ETI") {
+    return true;
+  }
+  return false;
+}
 // verify if the user is complete or not
 async function isUserComplete(sender_psid) {
   let sql_get_user = "SELECT * FROM user WHERE id_user=?";
@@ -335,7 +343,7 @@ async function handlePostback(sender_psid, received_postback) {
       // set the user filliere to payload
       sql_set_filiere = `UPDATE user SET filliere=? WHERE id_user=?`;
       db.run(sql_set_filiere, [payload, sender_psid]);
-      if (await isReady(sender_psid)) {
+      if (await is4ETI(sender_psid)) {
         console.log("4ETI");
         response = templates.askTemplateMajeureETI();
         r = await callSendAPI(sender_psid, response[0]);
@@ -345,10 +353,12 @@ async function handlePostback(sender_psid, received_postback) {
       // give days menu
       else {
         console.log("3ETI");
-        await planningNotReady(sender_psid);
         let inscription = "Inscrit";
         let sql_uptade_statusEti = "UPDATE user SET status=? WHERE id_user=?";
         db.run(sql_uptade_statusEti, [inscription, sender_psid]);
+        response = templates.askTemplateJour();
+        r = await callSendAPI(sender_psid, response[0]);
+        r = await callSendAPI(sender_psid, response[1]);
         break;
       }
     case "CGP":
