@@ -77,7 +77,7 @@ The database is composed of 3 tables:
 <img src="./Docs/ReadmeImages/confidential-ge984ebf2f_1280.png"  width="400" height="250">
 
 ## TODO
-
+- [ ] Make json file for all variables
 - [ ] Repair isKnown function
 - [ ] Manage CGP Table
 - [ ] Manage LV lessons
