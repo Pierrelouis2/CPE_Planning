@@ -129,20 +129,24 @@ async function callSendAPI(sender_psid, response) {
     console.log("error: no message to send");
   }
   // Send the HTTP request to the Messenger Platform
-  let err = await request({
+  let res = await request({
       uri: "https://graph.facebook.com/v16.0/me/messages",
       qs: { access_token: config.get("facebook.page.access_token") },
       method: "POST",
       json: request_body,
     });
-  console.log(err)
   // handling errors
-  if (!err) {
+  if (!res) {
     console.log("message sent!");
   } else {
     console.error("Unable to send message:" + err);
   }
+  await sleep(200);
   return;
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 module.exports = {
