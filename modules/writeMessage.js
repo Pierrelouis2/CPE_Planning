@@ -1,5 +1,6 @@
 let userInfo = require("./userInfo"),
-  variables = require("./variables");
+  variables = require("./variables"),
+  fs = require("fs");
 
 async function readCsv(dir, Jour, sender_psid,user) {
     let planningRen = {};
