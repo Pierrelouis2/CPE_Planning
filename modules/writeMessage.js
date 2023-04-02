@@ -86,7 +86,7 @@ async function sendPlanningDay(payload, sender_psid) {
         sender_psid,
         user
     );
-    let rep = await ConstructMessage(planningJour);
+    let rep = await constructMessage(planningJour);
     let message = { text: `Voici le planning de ${payload} : ` };
     let r = await callSendAPI(sender_psid, message);
     message = { text: `Matin : ${rep[0]}` };
