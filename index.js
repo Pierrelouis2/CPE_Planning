@@ -31,6 +31,7 @@ const MAJEURS = { "CBD": "CONCEP.LOGICIELLE/BIG DATA",
     "INFRA": "INFRA DES RESEAUX",
     "IMI": "IMAGE",
 };
+const DATE = "01_04";
 
 // Creation of a minimalist website for somone who might visit the url
 app.get('/', (req, res) => {
@@ -39,7 +40,7 @@ app.get('/', (req, res) => {
 
 app.get('/admin', function(req, res) {
     //read file
-    let html = fs.readFileSync('./admin.html', 'utf8');
+    let html = fs.readFileSync('./static/admin.html', 'utf8');
     //send file
     res.status(200).send(html);
 });
@@ -52,7 +53,7 @@ app.post('/admin/form', async function(req, res) {
     let function_to_do = req.body.function;
     console.log(body);
     //console.log(hashedPassword.password.hashjo);
-    let html = fs.readFileSync('./admin.html', 'utf8');
+    let html = fs.readFileSync('./static/admin.html', 'utf8');
     res.status(200).send(html);
 });
 
@@ -405,7 +406,7 @@ async function callSendAPI(sender_psid, response) {
 
 // read the planning json data to send Am and Pm
 async function sendPlanningDay(payload, sender_psid){
-    let planningJour = await readCsv('./Output_Json/Planning27_03.json',payload,sender_psid);
+    let planningJour = await readCsv(`./Output_Json/Planning${DATE}.json`,payload,sender_psid);
     let rep = await ConstructMessage(planningJour);
     let message = {"text": `Voici le planning de ${payload} : `};
     let r = await callSendAPI(sender_psid, message);
