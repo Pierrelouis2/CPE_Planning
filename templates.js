@@ -167,9 +167,9 @@ function imageTemplate() {
       },
     },
   };
-}
+};
 
-function TemplateSendWeek() {
+function askTemplateSendWeek() {
   return {
     name: "image",
     attachment: {
@@ -180,7 +180,7 @@ function TemplateSendWeek() {
       },
     },
   };
-}
+};
 
 function askTemplateMenu(psid) {
   return {
@@ -229,4 +229,8 @@ function askTemplateMenu(psid) {
       }
     ]
   };
+}
+
+function test(){
+    console.log("test templates")
 }

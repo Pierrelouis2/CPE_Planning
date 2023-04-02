@@ -11,6 +11,7 @@ let express = require("express"),
   Date = require("date-and-time"),
   templates = require("./templates.js");
 
+templates.test();
 // INIT APP
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
