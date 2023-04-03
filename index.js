@@ -387,6 +387,7 @@ async function handlePostback(sender_psid, received_postback) {
     default:
       // let's not make a long switch case with CGP MSOs
       if (Object.keys(MSO).includes(payload)) {
+        console.log("Choissinf mso = ", payload);
         let mso_name = MSO.payload;
         console.log("mso_name = ", mso_name)
         // get the id of the mso
