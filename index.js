@@ -38,7 +38,27 @@ const MAJEURS = {
   INFRA: "INFRA DES RESEAUX",
   IMI: "IMAGE",
 };
-const DATE = "03_04";
+const MSO = {
+    "SSO": "Stratégie de synthèse organique",
+    "CO2": "Chimie Organometallique 2, approche orbitalaire",
+    "IM": "Ingénierie Macromoléculaire",
+    "SSP": "Simulation stationnaire des procédés",
+    "CMH": "Chimie médicinale et hétérocycles",
+    "GRCA": "Génie de la réaction chimique avancée",
+    "TE": "Transition énergétique",
+    "AL": "Analyses en lignes",
+    "SM": "Synthèse Macromoléculaire",
+    "SMB": "Synthèse de molécules bioactives",
+    "NN": "Nanochimie, nanomatériaux",
+    "CN": "Chimie nucléaire",
+    "ADNSC": "Analyse de données - le numérique au service de la chimie",
+    "CAM": "Conception et application du médicament",
+    "TSA": "Techniques séparatives avancées",
+    "CDD": "Catalyse et développement durable",
+    "GP": "Génie de la polymérisation",
+    "RMN": "RMN appliquée à la chimie moléculaire",
+    "MN": "Méthodes Numériques"
+}
 
 // Creation of a minimalist website for somone who might visit the url
 app.get("/", (req, res) => {
@@ -281,12 +301,18 @@ async function handlePostback(sender_psid, received_postback) {
 
       if (await userInfo.is4CGP(sender_psid)) {
         console.log("4CGP");
-        message = {
-          text: `Le planning pour les CGP n'est pas encore disponible. On fait au plus vite ! `,
-        };
-        r = await writeMessage.callSendAPI(sender_psid, message);
-        message = { text: `Signé : les dev en SUSU` };
-        r = await writeMessage.callSendAPI(sender_psid, message);
+        // message = {
+        //   text: `Le planning pour les CGP n'est pas encore disponible. On fait au plus vite ! `,
+        // };
+        // r = await writeMessage.callSendAPI(sender_psid, message);
+        // message = { text: `Signé : les dev en SUSU` };
+        // r = await writeMessage.callSendAPI(sender_psid, message);
+        let messageMso = { "text": "Vous êtes en 4CGP, veuillez choisir vos mso (ca va etre long):" };
+        r = await writeMessage.callSendAPI(sender_psid, messageMso);
+        response = templates.askTemplateMsoCGP();
+        for (let m of response) {
+            r = await writeMessage.callSendAPI(sender_psid, m);
+        }
         break;
       }
       // give days menu

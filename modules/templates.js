@@ -229,7 +229,63 @@ function askTemplateMenu(psid) {
       }
     ]
   };
+};
+
+
+function askTemplateMsoCGP() {
+    const MSO = {
+    "SSO": "Stratégie de synthèse organique",
+    "CO2": "Chimie Organometallique 2, approche orbitalaire",
+    "IM": "Ingénierie Macromoléculaire",
+    "SSP": "Simulation stationnaire des procédés",
+    "CMH": "Chimie médicinale et hétérocycles",
+    "GRCA": "Génie de la réaction chimique avancée",
+    "TE": "Transition énergétique",
+    "AL": "Analyses en lignes",
+    "SM": "Synthèse Macromoléculaire",
+    "SMB": "Synthèse de molécules bioactives",
+    "NN": "Nanochimie, nanomatériaux",
+    "CN": "Chimie nucléaire",
+    "ADNSC": "Analyse de données - le numérique au service de la chimie",
+    "CAM": "Conception et application du médicament",
+    "TSA": "Techniques séparatives avancées",
+    "CDD": "Catalyse et développement durable",
+    "GP": "Génie de la polymérisation",
+    "RMN": "RMN appliquée à la chimie moléculaire",
+    "MN": "Méthodes Numériques"
+    }
+    let i = 0;
+    let lst_message = [];
+    let template = {
+        name: "ask",
+        attachment: {
+            type: "template",
+            payload: {
+                template_type: "button",
+                text: `mso n°${i}`,
+                buttons: [
+                    { type: "postback", title: "", payload: "" },
+                    { type: "postback", title: "", payload: "" },
+                    { type: "postback", title: "", payload: "" },
+                ],
+            }
+        }
+    }
+    let tmp_template = template;
+    for (let mso of MSO) {
+        tmp_template.attachment.payload.text = `mso n°${i}`;
+        tmp_template.attachment.payload.buttons[0].title = mso;
+        tmp_template.attachment.payload.buttons[0].payload = mso;
+        if (i === 3  || i === length(MSO)){
+            lst_message.push(tmp_template);
+            tmp_template = template;
+            i = 0;
+        }
+        i++;
+    }
 }
+
+
 
 module.exports = {
     askTemplateJour,
