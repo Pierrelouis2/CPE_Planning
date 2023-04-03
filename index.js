@@ -395,7 +395,11 @@ async function handlePostback(sender_psid, received_postback) {
         // get the id of the user
         let user = await userInfo.getUser(sender_psid);
         let sql_set_mso = `INSERT INTO tj_user_mso (id_user, id_mso) VALUES(?, ?)`;
-        db.run(sql_set_mso, [user.id_user, mso_id.id_mso]);
+        db.run(sql_set_mso, [user.id_user, mso_id.id_mso], function (err) {
+            if (err) {
+                console.log(err);
+            }
+        });
         // get all mso of the user id
         let sql_get_mso_user = `SELECT * FROM tj_user_mso WHERE id_user=?`;
         let mso_user = (await queryDB(sql_get_mso_user, [user.id_user]))[0];
