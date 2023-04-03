@@ -12,11 +12,10 @@ const express = require("express"),
   writeMessage = require("./modules/writeMessage"),
   templates = require("./modules/templates"),
   variables = require("./modules/variables"),
-  facebookInit = require("./modules/facebookInit");
-
-const cookieParser = require("cookie-parser");
-const sessions = require('express-session');
-const path = require('path');
+  facebookInit = require("./modules/facebookInit"),
+  cookieParser = require("cookie-parser"),
+  sessions = require('express-session'),
+  path = require('path');
 
 // INIT APP
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,22 +25,19 @@ app.listen(port, "0.0.0.0", () => {
   console.log(`App listening on port ${port}!`);
   facebookInit.set_get_started();
 });
-
-//  INIT Webserver
-const oneDay = 1000 *60 * 60 * 24 ;
-
 app.use(sessions({
   secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
   saveUninitialized:true,
   cookie: { maxAge: oneDay },
   resave: false
 }));
-
-
-let initpath = path.join(__dirname,'static','public')
 app.use(express.static(initpath));
-
 app.use(cookieParser());
+
+//  INIT Webserver variables
+const oneDay = 1000 *60 * 60 * 24 ;
+let initpath = path.join(__dirname,'static','public')
+var session;  
 
 
 // INIT DB
@@ -59,36 +55,34 @@ const MAJEURS = {
   INFRA: "INFRA DES RESEAUX",
   IMI: "IMAGE",
 };
+const MSO = {
+  SSO: "Stratégie de synthèse organique",
+  CO2: "Chimie Organometallique 2, approche orbitalaire",
+  IM: "Ingénierie Macromoléculaire",
+  SSP: "Simulation stationnaire des procédés",
+  CMH: "Chimie médicinale et hétérocycles",
+  GRCA: "Génie de la réaction chimique avancée",
+  TE: "Transition énergétique",
+  AL: "Analyses en lignes",
+  SM: "Synthèse Macromoléculaire",
+  SMB: "Synthèse de molécules bioactives",
+  NN: "Nanochimie, nanomatériaux",
+  CN: "Chimie nucléaire",
+  ADNSC: "Analyse de données - le numérique au service de la chimie",
+  CAM: "Conception et application du médicament",
+  TSA: "Techniques séparatives avancées",
+  CDD: "Catalyse et développement durable",
+  GP: "Génie de la polymérisation",
+  RMN: "RMN appliquée à la chimie moléculaire",
+  MN: "Méthodes Numériques"
+};
 
 // TO CHANGE PASSWORD AND USERNAME TEST
 const myusername = 'user1'
 const mypassword = 'mypassword'
 
-// a variable to save a session
-var session;
-const MSO = {
-    SSO: "Stratégie de synthèse organique",
-    CO2: "Chimie Organometallique 2, approche orbitalaire",
-    IM: "Ingénierie Macromoléculaire",
-    SSP: "Simulation stationnaire des procédés",
-    CMH: "Chimie médicinale et hétérocycles",
-    GRCA: "Génie de la réaction chimique avancée",
-    TE: "Transition énergétique",
-    AL: "Analyses en lignes",
-    SM: "Synthèse Macromoléculaire",
-    SMB: "Synthèse de molécules bioactives",
-    NN: "Nanochimie, nanomatériaux",
-    CN: "Chimie nucléaire",
-    ADNSC: "Analyse de données - le numérique au service de la chimie",
-    CAM: "Conception et application du médicament",
-    TSA: "Techniques séparatives avancées",
-    CDD: "Catalyse et développement durable",
-    GP: "Génie de la polymérisation",
-    RMN: "RMN appliquée à la chimie moléculaire",
-    MN: "Méthodes Numériques"
-}
+// ----- ROUTES -----
 
-// Creation of a minimalist website for somone who might visit the url
 app.get("/", (req, res) => {
   res.redirect('/login');
 });
@@ -97,8 +91,6 @@ app.get('/login',function(req, res){
   console.log(__dirname);
   res.sendFile(path.join(initpath , 'login.html')); 
   console.log(req.body.user);
-  
-
   if (req.body.user == myusername && req.body.password == mypassword){
       session = req.session;
       session.userid = req.body.user;
@@ -113,14 +105,15 @@ app.post('/form', function(req, res) {
   console.log(req.body.password)
   if (req.body.user == myusername && req.body.password == mypassword){
       console.log("test2");
-      session = req.session;
+      session = req.session; ////// USE A LOCAL VARIABLE TO SAVE THE SESSION
       session.userid = req.body.user;
       console.log(req.session);
       res.redirect('/admin');
   }
 });
+
 app.get("/admin", function (req, res) {
-  session = req.session;
+  session = req.session; ////// USE A LOCAL VARIABLE TO SAVE THE SESSION
     if (session.userid){
         // let homepage = fs.readFileSync('.public/html/home.html', 'utf8');
         res.sendFile(path.join(initpath , 'home.html')); 
@@ -129,7 +122,6 @@ app.get("/admin", function (req, res) {
         res.redirect('/login');
     }
 });
-
 
 // Creates the endpoint for our webhook to facebook
 app.post("/webhook", async (req, res) => {
