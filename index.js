@@ -61,6 +61,7 @@ const MAJEURS = {
 // TO CHANGE PASSWORD AND USERNAME TEST
 const myusername = 'user1'
 const mypassword = 'mypassword'
+const oneDay = 1000 *60 * 60 * 24 ;
 
 // a variable to save a session
 var session;
