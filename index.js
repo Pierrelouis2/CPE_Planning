@@ -67,25 +67,25 @@ const mypassword = 'mypassword'
 // a variable to save a session
 var session;
 const MSO = {
-    "SSO": "Stratégie de synthèse organique",
-    "CO2": "Chimie Organometallique 2, approche orbitalaire",
-    "IM": "Ingénierie Macromoléculaire",
-    "SSP": "Simulation stationnaire des procédés",
-    "CMH": "Chimie médicinale et hétérocycles",
-    "GRCA": "Génie de la réaction chimique avancée",
-    "TE": "Transition énergétique",
-    "AL": "Analyses en lignes",
-    "SM": "Synthèse Macromoléculaire",
-    "SMB": "Synthèse de molécules bioactives",
-    "NN": "Nanochimie, nanomatériaux",
-    "CN": "Chimie nucléaire",
-    "ADNSC": "Analyse de données - le numérique au service de la chimie",
-    "CAM": "Conception et application du médicament",
-    "TSA": "Techniques séparatives avancées",
-    "CDD": "Catalyse et développement durable",
-    "GP": "Génie de la polymérisation",
-    "RMN": "RMN appliquée à la chimie moléculaire",
-    "MN": "Méthodes Numériques"
+    SSO: "Stratégie de synthèse organique",
+    CO2: "Chimie Organometallique 2, approche orbitalaire",
+    IM: "Ingénierie Macromoléculaire",
+    SSP: "Simulation stationnaire des procédés",
+    CMH: "Chimie médicinale et hétérocycles",
+    GRCA: "Génie de la réaction chimique avancée",
+    TE: "Transition énergétique",
+    AL: "Analyses en lignes",
+    SM: "Synthèse Macromoléculaire",
+    SMB: "Synthèse de molécules bioactives",
+    NN: "Nanochimie, nanomatériaux",
+    CN: "Chimie nucléaire",
+    ADNSC: "Analyse de données - le numérique au service de la chimie",
+    CAM: "Conception et application du médicament",
+    TSA: "Techniques séparatives avancées",
+    CDD: "Catalyse et développement durable",
+    GP: "Génie de la polymérisation",
+    RMN: "RMN appliquée à la chimie moléculaire",
+    MN: "Méthodes Numériques"
 }
 
 // Creation of a minimalist website for somone who might visit the url
@@ -387,7 +387,8 @@ async function handlePostback(sender_psid, received_postback) {
     default:
       // let's not make a long switch case with CGP MSOs
       if (Object.keys(MSO).includes(payload)) {
-        let mso_name = MSO[payload];
+        let mso_name = MSO.payload;
+        console.log("mso_name = ", mso_name)
         // get the id of the mso
         let sql_get_mso_id = `SELECT id_mso FROM mso WHERE name_mso=?`;
         let mso_id = (await queryDB(sql_get_mso_id, [mso_name]))[0];
