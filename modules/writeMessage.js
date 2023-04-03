@@ -19,7 +19,6 @@ async function readCsv(dir, Jour, sender_psid,user) {
       console.log(err);
     }
     let planningG = JSON.parse(rawdata);
-    console.log(planningG)
     let Date;
     // loop days to get the desired day // May be a better way to do this
     for (let day in planningG) {
@@ -49,7 +48,6 @@ async function readCsv(dir, Jour, sender_psid,user) {
       }
       planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
     }
-    console.log("planningRen = ", planningRen);
     return planningRen;
   }
 
@@ -74,7 +72,6 @@ async function constructMessage(planning) {
       }
       i++;
     }
-    console.log("message = ", message);
     return message;
   }
 
@@ -134,7 +131,7 @@ async function callSendAPI(sender_psid, response) {
   } else {
     console.error("Unable to send message:" + res.error);
   }
-  await sleep(200);
+  await sleep(400);
   return;
 }
 

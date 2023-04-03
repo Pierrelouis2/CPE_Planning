@@ -79,7 +79,8 @@ The database is composed of 3 tables:
 ## TODO
 - [X] Make json file for all variables
 - [X] Repair isKnown function
-- [ ] Manage CGP Table
+- [X] Manage CGP Table
+- [X] Manage reinscription 4CGP (mso)
 - [ ] Manage LV lessons
 - [X] Manage 3A lessons
 - [X] Create MSO TABLE
