@@ -388,13 +388,13 @@ async function handlePostback(sender_psid, received_postback) {
       // let's not make a long switch case with CGP MSOs
       console.log(Object.keys(MSO));
       if (Object.keys(MSO).includes(payload)) {
-        console.log("Choissinf mso = ", payload);
-        console.log(MSO);
+        console.log("Choix mso = ", payload);
         let mso_name = MSO[payload];
         console.log("mso_name = ", mso_name)
         // get the id of the mso
         let sql_get_mso_id = `SELECT id_mso FROM mso WHERE name_mso=?`;
         let mso_id = (await queryDB(sql_get_mso_id, [mso_name]))[0];
+        console.log(mso_id)
         console.log("mso_id = ", mso_id);
         // get the id of the user
         let user = await userInfo.getUser(sender_psid);
