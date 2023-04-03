@@ -242,8 +242,10 @@ function askTemplateMsoCGP(msos) {
             if (!msoKey) {
                 break;
             }
+            console.log(` 1 - msoKey = ${msoKey}, msoValue = ${msos[msoKey]}`)
             const msoValue = msos[msoKey];
             delete msos[msoKey];
+            console.log(`2 - msoKey = ${msoKey}, msoValue = ${msos[msoKey]}`)
             buttons.push({ type: "postback", title: msoValue, payload: msoKey,});
         }
         templates.push({
