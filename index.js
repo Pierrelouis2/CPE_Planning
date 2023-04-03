@@ -26,7 +26,7 @@ app.listen(port, "0.0.0.0", () => {
 // INIT DB
 let db = new sqlite3.Database("users.db");
 db.on("error", function(error) {
-  console.log("Getting an error on DB: ", error);
+  console.log("Getting an error on DB: ", error, " date = ", writeMessage.getCurrentDate());
 }); 
 const queryDB = promisify(db.all).bind(db); // used for get info from db
 
