@@ -231,64 +231,8 @@ function askTemplateMenu(psid) {
   };
 };
 
-
-function askTemplateMsoCGP() {
-    const MSO = {
-        SSO: "Stratégie de synthèse organique",
-        CO2: "Chimie Organometallique 2, approche orbitalaire",
-        IM: "Ingénierie Macromoléculaire",
-        SSP: "Simulation stationnaire des procédés",
-        CMH: "Chimie médicinale et hétérocycles",
-        GRCA: "Génie de la réaction chimique avancée",
-        TE: "Transition énergétique",
-        AL: "Analyses en lignes",
-        SM: "Synthèse Macromoléculaire",
-        SMB: "Synthèse de molécules bioactives",
-        NN: "Nanochimie, nanomatériaux",
-        CN: "Chimie nucléaire",
-        ADNSC: "Analyse de données - le numérique au service de la chimie",
-        CAM: "Conception et application du médicament",
-        TSA: "Techniques séparatives avancées",
-        CDD: "Catalyse et développement durable",
-        GP: "Génie de la polymérisation",
-        RMN: "RMN appliquée à la chimie moléculaire",
-        MN: "Méthodes Numériques"
-    }
-    let i = 0;
-    let lst_message = [];
-    let template = {
-        name: "ask",
-        attachment: {
-            type: "template",
-            payload: {
-                template_type: "button",
-                text: `mso n°${i}`,
-                buttons: [
-                    { type: "postback", title: "", payload: "" },
-                    { type: "postback", title: "", payload: "" },
-                    { type: "postback", title: "", payload: "" },
-                ],
-            }
-        }
-    };
-    let tmp_template = JSON.parse(JSON.stringify(template)); //create a clone of our template
-    for (const [key, value] of Object.entries(MSO)) {
-        tmp_template.attachment.payload.text = `mso n°${i}`;
-        tmp_template.attachment.payload.buttons[i].title = value;
-        tmp_template.attachment.payload.buttons[i].payload = key;
-        if (i == 2  || i == Object.keys(MSO).length - 1){
-            lst_message.push(tmp_template);
-            tmp_template = JSON.parse(JSON.stringify(template));
-            i = 0;
-        } else {
-            i++;
-        }
-    }
-    console.log(`lst_message = ${JSON.stringify(lst_message)}`);
-    return lst_message;
-}
-
-function fillTemplatesWithMSO(msos) {
+function askTemplateMsoCGP(msos) {
+    // I have to say that it is ChatGPT who found this solution ;(
     const templates = [];
     let i = 1;
     while (Object.keys(msos).length > 0) {
@@ -313,7 +257,6 @@ function fillTemplatesWithMSO(msos) {
                 },
             },
         });
-  
       i++;
     }
     return templates;
@@ -332,7 +275,6 @@ module.exports = {
     askTemplateImage,
     askTemplateSendWeek,
     askTemplateMenu,
-    askTemplateMsoCGP,
-    fillTemplatesWithMSO
+    askTemplateMsoCGP
 }
 
