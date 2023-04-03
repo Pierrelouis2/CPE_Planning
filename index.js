@@ -388,7 +388,7 @@ async function handlePostback(sender_psid, received_postback) {
       if (Object.keys(MSO).includes(payload)) {
         let mso_name = MSO[payload];
         // get the id of the mso
-        let sql_get_mso_id = `SELECT id_mso FROM mso WHERE name=?`;
+        let sql_get_mso_id = `SELECT id_mso FROM mso WHERE name_mso=?`;
         let mso_id = (await queryDB(sql_get_mso_id, [mso_name]))[0];
         console.log("mso_id = ", mso_id);
         // get the id of the user
