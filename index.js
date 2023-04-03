@@ -311,6 +311,7 @@ async function handlePostback(sender_psid, received_postback) {
         r = await writeMessage.callSendAPI(sender_psid, messageMso);
         response = templates.askTemplateMsoCGP();
         for (let m of response) {
+            console.log(m);
             r = await writeMessage.callSendAPI(sender_psid, m);
         }
         break;
