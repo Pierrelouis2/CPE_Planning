@@ -1,5 +1,6 @@
 let request = require("request"),
-    config = require("config");
+    config = require("config"),
+    templates = require("./templates");
 
 // Set up the Get Started button
 function set_get_started() {
