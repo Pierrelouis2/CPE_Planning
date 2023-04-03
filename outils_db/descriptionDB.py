@@ -18,18 +18,3 @@ elif choix == "3":
 else:
     print("erreur")
 
-# df = pd.read_sql_query("SELECT * from user", conn)
-# print(df.to_string())
-# # df = pd.read_sql_query("SELECT * from mso", conn)
-# # print(df.to_string())
-# # df = pd.read_sql_query("SELECT * FROM tj_user_mso", conn)
-# # df = pd.read_sql_query("SELECT * from user", conn)
-# # print(df.to_string())
-# df = pd.read_sql_query("SELECT * from mso", conn)
-# print(df.to_string())
-# df = pd.read_sql_query("SELECT * FROM tj_user_mso", conn)
-# print(df.to_string())
-
-# # id = 111
-# # df = pd.read_sql_query("SELECT mso.name_mso FROM mso INNER JOIN tj_user_mso ON tj_user_mso.id_mso = mso.id_mso WHERE tj_user_mso.id_user=? ", conn, params=(id, ))
-# # print(df.to_string())
