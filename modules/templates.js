@@ -280,9 +280,11 @@ function askTemplateMsoCGP() {
             lst_message.push(tmp_template);
             tmp_template = template;
             i = 0;
+        } else {
+            i++;
         }
-        i++;
     }
+    console.log(`lst_message = ${JSON.stringify(lst_message)}`);
     return lst_message;
 }
 
