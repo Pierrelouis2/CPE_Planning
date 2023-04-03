@@ -28,6 +28,8 @@ app.listen(port, "0.0.0.0", () => {
 });
 
 //  INIT Webserver
+const oneDay = 1000 *60 * 60 * 24 ;
+
 app.use(sessions({
   secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
   saveUninitialized:true,
@@ -61,7 +63,6 @@ const MAJEURS = {
 // TO CHANGE PASSWORD AND USERNAME TEST
 const myusername = 'user1'
 const mypassword = 'mypassword'
-const oneDay = 1000 *60 * 60 * 24 ;
 
 // a variable to save a session
 var session;
