@@ -193,7 +193,11 @@ async function handlePostback(sender_psid, received_postback) {
         console.log("new user");
         let sql_new_user = `INSERT INTO user (id_user) VALUES (?)`;
         try {
-          db.run(sql_new_user, sender_psid);
+          db.run(sql_new_user, sender_psid, function (err) {
+            if (err) {
+              console.log(err.message);
+            }
+          });
           let inscription = "Inscription";
           let sql_uptade_status = "UPDATE user SET status=? WHERE id_user=?";
           db.run(sql_uptade_status, [inscription, sender_psid]);
