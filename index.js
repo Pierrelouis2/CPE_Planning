@@ -334,7 +334,6 @@ async function handlePostback(sender_psid, received_postback) {
         r = await writeMessage.callSendAPI(sender_psid, response[1]);
         break;
       }
-
     case "CGP":
       // set the user filliere to payload
       sql_set_filiere = `UPDATE user SET filliere=? WHERE id_user=?`;
@@ -346,12 +345,6 @@ async function handlePostback(sender_psid, received_postback) {
 
       if (await userInfo.is4CGP(sender_psid)) {
         console.log("4CGP");
-        // message = {
-        //   text: `Le planning pour les CGP n'est pas encore disponible. On fait au plus vite ! `,
-        // };
-        // r = await writeMessage.callSendAPI(sender_psid, message);
-        // message = { text: `Signé : les dev en SUSU` };
-        // r = await writeMessage.callSendAPI(sender_psid, message);
         let messageMso = { "text": "Vous êtes en 4CGP, veuillez choisir vos mso (ca va etre long):" };
         r = await writeMessage.callSendAPI(sender_psid, messageMso);
         response = templates.askTemplateMsoCGP(MSO);
