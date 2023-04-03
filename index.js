@@ -13,7 +13,11 @@ const express = require("express"),
   templates = require("./modules/templates"),
   variables = require("./modules/variables"),
   facebookInit = require("./modules/facebookInit");
-  
+
+const cookieParser = require("cookie-parser");
+const sessions = require('express-session');
+const path = require('path');
+
 // INIT APP
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -22,6 +26,21 @@ app.listen(port, "0.0.0.0", () => {
   console.log(`App listening on port ${port}!`);
   facebookInit.set_get_started();
 });
+
+//  INIT Webserver
+app.use(sessions({
+  secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+  saveUninitialized:true,
+  cookie: { maxAge: oneDay },
+  resave: false
+}));
+
+
+let initpath = path.join(__dirname,'static','public')
+app.use(express.static(initpath));
+
+app.use(cookieParser());
+
 
 // INIT DB
 let db = new sqlite3.Database("users.db");
@@ -35,33 +54,56 @@ const MAJEURS = {
   INFRA: "INFRA DES RESEAUX",
   IMI: "IMAGE",
 };
-const DATE = "03_04";
+
+// TO CHANGE PASSWORD AND USERNAME TEST
+const myusername = 'user1'
+const mypassword = 'mypassword'
+
+// a variable to save a session
+var session;
 
 // Creation of a minimalist website for somone who might visit the url
 app.get("/", (req, res) => {
-  res.send(
-    "<h1>Hello World!, This is not a website just quit it plz</h1> \n <h2><i> The admin </i></h2>"
-  );
+  res.redirect('/login');
 });
 
+app.get('/login',function(req, res){
+  console.log(__dirname);
+  res.sendFile(path.join(initpath , 'login.html')); 
+  console.log(req.body.user);
+  
+
+  if (req.body.user == myusername && req.body.password == mypassword){
+      session = req.session;
+      session.userid = req.body.user;
+      console.log(req.session);
+      res.redirect('/admin');
+  }
+});
+
+app.post('/form', function(req, res) {  
+  console.log("test");
+  console.log(req.body.user);
+  console.log(req.body.password)
+  if (req.body.user == myusername && req.body.password == mypassword){
+      console.log("test2");
+      session = req.session;
+      session.userid = req.body.user;
+      console.log(req.session);
+      res.redirect('/admin');
+  }
+});
 app.get("/admin", function (req, res) {
-  //read file
-  let html = fs.readFileSync("./static/admin.html", "utf8");
-  //send file
-  res.status(200).send(html);
+  session = req.session;
+    if (session.userid){
+        // let homepage = fs.readFileSync('.public/html/home.html', 'utf8');
+        res.sendFile(path.join(initpath , 'home.html')); 
+    }
+    else {
+        res.redirect('/login');
+    }
 });
 
-// app path to handle a form post
-app.post("/admin/form", async function (req, res) {
-  let body = req.body;
-  let password = req.body.password;
-  let user = req.body.user;
-  let function_to_do = req.body.function;
-  console.log(body);
-  //console.log(hashedPassword.password.hashjo);
-  let html = fs.readFileSync("./static/admin.html", "utf8");
-  res.status(200).send(html);
-});
 
 // Creates the endpoint for our webhook to facebook
 app.post("/webhook", async (req, res) => {

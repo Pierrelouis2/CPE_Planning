@@ -8,6 +8,8 @@ let  express = require('express'),
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
 const path = require('path');
+const { initParams } = require('request');
+
 
 let app = express();
 
@@ -18,7 +20,7 @@ app.listen(3000, () => console.log('Listening on port 3000'));
 
 
 // creating 24 hours from milliseconds
-const oneDay = 1000 ;
+const oneDay = 1000 *60 * 60 * 24 ;
 
 //session middleware
 app.use(sessions({
@@ -34,7 +36,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //serving public file
-app.use(express.static('public'));
+// app.use(express.static('/public'));
+let initpath = path.join(__dirname, 'public')
+app.use(express.static(initpath));
 
 // cookie parser middleware
 app.use(cookieParser());
@@ -57,7 +61,7 @@ app.get('/admin', function(req, res) {
     session = req.session;
     if (session.userid){
         // let homepage = fs.readFileSync('.public/html/home.html', 'utf8');
-        res.sendFile('public/html/home.html', {root: __dirname});;
+        res.sendFile(path.join(initpath , 'home.html')); 
     }
     else {
         res.redirect('/login');
@@ -68,12 +72,27 @@ app.get('/admin', function(req, res) {
     // //send file
     // res.status(200).send(html);
 });
-
+app.post('/form', function(req, res) {  
+    console.log("test");
+    console.log(req.body.user);
+    console.log(req.body.password)
+    if (req.body.user == myusername && req.body.password == mypassword){
+        console.log("test2");
+        session = req.session;
+        session.userid = req.body.user;
+        console.log(req.session);
+        res.redirect('/admin');
+    }
+    else {
+    }
+});
 
 // app path to handle a form post
 app.get('/login',function(req, res){
+    console.log(__dirname);
+    res.sendFile(path.join(initpath , 'login.html')); 
+    console.log(req.body.user);
     
-    res.sendFile(__dirname + "/" + 'public/html/login.html');
 
     if (req.body.user == myusername && req.body.password == mypassword){
         session = req.session;
@@ -81,23 +100,6 @@ app.get('/login',function(req, res){
         console.log(req.session);
         res.redirect('/admin');
     }
-    else {
-        res.send(html);
-    }
-
-
-
-    // let body = req.body;
-    // let password = req.body.password;
-    // let user = req.body.user;
-    // let function_to_do = req.body.function;
-    // console.log(body);
-    // console.log(hashedPassword.password.hashjo);
-    // let hash =  await hashPassword(password);
-    // console.log(hash);
-    // console.log(await comparePassword(password, "$2b$10$ZtQNnT5Vqmijvf8R9Sxheev6K6PZWkObGqJwQZILB4rKrtcKQY60m"));
-    // let html = fs.readFileSync('./admin.html', 'utf8');
-    // res.status(200).send(html);
 });
 
 // hash password
