@@ -388,20 +388,19 @@ async function handlePostback(sender_psid, received_postback) {
       // let's not make a long switch case with CGP MSOs
       console.log(Object.keys(MSO));
       if (Object.keys(MSO).includes(payload)) {
-        console.log("Choix mso = ", payload);
         let mso_name = MSO[payload];
-        console.log("mso_name = ", mso_name)
+        console.log(`mso_name = ${mso_name} at ${writeMessage.getCurrentDate()}`);
         // get the id of the mso
         let sql_get_mso_id = `SELECT id_mso FROM mso WHERE name_mso=?`;
         let mso_id = (await queryDB(sql_get_mso_id, [mso_name]))[0];
-        console.log(mso_id)
-        console.log("mso_id = ", mso_id);
         // get the id of the user
         let user = await userInfo.getUser(sender_psid);
         let sql_set_mso = `INSERT INTO tj_user_mso (id_user, id_mso) VALUES(?, ?)`;
-        db.run(sql_set_mso, [user.id_user, mso_id.id_mso], function (err) {
+        db.run(sql_set_mso, [user.id_user, mso_id.id_mso], async function (err) {
             if (err) {
                 console.log(err);
+                let messageAlreadyInMso = { "text": `Vous avez déjà choisi cette mso ${mso_name}`};
+                writeMessage.callSendAPI(sender_psid, messageAlreadyInMso);
             }
         });
         // get all mso of the user id
