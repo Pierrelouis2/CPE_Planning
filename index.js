@@ -1,6 +1,6 @@
 "use strict";
 //ALL THE IMPORTS AND CONFIGS HERE
-let express = require("express"),
+const express = require("express"),
   bodyParser = require("body-parser"),
   app = express(),
   request = require("request"),
@@ -11,7 +11,8 @@ let express = require("express"),
   userInfo = require("./modules/userInfo"),
   writeMessage = require("./modules/writeMessage"),
   templates = require("./modules/templates"),
-  variables = require("./modules/variables");
+  variables = require("./modules/variables"),
+  facebookInit = require("./modules/facebookInit");
   
 // INIT APP
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -19,7 +20,7 @@ app.use(bodyParser.json());
 let port = 8989;
 app.listen(port, "0.0.0.0", () => {
   console.log(`App listening on port ${port}!`);
-  set_get_started();
+  facebookInit.set_get_started();
 });
 
 // INIT DB
@@ -116,50 +117,15 @@ app.get("/webhook", (req, res) => {
   }
 });
 
-// Set up the Get Started button
-function set_get_started() {
-  let get_started = { get_started: { payload: "GET_STARTED" } };
-  let err,
-    res,
-    body = request({
-      uri: "https://graph.facebook.com/v16.0/me/messenger_profile",
-      qs: { access_token: config.get("facebook.page.access_token") },
-      method: "POST",
-      json: get_started,
-    });
-  if (!err) {
-    console.log("get_started set");
-  } else {
-    console.error("Unable to send message:" + err);
-  }
-  return;
-}
 
-// Set up the persistent menu
-async function set_persistent_menu(psid) {
-  let menu = templates.askTemplateMenu(psid);
-  let err,
-    res,
-    body = await request({
-      uri: "https://graph.facebook.com/v16.0/me/custom_user_settings",
-      qs: { access_token: config.get("facebook.page.access_token") },
-      method: "POST",
-      json: menu,
-    });
-  // handling errors
-  if (!err) {
-    console.log("menu set");
-  } else {
-    console.error("Unable to send message:" + err);
-  }
-  return;
-}
+
+
 
 // Handling the message when a user send text and not a postback
 async function handleMessage(sender_psid) {
   let response = templates.askTemplateJour();
   let r;
-  await set_persistent_menu(sender_psid);
+  await facebookInit.set_persistent_menu(sender_psid);
   r = await writeMessage.callSendAPI(sender_psid, response[0]);
   r = await writeMessage.callSendAPI(sender_psid, response[1]);
 }
@@ -171,7 +137,7 @@ async function handlePostback(sender_psid, received_postback) {
   let r;
   let user;
   let sql_set_filiere;
-  await set_persistent_menu(sender_psid); // Needed here ?
+  await facebookInit.set_persistent_menu(sender_psid); // Needed here ?
   // Get the payload for the postback
   let payload = received_postback.payload;
   console.log("payload: ", payload);
