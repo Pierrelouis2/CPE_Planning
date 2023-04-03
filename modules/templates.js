@@ -235,6 +235,7 @@ function askTemplateMsoCGP(msos) {
     // I have to say that it is ChatGPT who found this solution ;(
     const templates = [];
     let i = 1;
+    let num = 1;
     while (Object.keys(msos).length > 0) {
         const buttons = [];
         for (let j = 0; j < 3; j++) {
@@ -252,12 +253,13 @@ function askTemplateMsoCGP(msos) {
                 type: "template",
                 payload: {
                     template_type: "button",
-                    text: `mso n°${i}`,
+                    text: `mso n°${num}`,
                     buttons: buttons,
                 },
             },
         });
       i++;
+      num++;
     }
     return templates;
   }
