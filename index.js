@@ -408,16 +408,15 @@ async function handlePostback(sender_psid, received_postback) {
         let sql_get_mso_user = `SELECT * FROM tj_user_mso WHERE id_user=?`;
         let mso_user = (await queryDB(sql_get_mso_user, [user.id_user]))[0];
         console.log(mso_user);
+      } else {
+        console.log("unknown payload");
+        message = {text: `Je n'ai pas compris votre demande. Veuillez réessayer.`,};
+        r = await writeMessage.callSendAPI(sender_psid, message);
+        let start = templates.askTemplateStart();
+        r = await writeMessage.callSendAPI(sender_psid, start);
       }
-
-      console.log("unknown payload");
-      message = {
-        text: `Je n'ai pas compris votre demande. Veuillez réessayer.`,
-      };
-      r = await writeMessage.callSendAPI(sender_psid, message);
-      let start = templates.askTemplateStart();
-      r = await writeMessage.callSendAPI(sender_psid, start);
       break;
+      
   }
 }
 
