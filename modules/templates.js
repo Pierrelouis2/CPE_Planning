@@ -296,6 +296,7 @@ module.exports = {
     askTemplateMajeureETI,
     askTemplateImage,
     askTemplateSendWeek,
-    askTemplateMenu
+    askTemplateMenu,
+    askTemplateMsoCGP
 }
 
