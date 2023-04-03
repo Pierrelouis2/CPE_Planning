@@ -11,7 +11,7 @@ function set_get_started() {
         method: "POST",
         json: get_started,
     });
-    if (!res) {
+    if (res) {
     console.log("get_started set");
     } else {
     console.error("Unable to send message:" + res);
