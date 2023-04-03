@@ -25,6 +25,9 @@ app.listen(port, "0.0.0.0", () => {
 
 // INIT DB
 let db = new sqlite3.Database("users.db");
+db.on("error", function(error) {
+  console.log("Getting an error on DB: ", error);
+}); 
 const queryDB = promisify(db.all).bind(db); // used for get info from db
 
 // INIT CONSTANTS
@@ -198,9 +201,7 @@ async function handlePostback(sender_psid, received_postback) {
           response = templates.askTemplateNewUserPromo();
           r = await writeMessage.callSendAPI(sender_psid, response);
         } catch (err) {
-          console.log(
-            `error while inserting new user, date = ${writeMessage.getCurrentDate()}`
-          );
+          console.log(`error while inserting new user, date = ${writeMessage.getCurrentDate()}`);
           console.log("error: " + err);
           let message_error =
             "Il y a eu un probleme lors de votre inscription, rééssayez, si le probleme persiste contactez un administrateur";
