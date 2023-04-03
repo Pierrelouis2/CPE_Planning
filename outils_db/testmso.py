@@ -1,26 +1,14 @@
-# insert data
-mso = {
-    "SSO": "Stratégie de synthèse organique",
-    "CO2": "Chimie Organometallique 2, approche orbitalaire",
-    "IM": "Ingénierie Macromoléculaire",
-    "SSP": "Simulation stationnaire des procédés",
-    "CMH": "Chimie médicinale et hétérocycles",
-    "GRCA": "Génie de la réaction chimique avancée",
-    "TE": "Transition énergétique",
-    "AL": "Analyses en lignes",
-    "SM": "Synthèse Macromoléculaire",
-    "SMB": "Synthèse de molécules bioactives",
-    "NN": "Nanochimie, nanomatériaux",
-    "CN": "Chimie nucléaire",
-    "ADNSC": "Analyse de données - le numérique au service de la chimie",
-    "CAM": "Conception et application du médicament",
-    "TSA": "Techniques séparatives avancées",
-    "CDD": "Catalyse et développement durable",
-    "GP": "Génie de la polymérisation",
-    "RMN": "RMN appliquée à la chimie moléculaire",
-    "MN": "Méthodes Numériques"
-}
-print(mso.keys())
-# create dict of name_mso: id_mso
-msod = {i: list(mso.keys())[i] for i in range(len(mso.values()))}
-print(msod)
+# insert in tj_user_mso: user 1, mso 1
+import sqlite3
+database = "users.db"
+sql_insert_tj_user_mso = "INSERT INTO tj_user_mso (id_user, id_mso) VALUES(?, ?)"
+values = [121, 5]
+conn = sqlite3.connect(database)
+c = conn.cursor()
+c.execute(sql_insert_tj_user_mso, values)
+conn.commit()
+
+# verify
+import pandas as pd
+df = pd.read_sql_query("SELECT * FROM tj_user_mso", conn)
+print(df.to_string())
