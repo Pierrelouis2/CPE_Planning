@@ -25,7 +25,7 @@ app.listen(port, "0.0.0.0", () => {
 
 // INIT DB
 let db = new sqlite3.Database("users.db");
-const queryDB = promisify(db.all).bind(db);
+const queryDB = promisify(db.all).bind(db); // used for get info from db
 
 // INIT CONSTANTS
 const MAJEURS = {
@@ -116,10 +116,6 @@ app.get("/webhook", (req, res) => {
     }
   }
 });
-
-
-
-
 
 // Handling the message when a user send text and not a postback
 async function handleMessage(sender_psid) {
@@ -294,7 +290,6 @@ async function handlePostback(sender_psid, received_postback) {
         break;
       }
       
-      
     case "CBD":
     case "INFRA":
     case "IMI":
@@ -325,7 +320,7 @@ async function handlePostback(sender_psid, received_postback) {
 // Set up message for users that filliere/promo is not ready
 async function planningNotReady(sender_psid) {
   let message = {
-    text: `Le planning n'est pas encore disponible pour ta promo. On fait au plus vite ! `,
+    text: `Le planning n'est disponible que pour les 3ETI, 3CGP, 4ETI. \nA tu remplis ta promo, filliere et groupe? \nPour les 4CGP on fait au plus vite ! `,
   };
   let r = await writeMessage.callSendAPI(sender_psid, message);
   message = { text: `Signé : les dev en SUSU` };
