@@ -3,7 +3,7 @@
 let  express = require('express'),
     bodyParser = require('body-parser'),
     fs = require('fs'),
-    bcrypt = require('bcrypt'),
+    bcrypt = require('bcrypt');
     // hashedPassword = require('./hashedPassword');
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
