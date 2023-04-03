@@ -288,6 +288,38 @@ function askTemplateMsoCGP() {
     return lst_message;
 }
 
+function fillTemplatesWithMSO(msos) {
+    const templates = [];
+    let i = 1;
+    while (Object.keys(msos).length > 0) {
+        const buttons = [];
+        for (let j = 0; j < 3; j++) {
+            const msoKey = Object.keys(msos)[0];
+            if (!msoKey) {
+                break;
+            }
+            const msoValue = msos[msoKey];
+            delete msos[msoKey];
+            buttons.push({ type: "postback", title: msoValue, payload: msoKey,});
+        }
+        templates.push({
+            name: "ask",
+            attachment: {
+                type: "template",
+                payload: {
+                    template_type: "button",
+                    text: `mso n°${i}`,
+                    buttons: buttons,
+                },
+            },
+        });
+  
+      i++;
+    }
+    return templates;
+  }
+  
+
 
 
 module.exports = {
@@ -300,6 +332,7 @@ module.exports = {
     askTemplateImage,
     askTemplateSendWeek,
     askTemplateMenu,
-    askTemplateMsoCGP
+    askTemplateMsoCGP,
+    fillTemplatesWithMSO
 }
 
