@@ -272,10 +272,10 @@ function askTemplateMsoCGP() {
         }
     }
     let tmp_template = template;
-    for (let mso of MSO) {
+    for (const [key, value] of Object.entries(MSO)) {
         tmp_template.attachment.payload.text = `mso n°${i}`;
-        tmp_template.attachment.payload.buttons[0].title = mso;
-        tmp_template.attachment.payload.buttons[0].payload = mso;
+        tmp_template.attachment.payload.buttons[i].title = value;
+        tmp_template.attachment.payload.buttons[i].payload = key;
         if (i === 3  || i === length(MSO)){
             lst_message.push(tmp_template);
             tmp_template = template;
