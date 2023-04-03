@@ -311,7 +311,6 @@ async function handlePostback(sender_psid, received_postback) {
         r = await writeMessage.callSendAPI(sender_psid, messageMso);
         response = templates.fillTemplatesWithMSO(MSO);
         for (let m of response) {
-            console.log(m);
             r = await writeMessage.callSendAPI(sender_psid, m);
         }
         break;
@@ -341,6 +340,23 @@ async function handlePostback(sender_psid, received_postback) {
       r = await writeMessage.callSendAPI(sender_psid, response[1]);
       break;
     default:
+      // let's not make a long switch case with CGP MSOs
+      if (Object.keys(MSO).includes(payload)) {
+        let mso_name = MSO[payload];
+        // get the id of the mso
+        let sql_get_mso_id = `SELECT id_mso FROM mso WHERE name=?`;
+        let mso_id = (await queryDB(sql_get_mso_id, [mso_name]))[0];
+        console.log("mso_id = ", mso_id);
+        // get the id of the user
+        let user = await userInfo.getUser(sender_psid);
+        let sql_set_mso = `INSERT INTO tj_user_mso (id_user, id_mso) VALUES(?, ?)`;
+        db.run(sql_set_mso, [user.id_user, mso_id.id_mso]);
+        // get all mso of the user id
+        let sql_get_mso_user = `SELECT * FROM tj_user_mso WHERE id_user=?`;
+        let mso_user = (await queryDB(sql_get_mso_user, [user.id_user]))[0];
+        console.log(mso_user);
+      }
+
       console.log("unknown payload");
       message = {
         text: `Je n'ai pas compris votre demande. Veuillez réessayer.`,
