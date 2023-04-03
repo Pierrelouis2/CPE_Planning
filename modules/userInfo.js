@@ -36,6 +36,13 @@ return false;
 async function is4CGP(sender_psid) {
     let sql_get_user = "SELECT * FROM user WHERE id_user=?";
     let user = (await queryDB(sql_get_user, [sender_psid]))[0];
+    let PF;
+    try{
+      PF = user.promo + user.filliere;
+    } catch (error) {
+      console.log(error);
+      return true;
+    }
     if (user.promo === "4" && user.filliere === "CGP") {
       return true;
     }

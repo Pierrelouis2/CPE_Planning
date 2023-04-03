@@ -44,6 +44,9 @@ app.use(cookieParser());
 
 // INIT DB
 let db = new sqlite3.Database("users.db");
+db.on("error", function(error) {
+  console.log("Getting an error on DB: ", error, " date = ", writeMessage.getCurrentDate());
+}); 
 const queryDB = promisify(db.all).bind(db); // used for get info from db
 
 // INIT CONSTANTS
@@ -61,6 +64,27 @@ const mypassword = 'mypassword'
 
 // a variable to save a session
 var session;
+const MSO = {
+    "SSO": "Stratégie de synthèse organique",
+    "CO2": "Chimie Organometallique 2, approche orbitalaire",
+    "IM": "Ingénierie Macromoléculaire",
+    "SSP": "Simulation stationnaire des procédés",
+    "CMH": "Chimie médicinale et hétérocycles",
+    "GRCA": "Génie de la réaction chimique avancée",
+    "TE": "Transition énergétique",
+    "AL": "Analyses en lignes",
+    "SM": "Synthèse Macromoléculaire",
+    "SMB": "Synthèse de molécules bioactives",
+    "NN": "Nanochimie, nanomatériaux",
+    "CN": "Chimie nucléaire",
+    "ADNSC": "Analyse de données - le numérique au service de la chimie",
+    "CAM": "Conception et application du médicament",
+    "TSA": "Techniques séparatives avancées",
+    "CDD": "Catalyse et développement durable",
+    "GP": "Génie de la polymérisation",
+    "RMN": "RMN appliquée à la chimie moléculaire",
+    "MN": "Méthodes Numériques"
+}
 
 // Creation of a minimalist website for somone who might visit the url
 app.get("/", (req, res) => {
@@ -232,17 +256,21 @@ async function handlePostback(sender_psid, received_postback) {
         console.log("new user");
         let sql_new_user = `INSERT INTO user (id_user) VALUES (?)`;
         try {
-          db.run(sql_new_user, sender_psid);
+          db.run(sql_new_user, sender_psid, function (err) {
+            if (err) {
+              console.log(err.message);
+            }
+          });
           let inscription = "Inscription";
           let sql_uptade_status = "UPDATE user SET status=? WHERE id_user=?";
           db.run(sql_uptade_status, [inscription, sender_psid]);
           // ask for promo (3 or 4)
+          let messageRetour = {"text": "Vous avez été réinscrit, veuillez rensigner TOUTES les informations suivantes:\n- promo \n- filliere \n - groupe \n - majeur pour les 4ETI"};
+          r = await writeMessage.callSendAPI(sender_psid, messageRetour);
           response = templates.askTemplateNewUserPromo();
           r = await writeMessage.callSendAPI(sender_psid, response);
         } catch (err) {
-          console.log(
-            `error while inserting new user, date = ${writeMessage.getCurrentDate()}`
-          );
+          console.log(`error while inserting new user, date = ${writeMessage.getCurrentDate()}`);
           console.log("error: " + err);
           let message_error =
             "Il y a eu un probleme lors de votre inscription, rééssayez, si le probleme persiste contactez un administrateur";
@@ -257,7 +285,8 @@ async function handlePostback(sender_psid, received_postback) {
       } catch (err) {
         console.log( `error while updating REINSCRIPTION, date = ${writeMessage.getCurrentDate()} error: ${err}`);
       }
-
+      let messageRetour = {"text": "Vous avez été réinscrit, veuillez rensigner TOUTES les informations suivantes:\n- promo \n- filliere \n - groupe \n - majeur pour les 4ETI"};
+      r = await writeMessage.callSendAPI(sender_psid, messageRetour);
       // ask for promo (3 or 4)
       response = templates.askTemplateNewUserPromo();
       r = await writeMessage.callSendAPI(sender_psid, response);
@@ -315,12 +344,18 @@ async function handlePostback(sender_psid, received_postback) {
 
       if (await userInfo.is4CGP(sender_psid)) {
         console.log("4CGP");
-        message = {
-          text: `Le planning pour les CGP n'est pas encore disponible. On fait au plus vite ! `,
-        };
-        r = await writeMessage.callSendAPI(sender_psid, message);
-        message = { text: `Signé : les dev en SUSU` };
-        r = await writeMessage.callSendAPI(sender_psid, message);
+        // message = {
+        //   text: `Le planning pour les CGP n'est pas encore disponible. On fait au plus vite ! `,
+        // };
+        // r = await writeMessage.callSendAPI(sender_psid, message);
+        // message = { text: `Signé : les dev en SUSU` };
+        // r = await writeMessage.callSendAPI(sender_psid, message);
+        let messageMso = { "text": "Vous êtes en 4CGP, veuillez choisir vos mso (ca va etre long):" };
+        r = await writeMessage.callSendAPI(sender_psid, messageMso);
+        response = templates.fillTemplatesWithMSO(MSO);
+        for (let m of response) {
+            r = await writeMessage.callSendAPI(sender_psid, m);
+        }
         break;
       }
       // give days menu
@@ -348,6 +383,23 @@ async function handlePostback(sender_psid, received_postback) {
       r = await writeMessage.callSendAPI(sender_psid, response[1]);
       break;
     default:
+      // let's not make a long switch case with CGP MSOs
+      if (Object.keys(MSO).includes(payload)) {
+        let mso_name = MSO[payload];
+        // get the id of the mso
+        let sql_get_mso_id = `SELECT id_mso FROM mso WHERE name=?`;
+        let mso_id = (await queryDB(sql_get_mso_id, [mso_name]))[0];
+        console.log("mso_id = ", mso_id);
+        // get the id of the user
+        let user = await userInfo.getUser(sender_psid);
+        let sql_set_mso = `INSERT INTO tj_user_mso (id_user, id_mso) VALUES(?, ?)`;
+        db.run(sql_set_mso, [user.id_user, mso_id.id_mso]);
+        // get all mso of the user id
+        let sql_get_mso_user = `SELECT * FROM tj_user_mso WHERE id_user=?`;
+        let mso_user = (await queryDB(sql_get_mso_user, [user.id_user]))[0];
+        console.log(mso_user);
+      }
+
       console.log("unknown payload");
       message = {
         text: `Je n'ai pas compris votre demande. Veuillez réessayer.`,

@@ -229,7 +229,41 @@ function askTemplateMenu(psid) {
       }
     ]
   };
-}
+};
+
+function askTemplateMsoCGP(msos) {
+    // I have to say that it is ChatGPT who found this solution ;(
+    const templates = [];
+    let i = 1;
+    while (Object.keys(msos).length > 0) {
+        const buttons = [];
+        for (let j = 0; j < 3; j++) {
+            const msoKey = Object.keys(msos)[0];
+            if (!msoKey) {
+                break;
+            }
+            const msoValue = msos[msoKey];
+            delete msos[msoKey];
+            buttons.push({ type: "postback", title: msoValue, payload: msoKey,});
+        }
+        templates.push({
+            name: "ask",
+            attachment: {
+                type: "template",
+                payload: {
+                    template_type: "button",
+                    text: `mso n°${i}`,
+                    buttons: buttons,
+                },
+            },
+        });
+      i++;
+    }
+    return templates;
+  }
+  
+
+
 
 module.exports = {
     askTemplateJour,
@@ -240,6 +274,7 @@ module.exports = {
     askTemplateMajeureETI,
     askTemplateImage,
     askTemplateSendWeek,
-    askTemplateMenu
+    askTemplateMenu,
+    askTemplateMsoCGP
 }
 
