@@ -202,7 +202,7 @@ async function handlePostback(sender_psid, received_postback) {
           let sql_uptade_status = "UPDATE user SET status=? WHERE id_user=?";
           db.run(sql_uptade_status, [inscription, sender_psid]);
           // ask for promo (3 or 4)
-          let messageRetour = {"text": "Vous avez été inscrit, veuillez rensigner TOUTES les informations suivantes:\n- promo \n- filliere \n - groupe \n - majeur pour les 4ETI"};
+          let messageRetour = {"text": "Vous avez été réinscrit, veuillez rensigner TOUTES les informations suivantes:\n- promo \n- filliere \n - groupe \n - majeur pour les 4ETI"};
           r = await writeMessage.callSendAPI(sender_psid, messageRetour);
           response = templates.askTemplateNewUserPromo();
           r = await writeMessage.callSendAPI(sender_psid, response);
