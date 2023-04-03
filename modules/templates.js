@@ -276,7 +276,7 @@ function askTemplateMsoCGP() {
         tmp_template.attachment.payload.text = `mso n°${i}`;
         tmp_template.attachment.payload.buttons[i].title = value;
         tmp_template.attachment.payload.buttons[i].payload = key;
-        if (i === 2  || i === Object.keys(MSO).length - 1){
+        if (i == 2  || i == Object.keys(MSO).length - 1){
             lst_message.push(tmp_template);
             tmp_template = JSON.parse(JSON.stringify(template));
             i = 0;
