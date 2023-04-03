@@ -283,6 +283,7 @@ function askTemplateMsoCGP() {
         }
         i++;
     }
+    return lst_message;
 }
 
 
