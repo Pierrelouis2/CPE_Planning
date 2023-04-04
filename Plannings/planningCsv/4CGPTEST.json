@@ -1,0 +1,298 @@
+{
+    "LUNDI-45019": {
+        "Matin": {
+            "Strat\u00e9gie de Synth\u00e8se Organique": [
+                "Strat\u00e9gie de Synth\u00e8se Organique",
+                "10h30 - 12h30",
+                "Salle F002/003"
+            ],
+            "Ing\u00e9ni\u00e9rie Macromol\u00e9culaire": [
+                "Ing\u00e9ni\u00e9rie Macromol\u00e9culaire",
+                "10h30 - 12h30",
+                "Salle F006/007"
+            ],
+            "Spectrom\u00e9tries RMN et Masse Avanc\u00e9es": [
+                "Spectrom\u00e9tries RMN et Masse Avanc\u00e9es",
+                "10h30 - 12h30",
+                "Salle F002/003"
+            ],
+            "Introduction aux Biotechnologies et Bioproc\u00e9d\u00e9s": [
+                "Introduction aux Biotechnologies et",
+                "Bioproc\u00e9d\u00e9s",
+                "10h30 - 12h30",
+                "Salles F004/005 et F008"
+            ],
+            "Simulation des Proc\u00e9d\u00e9s": [
+                "Simulation des Proc\u00e9d\u00e9s",
+                "8h00 - 10h00 : Groupe 1",
+                "10h00 - 12h00 : Groupe 2",
+                "Salle I300"
+            ],
+            "Chimie Organom\u00e9tallique et Approche Orbitalaire": [
+                "Chimie Organom\u00e9tallique et Approche",
+                "Orbitalaire",
+                "10h30 - 12h30",
+                "Salle F006/007",
+                "13h10 - 18h00",
+                "LANGUES",
+                "(Voir planning sp\u00e9cifique sur le tableau",
+                "des langues situ\u00e9 pr\u00e8s de la salle E109)"
+            ],
+            "Conception et Application du M\u00e9dicament": [],
+            "Techniques S\u00e9paratives avanc\u00e9es et Sp\u00e9ciation": [],
+            "Catalyse et D\u00e9veloppement Durable": [],
+            "G\u00e9nie de la Polym\u00e9risation": [],
+            "M\u00e9thodes Spectroscopiques pour la Synth\u00e8se Organique": [],
+            "M\u00e9thodes Num\u00e9riques": [],
+            "Synth\u00e8se de mol\u00e9cules bioactives": [],
+            "De la mol\u00e9cule aux nanomat\u00e9riaux": [],
+            "Chimie nucl\u00e9aire, mesure, analyse et cycle du combustible": [],
+            "Chimie et Num\u00e9rique": [],
+            "Microbiologie, Immunologie, El\u00e9ments de g\u00e9nie g\u00e9n\u00e9tique": [],
+            "Pour tous": []
+        },
+        "Aprem": {}
+    },
+    "MARDI -45020": {
+        "Matin": {
+            "Groupe A": [
+                "Groupe A",
+                "Etude de cas - Formulation",
+                "8h00 - 12h15",
+                "Petit Amphi"
+            ],
+            "Groupe B": [
+                "Groupe B",
+                "Projets d'Industrialisation",
+                "8h00 - 12h00",
+                "Groupes B1 \u00e0 B6 : J-P. HERAUD",
+                "Salle E109",
+                "Groupes B7 \u00e0 B12 : J. GROLLEMUND",
+                "Salle F001"
+            ],
+            "Groupe C": [
+                "Groupe C",
+                "Pas de Cours",
+                "8h00 - 12h15",
+                "Salle F004/005",
+                "Groupe C",
+                "Projets d'Industrialisation"
+            ],
+            "Pour tous": []
+        },
+        "Aprem": {
+            "Groupe A": [
+                "Groupe A",
+                "Pas de Cours"
+            ],
+            "Groupe B": [
+                "Groupe B",
+                "Etude de cas - Formulation",
+                "13h30 - 17h30",
+                "Groupes C1 \u00e0 C6 : P. CUILLE",
+                "Salle F001",
+                "Groupes C7 \u00e0 C12 : M. DOLIDIER",
+                "Salle F002"
+            ],
+            "Groupe C": [],
+            "Pour tous": []
+        }
+    },
+    "MERCREDI-45021": {
+        "Matin": {
+            "Groupe A": [
+                "Groupe A",
+                "Pas de Cours"
+            ],
+            "Groupe B": [
+                "Groupe B",
+                "Pas de Cours"
+            ],
+            "Groupe C": [
+                "Groupe C",
+                "TP Formulation",
+                "8h00 - 12h15",
+                "Labo Cin\u00e9tique - B\u00e2t. D - 3\u00e8me \u00e9tage"
+            ],
+            "Pour tous": []
+        },
+        "Aprem": {
+            "Groupe A": [
+                "Groupe A",
+                "Projets d'Industrialisation",
+                "13h30 - 17h30",
+                "Groupes A1 \u00e0 A3 : C. CROISET",
+                "Salle E109",
+                "Groupes A4 \u00e0 A6 : JM. PAUTROT",
+                "Salle F101",
+                "Groupes A7 \u00e0 A12 : M. ARNAUD",
+                "Salle F001"
+            ],
+            "Groupe B": [
+                "Groupe B",
+                "Pas de Cours"
+            ],
+            "Groupe C": [
+                "Groupe C",
+                "Etude de cas - Formulation",
+                "13h30 - 17h45",
+                "Algeco H001"
+            ],
+            "Pour tous": []
+        }
+    },
+    "JEUDI-45022": {
+        "Matin": {
+            "Strat\u00e9gie de Synth\u00e8se Organique": [],
+            "Ing\u00e9ni\u00e9rie Macromol\u00e9culaire": [],
+            "Spectrom\u00e9tries RMN et Masse Avanc\u00e9es": [],
+            "Introduction aux Biotechnologies et Bioproc\u00e9d\u00e9s": [],
+            "Simulation des Proc\u00e9d\u00e9s": [],
+            "Chimie Organom\u00e9tallique et Approche Orbitalaire": [],
+            "Conception et Application du M\u00e9dicament": [
+                "Conception et Application du",
+                "M\u00e9dicament",
+                "8h00 - 12h15",
+                "T. BILLARD",
+                "Petit Amphi"
+            ],
+            "Techniques S\u00e9paratives avanc\u00e9es et Sp\u00e9ciation": [
+                "Techniques S\u00e9paratives avanc\u00e9es",
+                "et Sp\u00e9ciation",
+                "8h00 - 12h15",
+                "K. FAURE",
+                "Salle F101"
+            ],
+            "Catalyse et D\u00e9veloppement Durable": [
+                "Catalyse et D\u00e9veloppement Durable",
+                "8h00 - 10h00 : J. BOUSQUET",
+                "10h15 - 12h15 : A. QUADRELLI",
+                "Salle F001"
+            ],
+            "G\u00e9nie de la Polym\u00e9risation": [
+                "G\u00e9nie de la Polym\u00e9risation",
+                "8h00 - 10h00",
+                "T. MCKENNA",
+                "Salle G109"
+            ],
+            "M\u00e9thodes Spectroscopiques pour la Synth\u00e8se Organique": [
+                "M\u00e9thodes Spectroscopiques pour la",
+                "Synth\u00e8se Organique",
+                "8h00 - 10h00 : A. BAUDOUIN",
+                "10h15 - 12h15 : A. RENAUDAT",
+                "Salle E109"
+            ],
+            "M\u00e9thodes Num\u00e9riques": [
+                "M\u00e9thodes Num\u00e9riques",
+                "Pas de Cours"
+            ],
+            "Synth\u00e8se de mol\u00e9cules bioactives": [],
+            "De la mol\u00e9cule aux nanomat\u00e9riaux": [],
+            "Chimie nucl\u00e9aire, mesure, analyse et cycle du combustible": [],
+            "Chimie et Num\u00e9rique": [],
+            "Microbiologie, Immunologie, El\u00e9ments de g\u00e9nie g\u00e9n\u00e9tique": [],
+            "Pour tous": []
+        },
+        "Aprem": {}
+    },
+    "VENDREDI-45023": {
+        "Matin": {
+            "Strat\u00e9gie de Synth\u00e8se Organique": [],
+            "Ing\u00e9ni\u00e9rie Macromol\u00e9culaire": [],
+            "Spectrom\u00e9tries RMN et Masse Avanc\u00e9es": [],
+            "Introduction aux Biotechnologies et Bioproc\u00e9d\u00e9s": [],
+            "Simulation des Proc\u00e9d\u00e9s": [],
+            "Chimie Organom\u00e9tallique et Approche Orbitalaire": [],
+            "Conception et Application du M\u00e9dicament": [],
+            "Techniques S\u00e9paratives avanc\u00e9es et Sp\u00e9ciation": [],
+            "Catalyse et D\u00e9veloppement Durable": [],
+            "G\u00e9nie de la Polym\u00e9risation": [],
+            "M\u00e9thodes Spectroscopiques pour la Synth\u00e8se Organique": [],
+            "M\u00e9thodes Num\u00e9riques": [],
+            "Synth\u00e8se de mol\u00e9cules bioactives": [
+                "Synth\u00e8se de mol\u00e9cules bioactives",
+                "8h00 - 12h15",
+                "T. BILLARD",
+                "Salle E109"
+            ],
+            "De la mol\u00e9cule aux nanomat\u00e9riaux": [
+                "De la mol\u00e9cule aux nanomat\u00e9riaux",
+                "8h00 - 10h00 : S. DANIELE",
+                "10h15 - 12h15 : C. THIEULEUX",
+                "Algeco H003"
+            ],
+            "Chimie nucl\u00e9aire, mesure, analyse et cycle du combustible": [
+                "Chimie nucl\u00e9aire, mesure, analyse et",
+                "cycle du combustible",
+                "8h00 - 10h00 : C. OBERLIN",
+                "10h15 - 12h15 : N. MONCOFFRE",
+                "Salle F101"
+            ],
+            "Chimie et Num\u00e9rique": [
+                "Chimie et Num\u00e9rique",
+                "8h00 - 12h15",
+                "O. CARRILLO",
+                "Salle I203"
+            ],
+            "Microbiologie, Immunologie, El\u00e9ments de g\u00e9nie g\u00e9n\u00e9tique": [
+                "Microbiologie, Immunologie, El\u00e9ments",
+                "de g\u00e9nie g\u00e9n\u00e9tique",
+                "8h00 - 12h15",
+                "S. BUFFIN",
+                "Petit Amphi"
+            ],
+            "Pour tous": []
+        },
+        "Aprem": {
+            "Strat\u00e9gie de Synth\u00e8se Organique": [],
+            "Ing\u00e9ni\u00e9rie Macromol\u00e9culaire": [],
+            "Spectrom\u00e9tries RMN et Masse Avanc\u00e9es": [],
+            "Introduction aux Biotechnologies et Bioproc\u00e9d\u00e9s": [],
+            "Simulation des Proc\u00e9d\u00e9s": [],
+            "Chimie Organom\u00e9tallique et Approche Orbitalaire": [],
+            "Conception et Application du M\u00e9dicament": [
+                "Conception et Application du",
+                "M\u00e9dicament",
+                "13h30 - 17h45",
+                "T. BILLARD",
+                "Salle F006/007"
+            ],
+            "Techniques S\u00e9paratives avanc\u00e9es et Sp\u00e9ciation": [
+                "Techniques S\u00e9paratives avanc\u00e9es",
+                "et Sp\u00e9ciation",
+                "13h30 - 17h45",
+                "K. FAURE",
+                "Salle F101"
+            ],
+            "Catalyse et D\u00e9veloppement Durable": [
+                "Catalyse et D\u00e9veloppement Durable",
+                "13h30 - 15h30",
+                "J. BOUSQUET",
+                "Salle F002"
+            ],
+            "G\u00e9nie de la Polym\u00e9risation": [
+                "G\u00e9nie de la Polym\u00e9risation",
+                "13h30 - 15h30",
+                "T. MCKENNA",
+                "Salle E109"
+            ],
+            "M\u00e9thodes Spectroscopiques pour la Synth\u00e8se Organique": [
+                "M\u00e9thodes Spectroscopiques pour la",
+                "Synth\u00e8se Organique",
+                "13h30 - 15h30",
+                "G. BORREGO",
+                "Salle F001"
+            ],
+            "M\u00e9thodes Num\u00e9riques": [
+                "M\u00e9thodes Num\u00e9riques",
+                "Pas de Cours"
+            ],
+            "Synth\u00e8se de mol\u00e9cules bioactives": [],
+            "De la mol\u00e9cule aux nanomat\u00e9riaux": [],
+            "Chimie nucl\u00e9aire, mesure, analyse et cycle du combustible": [],
+            "Chimie et Num\u00e9rique": [],
+            "Microbiologie, Immunologie, El\u00e9ments de g\u00e9nie g\u00e9n\u00e9tique": [],
+            "Pour tous": []
+        }
+    }
+}
