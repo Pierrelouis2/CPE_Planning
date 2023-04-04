@@ -282,7 +282,7 @@ async function handlePostback(sender_psid, received_postback) {
         let sql_delete_mso = `DELETE FROM tj_user_mso WHERE id_user=?`;
         db.run(sql_delete_mso, sender_psid, function (err) {
           if (err) {
-            console.log(err.message);
+            console.log(`Error table when reinscription 4CGP, date = ${writeMessage.getCurrentDate()}: error = ${err.message}`);
           }
         });
       }
