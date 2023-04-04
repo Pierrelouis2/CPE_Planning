@@ -55,7 +55,7 @@ For the database we are using an sqlite database. This version works for all stu
 /!\ The database is not finished yet, we are still working on it. 
 The database is composed of 3 tables:  
 
-- `users` : 
+- `users` :
     - `id_user` : the user's id
     - `promo` : the user's promotion
     - `filliere` : the user's fillière
@@ -66,7 +66,7 @@ The database is composed of 3 tables:
   - `id_mso`: the user's MSO
 - `MSO` :
   - `id_mso` : the MSO's id
-  - `name_mso` : the MSO's name 
+  - `name_mso` : the MSO's name
   
 ### Database MPD
 
