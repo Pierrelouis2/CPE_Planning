@@ -56,25 +56,23 @@ const MAJEURS = {
   IMI: "IMAGE",
 };
 const MSO = {
-  SSO: "Stratégie de synthèse organique",
-  CO2: "Chimie Organometallique 2, approche orbitalaire",
-  IM: "Ingénierie Macromoléculaire",
-  SSP: "Simulation stationnaire des procédés",
-  CMH: "Chimie médicinale et hétérocycles",
-  GRCA: "Génie de la réaction chimique avancée",
-  TE: "Transition énergétique",
-  AL: "Analyses en lignes",
-  SM: "Synthèse Macromoléculaire",
-  SMB: "Synthèse de molécules bioactives",
-  NN: "Nanochimie, nanomatériaux",
-  CN: "Chimie nucléaire",
-  ADNSC: "Analyse de données - le numérique au service de la chimie",
-  CAM: "Conception et application du médicament",
-  TSA: "Techniques séparatives avancées",
-  CDD: "Catalyse et développement durable",
-  GP: "Génie de la polymérisation",
-  RMN: "RMN appliquée à la chimie moléculaire",
-  MN: "Méthodes Numériques"
+    SSO: "Stratégie de Synthèse Organique",
+    IM: "Ingéniérie Macromoléculaire",
+    SMA: "Spectrométries RMN et Masse Avancées",
+    IBB: "Introduction aux Biotechnologies et Bioprocédés",
+    SP: "Simulation des Procédés",
+    COO: "Chimie Organométallique et Approche Orbitalaire",
+    CAM: "Conception et Application du Médicament",
+    TSS: "Techniques Séparatives avancées et Spéciation",
+    CDD: "Catalyse et Développement Durable",
+    GP: "Génie de la Polymérisation",
+    MSSO: "Méthodes Spectroscopiques pour la Synthèse Organique",
+    MN: "Méthodes Numériques",
+    SMB: "Synthèse de molécules bioactives",
+    MN: "De la molécule aux nanomatériaux",
+    CNMACC: "Chimie nucléaire, mesure, analyse et cycle du combustible",
+    CN: "Chimie et Numérique",
+    MIE: "Microbiologie, Immunologie, Eléments de génie génétique"
 };
 
 // TO CHANGE PASSWORD AND USERNAME TEST
