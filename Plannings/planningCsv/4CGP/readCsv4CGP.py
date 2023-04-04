@@ -33,7 +33,7 @@ def createSchedule(Df):
                 # on ajoute le jour
                 DicoJour["jour"] = obj +"-" + value
             else :
-                if value in {'13h-14h30','13h30-17h45','13h10-18h', '13h30-15h30', '15h45-17h45', '13h30 - 14h30','13h30 - 17h45','13h30 - 17h30','13h30-15h45','13h30 - 15h30'} :
+                if value in {'13h-14h30','13h30-17h45','13h10-18h', '13h30-15h30', '15h45-17h45', '13h30 - 14h30','13h30 - 17h45','13h30 - 17h30','13h30-15h45','13h30 - 15h30', '13h10 - 18h', '13h10 - 18h00', '13h10-18h00'} :
                   IsAprem = True
                 elif value in {'8h-12h15','8h - 12h15', '8h30 - 10h00', '8h-10h', '10h15-12h15','10h15 - 12h15','8h00 - 10h00', '8h- 10h','8h - 10h','8h00 - 12h15'}:
                     IsAprem = False
@@ -62,7 +62,7 @@ def filtre4CGP(LstSemaine) :
     # init variables 
     Semaine =  {}
     currentGrp = "Pour tous" 
-    demi_jour ={"Matin", "Aprem"} 
+    demi_jour =("Matin", "Aprem") 
     GRP = ( "Groupe A", "Groupe B", "Groupe C", "Pour tous" )
     MSO = (
         "Stratégie de Synthèse Organique",
@@ -99,6 +99,7 @@ def filtre4CGP(LstSemaine) :
             Semaine[jour["jour"]][dj] = {}
             dicMso = copy.deepcopy(dicMsoinit)
             dicGrp = copy.deepcopy(dicGrpinit)
+            dicPT = {"Pour tous" : []}
             GrpOrMso = None
             currentGrp = "Pour tous"
             for i,Case in enumerate(jour[dj]):
@@ -121,11 +122,16 @@ def filtre4CGP(LstSemaine) :
                     dicGrp[currentGrp].append(Case)
                 elif GrpOrMso == "Mso":
                     dicMso[currentGrp].append(Case)
+                else :
+                    dicPT["Pour tous"].append(Case)
+                
             # add the right dictionnary to the right day
             if GrpOrMso == "Grp":
                 Semaine[jour["jour"]][dj] = copy.deepcopy(dicGrp)
             elif GrpOrMso == "Mso":
                 Semaine[jour["jour"]][dj] = copy.deepcopy(dicMso)
+            
+            Semaine[jour["jour"]][dj]["Pour tous"] = copy.deepcopy(dicPT)
     
     print('fin')
     print(Semaine)
