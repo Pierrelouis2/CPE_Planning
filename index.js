@@ -32,7 +32,7 @@ app.use(sessions({
   cookie: { maxAge: oneDay },
   resave: false
 }));
-let initpath = path.join(__dirname,'static','public')
+let initpath = path.join(__dirname,'static','public');
 app.use(express.static(initpath));
 app.use(cookieParser());
 
