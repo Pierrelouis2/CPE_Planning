@@ -32,6 +32,7 @@ def create_table(conn, create_table_sql):
         print(e)
 
 
+
 def main():
     database = "users.db"
 
@@ -54,6 +55,7 @@ def main():
                                     name_mso text
                                 );"""
 
+    sql_delete_mso_table = """DROP TABLE mso;"""
     # create a database connection
     conn = create_connection(database)
 
@@ -64,31 +66,30 @@ def main():
 
         # create tasks table
         create_table(conn, sql_create_tj_user_mso_table)
-
+        #delete mso table
+        create_table(conn, sql_delete_mso_table)
         # create tasks table
         create_table(conn, sql_create_mso_table)
 
         # insert data
         mso = {
-            "SSO": "Stratégie de synthèse organique",
-            "CO2": "Chimie Organometallique 2, approche orbitalaire",
-            "IM": "Ingénierie Macromoléculaire",
-            "SSP": "Simulation stationnaire des procédés",
-            "CMH": "Chimie médicinale et hétérocycles",
-            "GRCA": "Génie de la réaction chimique avancée",
-            "TE": "Transition énergétique",
-            "AL": "Analyses en lignes",
-            "SM": "Synthèse Macromoléculaire",
+            "SSO": "Stratégie de Synthèse Organique",
+            "IM": "Ingéniérie Macromoléculaire",
+            "SMA": "Spectrométries RMN et Masse Avancées",
+            "IBB": "Introduction aux Biotechnologies et Bioprocédés",
+            "SP": "Simulation des Procédés",
+            "COO": "Chimie Organométallique et Approche Orbitalaire",
+            "CAM": "Conception et Application du Médicament",
+            "TSS": "Techniques Séparatives avancées et Spéciation",
+            "CDD": "Catalyse et Développement Durable",
+            "GP": "Génie de la Polymérisation",
+            "MSSO": "Méthodes Spectroscopiques pour la Synthèse Organique",
+            "MN": "Méthodes Numériques",
             "SMB": "Synthèse de molécules bioactives",
-            "NN": "Nanochimie, nanomatériaux",
-            "CN": "Chimie nucléaire",
-            "ADNSC": "Analyse de données - le numérique au service de la chimie",
-            "CAM": "Conception et application du médicament",
-            "TSA": "Techniques séparatives avancées",
-            "CDD": "Catalyse et développement durable",
-            "GP": "Génie de la polymérisation",
-            "RMN": "RMN appliquée à la chimie moléculaire",
-            "MN": "Méthodes Numériques"
+            "MN": "De la molécule aux nanomatériaux",
+            "CNMACC": "Chimie nucléaire, mesure, analyse et cycle du combustible",
+            "CN": "Chimie et Numérique",
+            "MIE": "Microbiologie, Immunologie, Eléments de génie génétique",
         }
         # create dict of name_mso: id_mso
         msod = {i: list(mso.values())[i] for i in range(len(mso.values()))}
