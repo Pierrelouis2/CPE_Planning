@@ -25,6 +25,7 @@ app.listen(port, "0.0.0.0", () => {
   console.log(`App listening on port ${port}!`);
   facebookInit.set_get_started();
 });
+const oneDay = 1000 *60 * 60 * 24 ;
 app.use(sessions({
   secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
   saveUninitialized:true,
@@ -35,7 +36,7 @@ app.use(express.static(initpath));
 app.use(cookieParser());
 
 //  INIT Webserver variables
-const oneDay = 1000 *60 * 60 * 24 ;
+
 let initpath = path.join(__dirname,'static','public')
 var session;  
 
