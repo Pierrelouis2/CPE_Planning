@@ -2,6 +2,8 @@ let userInfo = require("./userInfo"),
   variables = require("./variables"),
   fs = require("fs"),
   config = require("config"),
+  sqlite3 = require("sqlite3"),
+  { promisify } = require("util"),
   request = require("request");
 
 const GROUPE3CGP = {
@@ -9,6 +11,8 @@ const GROUPE3CGP = {
   "B": "Groupe 2",
   "C": "Groupe 3"
 };
+let db = new sqlite3.Database("users.db");
+const queryDB = promisify(db.all).bind(db);
 
 async function readCsv(dir, Jour, sender_psid,user){
     let planningRen = {};
