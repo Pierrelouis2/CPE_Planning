@@ -26,6 +26,7 @@ async function readCsv(dir, Jour, sender_psid,user){
         Date = day;
       }
     }
+    console.log(Date)
     console.log(getCurrentDate() , "readCsv user : ", user); 
     const demi_jour = ["Matin", "Aprem"];
     let GM = user.groupe;
@@ -46,7 +47,7 @@ async function readCsv(dir, Jour, sender_psid,user){
       }
     }
     for (let dj of demi_jour) { 
-      planningRen[dj] = []; 
+      planningRen[dj] = [];
       if (planningG[Date][dj][GM] !== null) {
         planningRen[dj].push(planningG[Date][dj][GM]);
         planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
