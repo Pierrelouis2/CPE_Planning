@@ -277,6 +277,15 @@ async function handlePostback(sender_psid, received_postback) {
       } catch (err) {
         console.log( `error while updating REINSCRIPTION, date = ${writeMessage.getCurrentDate()} error: ${err}`);
       }
+      // empty the mso table if its a 4CGP
+      if (await userInfo.is4CGP(sender_psid)){
+        let sql_delete_mso = `DELETE FROM tj_user_mso WHERE id_user=?`;
+        db.run(sql_delete_mso, sender_psid, function (err) {
+          if (err) {
+            console.log(err.message);
+          }
+        });
+      }
       let messageRetour = {"text": "Vous avez été réinscrit, veuillez rensigner TOUTES les informations suivantes:\n- promo \n- filliere \n - groupe \n - majeur pour les 4ETI"};
       r = await writeMessage.callSendAPI(sender_psid, messageRetour);
       // ask for promo (3 or 4)
