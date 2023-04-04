@@ -55,7 +55,7 @@ For the database we are using an sqlite database. This version works for all stu
 /!\ The database is not finished yet, we are still working on it. 
 The database is composed of 3 tables:  
 
-- `users` : 
+- `users` :
     - `id_user` : the user's id
     - `promo` : the user's promotion
     - `filliere` : the user's fillière
@@ -63,10 +63,10 @@ The database is composed of 3 tables:
     - `majeur`: the user's major
 - `TJ_User_MSO` :
   - `id_user` : the user's id
-  - `mso`: the user's MSO
+  - `id_mso`: the user's MSO
 - `MSO` :
   - `id_mso` : the MSO's id
-  - `mso` : the MSO's name 
+  - `name_mso` : the MSO's name
   
 ### Database MPD
 
@@ -91,7 +91,7 @@ The database is composed of 3 tables:
 - [X] Manage SQL errors (try catch)
 - [X] Make a better readme 
 - [ ] Make a better code
-- [ ] For the future : make a web interface for CPE admin to post the planning (manage the time)
+- [ ] For the future : make a web interface for CPE admin to post the planning (manage timetable)
 - [X] Make more comments in the code so it's easier to understand when you come back to it after a long time
 - [ ] Don't share the token on github !!!!!!!!!
 - [ ] Don't share the code to  ETI students !!!!!!!!!
