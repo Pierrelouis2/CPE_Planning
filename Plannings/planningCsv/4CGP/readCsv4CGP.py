@@ -131,7 +131,7 @@ def filtre4CGP(LstSemaine) :
             elif GrpOrMso == "Mso":
                 Semaine[jour["jour"]][dj] = copy.deepcopy(dicMso)
             
-            Semaine[jour["jour"]][dj]["Pour tous"] = copy.deepcopy(dicPT)
+            Semaine[jour["jour"]][dj]["Pour tous"] = copy.deepcopy(dicPT["Pour tous"])
     
     print('fin')
     print(Semaine)

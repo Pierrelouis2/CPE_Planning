@@ -45,24 +45,20 @@
             "Chimie nucl\u00e9aire, mesure, analyse et cycle du combustible": [],
             "Chimie et Num\u00e9rique": [],
             "Microbiologie, Immunologie, El\u00e9ments de g\u00e9nie g\u00e9n\u00e9tique": [],
-            "Pour tous": {
-                "Pour tous": [
-                    "8h00 - 12h15",
-                    "Examen 1\u00e8re session",
-                    "Modules semi-optionnels",
-                    "S\u00e9rie 2"
-                ]
-            }
+            "Pour tous": [
+                "8h00 - 12h15",
+                "Examen 1\u00e8re session",
+                "Modules semi-optionnels",
+                "S\u00e9rie 2"
+            ]
         },
         "Aprem": {
-            "Pour tous": {
-                "Pour tous": [
-                    "13h10 - 18h00",
-                    "LANGUES",
-                    "(Voir planning sp\u00e9cifique sur le tableau",
-                    "des langues situ\u00e9 pr\u00e8s de la salle E109)"
-                ]
-            }
+            "Pour tous": [
+                "13h10 - 18h00",
+                "LANGUES",
+                "(Voir planning sp\u00e9cifique sur le tableau",
+                "des langues situ\u00e9 pr\u00e8s de la salle E109)"
+            ]
         }
     },
     "MARDI -04/04/2023": {
@@ -90,11 +86,9 @@
                 "Groupe C",
                 "Projets d'Industrialisation"
             ],
-            "Pour tous": {
-                "Pour tous": [
-                    "8h00 - 12h15"
-                ]
-            }
+            "Pour tous": [
+                "8h00 - 12h15"
+            ]
         },
         "Aprem": {
             "Groupe A": [
@@ -111,11 +105,9 @@
                 "Salle F002"
             ],
             "Groupe C": [],
-            "Pour tous": {
-                "Pour tous": [
-                    "13h30 - 17h45"
-                ]
-            }
+            "Pour tous": [
+                "13h30 - 17h45"
+            ]
         }
     },
     "MERCREDI-05/04/2023": {
@@ -134,11 +126,9 @@
                 "8h00 - 12h15",
                 "Labo Cin\u00e9tique - B\u00e2t. D - 3\u00e8me \u00e9tage"
             ],
-            "Pour tous": {
-                "Pour tous": [
-                    "8h00 - 12h15"
-                ]
-            }
+            "Pour tous": [
+                "8h00 - 12h15"
+            ]
         },
         "Aprem": {
             "Groupe A": [
@@ -162,11 +152,9 @@
                 "13h30 - 17h45",
                 "Algeco H001"
             ],
-            "Pour tous": {
-                "Pour tous": [
-                    "13h30 - 17h45"
-                ]
-            }
+            "Pour tous": [
+                "13h30 - 17h45"
+            ]
         }
     },
     "JEUDI-06/04/2023": {
@@ -219,20 +207,16 @@
             "Chimie nucl\u00e9aire, mesure, analyse et cycle du combustible": [],
             "Chimie et Num\u00e9rique": [],
             "Microbiologie, Immunologie, El\u00e9ments de g\u00e9nie g\u00e9n\u00e9tique": [],
-            "Pour tous": {
-                "Pour tous": [
-                    "8h00 - 12h15",
-                    "Modules Semi-Optionnels",
-                    "S\u00e9rie 5"
-                ]
-            }
+            "Pour tous": [
+                "8h00 - 12h15",
+                "Modules Semi-Optionnels",
+                "S\u00e9rie 5"
+            ]
         },
         "Aprem": {
-            "Pour tous": {
-                "Pour tous": [
-                    "13h30 - 17h45"
-                ]
-            }
+            "Pour tous": [
+                "13h30 - 17h45"
+            ]
         }
     },
     "VENDREDI-07/04/2023": {
@@ -281,13 +265,11 @@
                 "S. BUFFIN",
                 "Petit Amphi"
             ],
-            "Pour tous": {
-                "Pour tous": [
-                    "8h00 - 10h00",
-                    "Modules Semi-Optionnels",
-                    "S\u00e9rie 4"
-                ]
-            }
+            "Pour tous": [
+                "8h00 - 10h00",
+                "Modules Semi-Optionnels",
+                "S\u00e9rie 4"
+            ]
         },
         "Aprem": {
             "Strat\u00e9gie de Synth\u00e8se Organique": [],
@@ -338,13 +320,11 @@
             "Chimie nucl\u00e9aire, mesure, analyse et cycle du combustible": [],
             "Chimie et Num\u00e9rique": [],
             "Microbiologie, Immunologie, El\u00e9ments de g\u00e9nie g\u00e9n\u00e9tique": [],
-            "Pour tous": {
-                "Pour tous": [
-                    "13h30 - 17h45",
-                    "Modules Semi-Optionnels",
-                    "S\u00e9rie 5"
-                ]
-            }
+            "Pour tous": [
+                "13h30 - 17h45",
+                "Modules Semi-Optionnels",
+                "S\u00e9rie 5"
+            ]
         }
     }
 }

@@ -10,7 +10,7 @@ const GROUPE3CGP = {
   "C": "Groupe 3"
 };
 
-async function readCsv(dir, Jour, sender_psid,user) {
+async function readCsv(dir, Jour, sender_psid,user){
     let planningRen = {};
     let rawdata;
     try {
@@ -36,18 +36,29 @@ async function readCsv(dir, Jour, sender_psid,user) {
     } else {
       if (user.promo === '3'){
         GM = GROUPE3CGP[user.groupe];
-        console.log("GM = ", GM)
-      } else {
-        return;
+        console.log("GM = ", GM);
+      } if (user.promo === '4') {
+          if(user.filliere === 'CGP'){
+            // get mso user
+            sql_mso_user = "SELECT name_mso FROM mso INNER JOIN tj_user_mso ON tj_user_mso.id_mso = mso.id_mso WHERE tj_user_mso.id_user=?";
+            var mso_user = (await queryDB(sql_mso_user, [sender_psid]))[0];
+          }
       }
     }
     for (let dj of demi_jour) { 
       planningRen[dj] = []; 
       if (planningG[Date][dj][GM] !== null) {
         planningRen[dj].push(planningG[Date][dj][GM]);
-      }
-      planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
-    }
+        planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
+      } else {
+        for (let mso in mso_user){
+          if (planningG[Date][dj][mso] !== null){
+            planningRen[dj].push(planningG[Date][dj][mso]);
+          };
+        };
+        planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
+      };
+    };
     return planningRen;
   }
 
@@ -144,5 +155,5 @@ module.exports = {
     readCsv,
     constructMessage,
     getCurrentDate,
-    callSendAPI,
+    callSendAPI
 };
