@@ -63,10 +63,10 @@ The database is composed of 3 tables:
     - `majeur`: the user's major
 - `TJ_User_MSO` :
   - `id_user` : the user's id
-  - `mso`: the user's MSO
+  - `id_mso`: the user's MSO
 - `MSO` :
   - `id_mso` : the MSO's id
-  - `mso` : the MSO's name 
+  - `name_mso` : the MSO's name 
   
 ### Database MPD
 
