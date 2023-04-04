@@ -23,6 +23,7 @@ def createSchedule(Df):
         LstTemp = []
         # parcour des cases non nulles 
         for case in Df[obj] :
+
             if case != 0 :
                 LstTemp.append(case.strip())
 
@@ -99,6 +100,7 @@ def filtre4CGP(LstSemaine) :
             dicMso = copy.deepcopy(dicMsoinit)
             dicGrp = copy.deepcopy(dicGrpinit)
             GrpOrMso = None
+            currentGrp = "Pour tous"
             for i,Case in enumerate(jour[dj]):
                 try :
                     concatMSO = (Case + " " + jour[dj][i+1])
