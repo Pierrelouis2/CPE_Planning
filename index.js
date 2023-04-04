@@ -378,8 +378,10 @@ async function handlePostback(sender_psid, received_postback) {
       r = await writeMessage.callSendAPI(sender_psid, response[1]);
       break;
     default:
-      // let's not make a long switch case with CGP MSOs
+      // let's not make a long switch case with CGP MSO
+      console.log(Object.keys(MSO))
       if (Object.keys(MSO).includes(payload)) {
+        console.log("MSO payload")
         let mso_name = MSO[payload];
         console.log(`mso_name = ${mso_name} at ${writeMessage.getCurrentDate()}`);
         // get the id of the mso
@@ -395,9 +397,6 @@ async function handlePostback(sender_psid, received_postback) {
                 writeMessage.callSendAPI(sender_psid, messageAlreadyInMso);
             }
         });
-        // get all mso of the user id
-        let sql_get_mso_user = `SELECT * FROM tj_user_mso WHERE id_user=?`;
-        let mso_user = (await queryDB(sql_get_mso_user, [user.id_user]))[0];
       } else {
         console.log("unknown payload");
         message = {text: `Je n'ai pas compris votre demande. Veuillez réessayer.`,};
