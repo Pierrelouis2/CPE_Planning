@@ -10,7 +10,7 @@ let db = new sqlite3.Database("users.db");
 const queryDB = promisify(db.all).bind(db);
 
 async function isReady(sender_psid) {
-let lst_promo_ready = ["4ETI", "3ETI", "3CGP"];
+let lst_promo_ready = ["4ETI", "3ETI", "3CGP", "4CGP"];
 let sql_get_user = "SELECT * FROM user WHERE id_user=?";
 let user = (await queryDB(sql_get_user, [sender_psid]))[0];
 console.log(`user is4A: ${user}`);
