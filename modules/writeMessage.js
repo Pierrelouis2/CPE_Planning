@@ -46,15 +46,10 @@ async function readCsv(dir, Jour, sender_psid,user){
           if(user.filliere === 'CGP'){
             // get mso user
             sql_mso_user = "SELECT name_mso FROM mso INNER JOIN tj_user_mso ON tj_user_mso.id_mso = mso.id_mso WHERE tj_user_mso.id_user=?";
-            var mso_user = (await queryDB(sql_mso_user, [sender_psid])); // [0]?
-          }
-      }
-    }
-    try {
-      console.log(mso_user)
-    } catch (err) {
-      console.log(err);
-    }
+            var mso_user = (await queryDB(sql_mso_user, [sender_psid])); // dont add [0], we add a whole array (multiple line of the db)
+          };
+      };
+    };
     for (let dj of demi_jour) { 
       planningRen[dj] = [];
       if (planningG[Date][dj][GM] != null || planningG[Date][dj][GM] != undefined ) {
@@ -63,7 +58,7 @@ async function readCsv(dir, Jour, sender_psid,user){
       } else {
         for (let mso in mso_user){
           if (planningG[Date][dj][mso] !== null){
-            planningRen[dj].push(planningG[Date][dj][mso]);
+            planningRen[dj].push(planningG[Date][dj][mso.name_mso]);
           };
         };
         planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
