@@ -6,11 +6,9 @@ let userInfo = require("./userInfo"),
   { promisify } = require("util"),
   request = require("request");
 
-const GROUPE3CGP = {
-  "A": "Groupe 1",
-  "B": "Groupe 2",
-  "C": "Groupe 3"
-};
+const GROUPE3CGP = { "A": "Groupe 1", "B": "Groupe 2", "C": "Groupe 3" };
+const GROUPES = { "A": "Groupe A", "B": "Groupe B", "C": "Groupe C", "D": "Groupe D" }
+
 let db = new sqlite3.Database("users.db");
 const queryDB = promisify(db.all).bind(db);
 
@@ -33,7 +31,7 @@ async function readCsv(dir, Jour, sender_psid,user){
     console.log(Date)
     console.log(getCurrentDate() , "readCsv user : ", user); 
     const demi_jour = ["Matin", "Aprem"];
-    let GM = user.groupe;
+    let GM = GROUPES[user.groupe];
     if (user.filliere === 'ETI'){
       if (user.promo === '4'){
          GM = user.majeur;
@@ -52,6 +50,7 @@ async function readCsv(dir, Jour, sender_psid,user){
     };
     for (let dj of demi_jour) { 
       planningRen[dj] = [];
+      console.log("GM = ", GM)
       if (planningG[Date][dj][GM] != []) {
         planningRen[dj].push(planningG[Date][dj][GM]);
         planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
