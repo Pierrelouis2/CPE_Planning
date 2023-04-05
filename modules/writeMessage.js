@@ -50,7 +50,6 @@ async function readCsv(dir, Jour, sender_psid,user){
           };
       };
     };
-    console.log(mso_user)
     for (let dj of demi_jour) { 
       planningRen[dj] = [];
       if (planningG[Date][dj][GM] != null || planningG[Date][dj][GM] != undefined ) {
@@ -58,7 +57,7 @@ async function readCsv(dir, Jour, sender_psid,user){
         planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
       } else {
         for (let mso of mso_user){
-          console.log(mso)
+          console.log(`current mso = ${mso}`);
           if (planningG[Date][dj][mso] != null || planningG[Date][dj][mso] != undefined){
             console.log(planningG[Date][dj][mso], ' and mso: ', mso.name_mso);
             planningRen[dj].push(planningG[Date][dj][mso.name_mso]);
