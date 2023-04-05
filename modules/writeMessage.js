@@ -50,8 +50,7 @@ async function readCsv(dir, Jour, sender_psid,user){
     };
     for (let dj of demi_jour) { 
       planningRen[dj] = [];
-      console.log("GM = ", GM)
-      if (planningG[Date][dj][GM] != []) {
+      if (planningG[Date][dj][GM] != [] && planningG[Date][dj][GM] != undefined && planningG[Date][dj][GM] != null) {
         planningRen[dj].push(planningG[Date][dj][GM]);
         planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
       } else {
