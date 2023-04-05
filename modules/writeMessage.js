@@ -46,7 +46,7 @@ async function readCsv(dir, Jour, sender_psid,user){
           if(user.filliere === 'CGP'){
             // get mso user
             sql_mso_user = "SELECT name_mso FROM mso INNER JOIN tj_user_mso ON tj_user_mso.id_mso = mso.id_mso WHERE tj_user_mso.id_user=?";
-            var mso_user = (await queryDB(sql_mso_user, [sender_psid]))[0];
+            var mso_user = (await queryDB(sql_mso_user, [sender_psid])); // [0]?
           }
       }
     }
