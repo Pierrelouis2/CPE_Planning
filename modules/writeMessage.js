@@ -8,6 +8,7 @@ let userInfo = require("./userInfo"),
 
 const GROUPE3CGP = { "A": "Groupe 1", "B": "Groupe 2", "C": "Groupe 3" };
 const GROUPES = { "A": "Groupe A", "B": "Groupe B", "C": "Groupe C", "D": "Groupe D" }
+const GROUPE3ETI = { "A": "GROUPE A", "B": "GROUPE B", "C": "GROUPE C", "D": "GROUPE D" };
 
 let db = new sqlite3.Database("users.db");
 const queryDB = promisify(db.all).bind(db);
@@ -33,18 +34,16 @@ async function readCsv(dir, Jour, sender_psid,user){
     const demi_jour = ["Matin", "Aprem"];
     let GM = GROUPES[user.groupe];
     if (user.filliere === 'ETI'){
-      if (user.promo === '4'){
-         GM = user.majeur;
+      if (user.promo === '3'){
+        GM = GROUPE3ETI[user.groupe];
       }
     } else {
       if (user.promo === '3'){
         GM = GROUPE3CGP[user.groupe];
       } if (user.promo === '4') {
-          if(user.filliere === 'CGP'){
-            // get mso user
-            sql_mso_user = "SELECT name_mso FROM mso INNER JOIN tj_user_mso ON tj_user_mso.id_mso = mso.id_mso WHERE tj_user_mso.id_user=?";
-            var mso_user = (await queryDB(sql_mso_user, [sender_psid])); // dont add [0], we add a whole array (multiple line of the db)
-          };
+          // get mso user
+          sql_mso_user = "SELECT name_mso FROM mso INNER JOIN tj_user_mso ON tj_user_mso.id_mso = mso.id_mso WHERE tj_user_mso.id_user=?";
+          var mso_user = (await queryDB(sql_mso_user, [sender_psid])); // dont add [0], we add a whole array (multiple line of the db)
       };
     };
     for (let dj of demi_jour) { 
