@@ -50,15 +50,16 @@ async function readCsv(dir, Jour, sender_psid,user){
           };
       };
     };
+    console.log(mso_user)
     for (let dj of demi_jour) { 
       planningRen[dj] = [];
       if (planningG[Date][dj][GM] != null || planningG[Date][dj][GM] != undefined ) {
         planningRen[dj].push(planningG[Date][dj][GM]);
         planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
       } else {
-        for (let mso in mso_user){
+        for (let mso of mso_user){
           console.log(mso)
-          if (planningG[Date][dj][mso] !== null){
+          if (planningG[Date][dj][mso] != null || planningG[Date][dj][mso] != undefined){
             console.log(planningG[Date][dj][mso], ' and mso: ', mso.name_mso);
             planningRen[dj].push(planningG[Date][dj][mso.name_mso]);
           };
