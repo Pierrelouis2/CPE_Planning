@@ -50,9 +50,14 @@ async function readCsv(dir, Jour, sender_psid,user){
           }
       }
     }
+    try {
+      console.log(mso_user)
+    } catch (err) {
+      console.log(err);
+    }
     for (let dj of demi_jour) { 
       planningRen[dj] = [];
-      if (planningG[Date][dj][GM] !== null) {
+      if (planningG[Date][dj][GM] != null || planningG[Date][dj][GM] != undefined ) {
         planningRen[dj].push(planningG[Date][dj][GM]);
         planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
       } else {
