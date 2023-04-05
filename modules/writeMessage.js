@@ -58,7 +58,7 @@ async function readCsv(dir, Jour, sender_psid,user){
       } else {
         for (let mso of mso_user){
           console.log(`current mso = ${mso}`);
-          if (planningG[Date][dj][mso] != null || planningG[Date][dj][mso] != undefined){
+          if (planningG[Date][dj][mso] != []){
             console.log(planningG[Date][dj][mso], ' and mso: ', mso.name_mso);
             planningRen[dj].push(planningG[Date][dj][mso.name_mso]);
           };
