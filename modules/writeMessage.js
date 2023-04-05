@@ -52,9 +52,8 @@ async function readCsv(dir, Jour, sender_psid,user){
     };
     for (let dj of demi_jour) { 
       planningRen[dj] = [];
-      if (planningG[Date][dj][GM] != null || planningG[Date][dj][GM] != undefined ) {
+      if (planningG[Date][dj][GM] != []) {
         planningRen[dj].push(planningG[Date][dj][GM]);
-        planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
       } else {
         for (let mso of mso_user){
           console.log(`current mso = ${mso}`);
