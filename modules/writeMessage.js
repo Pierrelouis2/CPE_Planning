@@ -54,6 +54,7 @@ async function readCsv(dir, Jour, sender_psid,user){
       planningRen[dj] = [];
       if (planningG[Date][dj][GM] != []) {
         planningRen[dj].push(planningG[Date][dj][GM]);
+        planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
       } else {
         for (let mso of mso_user){
           console.log(`current mso = ${mso}`);
