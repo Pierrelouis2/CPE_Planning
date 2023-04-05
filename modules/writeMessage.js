@@ -39,7 +39,6 @@ async function readCsv(dir, Jour, sender_psid,user){
     } else {
       if (user.promo === '3'){
         GM = GROUPE3CGP[user.groupe];
-        console.log("GM = ", GM);
       } if (user.promo === '4') {
           if(user.filliere === 'CGP'){
             // get mso user
@@ -55,9 +54,7 @@ async function readCsv(dir, Jour, sender_psid,user){
         planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
       } else {
         for (let mso of mso_user){
-          console.log(`current mso = ${mso}`);
           if (planningG[Date][dj][mso] != []){
-            console.log(planningG[Date][dj][mso], ' and mso: ', mso.name_mso);
             planningRen[dj].push(planningG[Date][dj][mso.name_mso]);
           };
         };
