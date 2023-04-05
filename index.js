@@ -286,7 +286,7 @@ async function handlePostback(sender_psid, received_postback) {
           }
         });
       }
-      let messageRetour = {"text": "Vous avez été réinscrit, veuillez rensigner TOUTES les informations suivantes:\n- promo \n- filliere \n - groupe \n - majeur pour les 4ETI"};
+      let messageRetour = {"text": "Vous avez été réinscrit, veuillez rensigner TOUTES les informations suivantes:\n- promo \n- filliere \n- groupe \n- majeur pour les 4ETI"};
       r = await writeMessage.callSendAPI(sender_psid, messageRetour);
       // ask for promo (3 or 4)
       response = templates.askTemplateNewUserPromo();

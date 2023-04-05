@@ -52,7 +52,7 @@ async function readCsv(dir, Jour, sender_psid,user){
       if (planningG[Date][dj][GM] != [] && planningG[Date][dj][GM] != undefined && planningG[Date][dj][GM] != null) {
         planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
         planningRen[dj].push(planningG[Date][dj][GM]);
-      } else {
+      } else if (mso_user != undefined){
         planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
         for (let mso of mso_user){
           if (planningG[Date][dj][mso] != []){
