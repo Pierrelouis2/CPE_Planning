@@ -58,6 +58,7 @@ async function readCsv(dir, Jour, sender_psid,user){
       } else {
         for (let mso in mso_user){
           if (planningG[Date][dj][mso] !== null){
+            console.log(planningRen[dj].push(planningG[Date][dj]), ' and mso: ', mso.name_mso);
             planningRen[dj].push(planningG[Date][dj][mso.name_mso]);
           };
         };
