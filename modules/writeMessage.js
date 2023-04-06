@@ -13,7 +13,7 @@ const GROUPE3ETI = { "A": "GROUPE A", "B": "GROUPE B", "C": "GROUPE C", "D": "GR
 let db = new sqlite3.Database("users.db");
 const queryDB = promisify(db.all).bind(db);
 
-async function readCsv(dir, Jour, sender_psid,user){
+async function readCsv(dir, Jour, sender_psid,user){ // acutally we read a json file
     let planningRen = {};
     let rawdata;
     try {
@@ -36,6 +36,8 @@ async function readCsv(dir, Jour, sender_psid,user){
     if (user.filliere === 'ETI'){
       if (user.promo === '3'){
         GM = GROUPE3ETI[user.groupe];
+      } else {
+        GM = user.majeure;
       }
     } else {
       if (user.promo === '3'){
