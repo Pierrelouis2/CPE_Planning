@@ -7,3 +7,4 @@ less
 bcrypt
 express-session
 cookie-parser
+ejs

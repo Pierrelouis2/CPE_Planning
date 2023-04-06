@@ -84,7 +84,7 @@ The database is composed of 3 tables:
 - [ ] Manage LV lessons
 - [X] Manage 3A lessons
 - [X] Create MSO TABLE
-- [X] Manage groups but not for 4A
+- [X] Manage groups (but not for 4A its useless and complicated)
 - [ ] Manage database backup and restore (cron?)
 - [X] Use another file to store templates
 - [ ] Script to send planning automatically at 7h30am
