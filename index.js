@@ -87,8 +87,8 @@ app.get("/admin", async function (req, res) {
       var countPromoFilliere = await webFunctions.getStatFillierePromo();
       let variables = { 
         labels : ["Promo", "Filliere", "Promo_Filliere"],
-        xlabels: {promo: ['Promo 4', 'Promo 3'], filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
-        ylabels: {promo: countPromo, filliere: countFilliere, promo_filliere: countPromoFilliere},
+        xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
+        ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere},
     }; 
     res.render(path.join(initpath , 'home.ejs'), variables);
     }
