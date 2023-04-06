@@ -18,6 +18,7 @@ const express = require("express"),
   webFunctions = require("./modules/webFunctions.js");
   
 // INIT APP
+app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 let port = 8989;
