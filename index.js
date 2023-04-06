@@ -3,20 +3,19 @@
 const express = require("express"),
   bodyParser = require("body-parser"),
   app = express(),
-  request = require("request"),
-  config = require("config"),
-  sqlite3 = require("sqlite3"),
-  fs = require("fs"),
-  { promisify } = require("util"),
   userInfo = require("./modules/userInfo"),
   writeMessage = require("./modules/writeMessage"),
   templates = require("./modules/templates"),
   variables = require("./modules/variables"),
   facebookInit = require("./modules/facebookInit"),
+  path = require('path'),
+  config = require("config"),
+  { promisify } = require("util"),
   cookieParser = require("cookie-parser"),
   sessions = require('express-session'),
-  path = require('path');
-
+  sqlite3 = require("sqlite3"),
+  fs = require("fs");
+  
 // INIT APP
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
