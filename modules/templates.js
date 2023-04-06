@@ -231,7 +231,7 @@ function askTemplateMenu(psid) {
   };
 };
 
-function askTemplateMsoCGP(msos) {
+async function askTemplateMsoCGP(msos) {
     // I have to say that it is ChatGPT who found this solution ;(
     const templates = [];
     let i = 1;

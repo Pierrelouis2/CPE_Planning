@@ -346,8 +346,8 @@ async function handlePostback(sender_psid, received_postback) {
         console.log("4CGP");
         let messageMso = { "text": "Vous êtes en 4CGP, veuillez choisir vos mso, cliquez sur chacune de vos mso:" };
         r = await writeMessage.callSendAPI(sender_psid, messageMso);
-        response = templates.askTemplateMsoCGP(MSO);
-        console.log("response to send mso = ")
+        response = await templates.askTemplateMsoCGP(MSO);
+        console.log("response to send mso = ");
         console.log(response);
         for (let m of response) {
           console.log("mso sending");
