@@ -1,7 +1,7 @@
 sqlite3 = require("sqlite3");
 
-let db = new sqlite3.Database("../../../users.db");
-const queryDB = promisify(db.all).bind(db);
+// let db = new sqlite3.Database("../../../users.db");
+// const queryDB = promisify(db.all).bind(db);
 
 $(document).ready( function() {
   
@@ -21,9 +21,9 @@ $(document).ready( function() {
     });
   });
 
-sql_get_promo = "SELECT promo FROM user";
-let promos = (await queryDB(sql_get_promo));
-console.log(promos);
+// sql_get_promo = "SELECT promo FROM user";
+// let promos = (await queryDB(sql_get_promo));
+// console.log(promos);
 
 var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
 var yValues = [55, 49, 44, 24, 15];
