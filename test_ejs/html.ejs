@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test</title>
+  </head>
+  <body>
+    <h1>Test</h1>
+    <p>Test</p>
+    <ul>
+        <% mascots.forEach(function(mascot) { %>
+          <li>
+            <strong><%= mascot.name %></strong>
+            representing <%= mascot.organization %>,
+            born <%= mascot.birth_year %>
+          </li>
+        <% }); %>
+    <% if (!text) { %>
+      <p>Variable test = <%= text %></p>
+    <% } else { %>
+        <p>Variable test is undefined</p>
+    <% } %>
+
+   <!-- Let's print all user of the db -->
+   <ul> 
+    <% users.forEach(function(user) { %>
+      <li>
+        <strong><%= user.name %></strong>
+        psid: <%= user.id_user %>,
+        filliere: <%= user.filliere %>,
+        promo: <%= user.promo %>,
+        groupe: <%= user.groupe %>
+        majeur: <%= user.majeur %>
+      </li>
+    <% }); %>
+    </ul>
+  </body>

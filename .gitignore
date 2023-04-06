@@ -5,4 +5,3 @@ config/default.json
 users.db
 hashedPassword.json
 package*.json
-test*
