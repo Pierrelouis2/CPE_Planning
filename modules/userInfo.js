@@ -28,7 +28,7 @@ async function is4ETI(sender_psid) {
 let sql_get_user = "SELECT * FROM user WHERE id_user=?";
 let user = (await queryDB(sql_get_user, [sender_psid]))[0];
 if (user.promo === "4" && user.filliere === "ETI") {
-    return true;
+  return true;
 }
 return false;
 }
@@ -36,16 +36,11 @@ return false;
 async function is4CGP(sender_psid) {
     let sql_get_user = "SELECT * FROM user WHERE id_user=?";
     let user = (await queryDB(sql_get_user, [sender_psid]))[0];
-    let PF;
-    try{
-      PF = user.promo + user.filliere;
-    } catch (error) {
-      console.log(error);
+    console.log(`user in is4CGP:`);
+    console.log(user);
+    if (user.promo === "4" && user.filliere === "CGP") {
       return true;
-    }
-    console.log(`user in is4CGP: ${user}`);
-    if (user.promo == "4" && user.filliere == "CGP") {
-      return true;
+      
     }
     return false;
 }
