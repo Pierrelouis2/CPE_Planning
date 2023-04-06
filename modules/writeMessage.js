@@ -141,7 +141,8 @@ async function callSendAPI(sender_psid, response) {
   if (res) {
     console.log("message sent!");
   } else {
-    console.error("Unable to send message:" + res.error);
+    console.error("Unable to send message:");
+    console.error(res);
   }
   await sleep(400);
   return;
