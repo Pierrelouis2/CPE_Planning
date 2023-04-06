@@ -48,6 +48,8 @@ async function readCsv(dir, Jour, sender_psid,user){ // acutally we read a json 
           var mso_user = (await queryDB(sql_mso_user, [sender_psid])); // dont add [0], we add a whole array (multiple line of the db)
       };
     };
+    console.log(user)
+    console.log("GM : ", GM);
     for (let dj of demi_jour) { 
       planningRen[dj] = [];
       if (planningG[Date][dj][GM] != [] && planningG[Date][dj][GM] != undefined && planningG[Date][dj][GM] != null) {
