@@ -206,3 +206,14 @@ a:hover {
     }
   }
 }
+
+
+.parent {
+  display: grid;
+  grid-gap: 20px;
+  justify-content: center;
+  grid-template-columns: repeat(3, calc(33.33% - 20px));
+}
+.child {
+  margin: 0; /* because we have grid-gap */
+}

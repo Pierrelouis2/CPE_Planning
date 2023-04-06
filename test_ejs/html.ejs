@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
   </head>
   <body>
     <h1>Test</h1>
@@ -41,4 +43,32 @@
       </li>
     <% }); %>
     </ul>
+
+    <div>
+  
+      <% labels.forEach(function(label) { %>
+        <canvas id="<%= label %>" style="width:100%;max-width:600px"></canvas>
+        <script>
+          var barColors = ["#b91d47","#00aba9"];
+          new Chart("<%= label %>", {
+            type: "pie",
+            data: {
+              labels: <%- JSON.stringify(xlabels[label]) %> ,
+              datasets: [{
+                backgroundColor: barColors,
+                data: <%- JSON.stringify(ylabels[label]) %>
+              }]
+            },
+            options: {
+              title: {
+                display: true,
+                text: "Graph TEST"
+              }
+            }
+          });
+     
+
+          </script>
+          <% }); %>
+  </div>
   </body>
