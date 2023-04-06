@@ -120,9 +120,12 @@ app.get('/png/:imageName', function(req, res) {
   var image = req.params['imageName'];
   console.log("got png request : ", image);
   res.header('Content-Type', "image/png");
-  let data = fs.readFileSync(`./Plannings/planningPng/${image}`, 'utf8');
-  if(!data){
-    res.end(404);
+  let data;
+  try {
+    data = fs.readFileSync(`./Plannings/planningPng/${image}`, 'utf8');
+  } catch (error) {
+    console.log("error on png request : ");
+    console.log(error);
   }
   res.send(data)    
 });
