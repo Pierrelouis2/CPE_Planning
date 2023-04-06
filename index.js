@@ -248,14 +248,14 @@ async function handlePostback(sender_psid, received_postback) {
         console.log("new user");
         let sql_new_user = `INSERT INTO user (id_user) VALUES (?)`;
         try {
-          db.run(sql_new_user, sender_psid, function (err) {
+          await db.run(sql_new_user, sender_psid, function (err) {
             if (err) {
               console.log(err.message);
             }
           });
           let inscription = "Inscription";
           let sql_uptade_status = "UPDATE user SET status=? WHERE id_user=?";
-          db.run(sql_uptade_status, [inscription, sender_psid]);
+          await db.run(sql_uptade_status, [inscription, sender_psid]);
           // ask for promo (3 or 4)
           let messageRetour = {"text": "Vous avez été réinscrit, veuillez rensigner TOUTES les informations suivantes:\n- promo \n- filliere \n - groupe \n - majeur pour les 4ETI"};
           r = await writeMessage.callSendAPI(sender_psid, messageRetour);
@@ -273,14 +273,14 @@ async function handlePostback(sender_psid, received_postback) {
     case "REINSCRIPTION":
       let sql_status_inscription = "UPDATE user SET promo=?, filliere=?, groupe=?, majeur=?, status=? WHERE id_user=?"; // TODO : change all other params to None
       try {
-        db.run(sql_status_inscription, ["None","None","None","None","Inscription", sender_psid]); 
+        await db.run(sql_status_inscription, ["None","None","None","None","Inscription", sender_psid]); 
       } catch (err) {
         console.log( `error while updating REINSCRIPTION, date = ${writeMessage.getCurrentDate()} error: ${err}`);
       }
       // empty the mso table if its a 4CGP
       if (await userInfo.is4CGP(sender_psid)){
         let sql_delete_mso = `DELETE FROM tj_user_mso WHERE id_user=?`;
-        db.run(sql_delete_mso, sender_psid, function (err) {
+        await db.run(sql_delete_mso, sender_psid, function (err) {
           if (err) {
             console.log(`Error table when reinscription 4CGP, date = ${writeMessage.getCurrentDate()}: error = ${err.message}`);
           }
@@ -295,7 +295,7 @@ async function handlePostback(sender_psid, received_postback) {
     case "3":
     case "4":
       let sql_set_promo = `UPDATE user SET promo=? WHERE id_user=?`;
-      db.run(sql_set_promo, [payload, sender_psid]);
+      await db.run(sql_set_promo, [payload, sender_psid]);
       //ask for user groupe (A,B,C,D)
       response = templates.askTemplateGroupe();
       r = await writeMessage.callSendAPI(sender_psid, response[0]);
@@ -306,7 +306,7 @@ async function handlePostback(sender_psid, received_postback) {
     case "C":
     case "D":
       let sql_set_groupe = `UPDATE user SET groupe=? WHERE id_user=?`;
-      db.run(sql_set_groupe, [payload, sender_psid]);
+      await db.run(sql_set_groupe, [payload, sender_psid]);
       //ask for user filliere (CGP,ETI)
       response = templates.askTemplateFilliere();
       r = await writeMessage.callSendAPI(sender_psid, response);
@@ -314,7 +314,7 @@ async function handlePostback(sender_psid, received_postback) {
     case "ETI": //4A -> get Majeure
       // set the user filliere to payload
       sql_set_filiere = `UPDATE user SET filliere=? WHERE id_user=?`;
-      db.run(sql_set_filiere, [payload, sender_psid]);
+      await db.run(sql_set_filiere, [payload, sender_psid]);
       if (await userInfo.is4ETI(sender_psid)) {
         console.log("4ETI");
         response = templates.askTemplateMajeureETI();
@@ -326,7 +326,7 @@ async function handlePostback(sender_psid, received_postback) {
         console.log("3ETI");
         let inscription = "Inscrit";
         let sql_uptade_statusEti = "UPDATE user SET status=? WHERE id_user=?";
-        db.run(sql_uptade_statusEti, [inscription, sender_psid]);
+        await db.run(sql_uptade_statusEti, [inscription, sender_psid]);
         response = templates.askTemplateJour();
         r = await writeMessage.callSendAPI(sender_psid, response[0]);
         r = await writeMessage.callSendAPI(sender_psid, response[1]);
@@ -335,10 +335,10 @@ async function handlePostback(sender_psid, received_postback) {
     case "CGP":
       // set the user filliere to payload
       sql_set_filiere = `UPDATE user SET filliere=? WHERE id_user=?`;
-      db.run(sql_set_filiere, [payload, sender_psid]);
+      await db.run(sql_set_filiere, [payload, sender_psid]);
       let inscription = "Inscrit";
       let sql_uptade_statusCgp = "UPDATE user SET status=? WHERE id_user=?";
-      db.run(sql_uptade_statusCgp, [inscription, sender_psid]);
+      await db.run(sql_uptade_statusCgp, [inscription, sender_psid]);
       if (await userInfo.is4CGP(sender_psid)) {
         console.log("4CGP");
         let messageMso = { "text": "Vous êtes en 4CGP, veuillez choisir vos mso, cliquez sur chacune de vos mso:" };
@@ -362,10 +362,10 @@ async function handlePostback(sender_psid, received_postback) {
     case "ESE":
       let sql_set_majeur = `UPDATE user SET majeur=? WHERE id_user=?`;
       let majeur = MAJEURS[payload];
-      db.run(sql_set_majeur, [majeur, sender_psid]);
+      await db.run(sql_set_majeur, [majeur, sender_psid]);
       let inscriptionMaj = "Inscrit";
       let sql_uptade_statusMaj = "UPDATE user SET status=? WHERE id_user=?";
-      db.run(sql_uptade_statusMaj, [inscriptionMaj, sender_psid]);
+      await db.run(sql_uptade_statusMaj, [inscriptionMaj, sender_psid]);
       response = templates.askTemplateJour();
       r = await writeMessage.callSendAPI(sender_psid, response[0]);
       r = await writeMessage.callSendAPI(sender_psid, response[1]);
@@ -383,7 +383,7 @@ async function handlePostback(sender_psid, received_postback) {
         // get the id of the user
         let user = await userInfo.getUser(sender_psid);
         let sql_set_mso = `INSERT INTO tj_user_mso (id_user, id_mso) VALUES(?, ?)`;
-        db.run(sql_set_mso, [user.id_user, mso_id.id_mso], async function (err) {
+        await db.run(sql_set_mso, [user.id_user, mso_id.id_mso], async function (err) {
             if (err) {
                 console.log(err);
                 let messageAlreadyInMso = { "text": `Vous avez déjà choisi cette mso ${mso_name}`};
