@@ -212,8 +212,8 @@ async function handlePostback(sender_psid, received_postback) {
       r = await writeMessage.callSendAPI(sender_psid, message);
       response = templates.askTemplateImage();
       user = await userInfo.getUser(sender_psid);
-      let PF = user.promo.toString() + user.filliere;
-      response.attachment.payload.url = variables.link[PF];
+      let imgName = user.promo + user.filliere + variables.constant.DATE;
+      response.attachment.payload.url = `https://messenger.jo-pouradier.fr/png/${imgName}.png`;;
       r = await writeMessage.callSendAPI(sender_psid, response);
       break;
     case "LUNDI":
