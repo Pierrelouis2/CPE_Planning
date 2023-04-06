@@ -30,7 +30,7 @@ async function set_persistent_menu(psid) {
         json: menu,
     });
     // handling errors
-    if (!res) {
+    if (res) {
     console.log("menu set");
     } else {
     console.error("Unable to send message:");
