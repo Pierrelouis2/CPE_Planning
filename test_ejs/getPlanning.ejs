@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test Planning</title>
+  </head>
+  <body>
+    <% if (locals.data) { %>
+        <h1>Planning de <%= data.promo + data.filliere + data.DATE %> </h1>
+    <% } else { %>
+        <h1>Planning</h1>
+    <% } %>
+    <p>Test</p>
+
+    <form action="/planning" method="post">
+        <label for="jour">Jour: </label>
+        <select name="jour">
+            <option value="?">?</option>
+            <option value="LUNDI">Lundi</option>
+            <option value="MARDI">Mardi</option>
+            <option value="MERCREDI">Mercredi</option>
+            <option value="JEUDI">Jeudi</option>
+            <option value="VENDREDI">Vendredi</option>
+        </select>
+        <label for="promo">Promo: </label>
+        <select name="promo">
+            <option value="?">?</option>
+            <option value="3">3A</option>
+            <option value="4">4A</option>
+        </select>
+        <label for="filliere">Filliere: </label>
+        <select name="filliere" >
+            <option value="?">?</option>
+            <option value="CGP">CGP</option>
+            <option value="ETI">ETI</option>
+          </select>
+        <br>
+        <label for="groupe">Groupe: </label>
+        <select name="groupe">
+            <option value="?">?</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+        </select>
+        <label for="majeur">Majeur: </label>
+        <select name="majeur">
+            <option value="?">?</option>
+            <%for (let m of Object.keys(majeur)){ %>
+                <option value="<%= majeur[m] %>"><%= majeur[m] %></option>
+            <% } %>
+        </select>
+        <br>
+        <label for="mso">MSO (pour en selectionner plusieur il faut utiliser Ctrl+Click ou Cmd+Click) </label>
+        <br>
+        <select name="mso" multiple>
+            <option value="?">?</option>
+            <% for (let m of Object.keys(mso)){ %>
+                <option value="<%= mso[m] %>"><%= mso[m] %></option>
+            <% } %>
+        </select>
+        <br>
+        <label for="DATE">DATE:</label>
+        <input type="text" name="DATE" placeholder="03_04 (date du lundi de la semaine)">
+        <input type="submit" value="Submit">
+    </form>
+
+    <br>
+    <br>
+    <% if(locals.message){ %>
+        <div class="planning">
+            <% for (let dj of message){ %>
+                <p> <%= dj %></p>
+            <% } %>
+        </div>
+    <% } %>
+
+  </body>

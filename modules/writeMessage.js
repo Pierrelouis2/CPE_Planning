@@ -44,21 +44,24 @@ async function readCsv(dir, Jour, sender_psid,user){ // acutally we read a json 
           var mso_user = (await queryDB(sql_mso_user, [sender_psid])); // dont add [0], we add a whole array (multiple line of the db)
       };
     };
-    console.log(user)
     console.log("GM : ", GM);
-    for (let dj of demi_jour) { 
-      planningRen[dj] = [];
-      planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
-      if (planningG[Date][dj][GM] != [] && planningG[Date][dj][GM] != undefined && planningG[Date][dj][GM] != null) {
-        planningRen[dj].push(planningG[Date][dj][GM]);
-      } else if (mso_user != undefined){
-        for (let mso of mso_user){
-          if (planningG[Date][dj][mso] != []){
-            planningRen[dj].push(planningG[Date][dj][mso.name_mso]);
+    try {
+      for (let dj of demi_jour) { 
+        planningRen[dj] = [];
+        planningRen[dj].push(planningG[Date][dj]["Pour tous"]);
+        if (planningG[Date][dj][GM] != [] && planningG[Date][dj][GM] != undefined && planningG[Date][dj][GM] != null) {
+          planningRen[dj].push(planningG[Date][dj][GM]);
+        } else if (mso_user != undefined){
+          for (let mso of mso_user){
+            if (planningG[Date][dj][mso] != []){
+              planningRen[dj].push(planningG[Date][dj][mso.name_mso]);
+            };
           };
         };
       };
-    };
+    } catch (err) {
+      console.log(err);
+    }
     return planningRen;
   }
 
@@ -67,21 +70,24 @@ async function constructMessage(planning) {
     let demi_jour = ["Matin", "Aprem"];
     let message = [[], []];
     let i = 0;
-  
-    for (let dj of demi_jour) {
-      for (let matiere in planning[dj]) {
-        for (let cellule in planning[dj][matiere]) {
-          if (
-            planning[dj][matiere][cellule].includes("Salle") ||
-            planning[dj][matiere][cellule].includes("Salles")
-          ) {
-            message[i] += planning[dj][matiere][cellule] + ".\n\n";
-          } else {
-            message[i] += planning[dj][matiere][cellule] + ",\n";
+    try{
+      for (let dj of demi_jour) {
+        for (let matiere in planning[dj]) {
+          for (let cellule in planning[dj][matiere]) {
+            if (
+              planning[dj][matiere][cellule].includes("Salle") ||
+              planning[dj][matiere][cellule].includes("Salles")
+            ) {
+              message[i] += planning[dj][matiere][cellule] + ".\n\n";
+            } else {
+              message[i] += planning[dj][matiere][cellule] + ",\n";
+            }
           }
         }
+        i++;
       }
-      i++;
+    } catch (err) {
+      console.log(err);
     }
     return message;
   }
@@ -90,11 +96,7 @@ async function constructMessage(planning) {
 async function sendPlanningDay(payload, sender_psid,user) {
     let promo = user.promo;
     let filliere = user.filliere;
-    let planningJour = await readCsv(`./Output_Json/Planning${promo}${filliere}${variables.constant.DATE}.json`,
-        payload,
-        sender_psid,
-        user
-    );
+    let planningJour = await readCsv(`./Output_Json/Planning${promo}${filliere}${variables.constant.DATE}.json`, payload, sender_psid, user );
     let rep = await constructMessage(planningJour);
     let message = { text: `Voici le planning de ${payload} :`};
     await callSendAPI(sender_psid, message);
