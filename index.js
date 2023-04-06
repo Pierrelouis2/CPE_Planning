@@ -14,7 +14,7 @@ const express = require("express"),
   cookieParser = require("cookie-parser"),
   sessions = require('express-session'),
   sqlite3 = require("sqlite3"),
-  fs = require("fs");
+  fs = require("fs"),
   webFunctions = require("./modules/webFunctions.js");
   
 // INIT APP
