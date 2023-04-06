@@ -35,10 +35,6 @@ let initpath = path.join(__dirname,'static','public');
 app.use(express.static(initpath));
 app.use(cookieParser());
 
-//  INIT Webserver variables
-var session;  
-
-
 // INIT DB
 let db = new sqlite3.Database("users.db");
 db.on("error", function(error) {
@@ -89,7 +85,7 @@ app.get('/login',function(req, res){
   res.sendFile(path.join(initpath , 'login.html')); 
   console.log(req.body.user);
   if (req.body.user == myusername && req.body.password == mypassword){
-      session = req.session;
+      let session = req.session;
       session.userid = req.body.user;
       console.log(req.session);
       res.redirect('/admin');
@@ -102,7 +98,7 @@ app.post('/form', function(req, res) {
   console.log(req.body.password)
   if (req.body.user == myusername && req.body.password == mypassword){
       console.log("test2");
-      session = req.session; ////// USE A LOCAL VARIABLE TO SAVE THE SESSION
+      let session = req.session;
       session.userid = req.body.user;
       console.log(req.session);
       res.redirect('/admin');
@@ -110,7 +106,7 @@ app.post('/form', function(req, res) {
 });
 
 app.get("/admin", function (req, res) {
-  session = req.session; ////// USE A LOCAL VARIABLE TO SAVE THE SESSION
+  let session = req.session;
     if (session.userid){
         // let homepage = fs.readFileSync('.public/html/home.html', 'utf8');
         res.sendFile(path.join(initpath , 'home.html')); 
