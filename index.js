@@ -336,9 +336,6 @@ async function handlePostback(sender_psid, received_postback) {
       // set the user filliere to payload
       sql_set_filiere = `UPDATE user SET filliere=? WHERE id_user=?`;
       await db.run(sql_set_filiere, [payload, sender_psid]);
-      let user_log_4CGP = await userInfo.getUser(sender_psid);
-      console.log(`user log 4CGP =`);
-      console.log(user_log_4CGP);
       let inscription = "Inscrit";
       let sql_uptade_statusCgp = "UPDATE user SET status=? WHERE id_user=?";
       await db.run(sql_uptade_statusCgp, [inscription, sender_psid]);
@@ -347,8 +344,6 @@ async function handlePostback(sender_psid, received_postback) {
         let messageMso = { "text": "Vous êtes en 4CGP, veuillez choisir vos mso, cliquez sur chacune de vos mso:" };
         r = await writeMessage.callSendAPI(sender_psid, messageMso);
         response = templates.askTemplateMsoCGP(Object.assign({}, MSO));
-        console.log("response to send mso = ");
-        console.log(response);
         for (let m of response) {
           console.log("mso sending");
           r = await writeMessage.callSendAPI(sender_psid, m);

@@ -233,11 +233,9 @@ function askTemplateMenu(psid) {
 
 function askTemplateMsoCGP(msos) {
     // I have to say that it is ChatGPT who found this solution ;(
-    console.log("asking mso templates")
     const templates = [];
     let i = 1;
     let num = 1;
-    console.log(msos)
     while (Object.keys(msos).length > 0) {
         const buttons = [];
         for (let j = 0; j < 3; j++) {
@@ -263,8 +261,6 @@ function askTemplateMsoCGP(msos) {
       i++;
       num++;
     }
-    console.log(templates)
-    console.log(" out of asking mso templates")
     return templates;
   }
   
