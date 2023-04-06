@@ -320,7 +320,6 @@ async function handlePostback(sender_psid, received_postback) {
         response = templates.askTemplateMajeureETI();
         r = await writeMessage.callSendAPI(sender_psid, response[0]);
         r = await writeMessage.callSendAPI(sender_psid, response[1]);
-        break;
       }
       // give days menu
       else {
@@ -331,8 +330,8 @@ async function handlePostback(sender_psid, received_postback) {
         response = templates.askTemplateJour();
         r = await writeMessage.callSendAPI(sender_psid, response[0]);
         r = await writeMessage.callSendAPI(sender_psid, response[1]);
-        break;
       }
+      break;
     case "CGP":
       // set the user filliere to payload
       sql_set_filiere = `UPDATE user SET filliere=? WHERE id_user=?`;
@@ -340,8 +339,6 @@ async function handlePostback(sender_psid, received_postback) {
       let inscription = "Inscrit";
       let sql_uptade_statusCgp = "UPDATE user SET status=? WHERE id_user=?";
       db.run(sql_uptade_statusCgp, [inscription, sender_psid]);
-
-
       if (await userInfo.is4CGP(sender_psid)) {
         console.log("4CGP");
         let messageMso = { "text": "Vous êtes en 4CGP, veuillez choisir vos mso, cliquez sur chacune de vos mso:" };
@@ -351,17 +348,13 @@ async function handlePostback(sender_psid, received_postback) {
           console.log("mso sending");
           r = await writeMessage.callSendAPI(sender_psid, m);
         }
-        break;
-      }
-      // give days menu
-      else {
+      } else {
         console.log("3CGP");
         response = templates.askTemplateJour();
         r = await writeMessage.callSendAPI(sender_psid, response[0]);
         r = await writeMessage.callSendAPI(sender_psid, response[1]);
-        break;
       }
-      
+      break;
     case "CBD":
     case "INFRA":
     case "IMI":
