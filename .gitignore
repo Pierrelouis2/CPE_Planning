@@ -4,5 +4,5 @@ ngrok
 config/default.json
 users.db
 hashedPassword.json
-package*
+package*.json
 test*
