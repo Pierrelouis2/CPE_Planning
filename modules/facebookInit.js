@@ -14,7 +14,8 @@ function set_get_started() {
     if (res) {
     console.log("get_started set");
     } else {
-    console.error("Unable to send message:" + res);
+    console.error("Unable to send message:");
+    console.error(res);
     }
     return;
 }
@@ -32,7 +33,8 @@ async function set_persistent_menu(psid) {
     if (!res) {
     console.log("menu set");
     } else {
-    console.error("Unable to send message:" + res);
+    console.error("Unable to send message:");
+    console.error(res);
     }
     return;
 }
