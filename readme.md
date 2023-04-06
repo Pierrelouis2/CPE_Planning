@@ -96,8 +96,7 @@ The database is composed of 3 tables:
 - [ ] Don't share the token on github !!!!!!!!!
 - [ ] Don't share the code to  ETI students !!!!!!!!!
 - [ ] Regex expression for hours  
-- [ ] React site si y a vraiment plus rien à faire
 - [ ] Interface utilisateur lié avec le compte fb + addresse mail
 - [ ] Interface admin pour gérer les comptes
-- [ ] Interface pour l'administration cpe pour gérer les plannings -> pdf -> json -> png -> link
+- [ ] Interface pour l'administration cpe pour gérer les plannings -> pdf -> json && png -> link
 - [ ] Lié le site de langue 

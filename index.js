@@ -116,6 +116,16 @@ app.get("/admin", function (req, res) {
     }
 });
 
+app.get('/png/:imageName', function(req, res) {
+  var image = req.params['imageName'];
+  res.header('Content-Type', "image/gif");
+  let data = fs.readFileSync(`./Plannings/planningPng/${image}`, 'utf8');
+  if(!data){
+    res.end(404);
+  }
+  res.send(data)    
+});
+
 // Creates the endpoint for our webhook to facebook
 app.post("/webhook", async (req, res) => {
   console.log("got webhook post");
