@@ -37,6 +37,33 @@ async function getStatFilliere(){
     return [countETI, countCGP];
 }
 
+async function getStatFillierePromo(){
+    var count3ETI = 0;
+    var count3CGP = 0;
+    var count4ETI = 0;
+    var count4CGP = 0;
+    let sql_filliere_promo = "SELECT filliere, promo FROM user ";
+    let filliere_promo = await queryDB(sql_filliere_promo);
+    for (var i = 0; i < filliere_promo.length; i++) {
+        if (filliere_promo[i].filliere === 'ETI' && filliere_promo[i].promo === '3'){
+            count3ETI ++;
+        }
+        if (filliere_promo[i].filliere === 'CGP' && filliere_promo[i].promo === '3'){
+            count3CGP ++;
+        }
+        if (filliere_promo[i].filliere === 'ETI' && filliere_promo[i].promo === '4'){
+            count4ETI ++;
+        }
+        if (filliere_promo[i].filliere === 'CGP' && filliere_promo[i].promo === '4'){
+            count4CGP ++;
+        }
+    }
+    console.log("count3ETI : ", count3ETI);
+    console.log("count3CGP : ", count3CGP);
+    console.log("count4ETI : ", count4ETI);
+    console.log("count4CGP : ", count4CGP);
+    return [count3ETI, count3CGP, count4ETI, count4CGP];
+}
 
 module.exports = {
     getStatPromo,
