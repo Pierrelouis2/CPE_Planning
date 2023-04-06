@@ -118,7 +118,8 @@ app.get("/admin", function (req, res) {
 
 app.get('/png/:imageName', function(req, res) {
   var image = req.params['imageName'];
-  res.header('Content-Type', "image/gif");
+  console.log("got png request : ", image);
+  res.header('Content-Type', "image/png");
   let data = fs.readFileSync(`./Plannings/planningPng/${image}`, 'utf8');
   if(!data){
     res.end(404);
