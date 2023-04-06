@@ -19,7 +19,6 @@ var barColors = [
   "#1e7145"
 ];
 
-var xValues = 
 new Chart("myChart", {
     type: "pie",
     data: {
