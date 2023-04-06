@@ -37,7 +37,7 @@ async function readCsv(dir, Jour, sender_psid,user){ // acutally we read a json 
       if (user.promo === '3'){
         GM = GROUPE3ETI[user.groupe];
       } else {
-        GM = user.majeure;
+        GM = user.majeur;
       }
     } else {
       if (user.promo === '3'){
