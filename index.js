@@ -15,6 +15,7 @@ const express = require("express"),
   sessions = require('express-session'),
   sqlite3 = require("sqlite3"),
   fs = require("fs");
+  webFunctions = require("./modules/webFunctions.js");
   
 // INIT APP
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -77,11 +78,17 @@ app.post('/form', function(req, res) {
   }
 });
 
-app.get("/admin", function (req, res) {
+app.get("/admin", async function (req, res) {
   let session = req.session;
     if (session.userid){
-        // let homepage = fs.readFileSync('.public/html/home.html', 'utf8');
-        res.sendFile(path.join(initpath , 'home.html')); 
+      var countPromo = await webFunctions.getStatPromo();
+      var countFilliere = await webFunctions.getStatFilliere();
+      let variables = { 
+        labels : ["promo", "filliere"],
+        xlabels: {promo: ['Promo 4', 'promo 3'], filliere: ['ETI', 'CGP']},
+        ylabels: {promo: countPromo, filliere: countFilliere}
+    }; 
+    res.render(path.join(initpath , 'home.html'), variables);
     }
     else {
         res.redirect('/login');

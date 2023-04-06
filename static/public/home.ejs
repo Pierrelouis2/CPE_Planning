@@ -39,7 +39,30 @@
 
   <!-- Insert html -->
   <div class="content">
-    
+    <% labels.forEach(function(label) { %>
+      <canvas id="<%= label %>" style="width:100%;max-width:600px"></canvas>
+      <script>
+        var barColors = ["#b91d47","#00aba9"];
+        new Chart("<%= label %>", {
+          type: "pie",
+          data: {
+            labels: <%- JSON.stringify(xlabels[label]) %> ,
+            datasets: [{
+              backgroundColor: barColors,
+              data: <%- JSON.stringify(ylabels[label]) %>
+            }]
+          },
+          options: {
+            title: {
+              display: true,
+              text: "Graph TEST"
+            }
+          }
+        });
+   
+
+        </script>
+        <% }); %>
   </div>
-  <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+  
 </main>

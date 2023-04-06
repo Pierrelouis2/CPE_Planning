@@ -34,13 +34,49 @@ app.get('/', async function(req, res) {
     var tagline = "No programming concept is complete without a cute animal mascot.";
     let sql_users = "SELECT * FROM user";
     let users = await queryDB(sql_users);
+    var countPromo = await getStatPromo();
+    var countFilliere = await getStatFilliere();
     let variables = { 
         mascots: mascots, 
         tagline: tagline,
         text: "ceci est ma viables de text conditionnel",
-        users: users
-    };
+        users: users,
+        labels : ["promo", "filliere"],
+        xlabels: {promo: ['Promo 4', 'promo 3'], filliere: ['ETI', 'CGP']},
+        ylabels: {promo: countPromo, filliere: countFilliere}
+    }; 
     res.render(initpath, variables);
 });
 
+async function getStatPromo(){
+    var count4A = 0;
+    var count3A = 0;
+    let sql_promo = "SELECT promo FROM user ";
+    let promo = await queryDB(sql_promo);
+    for (var i = 0; i < promo.length; i++) {
+        if (promo[i].promo === '4'){
+            count4A ++;
+        }
+    }
+    count3A = promo.length - count4A;
+    console.log("count4A : ", count4A);
+    console.log("count3A : ", count3A);
+    return [count4A, count3A];
+}
+
+async function getStatFilliere(){
+    var countETI = 0;
+    var countCGP = 0;
+    let sql_filliere = "SELECT filliere FROM user ";
+    let filliere = await queryDB(sql_filliere);
+    for (var i = 0; i < filliere.length; i++) {
+        if (filliere[i].filliere === 'ETI'){
+            countETI ++;
+        }
+    }
+    countCGP = filliere.length - countETI;
+    console.log("countETI : ", countETI);
+    console.log("countCGP : ", countCGP);
+    return [countETI, countCGP];
+}
 
