@@ -119,7 +119,6 @@ app.get("/admin", function (req, res) {
 app.get('/png/:imageName', function(req, res) {
   let image = req.params.imageName;
   console.log("got png request : ", image);
-  // res.header('Content-Type', "image/png");
   res.sendFile(path.join(__dirname,`./Plannings/planningPng/${image}`));   
 });
 
