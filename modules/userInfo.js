@@ -43,7 +43,8 @@ async function is4CGP(sender_psid) {
       console.log(error);
       return true;
     }
-    if (user.promo === "4" && user.filliere === "CGP") {
+    console.log(`user in is4CGP: ${user}`);
+    if (user.promo == "4" && user.filliere == "CGP") {
       return true;
     }
     return false;
