@@ -91,6 +91,7 @@ The database is composed of 3 tables:
 - [X] Manage SQL errors (try catch)
 - [X] Make a better readme 
 - [ ] Make a better code
+- [X] Use personnal domain to get png
 - [ ] For the future : make a web interface for CPE admin to post the planning (manage timetable)
 - [X] Make more comments in the code so it's easier to understand when you come back to it after a long time
 - [ ] Don't share the token on github !!!!!!!!!

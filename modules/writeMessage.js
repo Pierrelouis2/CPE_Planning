@@ -6,10 +6,6 @@ let userInfo = require("./userInfo"),
   { promisify } = require("util"),
   request = require("request");
 
-const GROUPE3CGP = { "A": "Groupe 1", "B": "Groupe 2", "C": "Groupe 3" };
-const GROUPES = { "A": "Groupe A", "B": "Groupe B", "C": "Groupe C", "D": "Groupe D" }
-const GROUPE3ETI = { "A": "GROUPE A", "B": "GROUPE B", "C": "GROUPE C", "D": "GROUPE D" };
-
 let db = new sqlite3.Database("users.db");
 const queryDB = promisify(db.all).bind(db);
 
@@ -32,16 +28,16 @@ async function readCsv(dir, Jour, sender_psid,user){ // acutally we read a json 
     console.log(Date)
     console.log(getCurrentDate() , "readCsv user : ", user); 
     const demi_jour = ["Matin", "Aprem"];
-    let GM = GROUPES[user.groupe];
+    let GM = variables.constant.GROUPES[user.groupe];
     if (user.filliere === 'ETI'){
       if (user.promo === '3'){
-        GM = GROUPE3ETI[user.groupe];
+        GM = variables.constant.GROUPE3ETI[user.groupe];
       } else {
         GM = user.majeur;
       }
     } else {
       if (user.promo === '3'){
-        GM = GROUPE3CGP[user.groupe];
+        GM = variables.constant.GROUPE3CGP[user.groupe];
       } if (user.promo === '4') {
           // get mso user
           sql_mso_user = "SELECT name_mso FROM mso INNER JOIN tj_user_mso ON tj_user_mso.id_mso = mso.id_mso WHERE tj_user_mso.id_user=?";

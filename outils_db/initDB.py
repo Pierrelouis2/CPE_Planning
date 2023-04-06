@@ -86,7 +86,7 @@ def main():
             "MSSO": "Méthodes Spectroscopiques pour la Synthèse Organique",
             "MN": "Méthodes Numériques",
             "SMB": "Synthèse de molécules bioactives",
-            "MN": "De la molécule aux nanomatériaux",
+            "MNM": "De la molécule aux nanomatériaux",
             "CNMACC": "Chimie nucléaire, mesure, analyse et cycle du combustible",
             "CN": "Chimie et Numérique",
             "MIE": "Microbiologie, Immunologie, Eléments de génie génétique",

@@ -42,34 +42,6 @@ db.on("error", function(error) {
 }); 
 const queryDB = promisify(db.all).bind(db); // used for get info from db
 
-// INIT CONSTANTS
-const MAJEURS = {
-  CBD: "CONCEP.LOGICIELLE/BIG DATA",
-  ROSE: "ROBOTIQUE",
-  ESE: "ELECTRONIQUE ET SYST EMB",
-  INFRA: "INFRA DES RESEAUX",
-  IMI: "IMAGE",
-};
-const MSO = {
-  "SSO": "Stratégie de Synthèse Organique",
-  "IM": "Ingéniérie Macromoléculaire",
-  "SMA": "Spectrométries RMN et Masse Avancées",
-  "IBB": "Introduction aux Biotechnologies et Bioprocédés",
-  "SP": "Simulation des Procédés",
-  "COO": "Chimie Organométallique et Approche Orbitalaire",
-  "CAM": "Conception et Application du Médicament",
-  "TSS": "Techniques Séparatives avancées et Spéciation",
-  "CDD": "Catalyse et Développement Durable",
-  "GP": "Génie de la Polymérisation",
-  "MSSO": "Méthodes Spectroscopiques pour la Synthèse Organique",
-  "MN": "Méthodes Numériques",
-  "SMB": "Synthèse de molécules bioactives",
-  "MN": "De la molécule aux nanomatériaux",
-  "CNMACC": "Chimie nucléaire, mesure, analyse et cycle du combustible",
-  "CN": "Chimie et Numérique",
-  "MIE": "Microbiologie, Immunologie, Eléments de génie génétique"
-};
-
 // TO CHANGE PASSWORD AND USERNAME TEST
 const myusername = 'user1'
 const mypassword = 'mypassword'
@@ -344,7 +316,7 @@ async function handlePostback(sender_psid, received_postback) {
         console.log("4CGP");
         let messageMso = { "text": "Vous êtes en 4CGP, veuillez choisir vos mso, cliquez sur chacune de vos mso:" };
         r = await writeMessage.callSendAPI(sender_psid, messageMso);
-        response = templates.askTemplateMsoCGP(Object.assign({}, MSO));
+        response = templates.askTemplateMsoCGP(Object.assign({}, variables.constant.MSO));
         for (let m of response) {
           console.log("mso sending");
           r = await writeMessage.callSendAPI(sender_psid, m);
@@ -362,7 +334,7 @@ async function handlePostback(sender_psid, received_postback) {
     case "ROSE":
     case "ESE":
       let sql_set_majeur = `UPDATE user SET majeur=? WHERE id_user=?`;
-      let majeur = MAJEURS[payload];
+      let majeur = variables.constant.MAJEURS[payload];
       await db.run(sql_set_majeur, [majeur, sender_psid]);
       let inscriptionMaj = "Inscrit";
       let sql_uptade_statusMaj = "UPDATE user SET status=? WHERE id_user=?";
@@ -373,9 +345,9 @@ async function handlePostback(sender_psid, received_postback) {
       break;
     default:
       // let's not make a long switch case with CGP MSO
-      if (Object.keys(MSO).includes(payload)) {
+      if (Object.keys(variables.constant.MSO).includes(payload)) {
         console.log("MSO payload")
-        let mso_name = MSO[payload];
+        let mso_name = variables.constant.MSO[payload];
         console.log(`mso_name = ${mso_name} at ${writeMessage.getCurrentDate()}`);
         // get the id of the mso
         let sql_get_mso_id = `SELECT id_mso FROM mso WHERE name_mso=?`;
