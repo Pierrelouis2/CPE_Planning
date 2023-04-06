@@ -336,6 +336,9 @@ async function handlePostback(sender_psid, received_postback) {
       // set the user filliere to payload
       sql_set_filiere = `UPDATE user SET filliere=? WHERE id_user=?`;
       await db.run(sql_set_filiere, [payload, sender_psid]);
+      let user_log_4CGP = await userInfo.getUser(sender_psid);
+      console.log(`user log 4CGP =`);
+      console.log(user_log_4CGP);
       let inscription = "Inscrit";
       let sql_uptade_statusCgp = "UPDATE user SET status=? WHERE id_user=?";
       await db.run(sql_uptade_statusCgp, [inscription, sender_psid]);
