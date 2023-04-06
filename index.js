@@ -89,7 +89,7 @@ app.get("/admin", async function (req, res) {
         xlabels: {promo: ['Promo 4', 'promo 3'], filliere: ['ETI', 'CGP']},
         ylabels: {promo: countPromo, filliere: countFilliere}
     }; 
-    res.render(path.join(initpath , 'home.html'), variables);
+    res.render(path.join(initpath , 'home.ejs'), variables);
     }
     else {
         res.redirect('/login');
