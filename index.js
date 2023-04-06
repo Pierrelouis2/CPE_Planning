@@ -117,17 +117,17 @@ app.get("/admin", function (req, res) {
 });
 
 app.get('/png/:imageName', function(req, res) {
-  var image = req.params['imageName'];
+  let image = req.params.imageName;
   console.log("got png request : ", image);
   res.header('Content-Type', "image/png");
-  let data;
-  try {
-    data = fs.readFileSync(`./Plannings/planningPng/${image}`, 'utf8');
-  } catch (error) {
-    console.log("error on png request : ");
-    console.log(error);
-  }
-  res.send(data)    
+  // let data;
+  // try {
+  //   data = fs.readFileSync(`./Plannings/planningPng/${image}`, 'utf8');
+  // } catch (error) {
+  //   console.log("error on png request : ");
+  //   console.log(error);
+  // }
+  res.sendFile(path.join(__dirname,`./Plannings/planningPng/${image}`));   
 });
 
 // Creates the endpoint for our webhook to facebook
