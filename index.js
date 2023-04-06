@@ -179,7 +179,7 @@ app.get("/webhook", (req, res) => {
 async function handleMessage(sender_psid) {
   let response = templates.askTemplateJour();
   let r;
-  await facebookInit.set_persistent_menu(sender_psid);
+  await facebookInit.set_persistent_menu(sender_psid, true);
   r = await writeMessage.callSendAPI(sender_psid, response[0]);
   r = await writeMessage.callSendAPI(sender_psid, response[1]);
 }
@@ -191,7 +191,7 @@ async function handlePostback(sender_psid, received_postback) {
   let r;
   let user;
   let sql_set_filiere;
-  await facebookInit.set_persistent_menu(sender_psid); // Needed here ?
+  await facebookInit.set_persistent_menu(sender_psid, true); // Needed here ?
   // Get the payload for the postback
   let payload = received_postback.payload;
   console.log("payload: ", payload);

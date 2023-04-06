@@ -188,7 +188,7 @@ function askTemplateMenu(psid) {
     persistent_menu: [
       {
         locale: "default",
-        composer_input_disabled: true, // activate/deactivate the keayboard
+        composer_input_disabled: true, // activate/deactivate the keyboard
         call_to_actions: [
           {
             type: "postback",
