@@ -67,5 +67,6 @@ async function getStatFillierePromo(){
 
 module.exports = {
     getStatPromo,
-    getStatFilliere
+    getStatFilliere,
+    getStatFillierePromo
 }
