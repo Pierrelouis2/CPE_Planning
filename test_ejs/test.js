@@ -100,7 +100,7 @@ app.post('/planning', async function(req, res) {
     let majeur = variables.constant.MAJEURS;
     let mso = variables.constant.MSO;
     let id = '6271457816218293';
-    let user = {id_user:id, promo: data.promo, filliere: data.filliere, majeur: data.majeur}
+    let user = {id_user:id, promo: data.promo, filliere: data.filliere, majeur: data.majeur, groupe: data.groupe}
     let PlanningRend = await writeMessage.readCsv(`../Output_Json/Planning${data.promo + data.filliere + data.DATE}.json`, data.jour, id, user);
     let message = await writeMessage.constructMessage(PlanningRend);
     let variable = {majeur: majeur, mso: mso, data: data, message: message }

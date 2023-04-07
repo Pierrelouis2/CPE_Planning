@@ -31,7 +31,11 @@ async function readCsv(dir, Jour, sender_psid,user){ // acutally we read a json 
     let GM = variables.constant.GROUPES[user.groupe];
     if (user.filliere === 'ETI'){
       if (user.promo === '3'){
-        GM = variables.constant.GROUPE3ETI[user.groupe];
+        try {
+          GM = variables.constant.GROUPE3ETI[user.groupe];
+        } catch (err) {
+          console.log(err);
+        }
       } else {
         GM = user.majeur;
       }
