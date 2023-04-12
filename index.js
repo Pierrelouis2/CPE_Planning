@@ -1,4 +1,7 @@
 "use strict";
+
+const { profile } = require("console");
+
 //ALL THE IMPORTS AND CONFIGS HERE
 const express = require("express"),
   bodyParser = require("body-parser"),
@@ -8,6 +11,7 @@ const express = require("express"),
   templates = require("./modules/templates"),
   variables = require("./modules/variables"),
   facebookInit = require("./modules/facebookInit"),
+  account = require("./modules/account.js"),
   path = require('path'),
   config = require("config"),
   { promisify } = require("util"),
@@ -17,6 +21,7 @@ const express = require("express"),
   fs = require("fs"),
   webFunctions = require("./modules/webFunctions.js");
   
+
 // INIT APP
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -78,11 +83,10 @@ app.post('/form', function(req, res) {
   }
 });
 
-app.post('/profile_form', function(req, res) {
-  console.log("test");
-  console.log(req.body);
-  console.log(req.body.name);
-  console.log(req.body.email)
+app.post('/profile_form', async function(req, res) {
+  req.body.password = await account.hashPassword(req.body.password);
+  await account.changeInfo( JSON.parse(JSON.stringify(req.body)))
+  res.redirect('/profile');
 });
 
 app.get("/admin", async function (req, res) {
@@ -92,7 +96,7 @@ app.get("/admin", async function (req, res) {
       var countFilliere = await webFunctions.getStatFilliere();
       var countPromoFilliere = await webFunctions.getStatFillierePromo();
       let variables = { 
-        page : "profile",
+        page : "planning",
         labels : ["Promo", "Filliere", "Promo_Filliere"],
         xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
         ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere},

@@ -22,4 +22,12 @@ elif init == "3":
     cur.execute(sql_update_inscription)
     conn.commit()
     print("Inscription changé en inscrit")
+elif init == "4":
+    sql_inscription_profile = "INSERT INTO profile VALUES ('Pierre-Louis', 'TELEP', 'pl.telep@cpe.fr', 'password','S', 1)"
+    cur.execute(sql_inscription_profile)
+    conn.commit()
+    print("Inscription changé en inscrit")
+else:
+    print("erreur")
+
 

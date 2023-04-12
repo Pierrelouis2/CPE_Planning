@@ -16,8 +16,6 @@ async function getStatPromo(){
         }
     }
     count3A = promo.length - count4A;
-    console.log("count4A : ", count4A);
-    console.log("count3A : ", count3A);
     return [count4A, count3A];
 }
 
@@ -32,8 +30,7 @@ async function getStatFilliere(){
         }
     }
     countCGP = filliere.length - countETI;
-    console.log("countETI : ", countETI);
-    console.log("countCGP : ", countCGP);
+
     return [countETI, countCGP];
 }
 
@@ -58,10 +55,7 @@ async function getStatFillierePromo(){
             count4CGP ++;
         }
     }
-    console.log("count3ETI : ", count3ETI);
-    console.log("count3CGP : ", count3CGP);
-    console.log("count4ETI : ", count4ETI);
-    console.log("count4CGP : ", count4CGP);
+
     return [count3ETI, count3CGP, count4ETI, count4CGP];
 }
 

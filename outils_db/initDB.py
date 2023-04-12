@@ -34,7 +34,7 @@ def create_table(conn, create_table_sql):
 
 
 def main():
-    database = "users.db"
+    database = "../users.db"
 
     sql_create_user_table = """ CREATE TABLE IF NOT EXISTS user (
                                         id_user integer PRIMARY KEY,
@@ -57,27 +57,27 @@ def main():
     sql_create_profile_table = """CREATE TABLE IF NOT EXISTS profile (
                                     prenom text,
                                     nom text,
-                                    email text,
-                                    password text,
+                                    email varchar(254),
+                                    password varchar(254),
                                     rights text,
-                                    psid integer PRIMARY KEY,
+                                    psid integer PRIMARY KEY
                                     );"""
 
-    sql_delete_mso_table = """DROP TABLE mso;"""
+    sql_delete_mso_table = """DROP TABLE profile;"""
     # create a database connection
     conn = create_connection(database)
-
     # create tables
     if conn is not None:
         # create projects table
-        create_table(conn, sql_create_user_table)
-
+        # create_table(conn, sql_create_user_table)
         # create tasks table
         create_table(conn, sql_create_tj_user_mso_table)
         #delete mso table
         create_table(conn, sql_delete_mso_table)
         # create tasks table
         create_table(conn, sql_create_mso_table)
+
+
         # create tasks table
         create_table(conn, sql_create_profile_table)
 
