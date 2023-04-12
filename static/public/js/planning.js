@@ -1,6 +1,6 @@
 const btn = document.querySelector("button");
 const dropdown = document.querySelector(".dropdown-options");
-const optionLinks = document.querySelectorAll(".option a");
+const optionInput = document.querySelectorAll(".option input");
 
 
 btn.addEventListener("click", function(e) {
@@ -11,7 +11,7 @@ btn.addEventListener("click", function(e) {
 var clickFn = function(e) {
    e.preventDefault();
    dropdown.classList.remove("open");
-   btn.innerHTML = this.text;
+   btn.innerHTML = this.value;
    var activeLink = document.querySelector(".option .active")
    if (activeLink) {
       activeLink.classList.remove("active");
@@ -19,8 +19,8 @@ var clickFn = function(e) {
    this.classList.add("active");
 }
 
-for (var i = 0; i < optionLinks.length; i++) {
-   optionLinks[i].addEventListener("mousedown", clickFn, false);
+for (var i = 0; i < optionInput.length; i++) {
+   optionInput[i].addEventListener("mousedown", clickFn, false);
 }
 
 function hoverFct() {

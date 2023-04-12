@@ -54,7 +54,7 @@ const queryDB = promisify(db.all).bind(db); // used for get info from db
 const myusername = 'user1'
 const mypassword = 'mypassword'
 
-// ----- ROUTES -----
+// ----- ROUTES ----- //
 
 app.get("/", (req, res) => {
   res.redirect('/login');
@@ -134,6 +134,24 @@ app.get("/profile", async function (req, res) {
     else {
         res.redirect('/login');
     }
+});
+
+app.get("/planning", async function (req, res) {
+  let session = req.session;
+    if (session.userid){
+      let variables = {
+        page : "planning"
+      };
+      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+    }
+    else {
+        res.redirect('/login');
+    }
+});
+
+app.post("/planning/:payload", async function (req, res) {
+  console.log("got planning request");
+  console.log(req.params);
 });
 
 app.get('/png/:imageName', function(req, res) {
