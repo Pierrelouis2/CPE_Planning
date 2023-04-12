@@ -1,16 +1,7 @@
 @primary: #2975DA;
 @easing: cubic-bezier(0.5,2,0.5,0.75);
 
-body {
-   font-family: "Helvetica Neue", Helvetica, sans-serif;
-   font-size: 16px;
-   background: #f1f1f1;
-}
-
-.container {
-   max-width: 500px;
-   margin: 150px auto;
-   
+.container-select {
    button {
       position: relative;
       background: none;
@@ -46,12 +37,9 @@ body {
          position: absolute;
          left: 0;
          bottom: 0;
-         
          opacity: 0;
          transform: scale(0.8) translate3d(-20px, 0px, 0);
-         
          transition: opacity 0.1s @easing, transform 0.3s @easing;
-         
          transform-origin: 0 100%;
          z-index: 1;
          
@@ -70,7 +58,8 @@ body {
                color: @primary;
                
                &:hover {
-                  color: darken(@primary, 5%);
+                  background-color: #0496ff;
+                  color: white;
                }
                
                &.active {

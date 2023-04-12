@@ -55,9 +55,7 @@ app.get("/", (req, res) => {
 });
 
 app.get('/login',function(req, res){
-  console.log(__dirname);
   res.sendFile(path.join(initpath , 'login.html')); 
-  console.log(req.body.user);
   if (req.body.user == myusername && req.body.password == mypassword){
       let session = req.session;
       session.userid = req.body.user;
@@ -93,7 +91,7 @@ app.get("/admin", async function (req, res) {
       var countFilliere = await webFunctions.getStatFilliere();
       var countPromoFilliere = await webFunctions.getStatFillierePromo();
       let variables = { 
-        page : "stats",
+        page : "planning",
         labels : ["Promo", "Filliere", "Promo_Filliere"],
         xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
         ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere},

@@ -2,7 +2,9 @@
     <link rel="stylesheet/less" type="text/css" href="../css/planning.less" />
 </head>
 
-<div class="container">
+<h2>My Planning</h2>
+
+<div class="container-select">
     <div class="dropdown">
        <button >Select</button>
        <ul class="dropdown-options" onmouseleave="leaveFct()">
@@ -30,8 +32,8 @@
             <th>Après-midi</th>
         </tr>
         <tr>
-            <td><% =timetable.Matin %></td>
-            <td><% =timetable.Aprem %></td>
+            <td><% timetable.Matin %></td>
+            <td><% timetable.Aprem %></td>
         </tr>
     </table>
 <% } %>
