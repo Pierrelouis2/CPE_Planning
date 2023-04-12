@@ -39,7 +39,7 @@ app.get('/', async function(req, res) {
     var countPromo = await getStatPromo();
     var countFilliere = await getStatFilliere();
     let variables = { 
-        mascots: mascots, 
+        mascots: mascots,
         tagline: tagline,
         text: "ceci est ma viables de text conditionnel",
         users: users,
