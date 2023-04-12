@@ -93,6 +93,7 @@ app.get("/admin", async function (req, res) {
       var countFilliere = await webFunctions.getStatFilliere();
       var countPromoFilliere = await webFunctions.getStatFillierePromo();
       let variables = { 
+        page : "stats",
         labels : ["Promo", "Filliere", "Promo_Filliere"],
         xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
         ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere},
@@ -107,7 +108,10 @@ app.get("/admin", async function (req, res) {
 app.get("/profile", async function (req, res) {
   let session = req.session;
     if (session.userid){
-      res.render(path.join(initpath , 'ejs/profile.ejs'));
+      let variables = {
+        page : "profile"
+      };
+      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
     }
     else {
         res.redirect('/login');
