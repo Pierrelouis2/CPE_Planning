@@ -1,16 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
+.navigation:hover ~ main{
+  margin-left: 200px;
+  transition: 0.5s;
+}
+
+main {
+  margin-left: 60px;
+  transition: 0.5s;
+}
+
+
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-}
-
-body {
-  font-family: "Poppins", sans-serif;
-  min-height: 100vh;
-  background: black;
 }
 
 .navigation {
@@ -115,5 +121,8 @@ body {
   .navigation.active {
     left: 0px;
     width: 100%;
+  }
+  main {
+    border-left: -60px;
   }
 }

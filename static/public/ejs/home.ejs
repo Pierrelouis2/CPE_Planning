@@ -13,46 +13,42 @@
 
 
 <!-- <span class="bckg"></span> -->
-<header>
+<body>
   <h1>Dashboard</h1>
   <%- include('./sidebar'); %>
+  <main>
+    <div class="title">
+      <h2>CPE Planning</h2>
+    </div>
 
-  
-  
-</header>
-<main>
-  <div class="title">
-    <h2>CPE Planning</h2>
-  </div>
-
-  <!-- Insert html -->
-  <div class="content">
-    <div class="parent">
-    <% labels.forEach(function(label) { %>
-      <canvas class="child" id="<%= label %>" style="width:100%;max-width:600px"></canvas>
-      <script>
-        var barColors = ["#b91d47","#00aba9","#1543DF","#4FA436"];
-        new Chart("<%= label %>", {
-          type: "pie",
-          data: {
-            labels: <%- JSON.stringify(xlabels[label]) %> ,
-            datasets: [{
-              backgroundColor: barColors,
-              data: <%- JSON.stringify(ylabels[label]) %>
-            }]
-          },
-          options: {
-            title: {
-              display: true,
-              text: "<%= label %>"
+    <!-- Insert html -->
+    <div class="content">
+      <div class="parent">
+      <% labels.forEach(function(label) { %>
+        <canvas class="child" id="<%= label %>" style="width:100%;max-width:600px"></canvas>
+        <script>
+          var barColors = ["#b91d47","#00aba9","#1543DF","#4FA436"];
+          new Chart("<%= label %>", {
+            type: "pie",
+            data: {
+              labels: <%- JSON.stringify(xlabels[label]) %> ,
+              datasets: [{
+                backgroundColor: barColors,
+                data: <%- JSON.stringify(ylabels[label]) %>
+              }]
+            },
+            options: {
+              title: {
+                display: true,
+                text: "<%= label %>"
+              }
             }
-          }
-        });
-   
+          });
+    
 
-        </script>
-        <% }); %>
+          </script>
+          <% }); %>
       </div>
-  </div>
-  
-</main>
+    </div>
+  </main>
+</body>
