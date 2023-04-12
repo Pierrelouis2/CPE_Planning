@@ -20,12 +20,8 @@ async function comparePassword(plaintextPassword, hash) {
 }
 
 async function changeInfo(info) {
-    console.log("info  =" ,info);
-    console.log("prenom  =" ,info.prenom);
-    let sql_info = [info.prenom, info.nom, info.email, info.password, info.rights ,info.code];
-    console.log("sql_info  =" ,sql_info);
-    let sql_change_info = `UPDATE profile SET prenom=?, nom='terstse', email='tetstsetse', password='test', rights='F' WHERE psid='1'`;
-    await db.run(sql_change_info, sql_info, function (err) {
+    let sql_change_info = `UPDATE profile SET prenom=?, nom=?, email=?, password=?, rights=? WHERE psid=?`;
+    await db.run(sql_change_info, [info.prenom, info.nom, info.email, info.password, 'F' ,info.code], function (err) {
         if (err) {
             return console.error(err.message);
         }
@@ -33,9 +29,16 @@ async function changeInfo(info) {
     });
 }
 
+async function getProfile(code) {
+    let sql_get_profile = `SELECT * FROM profile WHERE psid=1`;
+    let profile = (await queryDB(sql_get_profile))[0];
+    console.log(profile);
+    return profile;
+}
 
 module.exports = {
     hashPassword,
     comparePassword,
-    changeInfo
+    changeInfo,
+    getProfile
 };
