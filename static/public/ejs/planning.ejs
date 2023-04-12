@@ -22,5 +22,19 @@
     </div>
  </div>
 
+ <!-- Timetable -->
+ <% if (locals.timetable) { %>
+    <table class="timetable">
+        <tr>
+            <th>Matin</th>
+            <th>Après-midi</th>
+        </tr>
+        <tr>
+            <td><% =timetable.Matin %></td>
+            <td><% =timetable.Aprem %></td>
+        </tr>
+    </table>
+<% } %>
+
  <script src="https://cdn.jsdelivr.net/npm/less" ></script>
  <script src="../js/planning.js"></script>
