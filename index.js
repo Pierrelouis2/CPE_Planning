@@ -65,20 +65,14 @@ app.get('/login',function(req, res){
   if (req.body.user == myusername && req.body.password == mypassword){
       let session = req.session;
       session.userid = req.body.user;
-      console.log(req.session);
       res.redirect('/admin');
   }
 });
 
 app.post('/form', function(req, res) {  
-  console.log("test");
-  console.log(req.body.user);
-  console.log(req.body.password)
   if (req.body.user == myusername && req.body.password == mypassword){
-      console.log("test2");
       let session = req.session;
       session.userid = req.body.user;
-      console.log(req.session);
       res.redirect('/admin');
   }
 });

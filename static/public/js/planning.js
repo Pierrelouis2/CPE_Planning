@@ -12,11 +12,14 @@ var clickFn = function(e) {
    e.preventDefault();
    dropdown.classList.remove("open");
    btn.innerHTML = this.value;
-   var activeLink = document.querySelector(".option .active")
-   if (activeLink) {
-      activeLink.classList.remove("active");
+   var activeInput = document.querySelector(".option .active")
+   if (activeInput) {
+      activeInput.classList.remove("active");
    }
    this.classList.add("active");
+   // submit the form which is the parent of the parameter e
+   e.target.parentNode.submit();
+   
 }
 
 for (var i = 0; i < optionInput.length; i++) {
