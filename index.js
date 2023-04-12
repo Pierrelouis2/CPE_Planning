@@ -41,6 +41,7 @@ app.use(sessions({
 let initpath = path.join(__dirname,'static','public');
 app.use(express.static(initpath));
 app.use(cookieParser());
+app.use('/Docs', express.static(__dirname + '/Docs'));
 
 // INIT DB
 let db = new sqlite3.Database("users.db");

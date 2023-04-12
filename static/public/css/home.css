@@ -12,15 +12,27 @@ html{
 header{
   width: 100%;
   top: 0;
+  display: flex;
 }
 
 header h1 {
-    padding-left: 60px;
+    padding-left: 20px;
 }
 
 header, .navigation{
     position: fixed;
     background: #0496FF;
+}
+
+.logo{
+    display: flex;
+    height: 40px;
+    width: 40px;
+    margin-block-start: 23px;
+    margin-block-end: 23px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 40px;
 }
 
 main h2{
