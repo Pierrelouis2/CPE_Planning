@@ -9,3 +9,8 @@ header{
   top: 0;
   background-color: #ffffff ;
 }
+
+.parent{
+  display: flex;
+  flex-wrap: wrap;
+}
