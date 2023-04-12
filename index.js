@@ -79,6 +79,13 @@ app.post('/form', function(req, res) {
   }
 });
 
+app.post('/profile_form', function(req, res) {
+  console.log("test");
+  console.log(req.body);
+  console.log(req.body.name);
+  console.log(req.body.email)
+});
+
 app.get("/admin", async function (req, res) {
   let session = req.session;
     if (session.userid){
@@ -91,6 +98,16 @@ app.get("/admin", async function (req, res) {
         ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere},
     }; 
     res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+    }
+    else {
+        res.redirect('/login');
+    }
+});
+
+app.get("/profile", async function (req, res) {
+  let session = req.session;
+    if (session.userid){
+      res.render(path.join(initpath , 'ejs/profile.ejs'));
     }
     else {
         res.redirect('/login');

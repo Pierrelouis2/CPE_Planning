@@ -1,0 +1,37 @@
+<head>
+<link rel="stylesheet" href="../css/profile.css">
+</head>
+
+<div class="container">
+
+	<h1 class="title">Modifier mon profil</h1>
+    <form action="/profile_form" method="post">
+	<div class="grid">
+		<div class="form-group a">
+			<label for="name">Nom</label>
+			<input id="name" type="text" name="nom">
+		</div>
+
+		<div class="form-group b">
+			<label for="first-name">Prénom</label>
+			<input id="first-name" type="text" name="prenom">
+		</div>
+
+		<div class="form-group email-group">
+			<label for="email">Email (CPE)</label>
+			<input id="email" type="text" name="email">
+		</div>
+
+
+		<div class="form-group">
+			<label for="Sender_psid">Code de liaison</label>
+			<input id="psid" type="text" name="xode">
+		</div>
+	</div>
+
+
+	<div class="button-container">
+		<button type="submit" class="button">Enregister les modifications</button>
+	</div>
+</form>
+</div>
