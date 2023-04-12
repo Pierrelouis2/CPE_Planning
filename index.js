@@ -112,6 +112,7 @@ app.post("/webhook", async (req, res) => {
     // Iterates over each entry - there may be multiple if batched
     for (const entry of body.entry) {
       console.log("entry: " + entry)
+      console.log(body)
       // only reading the message
       let webhook_event = entry.messaging[0];
       // Get the sender PSID
