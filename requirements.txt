@@ -8,3 +8,6 @@ bcrypt
 express-session
 cookie-parser
 ejs
+config
+html
+

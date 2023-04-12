@@ -9,6 +9,8 @@ let  express = require('express'),
     sqlite3 = require('sqlite3').verbose(),
     { promisify } = require("util"),
     db = new sqlite3.Database('../users.db'),
+    variables = require('../modules/variables.json'),
+    writeMessage = require('../modules/writeMessage.js');
     queryDB = promisify(db.all).bind(db); // used for get info from db
 
 let app = express();
@@ -79,4 +81,31 @@ async function getStatFilliere(){
     console.log("countCGP : ", countCGP);
     return [countETI, countCGP];
 }
+
+app.get('/planning', async function(req, res) {
+    let majeur = variables.constant.MAJEURS;
+    let mso = variables.constant.MSO;
+
+    let variable = {   
+        majeur: majeur,
+        mso: mso,
+        }
+    res.render(path.join(__dirname, 'getPlanning.ejs'), variable);
+});
+
+
+app.post('/planning', async function(req, res) {
+    console.log(req.body);
+    let data = req.body;
+    let majeur = variables.constant.MAJEURS;
+    let mso = variables.constant.MSO;
+    let id = '6271457816218293';
+    let user = {id_user:id, promo: data.promo, filliere: data.filliere, majeur: data.majeur, groupe: data.groupe}
+    let PlanningRend = await writeMessage.readCsv(`../Output_Json/Planning${data.promo + data.filliere + data.DATE}.json`, data.jour, id, user);
+    let message = await writeMessage.constructMessage(PlanningRend);
+    let variable = {majeur: majeur, mso: mso, data: data, message: message }
+    
+    res.render(path.join(__dirname, 'getPlanning.ejs'), variable);
+});
+
 

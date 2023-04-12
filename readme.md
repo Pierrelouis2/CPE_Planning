@@ -77,27 +77,28 @@ The database is composed of 3 tables:
 <img src="./Docs/ReadmeImages/confidential-ge984ebf2f_1280.png"  width="400" height="250">
 
 ## TODO
-- [X] Make json file for all variables
-- [X] Repair isKnown function
-- [X] Manage CGP Table
-- [X] Manage reinscription 4CGP (mso)
+- [ ] Change readCsv with more parameters to get more use to the function
 - [ ] Manage LV lessons
-- [X] Manage 3A lessons
-- [X] Create MSO TABLE
-- [X] Manage groups (but not for 4A its useless and complicated)
 - [ ] Manage database backup and restore (cron?)
-- [X] Use another file to store templates
 - [ ] Script to send planning automatically at 7h30am
-- [X] Manage SQL errors (try catch)
-- [X] Make a better readme 
 - [ ] Make a better code
-- [X] Use personnal domain to get png
 - [ ] For the future : make a web interface for CPE admin to post the planning (manage timetable)
-- [X] Make more comments in the code so it's easier to understand when you come back to it after a long time
 - [ ] Don't share the token on github !!!!!!!!!
 - [ ] Don't share the code to  ETI students !!!!!!!!!
 - [ ] Regex expression for hours  
 - [ ] Interface utilisateur lié avec le compte fb + addresse mail
 - [ ] Interface admin pour gérer les comptes
 - [ ] Interface pour l'administration cpe pour gérer les plannings -> pdf -> json && png -> link
-- [ ] Lié le site de langue 
+- [ ] Link the LV lessons website
+- [X] Make json file for all variables
+- [X] Repair isKnown function
+- [X] Manage CGP Table
+- [X] Manage reinscription 4CGP (mso)
+- [X] Manage 3A lessons
+- [X] Create MSO TABLE
+- [X] Manage groups (but not for 4A its useless and complicated)
+- [X] Make more comments in the code so it's easier to understand when you come back to it after a long time
+- [X] Use personnal domain to get png
+- [X] Manage SQL errors (try catch)
+- [X] Make a better readme 
+- [X] Use another file to store templates

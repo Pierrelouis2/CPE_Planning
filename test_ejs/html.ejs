@@ -16,7 +16,7 @@
             born <%= mascot.birth_year %>
           </li>
         <% }); %>
-    <% if (!text) { %>
+    <% if (locals.text) { %>
       <p>Variable test = <%= text %></p>
     <% } else { %>
         <p>Variable test is undefined</p>
@@ -28,10 +28,18 @@
       <li>
         <strong><%= user.name %></strong>
         psid: <%= user.id_user %>,
+        <% if (!user.filliere) { %>
+          filliere: None,
+        <% } else { %>
         filliere: <%= user.filliere %>,
+        <% } %>
         promo: <%= user.promo %>,
         groupe: <%= user.groupe %>
-        majeur: <%= user.majeur %>
+        <% if (!user.majeur) { %>
+          filliere: None,
+        <% } else { %>
+        filliere: <%= user.majeur %>,
+        <% } %>
       </li>
     <% }); %>
     </ul>
