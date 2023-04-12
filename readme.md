@@ -78,6 +78,8 @@ The database is composed of 3 tables:
 
 ## TODO
 - [ ] to link bot and website use sender PSID 
+- [ ] create send psid button
+- [ ] create subscribe page
 - [ ] Change readCsv with more parameters to get more use to the function
 - [ ] Manage LV lessons
 - [ ] Manage database backup and restore (cron?)
@@ -87,7 +89,6 @@ The database is composed of 3 tables:
 - [ ] Don't share the token on github !!!!!!!!!
 - [ ] Don't share the code to  ETI students !!!!!!!!!
 - [ ] Regex expression for hours  
-- [ ] Interface utilisateur lié avec le compte fb + addresse mail
 - [ ] Interface admin pour gérer les comptes
 - [ ] Interface pour l'administration cpe pour gérer les plannings -> pdf -> json && png -> link
 - [ ] Link the LV lessons website
