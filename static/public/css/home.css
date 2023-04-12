@@ -29,6 +29,8 @@ main h2{
 }
 
 main {
+    position: relative;
+    z-index: -1;
     margin-top: 90px;
 }
 
