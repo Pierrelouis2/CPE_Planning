@@ -120,7 +120,7 @@ app.post("/webhook", async (req, res) => {
       //message or postback ?
       if (webhook_event.message) {
         console.log("in handleMessage");
-        // await handleMessage(sender_psid);
+        await handleMessage(sender_psid);
       } else if (webhook_event.postback) {
         await handlePostback(sender_psid, webhook_event.postback);
       }
@@ -198,7 +198,6 @@ async function handlePostback(sender_psid, received_postback) {
       r = await writeMessage.callSendAPI(sender_psid, response);
       break;
     case "LUNDI":
-      await facebookInit.set_persistent_menu(sender_psid, false);
     case "MARDI":
     case "MERCREDI":
     case "JEUDI":
