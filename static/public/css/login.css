@@ -38,7 +38,7 @@
     background: transparent;
 }
 
-/* using webkit to get the same view when autocomplete */
+/* using webkit to get the same view when autocompleted */
 .user-box-input:-webkit-autofill,
 .user-box-input:-webkit-autofill:hover,
 .user-box-input:-webkit-autofill:focus,
