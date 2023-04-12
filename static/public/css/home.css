@@ -1,16 +1,30 @@
 body {
-    background-color: #8b9294;
-    padding-top: 48px;
+    background-color: #ffffff;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
 }
+  
 header{
-  position: fixed;
   width: 100%;
-  /* .border-bottom: 3px solid; */
   top: 0;
-  background-color: #ffffff ;
 }
 
-.parent{
-  display: flex;
-  flex-wrap: wrap;
+header h1 {
+    padding-left: 60px;
+}
+
+header, .navigation{
+    position: fixed;
+    background: #0496FF;
+}
+
+main {
+    margin-top: 90px;
+}
+
+footer {
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding-top: 40px;
 }

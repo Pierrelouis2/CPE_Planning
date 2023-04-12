@@ -3,62 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
   <link rel="stylesheet" href="../css/home.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   <script src="../js/home.js"></script>
-
+  <title>CPE Planning</title>
 </head>
-</html>
 
-
-<!-- <span class="bckg"></span> -->
 <body>
-<header>
-
-  <h1 class="top-title">Dashboard</h1>
-</header>
-
-<%- include('./sidebar'); %>
+  <header>
+  <h1 class="top-title">CPE Planning</h1>
+  </header>
+ 
+  <%- include('./sidebar'); %>
 
   <main>
-    <div class="title">
-      <h2 style="
-      margin-left: 10px">CPE Planning</h2>
-    </div>
-  
-    <!-- Insert html -->
-    <div class="content">
-      <div class="parent">
-      <% labels.forEach(function(label) { %>
-        <canvas class="child" id="<%= label %>" style="width:100%;max-width:600px;padding:0px"></canvas>
-        <script>
-          var barColors = ["#b91d47","#00aba9","#1543DF","#4FA436"];
-          new Chart("<%= label %>", {
-            type: "pie",
-            data: {
-              labels: <%- JSON.stringify(xlabels[label]) %> ,
-              datasets: [{
-                backgroundColor: barColors,
-                data: <%- JSON.stringify(ylabels[label]) %>
-              }]
-            },
-            options: {
-              title: {
-                display: true,
-                text: "<%= label %>"
-              },
-              layout: {
-                padding: "0px"
-                }
-              }
-            }
-          );
-    
+    <!-- A changer en fonction de l'uri -->
+    <%- include('./stats'); %>
 
-          </script>
-          <% }); %>
-      </div>
-    </div>
   </main>
+
+  <footer>
+    <p>© 2023 - CPE Planning</p>
+  </footer>
 </body>
+
+</html>
