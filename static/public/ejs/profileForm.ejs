@@ -1,39 +1,42 @@
 <head>
-    <link rel="stylesheet" href="../css/profile.css">
+<link rel="stylesheet" href="../css/profile.css">
 </head>
+
 
 <h2 class>Modifier mon profil</h2>
 <div class="container">
+    <form action="/profile_form" method="post">
 	<div class="grid">
 		<div class="form-group a">
 			<label for="name">Nom</label>
-            <h3> <%= user.nom %></h3>
+			<input id="name" type="text" name="nom">
 		</div>
 
 		<div class="form-group b">
 			<label for="first-name">Prénom</label>
-            <h3> <%= user.prenom %></h3>
+			<input id="first-name" type="text" name="prenom">
 		</div>
 
 		<div class="form-group email-group">
 			<label for="email">Email (CPE)</label>
-            <h3> <%= user.email %></h3>
+			<input id="email" type="text" name="email">
 		</div>
 
 
 		<div class="form-group">
 			<label for="Sender_psid">Code de liaison</label>
-            <h3> <%= user.psid %></h3>
+			<input id="psid" type="number" name="code">
 		</div>
 
         <div class="form-group">
 			<label for="password">Password</label>
-            <h3> ********** </h3>
+			<input id="password" type="password" name="password">
 		</div>
-        <form action="/profile_change" method="post">
-            <div class="button-container">
-                <button type="submit" class="button" >Modifier les infos</button>
-            </div>
-        </form>
 	</div>
+
+
+	<div class="button-container">
+		<button type="submit" class="button">Enregister les modifications</button>
+	</div>
+</form>
 </div>

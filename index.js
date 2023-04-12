@@ -78,11 +78,23 @@ app.post('/form', function(req, res) {
 });
 
 app.post('/profile_form', async function(req, res) {
-  req.body.password = await account.hashPassword(req.body.password);
-  await account.changeInfo( JSON.parse(JSON.stringify(req.body)))
-  res.redirect('/profile');
+  let session = req.session;
+  if (session.userid){
+    req.body.password = await account.hashPassword(req.body.password);
+    await account.changeInfo( JSON.parse(JSON.stringify(req.body)))
+    res.redirect('/profile');
+  }
 });
 
+app.post('/profile_change' , async function(req, res) {
+  let session = req.session;
+  if (session.userid){
+    let variables = {
+      page : "profileForm",
+    };
+    res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+  }
+});
 app.get("/admin", async function (req, res) {
   let session = req.session;
     if (session.userid){
@@ -105,7 +117,10 @@ app.get("/admin", async function (req, res) {
 app.get("/profile", async function (req, res) {
   let session = req.session;
     if (session.userid){
+      let user = await account.getProfile(req.session.userid);
+      console.log(user);
       let variables = {
+        user: user,
         page : "profile"
       };
       res.render(path.join(initpath , 'ejs/home.ejs'), variables);
