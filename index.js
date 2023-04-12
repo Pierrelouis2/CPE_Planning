@@ -91,7 +91,7 @@ app.get("/admin", async function (req, res) {
       var countFilliere = await webFunctions.getStatFilliere();
       var countPromoFilliere = await webFunctions.getStatFillierePromo();
       let variables = { 
-        page : "planning",
+        page : "profile",
         labels : ["Promo", "Filliere", "Promo_Filliere"],
         xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
         ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere},

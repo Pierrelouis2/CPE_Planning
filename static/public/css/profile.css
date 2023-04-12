@@ -2,15 +2,8 @@
 .container {
 	background: #fff;
 	width: 100%;
-	padding: 1rem;
-}
-
-.title {
-	font-size: 24px;
-	line-height: 28px;
-	font-weight: bold;
-	color: #374151;
-	padding-bottom: 11px;
+	max-width: 80%;
+	margin-left: 20px;
 }
 
 .form-group {
@@ -21,7 +14,6 @@
 
 .textarea-group label,
 .form-group label {
-	color: #374151;
 	font-size: 16px;
 	line-height: 19px;
 	margin-bottom: 10px;
@@ -96,7 +88,6 @@
 }
 
 .button {
-	font-weight: bold;
 	line-height: 19px;
 	background: #bd1050;
 	border: none;
@@ -106,8 +97,9 @@
 	width: 100%;
 	margin-top: 24px;
 }
+
 .button:hover {
-	background: #881c92;
+	background: #981444;
 }
 .button:focus {
 	background: #bd1050;
@@ -118,12 +110,10 @@
 		align-items: center;
 		justify-content: center;
 	}
-
-
 }
+
 @media screen and (min-width: 1024px) {
 	.container {
-		max-width: 80%;
 		width: 100%;
 	}
 
