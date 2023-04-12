@@ -112,7 +112,6 @@ app.post("/webhook", async (req, res) => {
     // Iterates over each entry - there may be multiple if batched
     for (const entry of body.entry) {
       console.log("entry: " + entry)
-      console.log(body)
       // only reading the message
       let webhook_event = entry.messaging[0];
       // Get the sender PSID
@@ -199,6 +198,7 @@ async function handlePostback(sender_psid, received_postback) {
       r = await writeMessage.callSendAPI(sender_psid, response);
       break;
     case "LUNDI":
+      await facebookInit.set_persistent_menu(sender_psid, false);
     case "MARDI":
     case "MERCREDI":
     case "JEUDI":
