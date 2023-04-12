@@ -54,6 +54,14 @@ def main():
                                     id_mso integer PRIMARY KEY,
                                     name_mso text
                                 );"""
+    sql_create_profile_table = """CREATE TABLE IF NOT EXISTS profile (
+                                    prenom text,
+                                    nom text,
+                                    email text,
+                                    password text,
+                                    rights text,
+                                    psid integer PRIMARY KEY,
+                                    );"""
 
     sql_delete_mso_table = """DROP TABLE mso;"""
     # create a database connection
@@ -70,6 +78,8 @@ def main():
         create_table(conn, sql_delete_mso_table)
         # create tasks table
         create_table(conn, sql_create_mso_table)
+        # create tasks table
+        create_table(conn, sql_create_profile_table)
 
         # insert data
         mso = {
