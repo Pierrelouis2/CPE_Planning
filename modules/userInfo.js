@@ -1,26 +1,22 @@
 
-let sqlite3 = require("sqlite3"),
+const sqlite3 = require("sqlite3"),
     { promisify } = require("util"),
     templates = require("./templates"),
-    writeMessage = require("./writeMessage");
-
-
-
-let db = new sqlite3.Database("users.db");
-const queryDB = promisify(db.all).bind(db);
+    writeMessage = require("./writeMessage"),
+    db = new sqlite3.Database("users.db"),
+    queryDB = promisify(db.all).bind(db);
 
 async function isReady(sender_psid) {
-let lst_promo_ready = ["4ETI", "3ETI", "3CGP", "4CGP"];
-let sql_get_user = "SELECT * FROM user WHERE id_user=?";
-let user = (await queryDB(sql_get_user, [sender_psid]))[0];
-console.log(`user is4A: ${user}`);
-let PF = user.promo + user.filliere;
-if (lst_promo_ready.includes(PF)) {
-    console.log("isReady");
-    return true;
-} else {
-    return false;
-}
+  let lst_promo_ready = ["4ETI", "3ETI", "3CGP", "4CGP"];
+  let sql_get_user = "SELECT * FROM user WHERE id_user=?";
+  let user = (await queryDB(sql_get_user, [sender_psid]))[0];
+  let PF = user.promo + user.filliere;
+  if (lst_promo_ready.includes(PF)) {
+      console.log("isReady");
+      return true;
+  } else {
+      return false;
+  }
 }
 
 
