@@ -189,6 +189,9 @@ app.get("/depot", async function (req, res) {
       };
       res.render(path.join(initpath , 'ejs/home.ejs'), variables);
     }
+    else {
+      res.redirect('/admin');
+    }
   });
   
 
