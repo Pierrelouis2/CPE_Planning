@@ -63,7 +63,7 @@ app.get("/", (req, res) => {
 app.get('/login',function(req, res){
   if (req.body.user == myusername && req.body.password == mypassword){
       let session = req.session;
-      session.userid = req.body.user;
+      session.userid = req.body.email;
       res.redirect('/admin');
   } else {
     res.render(path.join(initpath , 'ejs/login.ejs')); 
@@ -74,14 +74,21 @@ app.get("/register", (req, res) => {
 });
 
 app.post('/register-form', async function(req, res){
-  req.body.password = await account.hashPassword(req.body.password);
-  let result = await account.register(JSON.parse(JSON.stringify(req.body)))
+  let form = JSON.parse(JSON.stringify(req.body));
+  let user = (await queryDB("SELECT * FROM user WHERE id_user = ?", [form.code]))[0];
+  if (user == undefined){
+    console.log("new profile user undefined, wrong code");
+    res.render(path.join(initpath , 'ejs/register.ejs'), {error: "Erreur de code de liaison"});
+    return;
+  }
+  form.password = await account.hashPassword(form.password);
+  let result = await account.register(form)
   console.log("result = ", result);
   if (result){
     console.log("register success");
     let session = req.session;
-    session.userid = req.body.user;
-    res.redirect('/admin'); //change this redirection
+    session.userid = req.body.email;
+    res.redirect('/admin'); //change this redirection?
   }
   else {
     console.log("register failed");
@@ -89,12 +96,12 @@ app.post('/register-form', async function(req, res){
   }
 });
 
-app.post('/form',async function(req, res) {  
+app.post('/login-form',async function(req, res) {  
   let form = JSON.parse(JSON.stringify(req.body));
-  let result = await account.comparePassword(form.password, form.user)
+  let result = await account.comparePassword(form.password, form.email)
   if (result){
       let session = req.session;
-      session.userid = req.body.user;
+      session.userid = req.body.email;
       res.redirect('/admin');
   } else {
     res.render(path.join(initpath , 'ejs/login.ejs'), {error: "Erreur de connexion"}); 
@@ -104,21 +111,23 @@ app.post('/form',async function(req, res) {
 app.post('/profile_form', async function(req, res) {
   let session = req.session;
   let form = JSON.parse(JSON.stringify(req.body));
-  form.password = await account.hashPassword(form.password);
   let user = await userInfo.getUser(form.code);
   if (session.userid){
     if (!(/@cpe.fr$/.test(form.email))){
     res.render(path.join(initpath , 'ejs/home.ejs'), { page : "profileForm", error: "Erreur de mail: prenom.nom@cpe.fr"});
     } else if (user === undefined){
-    // test if user is in db
-    res.render(path.join(initpath , 'ejs/home.ejs'), { page : "profileForm", error: "Erreur de code de liaison"});
-  //  /!\ verify password /!\ 
-  // }else if (user.password == ){
-  //   res.render(path.join(initpath , 'ejs/login.ejs'), {error: "Erreur de code de liaison"});
+      res.render(path.join(initpath , 'ejs/home.ejs'), { page : "profileForm", error: "Erreur de code de liaison"});
+    } else if ( !(await account.comparePassword(form.password, session.userid))){
+      res.render(path.join(initpath , 'ejs/login.ejs'), {error: "Erreur de mot de passe, vous ne pouvez pas le changer ici il faut vous reinscrire"});
     } else {
-      res.redirect('/profile');
-    }
-    
+      // all is good so we register the user
+      form.password = await account.hashPassword(form.password);
+      await account.updateAccount(form);
+      session.userid = req.body.email;
+      let user = await account.getProfile(form.email);
+      let variables = { user: user, page : "profile" };
+      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+    } 
   } else {
     res.redirect('/login');
   }
@@ -127,9 +136,7 @@ app.post('/profile_form', async function(req, res) {
 app.post('/profile_change' , async function(req, res) {
   let session = req.session;
   if (session.userid){
-    let variables = {
-      page : "profileForm",
-    };
+    let variables = { page : "profileForm",};
     res.render(path.join(initpath , 'ejs/home.ejs'), variables);
   }
 });
@@ -144,26 +151,26 @@ app.get("/admin", async function (req, res) {
         page : "planning",
         labels : ["Promo", "Filliere", "Promo_Filliere"],
         xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
-        ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere},
-    }; 
-    res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+        ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere}
+      }; 
+      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
     }
     else {
-        res.redirect('/login');
+      res.redirect('/login');
     }
 });
 
 app.get("/profile", async function (req, res) {
   let session = req.session;
-  console.log(req.session.userid);
-    if (session.userid){
-      let user = await account.getProfile(req.session.userid);
-      let variables = { user: user, page : "profile" };
-      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
-    }
-    else {
-        res.redirect('/login');
-    }
+  console.log(session);
+  if (session.userid){
+    let user = await account.getProfile(session.userid);
+    let variables = { user: user, page : "profile" };
+    res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+  }
+  else {
+    res.redirect('/login');
+  }
 });
 
 app.get("/planning", async function (req, res) {

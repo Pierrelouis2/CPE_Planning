@@ -26,7 +26,7 @@
                 <label class="user-box-label">Email</label>
             </div>
             <div class="user-box">
-                <input class="user-box-input" type="number" required name="psid"> 
+                <input class="user-box-input" type="number" required name="code"> 
                 <label class="user-box-label">Code de liaison</label>
             </div>
             <div class="user-box">
@@ -36,5 +36,10 @@
             <input class="button" type="submit" value="Inscription">
         </form>
 
+        <% if(locals.error){ %>
+            <div class="error">
+                <p class="error"><%= locals.error %></p>
+            </div>
+        <% } %>
     </div>
 </body>
