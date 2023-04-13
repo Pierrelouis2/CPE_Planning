@@ -1,6 +1,6 @@
 let sqlite3 = require("sqlite3"),
     { promisify } = require("util"),
-    db = new sqlite3.Database("../users.db"),
+    db = new sqlite3.Database("users.db"),
     bcrypt = require('bcrypt');
 
 const queryDB = promisify(db.all).bind(db);
@@ -14,7 +14,10 @@ async function hashPassword(plaintextPassword) {
 }
 
 // compare password
-async function comparePassword(plaintextPassword, hash) {
+async function comparePassword(plaintextPassword, user) {
+    console.log("user : " ,user);
+    sql_get_hash = "SELECT password FROM profile WHERE email=?"
+    let hash = (await queryDB(sql_get_hash,user))[0].password;
     const result = await bcrypt.compare(plaintextPassword, hash);
     return result;
 }
@@ -38,23 +41,24 @@ async function getProfile(code) {
 
 async function register(user) {
     let sql_verify_user = "SELECT * FROM user WHERE id_user=?"
-    await queryDB(sql_verify_user, user.psid, function (err, rows) {
-        if (err) {
-            console.error(err.message);
-            return false;
-        }
-        if (rows.length > 0) {
-            let sql_register = `INSERT INTO profile(psid, prenom, nom, email, password, rights) VALUES(?,?,?,?,?,?)`;
-            db.run(sql_register, [user.psid, user.prenom, user.nom, user.email, user.password, 'F'], function (err) {
-                if (err) {
-                    console.error(err.message);
-                    return false
-                }
+    let verify = (await queryDB(sql_verify_user,user.psid))[0];
+
+    if (verify!==undefined){
+        let sql_register = `INSERT INTO profile(psid, prenom, nom, email, password, rights) VALUES(?,?,?,?,?,?)`;
+        db.run(sql_register, [user.psid, user.prenom, user.nom, user.email, user.password, 'F'], function (err) {
+            if (err) {
+                console.error(err.message);
+                return false
+            } else {
                 console.log(`Row(s) inserted: ${this.changes}`);
                 return true;
-            });
-        }});
+            }
+        });
+        }   else {
+            return false;  }
 }
+
+
 
 module.exports = {
     hashPassword,

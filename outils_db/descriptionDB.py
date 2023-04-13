@@ -2,7 +2,7 @@
 import sqlite3
 from sqlite3 import Error
 import pandas as pd
-conn = sqlite3.connect("../users.db")
+conn = sqlite3.connect("users.db")
 
 choix = input("quelle table (user : 1  liaison : 2  mso : 3 profile : 4)  ?")
 

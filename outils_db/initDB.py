@@ -34,7 +34,7 @@ def create_table(conn, create_table_sql):
 
 
 def main():
-    database = "../users.db"
+    database = "users.db"
 
     sql_create_user_table = """ CREATE TABLE IF NOT EXISTS user (
                                         id_user integer PRIMARY KEY,

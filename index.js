@@ -60,7 +60,7 @@ app.get("/", (req, res) => {
   res.redirect('/login');
 });
 
-app.get('/login',function(req, res){
+app.get('/login',async function(req, res){
   res.sendFile(path.join(initpath , 'login.html')); 
   if (req.body.user == myusername && req.body.password == mypassword){
       let session = req.session;
@@ -68,20 +68,29 @@ app.get('/login',function(req, res){
       res.redirect('/admin');
   }
 });
+app.get("/register", (req, res) => {
+    res.render(path.join(initpath , 'ejs/register.ejs'));
+});
 
 app.post('/register-form', async function(req, res){
-  if (await account.register(req.body)){
+  console.log(req.body);
+  await account.hashPassword(req.body.password);
+  if (await account.register(JSON.parse(JSON.stringify(req.body)))){
+    console.log("register success");
     let session = req.session;
     session.userid = req.body.user;
     res.redirect('/admin');
   }
   else {
+    console.log("register failed");
     // TODO : ERROR MESSAGE
   }
 });
 
-app.post('/form', function(req, res) {  
-  if (req.body.user == myusername && req.body.password == mypassword){
+app.post('/form',async function(req, res) {  
+  let form = JSON.parse(JSON.stringify(req.body));
+  let result = await account.comparePassword(form.password, form.user)
+  if (result){
       let session = req.session;
       session.userid = req.body.user;
       res.redirect('/admin');
@@ -128,6 +137,7 @@ app.get("/admin", async function (req, res) {
 
 app.get("/profile", async function (req, res) {
   let session = req.session;
+  console.log(req.session.userid);
     if (session.userid){
       let user = await account.getProfile(req.session.userid);
       console.log(user);
