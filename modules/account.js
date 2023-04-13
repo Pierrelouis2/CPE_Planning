@@ -17,7 +17,12 @@ async function hashPassword(plaintextPassword) {
 async function comparePassword(plaintextPassword, user) {
     console.log("user : " ,user);
     sql_get_hash = "SELECT password FROM profile WHERE email=?"
-    let hash = (await queryDB(sql_get_hash,user))[0].password;
+    let hash = (await queryDB(sql_get_hash,user))[0];
+    if (hash!==undefined){
+        hash = hash.password;
+    }else{
+        hash = "";  // What do we do for this case?
+    }
     console.log("hash : " ,hash);
     const result = await bcrypt.compare(plaintextPassword, hash);
     return result;
