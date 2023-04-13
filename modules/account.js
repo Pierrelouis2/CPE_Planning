@@ -18,6 +18,7 @@ async function comparePassword(plaintextPassword, user) {
     console.log("user : " ,user);
     sql_get_hash = "SELECT password FROM profile WHERE email=?"
     let hash = (await queryDB(sql_get_hash,user))[0].password;
+    console.log("hash : " ,hash);
     const result = await bcrypt.compare(plaintextPassword, hash);
     return result;
 }
@@ -32,9 +33,9 @@ async function changeInfo(info) {
     });
 }
 
-async function getProfile(code) {
-    let sql_get_profile = `SELECT * FROM profile WHERE psid=1`;
-    let profile = (await queryDB(sql_get_profile))[0];
+async function getProfile(mail) {
+    let sql_get_profile = `SELECT * FROM profile WHERE email=?`;
+    let profile = (await queryDB(sql_get_profile,mail))[0];
     console.log(profile);
     return profile;
 }
@@ -42,7 +43,6 @@ async function getProfile(code) {
 async function register(user) {
     let sql_verify_user = "SELECT * FROM user WHERE id_user=?"
     let verify = (await queryDB(sql_verify_user,user.psid))[0];
-
     if (verify!==undefined){
         let sql_register = `INSERT INTO profile(psid, prenom, nom, email, password, rights) VALUES(?,?,?,?,?,?)`;
         await db.run(sql_register, [user.psid, user.prenom, user.nom, user.email, user.password, 'F'], function (err) {
