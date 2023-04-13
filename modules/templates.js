@@ -227,7 +227,7 @@ function askTemplateMenu(psid) {
           },
           {
             type: "postback",
-            title: "Code de liasion",
+            title: "Code de liaison",
             payload: "CODE",
           }
         ]
