@@ -155,10 +155,8 @@ app.get("/admin", async function (req, res) {
 
 app.get("/profile", async function (req, res) {
   let session = req.session;
-  console.log(req.session.userid);
     if (session.userid){
       let user = await account.getProfile(req.session.userid);
-      console.log(user);
       let variables = {
         user: user,
         page : "profile"
@@ -182,6 +180,17 @@ app.get("/planning", async function (req, res) {
         res.redirect('/login');
     }
 });
+
+app.get("/depot", async function (req, res) {
+  let session = req.session;
+    if (await account.isAllow(session.userid)){
+      let variables = {
+        page : "depot"
+      };
+      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+    }
+  });
+  
 
 app.post("/planning/:payload", async function (req, res) {
   console.log("got planning request");

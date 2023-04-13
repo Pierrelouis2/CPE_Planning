@@ -36,7 +36,6 @@ async function changeInfo(info) {
 async function getProfile(mail) {
     let sql_get_profile = `SELECT * FROM profile WHERE email=?`;
     let profile = (await queryDB(sql_get_profile,mail))[0];
-    console.log(profile);
     return profile;
 }
 
@@ -60,12 +59,23 @@ async function register(user) {
     }
 }
 
-
+async function isAllow(user) {
+    console.log("user : " ,user);
+    let sql_is_allow = "SELECT rights FROM profile WHERE email=?"
+    let allow = (await queryDB(sql_is_allow,user))[0].rights;
+    if (allow==='F'){
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
 
 module.exports = {
     hashPassword,
     comparePassword,
     changeInfo,
     getProfile,
-    register
+    register,
+    isAllow
 };
