@@ -184,8 +184,15 @@ app.post("/planning/:payload", async function (req, res) {
     // get the user psid
     let sender_psid = (await account.getProfile(session.userid)).psid;
     let user = await userInfo.getUser(sender_psid);
-    let message = await writeMessage.constructMessage(await writeMessage.readCsv(`./Output_Json/Planning${user.promo}${user.filliere}${variables.constant.DATE}.json`, req.params.payload, user.id_user, user));
-    let variable = { page: "planning", timetable: message, payload: req.params.payload };
+    let variable = { page: "planning", payload: req.params.payload };
+    if (req.params.payload == "TOUT"){
+      let imgName = user.promo + user.filliere + variables.constant.DATE;
+      let timetableImage = `https://messenger.jo-pouradier.fr/png/${imgName}.png`;
+      variable.timetableImage = timetableImage;
+    } else {
+      let message = await writeMessage.constructMessage(await writeMessage.readCsv(`./Output_Json/Planning${user.promo}${user.filliere}${variables.constant.DATE}.json`, req.params.payload, user.id_user, user));
+      variable.message = message;
+    }
     res.render(path.join(initpath , 'ejs/home.ejs'), variable);
   } else {
     res.redirect('/login');
@@ -289,7 +296,7 @@ async function handlePostback(sender_psid, received_postback) {
       response = templates.askTemplateImage();
       user = await userInfo.getUser(sender_psid);
       let imgName = user.promo + user.filliere + variables.constant.DATE;
-      response.attachment.payload.url = `https://messenger.jo-pouradier.fr/png/${imgName}.png`;;
+      response.attachment.payload.url = `https://messenger.jo-pouradier.fr/png/${imgName}.png`;
       r = await writeMessage.callSendAPI(sender_psid, response);
       break;
     case "LUNDI":

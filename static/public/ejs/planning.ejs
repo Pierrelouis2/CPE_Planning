@@ -18,41 +18,41 @@
             <% } %>
         </button>
         <ul class="dropdown-options" >
-         <li class="option">
+        <li class="option">
             <form action="/planning/LUNDI" method="post">
                <input class="input-payload" type="submit" name="payload" value="LUNDI" />
            </form>
-         </li>
-         <li class="option">
+        </li>
+        <li class="option">
             <form action="/planning/MARDI" method="post">
                <input class="input-payload" type="submit" name="payload" value="MARDI" />
            </form>
-         </li>
-         <li class="option">
+        </li>
+        <li class="option">
             <form action="/planning/MERCREDI" method="post">
                <input class="input-payload" type="submit" name="payload" value="MERCREDI" />
            </form>
-         </li>
-         <li class="option">
+        </li>
+        <li class="option">
             <form action="/planning/JEUDI" method="post">
                <input class="input-payload" type="submit" name="payload" value="JEUDI" />
            </form>
-         </li>
-         <li class="option">
+        </li>
+        <li class="option">
             <form action="/planning/VENDREDI" method="post">
-               <input class="input-payload" type="submit" name="payload" value="VENDREDI" />
+                <input class="input-payload" type="submit" name="payload" value="VENDREDI" />
            </form>
-         </li>
-         <li class="option">
+        </li>
+        <li class="option">
             <form action="/planning/TOUT" method="post">
-               <input class="input-payload" type="submit" name="payload" value="TOUT" />
-           </form>
+                <input class="input-payload" type="submit" name="payload" value="TOUT" />
+            </form>
          </li>
        </ul>
     </div>
- </div>
+</div>
 
- <!-- Timetable -->
+<!-- Timetable -->
  <% if (locals.timetable) { %>
     <table class="timetable">
         <tr>
@@ -64,6 +64,11 @@
             <td><pre><%= timetable[1].replace(/,/g, '') %></pre></td>
         </tr>
     </table>
+<% } %>
+
+<!-- Image timetable (TOUT) -->
+<% if (locals.timetableImage) { %>
+    <img class="timetable-image" src="<%= timetableImage %>" alt="timetable">
 <% } %>
 
  <script src="https://cdn.jsdelivr.net/npm/less" ></script>
