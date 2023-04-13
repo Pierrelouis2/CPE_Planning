@@ -35,10 +35,16 @@ We are reccording the user's :
  - promotion (3A or 4A)
  - group (A, B, C or D)
  - major (only for 4ETI students)
+On the website we are using the user's:
+ - email (cpe)
+ - first-name
+ - last-name
+ - password
+ - personnal code (send via messenger) 
 
-Then we send to the user a message with a button for each day of the week. When the user click on a button, we send him a message with the timetable of the day according to his promotion and major. The group is not taken into account for the moment it is way too complicated because of the pdf file and too many of unplanned format.  
+On Messenger we send to the user a message with a button for each day of the week. When the user click on a button, we send him a message with the timetable of the day according to his promotion and major. The group is not taken into account for the moment it is way too complicated because of the pdf file and too many of unplanned format.  
 
-For the moment the timetable is only available for 4ETI students. We are working on it to make it available for all students.
+On the website, when the user is connected, he can see his timetable and his personnal code.  
 
 ## Legal
 
@@ -56,21 +62,26 @@ For the database we are using an sqlite database. This version works for all stu
 The database is composed of 3 tables:  
 
 - `users` :
-    - `id_user` : the user's id
-    - `promo` : the user's promotion
-    - `filliere` : the user's fillière
-    - `groupe` : the user's group
-    - `majeur`: the user's major
+    - `id_user` 
+    - `promo` 
+    - `filliere` 
+    - `groupe`
+    - `majeur`
 - `TJ_User_MSO` :
-  - `id_user` : the user's id
-  - `id_mso`: the user's MSO
+  - `id_user` 
+  - `id_mso`
 - `MSO` :
-  - `id_mso` : the MSO's id
-  - `name_mso` : the MSO's name
+  - `id_mso`
+  - `name_mso`
+- `profile`:
+  - `email`
+  - `first-name`
+  - `last-name`
+  - `password` (stored in sha256 with salt)
   
 ### Database MPD
 
-![Database structure V1](./Docs/ReadmeImages/DBV2.png)
+![Database structure V1](./Docs/ReadmeImages/DBV2.png) (not up to date)
 
 ## Recover timetable data from pdf
 
@@ -92,10 +103,11 @@ The database is composed of 3 tables:
 - [ ] Interface admin pour gérer les comptes
 - [ ] Interface pour l'administration cpe pour gérer les plannings -> pdf -> json && png -> link
 - [ ] Link the LV lessons website
+- [ ] autocomplete the re-registration form of the website
 - [X] Make json file for all variables
 - [X] Repair isKnown function
 - [X] Manage CGP Table
-- [X] Manage reinscription 4CGP (mso)
+- [X] Manage re-registration 4CGP (mso)
 - [X] Manage 3A lessons
 - [X] Create MSO TABLE
 - [X] Manage groups (but not for 4A its useless and complicated)
