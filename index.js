@@ -79,7 +79,7 @@ app.post('/register-form', async function(req, res){
     console.log("register success");
     let session = req.session;
     session.userid = req.body.user;
-    res.redirect('/admin');
+    res.redirect('/admin'); //change this redirection
   }
   else {
     console.log("register failed");
@@ -138,7 +138,7 @@ app.get("/admin", async function (req, res) {
       var countPromo = await webFunctions.getStatPromo();
       var countFilliere = await webFunctions.getStatFilliere();
       var countPromoFilliere = await webFunctions.getStatFillierePromo();
-      let variables = { 
+      let variables = {
         page : "profileForm",
         labels : ["Promo", "Filliere", "Promo_Filliere"],
         xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
