@@ -119,3 +119,8 @@ textarea:-webkit-autofill:focus,
         font-size: 12px;
     }
 }
+
+a{
+    text-decoration: none;
+    color: #bd1050
+}
