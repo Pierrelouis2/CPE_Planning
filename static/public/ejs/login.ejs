@@ -23,8 +23,11 @@
             </div>
             <input class="button" type="submit" value="Connection">
         </form>
-        <h3>Pas encore inscrit ?
+        <% if (locals.error) { %>
+            <p class="error"><%= error %></p>
+        <% } %>
+        <h3 class="not-register">Pas encore inscrit ?
         <a href="/register">Inscrit toi ici !</a>
-    </h3>
+        </h3>
     </div>
 </body>

@@ -93,6 +93,25 @@ textarea:-webkit-autofill:focus,
     background-color: #8F2D56;
 }
 
+a{
+    text-decoration: none;
+    color: #bd1050
+}
+
+.error{
+    color: #bd1050;
+    font-size: 16px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.not-register{
+    color: #fff;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
 @media screen and (max-width: 576px) and (min-width: 400px) {
     .login-box {
         width: 250px;
@@ -118,9 +137,4 @@ textarea:-webkit-autofill:focus,
     .login-box-button {
         font-size: 12px;
     }
-}
-
-a{
-    text-decoration: none;
-    color: #bd1050
 }
