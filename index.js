@@ -444,8 +444,10 @@ async function handlePostback(sender_psid, received_postback) {
       r = await writeMessage.callSendAPI(sender_psid, response[1]);
       break;
     case "CODE":
-      message = {text: `Ton code de liaison est : ${sender_psid}`};
-      r = await writeMessage.callSendAPI(sender_psid, message);
+      message = {text: `Ton code de liaison est :`};
+      await writeMessage.callSendAPI(sender_psid, message);
+      message = {text: `${sender_psid}`};
+      await writeMessage.callSendAPI(sender_psid, message);
       break;
     default:
       // let's not make a long switch case with CGP MSO
