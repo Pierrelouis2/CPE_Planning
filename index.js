@@ -93,13 +93,22 @@ app.post('/form', function(req, res) {
 
 app.post('/profile_form', async function(req, res) {
   let session = req.session;
+  let form = JSON.parse(JSON.stringify(req.body));
+  form.password = await account.hashPassword(form.password);
+  let user = await userInfo.getUser(form.code);
   if (session.userid){
-    req.body.password = await account.hashPassword(req.body.password);
-    await account.changeInfo( JSON.parse(JSON.stringify(req.body)))
-    res.redirect('/profile');
-  } if else{
+    if (!(/@cpe.fr$/.test(form.email))){
+    res.render(path.join(initpath , 'ejs/home.ejs'), { page : "profileForm", error: "Erreur de mail: prenom.nom@cpe.fr"});
+    } else if (user === undefined){
+    // test if user is in db
+    res.render(path.join(initpath , 'ejs/home.ejs'), { page : "profileForm", error: "Erreur de code de liaison"});
+  //  /!\ verify password /!\ 
+  // }else if (user.password == ){
+  //   res.render(path.join(initpath , 'ejs/login.ejs'), {error: "Erreur de code de liaison"});
+    } else {
+      res.redirect('/profile');
+    }
     
-  }
   } else {
     res.redirect('/login');
   }
