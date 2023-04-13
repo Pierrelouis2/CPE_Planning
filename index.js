@@ -463,7 +463,11 @@ async function handlePostback(sender_psid, received_postback) {
                 writeMessage.callSendAPI(sender_psid, messageAlreadyInMso);
             }
         });
-      } else {
+      } else if(payload == "CODE"){
+        user = await userInfo.getUser(sender_psid);
+        message = {text: `Ton code de liason est : ${user.code}`};
+        r = await writeMessage.callSendAPI(sender_psid, message);
+      } else  {
         console.log("unknown payload");
         message = {text: `Je n'ai pas compris votre demande. Veuillez réessayer.`,};
         r = await writeMessage.callSendAPI(sender_psid, message);

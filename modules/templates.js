@@ -225,6 +225,11 @@ function askTemplateMenu(psid) {
             title: "REINSCRIPTION",
             payload: "REINSCRIPTION",
           },
+          {
+            type: "postback",
+            title: "Code de liasion",
+            payload: "CODE",
+          }
         ]
       }
     ]
