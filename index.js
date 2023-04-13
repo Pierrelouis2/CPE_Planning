@@ -56,7 +56,6 @@ const mypassword = 'mypassword'
 
 // ----- ROUTES ----- //
 
-
 app.get("/", (req, res) => {
   res.redirect('/login');
 });
@@ -70,18 +69,44 @@ app.get('/login',function(req, res){
   }
 });
 
-app.get('/register',function(req, res){
-  res.render(path.join(initpath , 'ejs/register.ejs'));
-});
-
 app.post('/register-form', async function(req, res){
   if (await account.register(req.body)){
-    res.redirect('/login');
+    let session = req.session;
+    session.userid = req.body.user;
+    res.redirect('/admin');
   }
   else {
     // TODO : ERROR MESSAGE
   }
 });
+
+app.post('/form', function(req, res) {  
+  if (req.body.user == myusername && req.body.password == mypassword){
+      let session = req.session;
+      session.userid = req.body.user;
+      res.redirect('/admin');
+  }
+});
+
+app.post('/profile_form', async function(req, res) {
+  let session = req.session;
+  if (session.userid){
+    req.body.password = await account.hashPassword(req.body.password);
+    await account.changeInfo( JSON.parse(JSON.stringify(req.body)))
+    res.redirect('/profile');
+  }
+});
+
+app.post('/profile_change' , async function(req, res) {
+  let session = req.session;
+  if (session.userid){
+    let variables = {
+      page : "profileForm",
+    };
+    res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+  }
+});
+
 app.get("/admin", async function (req, res) {
   let session = req.session;
     if (session.userid){

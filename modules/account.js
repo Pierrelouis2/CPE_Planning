@@ -36,9 +36,30 @@ async function getProfile(code) {
     return profile;
 }
 
+async function register(user) {
+    let sql_verify_user = "SELECT * FROM user WHERE id_user=?"
+    await queryDB(sql_verify_user, user.psid, function (err, rows) {
+        if (err) {
+            console.error(err.message);
+            return false;
+        }
+        if (rows.length > 0) {
+            let sql_register = `INSERT INTO profile(psid, prenom, nom, email, password, rights) VALUES(?,?,?,?,?,?)`;
+            db.run(sql_register, [user.psid, user.prenom, user.nom, user.email, user.password, 'F'], function (err) {
+                if (err) {
+                    console.error(err.message);
+                    return false
+                }
+                console.log(`Row(s) inserted: ${this.changes}`);
+                return true;
+            });
+        }});
+}
+
 module.exports = {
     hashPassword,
     comparePassword,
     changeInfo,
-    getProfile
+    getProfile,
+    register
 };
