@@ -75,7 +75,9 @@ app.get("/register", (req, res) => {
 
 app.post('/register-form', async function(req, res){
   req.body.password = await account.hashPassword(req.body.password);
-  if (await account.register(JSON.parse(JSON.stringify(req.body)))){
+  let result = await account.register(JSON.parse(JSON.stringify(req.body)))
+  console.log("result = ", result);
+  if (result){
     console.log("register success");
     let session = req.session;
     session.userid = req.body.user;

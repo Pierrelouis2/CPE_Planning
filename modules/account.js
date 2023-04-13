@@ -45,17 +45,19 @@ async function register(user) {
 
     if (verify!==undefined){
         let sql_register = `INSERT INTO profile(psid, prenom, nom, email, password, rights) VALUES(?,?,?,?,?,?)`;
-        db.run(sql_register, [user.psid, user.prenom, user.nom, user.email, user.password, 'F'], function (err) {
+        await db.run(sql_register, [user.psid, user.prenom, user.nom, user.email, user.password, 'F'], function (err) {
             if (err) {
-                console.error(err.message);
-                return false
+                console.log(err);
+                return 0;
             } else {
                 console.log(`Row(s) inserted: ${this.changes}`);
-                return true;
+                return 1;
             }
         });
+        return 1;
         }   else {
-            return false;  }
+            return 0;  
+    }
 }
 
 
