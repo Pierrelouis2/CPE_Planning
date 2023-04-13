@@ -64,7 +64,6 @@ async function getUser(sender_psid) {
     return user;
 }
 
-
 // Check if the user is in our database
 async function isKnownUser(sender_psid) {
   const user = await getUser(sender_psid);
