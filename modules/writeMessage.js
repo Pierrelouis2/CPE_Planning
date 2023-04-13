@@ -43,12 +43,11 @@ async function readCsv(dir, Jour, sender_psid,user){ // acutally we read a json 
       if (user.promo === '3'){
         GM = variables.constant.GROUPE3CGP[user.groupe];
       } if (user.promo === '4') {
-          // get mso user
-          sql_mso_user = "SELECT name_mso FROM mso INNER JOIN tj_user_mso ON tj_user_mso.id_mso = mso.id_mso WHERE tj_user_mso.id_user=?";
-          var mso_user = (await queryDB(sql_mso_user, [sender_psid])); // dont add [0], we add a whole array (multiple line of the db)
+        // get mso user
+        sql_mso_user = "SELECT name_mso FROM mso INNER JOIN tj_user_mso ON tj_user_mso.id_mso = mso.id_mso WHERE tj_user_mso.id_user=?";
+        var mso_user = (await queryDB(sql_mso_user, [sender_psid])); // dont add [0], we add a whole array (multiple line of the db)
       };
     };
-    console.log("GM : ", GM);
     try {
       for (let dj of demi_jour) { 
         planningRen[dj] = [];

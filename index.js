@@ -2,7 +2,7 @@
 
 const { profile } = require("console");
 
-//ALL THE IMPORTS AND CONFIGS HERE
+// ----- ALL THE IMPORTS AND CONFIGS HERE ----- //
 const express = require("express"),
   bodyParser = require("body-parser"),
   app = express(),
@@ -22,7 +22,7 @@ const express = require("express"),
   webFunctions = require("./modules/webFunctions.js");
   
 
-// INIT APP
+// ----- INIT APP ----- //
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -43,14 +43,14 @@ app.use(express.static(initpath));
 app.use(cookieParser());
 app.use('/Docs', express.static(__dirname + '/Docs'));
 
-// INIT DB
+// ----- INIT DB ----- //
 let db = new sqlite3.Database("users.db");
 db.on("error", function(error) {
   console.log("Getting an error on DB: ", error, " date = ", writeMessage.getCurrentDate());
 }); 
 const queryDB = promisify(db.all).bind(db); // used for get info from db
 
-// TO CHANGE PASSWORD AND USERNAME TEST
+// ----- TO CHANGE PASSWORD AND USERNAME TEST ----- //
 const myusername = 'user1'
 const mypassword = 'mypassword'
 
@@ -63,7 +63,7 @@ app.get("/", (req, res) => {
 app.get('/login',function(req, res){
   if (req.body.user == myusername && req.body.password == mypassword){
       let session = req.session;
-      session.userid = req.body.user;
+      session.userid = req.body.email;
       res.redirect('/admin');
   } else {
     res.render(path.join(initpath , 'ejs/login.ejs')); 
@@ -74,27 +74,32 @@ app.get("/register", (req, res) => {
 });
 
 app.post('/register-form', async function(req, res){
-  req.body.password = await account.hashPassword(req.body.password);
-  let result = await account.register(JSON.parse(JSON.stringify(req.body)))
-  console.log("result = ", result);
+  let form = JSON.parse(JSON.stringify(req.body));
+  let user = (await queryDB("SELECT * FROM user WHERE id_user = ?", [form.code]))[0];
+  if (user == undefined){
+    console.log("new profile user undefined, wrong code");
+    res.render(path.join(initpath , 'ejs/register.ejs'), {error: "Erreur de code de liaison"});
+    return;
+  }
+  form.password = await account.hashPassword(form.password);
+  let result = await account.register(form)
   if (result){
     console.log("register success");
     let session = req.session;
-    session.userid = req.body.user;
-    res.redirect('/admin'); //change this redirection
-  }
-  else {
+    session.userid = req.body.email;
+    res.redirect('/admin'); //change this redirection?
+  } else {
     console.log("register failed");
-    // TODO : ERROR MESSAGE
+    res.render(path.join(initpath , 'ejs/register.ejs'), {error: "Erreur de code inattendue, réessayez"});
   }
 });
 
-app.post('/form',async function(req, res) {  
+app.post('/login-form',async function(req, res) {  
   let form = JSON.parse(JSON.stringify(req.body));
-  let result = await account.comparePassword(form.password, form.user)
+  let result = await account.comparePassword(form.password, form.email)
   if (result){
       let session = req.session;
-      session.userid = req.body.user;
+      session.userid = req.body.email;
       res.redirect('/admin');
   } else {
     res.render(path.join(initpath , 'ejs/login.ejs'), {error: "Erreur de connexion"}); 
@@ -104,21 +109,23 @@ app.post('/form',async function(req, res) {
 app.post('/profile_form', async function(req, res) {
   let session = req.session;
   let form = JSON.parse(JSON.stringify(req.body));
-  form.password = await account.hashPassword(form.password);
   let user = await userInfo.getUser(form.code);
   if (session.userid){
     if (!(/@cpe.fr$/.test(form.email))){
     res.render(path.join(initpath , 'ejs/home.ejs'), { page : "profileForm", error: "Erreur de mail: prenom.nom@cpe.fr"});
     } else if (user === undefined){
-    // test if user is in db
-    res.render(path.join(initpath , 'ejs/home.ejs'), { page : "profileForm", error: "Erreur de code de liaison"});
-  //  /!\ verify password /!\ 
-  // }else if (user.password == ){
-  //   res.render(path.join(initpath , 'ejs/login.ejs'), {error: "Erreur de code de liaison"});
+      res.render(path.join(initpath , 'ejs/home.ejs'), { page : "profileForm", error: "Erreur de code de liaison"});
+    } else if ( !(await account.comparePassword(form.password, session.userid))){
+      res.render(path.join(initpath , 'ejs/login.ejs'), {error: "Erreur de mot de passe, vous ne pouvez pas le changer ici il faut vous reinscrire"});
     } else {
-      res.redirect('/profile');
-    }
-    
+      // all is good so we register the user
+      form.password = await account.hashPassword(form.password);
+      await account.updateAccount(form);
+      session.userid = req.body.email;
+      let user = await account.getProfile(form.email);
+      let variables = { user: user, page : "profile" };
+      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+    } 
   } else {
     res.redirect('/login');
   }
@@ -127,9 +134,7 @@ app.post('/profile_form', async function(req, res) {
 app.post('/profile_change' , async function(req, res) {
   let session = req.session;
   if (session.userid){
-    let variables = {
-      page : "profileForm",
-    };
+    let variables = { page : "profileForm",};
     res.render(path.join(initpath , 'ejs/home.ejs'), variables);
   }
 });
@@ -144,41 +149,36 @@ app.get("/admin", async function (req, res) {
         page : "planning",
         labels : ["Promo", "Filliere", "Promo_Filliere"],
         xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
-        ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere},
-    }; 
-    res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+        ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere}
+      }; 
+      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
     }
     else {
-        res.redirect('/login');
+      res.redirect('/login');
     }
 });
 
 app.get("/profile", async function (req, res) {
   let session = req.session;
-    if (session.userid){
-      let user = await account.getProfile(req.session.userid);
-      let variables = {
-        user: user,
-        page : "profile"
-      };
-      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
-    }
-    else {
-        res.redirect('/login');
-    }
+  if (session.userid){
+    let user = await account.getProfile(session.userid);
+    let variables = { user: user, page : "profile" };
+    res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+  }
+  else {
+    res.redirect('/login');
+  }
 });
 
 app.get("/planning", async function (req, res) {
   let session = req.session;
-    if (session.userid){
-      let variables = {
-        page : "planning"
-      };
-      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
-    }
-    else {
-        res.redirect('/login');
-    }
+  if (session.userid){
+    let variables = { page : "planning" };
+    res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+  }
+  else {
+    res.redirect('/login');
+  }
 });
 
 app.get("/depot", async function (req, res) {
@@ -193,8 +193,25 @@ app.get("/depot", async function (req, res) {
   
 
 app.post("/planning/:payload", async function (req, res) {
-  console.log("got planning request");
-  console.log(req.params);
+  console.log(`got planning ${req.params.payload} request`);
+  let session = req.session;
+  if (session.userid){
+    // get the user psid
+    let sender_psid = (await account.getProfile(session.userid)).psid;
+    let user = await userInfo.getUser(sender_psid);
+    let variable = { page: "planning", payload: req.params.payload };
+    if (req.params.payload == "TOUT"){
+      let imgName = user.promo + user.filliere + variables.constant.DATE;
+      let timetableImage = `https://messenger.jo-pouradier.fr/png/${imgName}.png`;
+      variable.timetableImage = timetableImage;
+    } else {
+      let message = await writeMessage.constructMessage(await writeMessage.readCsv(`./Output_Json/Planning${user.promo}${user.filliere}${variables.constant.DATE}.json`, req.params.payload, user.id_user, user));
+      variable.timetable = message;
+    }
+    res.render(path.join(initpath , 'ejs/home.ejs'), variable);
+  } else {
+    res.redirect('/login');
+  }
 });
 
 app.get('/png/:imageName', function(req, res) {
@@ -294,7 +311,7 @@ async function handlePostback(sender_psid, received_postback) {
       response = templates.askTemplateImage();
       user = await userInfo.getUser(sender_psid);
       let imgName = user.promo + user.filliere + variables.constant.DATE;
-      response.attachment.payload.url = `https://messenger.jo-pouradier.fr/png/${imgName}.png`;;
+      response.attachment.payload.url = `https://messenger.jo-pouradier.fr/png/${imgName}.png`;
       r = await writeMessage.callSendAPI(sender_psid, response);
       break;
     case "LUNDI":
@@ -311,7 +328,6 @@ async function handlePostback(sender_psid, received_postback) {
         await planningNotReady(sender_psid);
         break;
       }
-      //get user
       user = await userInfo.getUser(sender_psid);
       await writeMessage.sendPlanningDay(payload, sender_psid, user);
       break;
@@ -452,6 +468,12 @@ async function handlePostback(sender_psid, received_postback) {
       r = await writeMessage.callSendAPI(sender_psid, response[0]);
       r = await writeMessage.callSendAPI(sender_psid, response[1]);
       break;
+    case "CODE":
+      message = {text: `Ton code de liaison est :`};
+      await writeMessage.callSendAPI(sender_psid, message);
+      message = {text: `${sender_psid}`};
+      await writeMessage.callSendAPI(sender_psid, message);
+      break;
     default:
       // let's not make a long switch case with CGP MSO
       if (Object.keys(variables.constant.MSO).includes(payload)) {
@@ -472,7 +494,7 @@ async function handlePostback(sender_psid, received_postback) {
                 writeMessage.callSendAPI(sender_psid, messageAlreadyInMso);
             }
         });
-      } else {
+      } else  {
         console.log("unknown payload");
         message = {text: `Je n'ai pas compris votre demande. Veuillez réessayer.`,};
         r = await writeMessage.callSendAPI(sender_psid, message);
@@ -480,7 +502,6 @@ async function handlePostback(sender_psid, received_postback) {
         r = await writeMessage.callSendAPI(sender_psid, start);
       }
       break;
-      
   }
 }
 

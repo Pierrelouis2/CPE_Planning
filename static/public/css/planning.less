@@ -79,3 +79,44 @@
       }
    }
 }
+
+.timetable{
+   margin-top: 20px;
+   width: 80%;
+   border-radius: 10px;
+   border-collapse: collapse;
+   margin-left: auto;
+   margin-right: auto;
+   
+   th, td{
+      border: 2px solid #2975DA;
+   }
+
+   pre{
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+   }
+}
+
+.timetable-image{
+   display: block;
+   margin-top: 20px;
+   margin-left: auto;
+   margin-right: auto;
+   width: 400px;
+   height: 640px;
+}
+
+@media (min-width: 767px) {
+   .timetable-image{
+      width: 600px;
+      height: 960px;
+   }
+}
+
+@media (max-width: 767px) {
+   .timetable-image{
+      width: 300px;
+      height: 480px;
+   }
+}
