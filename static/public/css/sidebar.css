@@ -85,17 +85,17 @@ main {
 .toggle {
   position: fixed;
   top: 0;
-  right: 0;
+  right: 20px;
   width: 48px;
   height: 48px;
   background: #0496FF;
   cursor: pointer;
   transition: 0.7s;
+  z-index: 11;
 }
 
 .toggle.active ~ main {
   margin-left: 200px;
-
 }
 
 .toggle::before {
