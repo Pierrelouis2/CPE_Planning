@@ -76,11 +76,8 @@ def main():
         create_table(conn, sql_delete_mso_table)
         # create tasks table
         create_table(conn, sql_create_mso_table)
-
-
         # create tasks table
         create_table(conn, sql_create_profile_table)
-
         # insert data
         mso = {
             "SSO": "Stratégie de Synthèse Organique",
