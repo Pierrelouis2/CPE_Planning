@@ -2,10 +2,10 @@ const btn = document.querySelector("button");
 const dropdown = document.querySelector(".dropdown-options");
 const optionInput = document.querySelectorAll(".option input");
 
-
 btn.addEventListener("click", function(e) {
    e.preventDefault();
    dropdown.classList.toggle("open");
+   dropdown.style.display = "block";
 });
 
 var clickFn = function(e) {
@@ -19,17 +19,14 @@ var clickFn = function(e) {
    this.classList.add("active");
    // submit the form which is the parent of the parameter e
    e.target.parentNode.submit();
-   
+   dropdown.style.display = "none";
 }
 
 for (var i = 0; i < optionInput.length; i++) {
    optionInput[i].addEventListener("mousedown", clickFn, false);
 }
 
-function hoverFct() {
-   dropdown.classList.add("open");
-}
-
 function leaveFct() {
-    dropdown.classList.remove("open");
+   dropdown.classList.remove("open");
+   dropdown.style.display = "none";
 }

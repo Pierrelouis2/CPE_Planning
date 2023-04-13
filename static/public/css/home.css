@@ -22,6 +22,7 @@ header h1 {
 header, .navigation{
     position: fixed;
     background: #0496FF;
+    z-index: 10;
 }
 
 .logo{
