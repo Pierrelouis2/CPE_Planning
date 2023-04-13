@@ -7,12 +7,12 @@
 <div class="container">
     <form action="/profile_form" method="post">
 	<div class="grid">
-		<div class="form-group a">
+		<div class="form-group">
 			<label for="name">Nom</label>
 			<input id="name" type="text" name="nom" required>
 		</div>
 
-		<div class="form-group b">
+		<div class="form-group">
 			<label for="first-name">Prénom</label>
 			<input id="first-name" type="text" name="prenom" required>
 		</div>
@@ -34,9 +34,13 @@
 		</div>
 	</div>
 
-
 	<div class="button-container">
 		<button type="submit" class="button">Enregister les modifications</button>
 	</div>
+	<% if (locals.error) { %>
+		<div class="error-profile">
+			<p class="error"><%= error %></p>
+		</div>
+	<% } %>
 </form>
 </div>

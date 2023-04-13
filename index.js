@@ -61,11 +61,12 @@ app.get("/", (req, res) => {
 });
 
 app.get('/login',function(req, res){
-  res.render(path.join(initpath , 'ejs/login.ejs')); 
   if (req.body.user == myusername && req.body.password == mypassword){
       let session = req.session;
       session.userid = req.body.user;
       res.redirect('/admin');
+  } else {
+    res.render(path.join(initpath , 'ejs/login.ejs')); 
   }
 });
 
@@ -85,6 +86,8 @@ app.post('/form', function(req, res) {
       let session = req.session;
       session.userid = req.body.user;
       res.redirect('/admin');
+  } else {
+    res.render(path.join(initpath , 'ejs/login.ejs'), {error: "Erreur de connexion"}); 
   }
 });
 
@@ -94,6 +97,11 @@ app.post('/profile_form', async function(req, res) {
     req.body.password = await account.hashPassword(req.body.password);
     await account.changeInfo( JSON.parse(JSON.stringify(req.body)))
     res.redirect('/profile');
+  } if else{
+    
+  }
+  } else {
+    res.redirect('/login');
   }
 });
 
@@ -114,7 +122,7 @@ app.get("/admin", async function (req, res) {
       var countFilliere = await webFunctions.getStatFilliere();
       var countPromoFilliere = await webFunctions.getStatFillierePromo();
       let variables = { 
-        page : "planning",
+        page : "profileForm",
         labels : ["Promo", "Filliere", "Promo_Filliere"],
         xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
         ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere},
