@@ -104,6 +104,8 @@ The database is composed of 3 tables:
 - [ ] Interface pour l'administration cpe pour gérer les plannings -> pdf -> json && png -> link
 - [ ] Link the LV lessons website
 - [ ] autocomplete the re-registration form of the website
+- [ ] make a repport bug or feedback page/form
+- [ ] change url from messenger to cpeplanning
 - [X] Make json file for all variables
 - [X] Repair isKnown function
 - [X] Manage CGP Table
