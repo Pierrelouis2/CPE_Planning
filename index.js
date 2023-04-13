@@ -2,7 +2,7 @@
 
 const { profile } = require("console");
 
-//ALL THE IMPORTS AND CONFIGS HERE
+// ----- ALL THE IMPORTS AND CONFIGS HERE ----- //
 const express = require("express"),
   bodyParser = require("body-parser"),
   app = express(),
@@ -22,7 +22,7 @@ const express = require("express"),
   webFunctions = require("./modules/webFunctions.js");
   
 
-// INIT APP
+// ----- INIT APP ----- //
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -43,14 +43,14 @@ app.use(express.static(initpath));
 app.use(cookieParser());
 app.use('/Docs', express.static(__dirname + '/Docs'));
 
-// INIT DB
+// ----- INIT DB ----- //
 let db = new sqlite3.Database("users.db");
 db.on("error", function(error) {
   console.log("Getting an error on DB: ", error, " date = ", writeMessage.getCurrentDate());
 }); 
 const queryDB = promisify(db.all).bind(db); // used for get info from db
 
-// TO CHANGE PASSWORD AND USERNAME TEST
+// ----- TO CHANGE PASSWORD AND USERNAME TEST ----- //
 const myusername = 'user1'
 const mypassword = 'mypassword'
 
@@ -158,11 +158,7 @@ app.get("/profile", async function (req, res) {
   console.log(req.session.userid);
     if (session.userid){
       let user = await account.getProfile(req.session.userid);
-      console.log(user);
-      let variables = {
-        user: user,
-        page : "profile"
-      };
+      let variables = { user: user, page : "profile" };
       res.render(path.join(initpath , 'ejs/home.ejs'), variables);
     }
     else {
@@ -172,20 +168,28 @@ app.get("/profile", async function (req, res) {
 
 app.get("/planning", async function (req, res) {
   let session = req.session;
-    if (session.userid){
-      let variables = {
-        page : "planning"
-      };
-      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
-    }
-    else {
-        res.redirect('/login');
-    }
+  if (session.userid){
+    let variables = { page : "planning" };
+    res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+  }
+  else {
+    res.redirect('/login');
+  }
 });
 
 app.post("/planning/:payload", async function (req, res) {
-  console.log("got planning request");
-  console.log(req.params);
+  console.log(`got planning ${req.params.payload} request`);
+  let session = req.session;
+  if (session.userid){
+    // get the user psid
+    let sender_psid = (await account.getProfile(session.userid)).psid;
+    let user = await userInfo.getUser(sender_psid);
+    let message = await writeMessage.constructMessage(await writeMessage.readCsv(`./Output_Json/Planning${user.promo}${user.filliere}${variables.constant.DATE}.json`, req.params.payload, user.id_user, user));
+    let variable = { page: "planning", timetable: message, payload: req.params.payload };
+    res.render(path.join(initpath , 'ejs/home.ejs'), variable);
+  } else {
+    res.redirect('/login');
+  }
 });
 
 app.get('/png/:imageName', function(req, res) {
@@ -302,7 +306,6 @@ async function handlePostback(sender_psid, received_postback) {
         await planningNotReady(sender_psid);
         break;
       }
-      //get user
       user = await userInfo.getUser(sender_psid);
       await writeMessage.sendPlanningDay(payload, sender_psid, user);
       break;

@@ -2,12 +2,22 @@
     <link rel="stylesheet/less" type="text/css" href="../css/planning.less" />
 </head>
 
-<h2>My Planning</h2>
+<% if (locals.payload){ %>
+    <h1>Mon planning de <%= payload %></h1>
+<% } else { %>
+<h2>Mon Planning</h2>
+<% } %>
 
 <div class="container-select">
     <div class="dropdown">
-       <button type="submit">Jour</button>
-        <ul class="dropdown-options" > <!-- onmouseleave="leaveFct()" -->
+        <button type="submit">
+            <% if (locals.payload){ %>
+                <%= payload %>
+            <% } else { %>
+            Jour
+            <% } %>
+        </button>
+        <ul class="dropdown-options" >
          <li class="option">
             <form action="/planning/LUNDI" method="post">
                <input class="input-payload" type="submit" name="payload" value="LUNDI" />
@@ -50,8 +60,8 @@
             <th>Après-midi</th>
         </tr>
         <tr>
-            <td><% timetable.Matin %></td>
-            <td><% timetable.Aprem %></td>
+            <td><pre><%= timetable[0].replace(/,/g, '\n') %></pre></td>
+            <td><pre><%= timetable[1].replace(/,/g, '') %></pre></td>
         </tr>
     </table>
 <% } %>
