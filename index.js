@@ -83,16 +83,14 @@ app.post('/register-form', async function(req, res){
   }
   form.password = await account.hashPassword(form.password);
   let result = await account.register(form)
-  console.log("result = ", result);
   if (result){
     console.log("register success");
     let session = req.session;
     session.userid = req.body.email;
     res.redirect('/admin'); //change this redirection?
-  }
-  else {
+  } else {
     console.log("register failed");
-    // TODO : ERROR MESSAGE
+    res.render(path.join(initpath , 'ejs/register.ejs'), {error: "Erreur de code inattendue, réessayez"});
   }
 });
 
@@ -162,7 +160,6 @@ app.get("/admin", async function (req, res) {
 
 app.get("/profile", async function (req, res) {
   let session = req.session;
-  console.log(session);
   if (session.userid){
     let user = await account.getProfile(session.userid);
     let variables = { user: user, page : "profile" };
