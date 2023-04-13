@@ -23,6 +23,9 @@
             </div>
             <input class="button" type="submit" value="Connection">
         </form>
+        <% if (locals.error) { %>
+            <p class="error"><%= error %></p>
+        <% } %>
         <h3>Pas encore inscrit ?
         <a href="/register">Inscrit toi ici !</a>
     </h3>

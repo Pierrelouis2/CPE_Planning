@@ -61,7 +61,7 @@ For the database we are using an sqlite database. This version works for all stu
 /!\ The database is not finished yet, we are still working on it. 
 The database is composed of 3 tables:  
 
-- `users` :
+- `user` :
     - `id_user` 
     - `promo` 
     - `filliere` 

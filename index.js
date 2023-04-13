@@ -62,7 +62,7 @@ app.get("/", (req, res) => {
 });
 
 app.get('/login',function(req, res){
-  res.sendFile(path.join(initpath , 'login.html')); 
+  res.render(path.join(initpath , 'ejs/login.ejs')); 
   if (req.body.user == myusername && req.body.password == mypassword){
       let session = req.session;
       session.userid = req.body.user;
