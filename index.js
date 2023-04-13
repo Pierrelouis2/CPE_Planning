@@ -191,6 +191,8 @@ app.post("/planning/:payload", async function (req, res) {
       variable.timetableImage = timetableImage;
     } else {
       let message = await writeMessage.constructMessage(await writeMessage.readCsv(`./Output_Json/Planning${user.promo}${user.filliere}${variables.constant.DATE}.json`, req.params.payload, user.id_user, user));
+      console.log("message = ");
+      console.log(message);
       variable.message = message;
     }
     res.render(path.join(initpath , 'ejs/home.ejs'), variable);
