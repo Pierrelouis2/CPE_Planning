@@ -1,8 +1,6 @@
 const btn = document.querySelector("button");
 const dropdown = document.querySelector(".dropdown-options");
 const optionInput = document.querySelectorAll(".option input");
-const inputPayload = document.querySelectorAll(".input-payload");
-
 
 btn.addEventListener("click", function(e) {
    e.preventDefault();
