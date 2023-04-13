@@ -443,6 +443,11 @@ async function handlePostback(sender_psid, received_postback) {
       r = await writeMessage.callSendAPI(sender_psid, response[0]);
       r = await writeMessage.callSendAPI(sender_psid, response[1]);
       break;
+    case "CODE":
+      user = await userInfo.getUser(sender_psid);
+      message = {text: `Ton code de liason est : ${user.code}`};
+      r = await writeMessage.callSendAPI(sender_psid, message);
+      break;
     default:
       // let's not make a long switch case with CGP MSO
       if (Object.keys(variables.constant.MSO).includes(payload)) {
@@ -463,10 +468,6 @@ async function handlePostback(sender_psid, received_postback) {
                 writeMessage.callSendAPI(sender_psid, messageAlreadyInMso);
             }
         });
-      } else if(payload == "CODE"){
-        user = await userInfo.getUser(sender_psid);
-        message = {text: `Ton code de liason est : ${user.code}`};
-        r = await writeMessage.callSendAPI(sender_psid, message);
       } else  {
         console.log("unknown payload");
         message = {text: `Je n'ai pas compris votre demande. Veuillez réessayer.`,};
@@ -475,7 +476,6 @@ async function handlePostback(sender_psid, received_postback) {
         r = await writeMessage.callSendAPI(sender_psid, start);
       }
       break;
-      
   }
 }
 
