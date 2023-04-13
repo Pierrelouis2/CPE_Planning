@@ -81,7 +81,7 @@ app.post('/register-form', async function(req, res){
     console.log("register success");
     let session = req.session;
     session.userid = req.body.user;
-    res.redirect('/admin');
+    res.redirect('/admin'); //change this redirection
   }
   else {
     console.log("register failed");
