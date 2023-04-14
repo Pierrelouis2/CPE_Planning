@@ -62,7 +62,7 @@ def main():
                                     rights text,
                                     psid integer PRIMARY KEY
                                     );"""
-
+    
     sql_delete_mso_table = """DROP TABLE profile;"""
     # create a database connection
     conn = create_connection(database)

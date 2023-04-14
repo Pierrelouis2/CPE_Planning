@@ -1,0 +1,1916 @@
+[
+    {
+     "NOM": "ABENZOAR",
+     "Prénom": "CHLOÉ",
+     "Filière": "CGP",
+     "LV1": "122(8)MB3c",
+     "LV2": "448(8)NH2b",
+     "LV3": "230(8)EB1a"
+    },
+    {
+     "NOM": "ABIDI",
+     "Prénom": "NAËL",
+     "Filière": "CGP",
+     "LV1": "113(8)JL2b",
+     "LV2": "444(8)NH1a"
+    },
+    {
+     "NOM": "ABOU-GHAIDA",
+     "Prénom": "AMR",
+     "Filière": "CGP",
+     "LV1": "113(8)JL3c",
+     "LV2": "444(8)NH1a"
+    },
+    {
+     "NOM": "AIT HADICHOU",
+     "Prénom": "YOUNESS",
+     "Filière": "ETI",
+     "LV1": "113(8)CC1a",
+     "LV2": "222(8)CB1c",
+     "LV3": "230(8)DC2b"
+    },
+    {
+     "NOM": "AIVAZIAN",
+     "Prénom": "LOUIS",
+     "Filière": "4ETI RED",
+     "LV1": "104(8)JL1a",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "ANELLI",
+     "Prénom": "MATHIS",
+     "Filière": "ETI",
+     "LV1": "108(8)TD2c",
+     "LV2": "300(8)MCV1b"
+    },
+    {
+     "NOM": "AUBONNET",
+     "Prénom": "CYANNE",
+     "Filière": "4CGP RED",
+     "LV1": "108(8)TD2c",
+     "LV2": "801(8)MS1a"
+    },
+    {
+     "NOM": "AUBRY",
+     "Prénom": "PAUL",
+     "Filière": "ETI",
+     "LV1": "102(8)CLS1a",
+     "LV2": "443(8)ST1c"
+    },
+    {
+     "NOM": "AURIOL",
+     "Prénom": "CONSTANCE",
+     "Filière": "CGP",
+     "LV1": "107(8)TD1a",
+     "LV2": "441(8)LP2c"
+    },
+    {
+     "NOM": "AVELINO",
+     "Prénom": "LAURIANE",
+     "Filière": "CGP",
+     "LV1": "113(8)CC1a",
+     "LV2": "900(8)IM1b"
+    },
+    {
+     "NOM": "AVRAMIDIS",
+     "Prénom": "ANGELOS NEKTARIOS",
+     "Filière": "4CGP",
+     "LV1": "102(8)CLS1a",
+     "LV2": "FLE(8)IM(jeudis)"
+    },
+    {
+     "NOM": "BA MA",
+     "Prénom": "MARIAMA RAKY",
+     "Filière": "4CGP",
+     "LV1": "109(8)JC1b",
+     "LV2": "700(8)ZE(CM)"
+    },
+    {
+     "NOM": "BA MO",
+     "Prénom": "MOHAMED",
+     "Filière": "4CGP",
+     "LV1": "104(8)JL1a",
+     "LV2": "700(8)ZE(CM)"
+    },
+    {
+     "NOM": "BAILLIVET",
+     "Prénom": "CHLOÉ",
+     "Filière": "4ETI",
+     "LV1": "107(8)TD1a",
+     "LV2": "449(8)EA1b"
+    },
+    {
+     "NOM": "BALEYDIER",
+     "Prénom": "LÉA",
+     "Filière": "CGP",
+     "LV1": "113(8)CC1a",
+     "LV2": "449(8)EA1b"
+    },
+    {
+     "NOM": "BARNIER",
+     "Prénom": "OZ",
+     "Filière": "CGP",
+     "LV1": "105(8)CC1c",
+     "LV2": "600(8)ND2b",
+     "LV3": "230(8)EB1a"
+    },
+    {
+     "NOM": "BARRIQUAND",
+     "Prénom": "VALENTIN",
+     "Filière": "ETI",
+     "LV1": "108(8)TD2c",
+     "LV2": "600(8)ND2b"
+    },
+    {
+     "NOM": "BECHET",
+     "Prénom": "CLAIRE-MARIE",
+     "Filière": "CGP",
+     "LV1": "122(8)MB2b",
+     "LV2": "443(8)ST1c"
+    },
+    {
+     "NOM": "BEGARD",
+     "Prénom": "EMMA",
+     "Filière": "ETI",
+     "LV1": "117(8)JC1c",
+     "LV2": "802(8)MS1b"
+    },
+    {
+     "NOM": "BEJEAN",
+     "Prénom": "JULIE",
+     "Filière": "CGP",
+     "LV1": "111(8)JC1a",
+     "LV2": "448(8)NH3c"
+    },
+    {
+     "NOM": "BELCASTRO",
+     "Prénom": "LISA",
+     "Filière": "CGP",
+     "LV1": "116(8)AB2c",
+     "LV2": "440(8)LP1a",
+     "LV3": "230(8)DC2b"
+    },
+    {
+     "NOM": "BELLONCLE",
+     "Prénom": "CLEMENCE",
+     "Filière": "CGP",
+     "LV1": "108(8)TD1b",
+     "LV2": "600(8)ND1c"
+    },
+    {
+     "NOM": "BERTHET",
+     "Prénom": "THIBAULT",
+     "Filière": "ETI",
+     "LV1": "122(8)MB3c",
+     "LV2": "449(8)EA1b"
+    },
+    {
+     "NOM": "BEY",
+     "Prénom": "LÉA",
+     "Filière": "CGP",
+     "LV1": "122(8)MB2b",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "BODINO",
+     "Prénom": "VALENTIN",
+     "Filière": "CGP",
+     "LV1": "113(8)JL2b",
+     "LV2": "600(8)ND3a"
+    },
+    {
+     "NOM": "BOISDON",
+     "Prénom": "HUGUES",
+     "Filière": "4ETI",
+     "LV1": "107(8)TD1a",
+     "LV2": "600(8)ND2b"
+    },
+    {
+     "NOM": "BOLTEAU",
+     "Prénom": "PIERRE",
+     "Filière": "CGP",
+     "LV1": "110(8)AB1b",
+     "LV2": "443(8)ST1c"
+    },
+    {
+     "NOM": "BOMMER",
+     "Prénom": "MARILOU",
+     "Filière": "4CGP",
+     "LV1": "108(8)TD1b",
+     "LV2": "900(8)IM2a"
+    },
+    {
+     "NOM": "BONNET",
+     "Prénom": "AURÉLIE",
+     "Filière": "4CGP",
+     "LV1": "104(8)JL1a",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "BOST",
+     "Prénom": "MARGUERITE-MARIE",
+     "Filière": "CGP",
+     "LV1": "116(8)AB2c",
+     "LV2": "446(8)ST1b"
+    },
+    {
+     "NOM": "BOUTON",
+     "Prénom": "DORIAN",
+     "Filière": "CGP",
+     "LV1": "113(8)CC1a",
+     "LV2": "448(8)NH3c"
+    },
+    {
+     "NOM": "BOUVEAU",
+     "Prénom": "AUGUSTIN",
+     "Filière": "4ETI",
+     "LV1": "108(8)TD1b",
+     "LV2": "801(8)MS1a"
+    },
+    {
+     "NOM": "BOUVET",
+     "Prénom": "VICTOR",
+     "Filière": "4ETI",
+     "LV1": "104(8)JL1a",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "BRET",
+     "Prénom": "ALEXANDRE",
+     "Filière": "CGP",
+     "LV1": "116(8)AB2c",
+     "LV2": "449(8)EA1b"
+    },
+    {
+     "NOM": "BROCHET",
+     "Prénom": "EMILIE",
+     "Filière": "CGP",
+     "LV1": "111(8)JC1a",
+     "LV2": "221(8)CB1b"
+    },
+    {
+     "NOM": "BROCHIER",
+     "Prénom": "VALENTIN",
+     "Filière": "4CGP",
+     "LV1": "109(8)JC1b",
+     "LV2": "444(8)NH1a"
+    },
+    {
+     "NOM": "BRUNO",
+     "Prénom": "CAMILLE",
+     "Filière": "CGP",
+     "LV1": "122(8)MB3c",
+     "LV2": "448(8)NH2b",
+     "LV3": "230(8)EB1a"
+    },
+    {
+     "NOM": "BRUSSIEUX",
+     "Prénom": "GUILLAUME",
+     "Filière": "4ETI",
+     "LV1": "107(8)TD1a",
+     "LV2": "900(8)IM1b"
+    },
+    {
+     "NOM": "BUFFERNE",
+     "Prénom": "GUILLAUME",
+     "Filière": "ETI",
+     "LV1": "108(8)TD2c",
+     "LV2": "441(8)LP1b",
+     "LV3": "230(8)EB1a"
+    },
+    {
+     "NOM": "BURNOT",
+     "Prénom": "JEAN-CHRISTOPHE",
+     "Filière": "ETI",
+     "LV1": "105(8)CC1c",
+     "LV2": "300(8)MCV1b"
+    },
+    {
+     "NOM": "CANZIAN",
+     "Prénom": "GIORGIA",
+     "Filière": "CGP",
+     "LV1": "116(8)AB2c",
+     "LV2": "444(8)NH1a"
+    },
+    {
+     "NOM": "CAPOMACCIO",
+     "Prénom": "CAMILLE",
+     "Filière": "4CGP",
+     "LV1": "109(8)JC1b",
+     "LV2": "300(8)MCV2a"
+    },
+    {
+     "NOM": "CARMINATI",
+     "Prénom": "LAURE",
+     "Filière": "CGP",
+     "LV1": "113(8)JL2b",
+     "LV2": "448(8)NH3c"
+    },
+    {
+     "NOM": "CARPENTIER",
+     "Prénom": "JULIETTE",
+     "Filière": "4ETI",
+     "LV1": "113(8)CC1a",
+     "LV2": "441(8)LP1b"
+    },
+    {
+     "NOM": "CARRÉ",
+     "Prénom": "PAUL",
+     "Filière": "ETI",
+     "LV1": "111(8)JC1a",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "CARROIS",
+     "Prénom": "CONSTANCE",
+     "Filière": "CGP",
+     "LV1": "116(8)AB2c",
+     "LV2": "446(8)ST1b"
+    },
+    {
+     "NOM": "CASSARD",
+     "Prénom": "ELISE",
+     "Filière": "CGP",
+     "LV1": "108(8)TD1b",
+     "LV2": "448(8)NH3c"
+    },
+    {
+     "NOM": "CASTANIER",
+     "Prénom": "LAURIA",
+     "Filière": "ETI",
+     "LV1": "109(8)CLS2c",
+     "LV2": "449(8)EA1b"
+    },
+    {
+     "NOM": "CAUDRON",
+     "Prénom": "RAPHAEL",
+     "Filière": "ETI",
+     "LV1": "122(8)MB3c",
+     "LV2": "802(8)MS1b"
+    },
+    {
+     "NOM": "CAUQUIL",
+     "Prénom": "ANTOINE",
+     "Filière": "ETI",
+     "LV1": "104(8)JL1a",
+     "LV2": "443(8)ST1c"
+    },
+    {
+     "NOM": "CHABAILLE",
+     "Prénom": "CLEO",
+     "Filière": "CGP",
+     "LV1": "105(8)CC1c",
+     "LV2": "449(8)EA1b"
+    },
+    {
+     "NOM": "CHANET",
+     "Prénom": "NOËLIE",
+     "Filière": "4CGP",
+     "LV1": "107(8)TD1a",
+     "LV2": "441(8)LP1b"
+    },
+    {
+     "NOM": "CHARPENAY",
+     "Prénom": "ARTHUR",
+     "Filière": "4ETI RED",
+     "LV1": "102(8)CLS1a",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "CHAUSSON",
+     "Prénom": "ADRIEN",
+     "Filière": "ETI",
+     "LV1": "107(8)TD1a",
+     "LV2": "449(8)EA1b"
+    },
+    {
+     "NOM": "CHIRON",
+     "Prénom": "PIERRE-ANTOINE",
+     "Filière": "ETI",
+     "LV1": "110(8)AB1b",
+     "LV2": "801(8)MS1a"
+    },
+    {
+     "NOM": "CHOURREU",
+     "Prénom": "DIEGO",
+     "Filière": "CGP",
+     "LV1": "105(8)CC1c",
+     "LV2": "448(8)NH2b"
+    },
+    {
+     "NOM": "CHRONOWSKI",
+     "Prénom": "AMAURY",
+     "Filière": "ETI",
+     "LV1": "113(8)JL3c",
+     "LV2": "802(8)MS1b",
+     "LV3": "230(8)EB1a"
+    },
+    {
+     "NOM": "CLARET",
+     "Prénom": "JEANNE",
+     "Filière": "ETI",
+     "LV1": "108(8)TD2c",
+     "LV2": "234(8)EB1b"
+    },
+    {
+     "NOM": "CLOIX",
+     "Prénom": "CORALIE",
+     "Filière": "CGP",
+     "LV1": "113(8)JL3c",
+     "LV2": "448(8)NH2b"
+    },
+    {
+     "NOM": "CLOP",
+     "Prénom": "MARINE",
+     "Filière": "CGP",
+     "LV1": "105(8)CC1c",
+     "LV2": "448(8)NH2b"
+    },
+    {
+     "NOM": "COLEAU",
+     "Prénom": "ARTHUR",
+     "Filière": "CGP",
+     "LV1": "111(8)JC1a",
+     "LV2": "227(8)DC1c"
+    },
+    {
+     "NOM": "COLOMER",
+     "Prénom": "LÉA",
+     "Filière": "ETI",
+     "LV1": "108(8)TD1b",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "CONCHE",
+     "Prénom": "MORGAN",
+     "Filière": "4ETI",
+     "LV1": "107(8)TD1a",
+     "LV2": "441(8)LP1b"
+    },
+    {
+     "NOM": "CORNATON",
+     "Prénom": "MAXIME",
+     "Filière": "ETI",
+     "LV1": "122(8)MB2b",
+     "LV2": "900(8)IM2a"
+    },
+    {
+     "NOM": "COSSON",
+     "Prénom": "VICTOR",
+     "Filière": "CGP",
+     "LV1": "115(8)AB1a",
+     "LV2": "446(8)ST1b"
+    },
+    {
+     "NOM": "COURBIN",
+     "Prénom": "MICHEL",
+     "Filière": "ETI",
+     "LV1": "116(8)AB2c",
+     "LV2": "802(8)MS1b"
+    },
+    {
+     "NOM": "COUTAUD",
+     "Prénom": "HUGO",
+     "Filière": "4ETI",
+     "LV1": "109(8)JC1b",
+     "LV2": "600(8)ND1c"
+    },
+    {
+     "NOM": "COVA",
+     "Prénom": "MARTIN",
+     "Filière": "ETI",
+     "LV1": "106(8)MB1a",
+     "LV2": "234(8)EB1b"
+    },
+    {
+     "NOM": "CRETALLAZ",
+     "Prénom": "LOUIS",
+     "Filière": "CGP",
+     "LV1": "104(8)JL1a",
+     "LV2": "446(8)ST1b"
+    },
+    {
+     "NOM": "DABBOUSSI",
+     "Prénom": "AZZAM",
+     "Filière": "CGP",
+     "LV1": "113(8)JL2b",
+     "LV2": "444(8)NH1a"
+    },
+    {
+     "NOM": "DALBEIGUE",
+     "Prénom": "ADRIEN",
+     "Filière": "ETI",
+     "LV1": "110(8)AB1b",
+     "LV2": "801(8)MS1a"
+    },
+    {
+     "NOM": "DAMASIO",
+     "Prénom": "TOM",
+     "Filière": "CGP",
+     "LV1": "104(8)JL1a",
+     "LV2": "600(8)ND2b"
+    },
+    {
+     "NOM": "DANNOUX",
+     "Prénom": "GUÉNOLÉ",
+     "Filière": "CGP",
+     "LV1": "115(8)AB1a",
+     "LV2": "600(8)ND2b"
+    },
+    {
+     "NOM": "DAVAUX",
+     "Prénom": "FLORIAN",
+     "Filière": "ETI",
+     "LV1": "113(8)JL3c",
+     "LV2": "449(8)EA1b"
+    },
+    {
+     "NOM": "DE WOLF",
+     "Prénom": "MARGOT",
+     "Filière": "CGP",
+     "LV1": "108(8)TD1b",
+     "LV2": "448(8)EA1a"
+    },
+    {
+     "NOM": "DEBARD",
+     "Prénom": "ELOI",
+     "Filière": "CGP",
+     "LV1": "113(8)JL2b",
+     "LV2": "227(8)DC1c"
+    },
+    {
+     "NOM": "DEFROCOURT",
+     "Prénom": "MARWAN",
+     "Filière": "ETI",
+     "LV1": "113(8)CC1a",
+     "LV2": "234(8)EB1b"
+    },
+    {
+     "NOM": "DELAGE",
+     "Prénom": "MARIE",
+     "Filière": "CGP",
+     "LV1": "122(8)MB3c",
+     "LV2": "221(8)CB1b"
+    },
+    {
+     "NOM": "DELEULE",
+     "Prénom": "ALIX",
+     "Filière": "ETI",
+     "LV1": "122(8)MB2b",
+     "LV2": "900(8)IM2a"
+    },
+    {
+     "NOM": "DELPRAT",
+     "Prénom": "ALEXIS",
+     "Filière": "ETI",
+     "LV1": "106(8)MB1a",
+     "LV2": "441(8)LP1b"
+    },
+    {
+     "NOM": "DEMONT",
+     "Prénom": "CAROLINE",
+     "Filière": "CGP",
+     "LV1": "111(8)JC1a",
+     "LV2": "221(8)CB1b"
+    },
+    {
+     "NOM": "DERVILLE",
+     "Prénom": "THOMAS",
+     "Filière": "3ETI RED anticipe langue A4",
+     "LV1": "102(8)CLS1a",
+     "LV2": "227(8)DC1c"
+    },
+    {
+     "NOM": "DESRIAC",
+     "Prénom": "LÉA",
+     "Filière": "4CGP",
+     "LV1": "113(8)CC1a",
+     "LV2": "LSF(8)GR(CM)"
+    },
+    {
+     "NOM": "DIALLO",
+     "Prénom": "MALAIKA GAELLE",
+     "Filière": "4CGP",
+     "LV1": "109(8)JC1b",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "DIENA",
+     "Prénom": "AISSATOU",
+     "Filière": "CGP",
+     "LV1": "111(8)JC1a",
+     "LV2": "700(8)ZE(CM)"
+    },
+    {
+     "NOM": "DJERMANI",
+     "Prénom": "MARINA",
+     "Filière": "CGP",
+     "LV1": "116(8)AB2c",
+     "LV2": "446(8)ST1b"
+    },
+    {
+     "NOM": "DOLO",
+     "Prénom": "ELSA",
+     "Filière": "CGP",
+     "LV1": "104(8)JL1a",
+     "LV2": "227(8)DC1c"
+    },
+    {
+     "NOM": "DOMELIER",
+     "Prénom": "GUILLAUME",
+     "Filière": "ETI",
+     "LV1": "108(8)TD2c",
+     "LV2": "222(8)CB1c"
+    },
+    {
+     "NOM": "DROIN",
+     "Prénom": "LOUISE",
+     "Filière": "CGP",
+     "LV1": "116(8)AB2c",
+     "LV2": "446(8)ST1b"
+    },
+    {
+     "NOM": "DULOR",
+     "Prénom": "EMMA",
+     "Filière": "CGP",
+     "LV1": "104(8)JL1a",
+     "LV2": "600(8)ND1c"
+    },
+    {
+     "NOM": "DUMAS",
+     "Prénom": "JULIE",
+     "Filière": "CGP",
+     "LV1": "115(8)AB1a",
+     "LV2": "300(8)MCV2a"
+    },
+    {
+     "NOM": "DURAND",
+     "Prénom": "GUILHEM",
+     "Filière": "4CGP",
+     "LV1": "111(8)JC1a",
+     "LV2": "221(8)CB1b"
+    },
+    {
+     "NOM": "EBERMEYER",
+     "Prénom": "TOM",
+     "Filière": "ETI",
+     "LV1": "107(8)TD1a",
+     "LV2": "600(8)ND2b"
+    },
+    {
+     "NOM": "ECOLIVET",
+     "Prénom": "GAUTIER",
+     "Filière": "CGP",
+     "LV1": "105(8)CC2b",
+     "LV2": "227(8)DC1c"
+    },
+    {
+     "NOM": "ELMARY",
+     "Prénom": "PIERRE",
+     "Filière": "CGP",
+     "LV1": "113(8)JL3c",
+     "LV2": "221(8)CB1b"
+    },
+    {
+     "NOM": "EMZIANE",
+     "Prénom": "RACHID",
+     "Filière": "4ETI",
+     "LV1": "108(8)TD1b",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "ENSELME",
+     "Prénom": "MARINE",
+     "Filière": "CGP",
+     "LV1": "122(8)MB3c",
+     "LV2": "440(8)LP1a",
+     "LV3": "230(8)DC2b"
+    },
+    {
+     "NOM": "EPINAT",
+     "Prénom": "CLÉMENCE",
+     "Filière": "CGP",
+     "LV1": "109(8)JC1b",
+     "LV2": "443(8)ST1c"
+    },
+    {
+     "NOM": "ESTIGNARD",
+     "Prénom": "SÉBASTIEN",
+     "Filière": "ETI",
+     "LV1": "104(8)JL1a",
+     "LV2": "443(8)ST1c"
+    },
+    {
+     "NOM": "EXBRAYAT",
+     "Prénom": "BAPTISTE",
+     "Filière": "ETI",
+     "LV1": "107(8)TD1a",
+     "LV2": "300(8)MCV1b"
+    },
+    {
+     "NOM": "EYMONERIE",
+     "Prénom": "CHLOE",
+     "Filière": "CGP",
+     "LV1": "107(8)TD1a",
+     "LV2": "448(8)NH2b"
+    },
+    {
+     "NOM": "FARTHOUAT",
+     "Prénom": "HUGUES",
+     "Filière": "ETI",
+     "LV1": "113(8)JL2b",
+     "LV2": "441(8)LP2c"
+    },
+    {
+     "NOM": "FERREOL",
+     "Prénom": "ELISA",
+     "Filière": "CGP",
+     "LV1": "122(8)MB2b",
+     "LV2": "448(8)EA1a"
+    },
+    {
+     "NOM": "FIVEL",
+     "Prénom": "LOU",
+     "Filière": "CGP",
+     "LV1": "108(8)TD2c",
+     "LV2": "221(8)CB1b"
+    },
+    {
+     "NOM": "FORIEN",
+     "Prénom": "BAPTISTE",
+     "Filière": "CGP",
+     "LV1": "117(8)JC1c",
+     "LV2": "234(8)EB1b"
+    },
+    {
+     "NOM": "FOUQUET",
+     "Prénom": "PAUL-EMILE",
+     "Filière": "4CGP",
+     "LV1": "104(8)JL1a",
+     "LV2": "441(8)LP1b"
+    },
+    {
+     "NOM": "FRANCOIS",
+     "Prénom": "JULIE",
+     "Filière": "4CGP",
+     "LV1": "108(8)TD2c",
+     "LV2": "900(8)IM1b"
+    },
+    {
+     "NOM": "FRECHET",
+     "Prénom": "QUITTERIE",
+     "Filière": "CGP",
+     "LV1": "113(8)JL3c",
+     "LV2": "446(8)ST1b"
+    },
+    {
+     "NOM": "GABILLET",
+     "Prénom": "JULES",
+     "Filière": "CGP",
+     "LV1": "111(8)JC1a",
+     "LV2": "227(8)DC1c"
+    },
+    {
+     "NOM": "GABRIEL",
+     "Prénom": "THOMAS",
+     "Filière": "ETI",
+     "LV1": "117(8)JC1c",
+     "LV2": "801(8)MS1a"
+    },
+    {
+     "NOM": "GAZQUEZ",
+     "Prénom": "JOSHUAN",
+     "Filière": "CGP",
+     "LV1": "108(8)TD1b",
+     "LV2": "222(8)CB1c"
+    },
+    {
+     "NOM": "GENIES",
+     "Prénom": "LOUIS",
+     "Filière": "CGP",
+     "LV1": "113(8)JL3c",
+     "LV2": "448(8)NH2b"
+    },
+    {
+     "NOM": "GHANDOUR",
+     "Prénom": "JAD",
+     "Filière": "ETI",
+     "LV1": "115(8)AB1a",
+     "LV2": "700(8)ZE(CM)"
+    },
+    {
+     "NOM": "GIRAUD",
+     "Prénom": "EMELYNE",
+     "Filière": "CGP",
+     "LV1": "113(8)JL3c",
+     "LV2": "221(8)CB1b",
+     "LV3": "444(8)NH1a"
+    },
+    {
+     "NOM": "GIROUD",
+     "Prénom": "MAXIME",
+     "Filière": "4ETI",
+     "LV1": "122(8)MB2b",
+     "LV2": "900(8)IM2a"
+    },
+    {
+     "NOM": "GOMEZ",
+     "Prénom": "MYRLIE",
+     "Filière": "CGP",
+     "LV1": "116(8)AB2c",
+     "LV2": "446(8)ST1b"
+    },
+    {
+     "NOM": "GONNET",
+     "Prénom": "LÉO",
+     "Filière": "ETI",
+     "LV1": "113(8)JL3c",
+     "LV2": "446(8)ST1b"
+    },
+    {
+     "NOM": "GORVIEN",
+     "Prénom": "MATHIS",
+     "Filière": "ETI",
+     "LV1": "109(8)CLS2c",
+     "LV2": "448(8)NH2b"
+    },
+    {
+     "NOM": "GOSSON",
+     "Prénom": "PIERRE",
+     "Filière": "ETI",
+     "LV1": "110(8)AB1b",
+     "LV2": "440(8)LP1a"
+    },
+    {
+     "NOM": "GOURIACH",
+     "Prénom": "SOUAD",
+     "Filière": "ETI",
+     "LV1": "122(8)MB2b",
+     "LV2": "222(8)CB1c",
+     "LV3": "230(8)EB1a"
+    },
+    {
+     "NOM": "GOUTTAYA",
+     "Prénom": "RYAD",
+     "Filière": "CGP",
+     "LV1": "113(8)CC1a",
+     "LV2": "446(8)ST1b"
+    },
+    {
+     "NOM": "GUEUX",
+     "Prénom": "ALEXIS",
+     "Filière": "ETI",
+     "LV1": "122(8)MB3c",
+     "LV2": "234(8)EB1b"
+    },
+    {
+     "NOM": "GUILLOT",
+     "Prénom": "ANTONY",
+     "Filière": "ETI",
+     "LV1": "122(8)MB3c",
+     "LV2": "802(8)MS1b"
+    },
+    {
+     "NOM": "GUZELIAN",
+     "Prénom": "RAPHAËL",
+     "Filière": "ETI",
+     "LV1": "102(8)CLS1a",
+     "LV2": "221(8)CB1b"
+    },
+    {
+     "NOM": "HEUNET",
+     "Prénom": "ALEXANDRE",
+     "Filière": "4CGP",
+     "LV1": "102(8)CLS1a",
+     "LV2": "441(8)LP1b"
+    },
+    {
+     "NOM": "HIRSCH",
+     "Prénom": "THERESA",
+     "Filière": "4CGP-Eras",
+     "LV1": "107(8)TD1a",
+     "LV2": "FLE(8)IM(jeudis)"
+    },
+    {
+     "NOM": "HUELSMANN",
+     "Prénom": "HANNA",
+     "Filière": "4CGP-Eras",
+     "LV1": "115(8)AB1a",
+     "LV2": "FLE(8)IM(jeudis)"
+    },
+    {
+     "NOM": "HUGUES-LÉTARD",
+     "Prénom": "OCÉANE",
+     "Filière": "CGP",
+     "LV1": "105(8)CC2b",
+     "LV2": "448(8)EA1a"
+    },
+    {
+     "NOM": "IMBERT",
+     "Prénom": "TRISTAN",
+     "Filière": "ETI",
+     "LV1": "106(8)MB1a",
+     "LV2": "449(8)EA1b"
+    },
+    {
+     "NOM": "IRRMANN",
+     "Prénom": "HECTOR",
+     "Filière": "ETI",
+     "LV1": "117(8)JC1c",
+     "LV2": "444(8)NH1a"
+    },
+    {
+     "NOM": "ISSELIN",
+     "Prénom": "DORIAN",
+     "Filière": "ETI",
+     "LV1": "107(8)TD1a",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "JACOB",
+     "Prénom": "KILLIAN",
+     "Filière": "CGP",
+     "LV1": "111(8)JC1a",
+     "LV2": "449(8)EA1b"
+    },
+    {
+     "NOM": "JACQUET",
+     "Prénom": "ELENA",
+     "Filière": "CGP",
+     "LV1": "105(8)CC2b",
+     "LV2": "448(8)NH3c"
+    },
+    {
+     "NOM": "JAMET",
+     "Prénom": "AXEL",
+     "Filière": "ETI",
+     "LV1": "117(8)JC1c",
+     "LV2": "802(8)MS1b"
+    },
+    {
+     "NOM": "JEZEQUEL",
+     "Prénom": "ARTHUR",
+     "Filière": "ETI",
+     "LV1": "122(8)MB3c",
+     "LV2": "802(8)MS1b"
+    },
+    {
+     "NOM": "JHIMA",
+     "Prénom": "MOHAMED",
+     "Filière": "4ETI",
+     "LV1": "115(8)AB1a",
+     "LV2": "700(8)ZE(CM)"
+    },
+    {
+     "NOM": "JOBERT--ROLLIN",
+     "Prénom": "GABIN",
+     "Filière": "ETI",
+     "LV1": "117(8)JC1c",
+     "LV2": "600(8)ND3a"
+    },
+    {
+     "NOM": "JOLIN",
+     "Prénom": "ALEXANDRE",
+     "Filière": "ETI",
+     "LV1": "122(8)MB3c",
+     "LV2": "802(8)MS1b"
+    },
+    {
+     "NOM": "JOMAIN",
+     "Prénom": "BENOÎT",
+     "Filière": "ETI",
+     "LV1": "106(8)MB1a",
+     "LV2": "441(8)LP2c",
+     "LV3": "230(8)DC2b"
+    },
+    {
+     "NOM": "JOVENIN",
+     "Prénom": "DAPHNÉ",
+     "Filière": "CGP",
+     "LV1": "122(8)MB3c",
+     "LV2": "221(8)CB1b"
+    },
+    {
+     "NOM": "JUMELLE",
+     "Prénom": "CAPUCINE",
+     "Filière": "ETI",
+     "LV1": "105(8)CC1c",
+     "LV2": "448(8)NH2b",
+     "LV3": "LSF LV3"
+    },
+    {
+     "NOM": "JUNG",
+     "Prénom": "INYOUNG",
+     "Filière": "4CGP RED",
+     "LV1": "102(8)CLS1a",
+     "LV2": "FLE(8)IM(jeudis)"
+    },
+    {
+     "NOM": "KAPOUSOUZIAN",
+     "Prénom": "LAURA",
+     "Filière": "CGP",
+     "LV1": "105(8)CC2b",
+     "LV2": "440(8)LP1a"
+    },
+    {
+     "NOM": "KLEITZ",
+     "Prénom": "ANTOINE",
+     "Filière": "ETI",
+     "LV1": "105(8)CC2b",
+     "LV2": "448(8)NH3c"
+    },
+    {
+     "NOM": "LABADIE",
+     "Prénom": "MANON",
+     "Filière": "CGP",
+     "LV1": "111(8)JC1a",
+     "LV2": "443(8)ST1c"
+    },
+    {
+     "NOM": "LABORIEUX",
+     "Prénom": "RÉDA",
+     "Filière": "4ETI",
+     "LV1": "109(8)JC1b",
+     "LV2": "700(8)ZE(CM)"
+    },
+    {
+     "NOM": "LACHAISE-BOGART",
+     "Prénom": "MANON",
+     "Filière": "CGP",
+     "LV1": "115(8)AB1a",
+     "LV2": "441(8)LP2c"
+    },
+    {
+     "NOM": "LAJUGIE",
+     "Prénom": "RODOLPHE",
+     "Filière": "ETI",
+     "LV1": "106(8)MB1a",
+     "LV2": "441(8)LP2c"
+    },
+    {
+     "NOM": "LANGUILLE",
+     "Prénom": "ANTOINE",
+     "Filière": "ETI",
+     "LV1": "117(8)JC1c",
+     "LV2": "600(8)ND3a"
+    },
+    {
+     "NOM": "LAPRAIS",
+     "Prénom": "AUGUSTIN",
+     "Filière": "ETI",
+     "LV1": "113(8)JL2b",
+     "LV2": "600(8)ND3a"
+    },
+    {
+     "NOM": "LARCHIER",
+     "Prénom": "ANTON",
+     "Filière": "CGP",
+     "LV1": "116(8)AB2c",
+     "LV2": "900(8)IM1b"
+    },
+    {
+     "NOM": "LECELLIER",
+     "Prénom": "SOPHIA",
+     "Filière": "CGP",
+     "LV1": "113(8)JL2b",
+     "LV2": "448(8)EA1a"
+    },
+    {
+     "NOM": "LEE",
+     "Prénom": "KILLIAN",
+     "Filière": "CGP",
+     "LV1": "115(8)AB1a",
+     "LV2": "900(8)IM1b"
+    },
+    {
+     "NOM": "LEFEBVRE",
+     "Prénom": "ELISA",
+     "Filière": "CGP",
+     "LV1": "122(8)MB2b",
+     "LV2": "443(8)ST1c"
+    },
+    {
+     "NOM": "LEFEBVRE- -GROSMAIRE",
+     "Prénom": "TIPHAINE",
+     "Filière": "CGP",
+     "LV1": "108(8)TD1b",
+     "LV2": "227(8)DC1c"
+    },
+    {
+     "NOM": "LEPAIN",
+     "Prénom": "THOMAS",
+     "Filière": "CGP",
+     "LV1": "102(8)CLS1a",
+     "LV2": "POR(8)(CM)"
+    },
+    {
+     "NOM": "LEROUX",
+     "Prénom": "GAËLLE",
+     "Filière": "4ETI",
+     "LV1": "109(8)CLS2c",
+     "LV2": "LSF(8)GR(CM)"
+    },
+    {
+     "NOM": "LEROY-CANARELLI",
+     "Prénom": "ELSA",
+     "Filière": "CGP",
+     "LV1": "108(8)TD2c",
+     "LV2": "300(8)MCV1b"
+    },
+    {
+     "NOM": "LESTIENNE",
+     "Prénom": "CAMILLE",
+     "Filière": "CGP",
+     "LV1": "105(8)CC2b",
+     "LV2": "443(8)ST1c"
+    },
+    {
+     "NOM": "LETESSIER",
+     "Prénom": "SARAH",
+     "Filière": "CGP",
+     "LV1": "122(8)MB3c",
+     "LV2": "443(8)ST1c"
+    },
+    {
+     "NOM": "LEVESQUE",
+     "Prénom": "YASMINE",
+     "Filière": "CGP",
+     "LV1": "113(8)JL3c",
+     "LV2": "440(8)LP1a"
+    },
+    {
+     "NOM": "LICI",
+     "Prénom": "TANCRÈDE",
+     "Filière": "ETI",
+     "LV1": "115(8)AB1a",
+     "LV2": "801(8)MS1a"
+    },
+    {
+     "NOM": "LINNELL-BOUTAUD",
+     "Prénom": "HEATHER-JANE",
+     "Filière": "ETI",
+     "LV1": "122(8)MB3c",
+     "LV2": "234(8)EB1b"
+    },
+    {
+     "NOM": "LLORENS",
+     "Prénom": "VALENTINA",
+     "Filière": "4ETI Inter",
+     "LV1": "115(8)AB1a",
+     "LV2": "222(8)CB1c"
+    },
+    {
+     "NOM": "LOMBARD",
+     "Prénom": "ANTHONY",
+     "Filière": "ETI",
+     "LV1": "117(8)JC1c",
+     "LV2": "444(8)NH1a"
+    },
+    {
+     "NOM": "LOPEZ",
+     "Prénom": "ALEXIA",
+     "Filière": "CGP",
+     "LV1": "105(8)CC1c",
+     "LV2": "448(8)NH2b"
+    },
+    {
+     "NOM": "LOSCHI",
+     "Prénom": "ESTEBAN",
+     "Filière": "CGP",
+     "LV1": "122(8)MB2b",
+     "LV2": "440(8)LP1a"
+    },
+    {
+     "NOM": "LUCAS",
+     "Prénom": "ALICIA",
+     "Filière": "4CGP",
+     "LV1": "108(8)TD1b",
+     "LV2": "801(8)MS1a"
+    },
+    {
+     "NOM": "LUDWIG",
+     "Prénom": "JULIE",
+     "Filière": "ETI",
+     "LV1": "111(8)JC1a",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "MAHAMODRAZA",
+     "Prénom": "SHÉZAN",
+     "Filière": "ETI",
+     "LV1": "115(8)AB1a",
+     "LV2": "600(8)ND2b"
+    },
+    {
+     "NOM": "MAHDI",
+     "Prénom": "MOHAMAD JAD",
+     "Filière": "4CGP RED",
+     "LV1": "PAS D'ANGLAIS",
+     "LV2": "PAS de LV2"
+    },
+    {
+     "NOM": "MALEYSSON",
+     "Prénom": "EMMA-LOU",
+     "Filière": "CGP",
+     "LV1": "110(8)AB1b",
+     "LV2": "227(8)DC1c"
+    },
+    {
+     "NOM": "MANTOUT",
+     "Prénom": "LOLA",
+     "Filière": "CGP",
+     "LV1": "115(8)AB1a",
+     "LV2": "443(8)ST1c"
+    },
+    {
+     "NOM": "MARION",
+     "Prénom": "LINE",
+     "Filière": "CGP",
+     "LV1": "109(8)JC1b",
+     "LV2": "222(8)CB1c"
+    },
+    {
+     "NOM": "MARTA",
+     "Prénom": "HUGO",
+     "Filière": "ETI",
+     "LV1": "108(8)TD2c",
+     "LV2": "600(8)ND2b"
+    },
+    {
+     "NOM": "MARTEAU",
+     "Prénom": "FABIEN",
+     "Filière": "CGP",
+     "LV1": "113(8)JL2b",
+     "LV2": "448(8)EA1a"
+    },
+    {
+     "NOM": "MARTIN",
+     "Prénom": "EVA",
+     "Filière": "4CGP",
+     "LV1": "104(8)JL1a",
+     "LV2": "222(8)CB1c"
+    },
+    {
+     "NOM": "MASCHIO",
+     "Prénom": "VICTOR",
+     "Filière": "4ETI",
+     "LV1": "109(8)CLS2c",
+     "LV2": "802(8)MS1b"
+    },
+    {
+     "NOM": "MATTHYS",
+     "Prénom": "ALICE",
+     "Filière": "CGP",
+     "LV1": "105(8)CC2b",
+     "LV2": "444(8)NH1a"
+    },
+    {
+     "NOM": "MAUDET",
+     "Prénom": "CASIMIR",
+     "Filière": "CGP",
+     "LV1": "110(8)AB1b",
+     "LV2": "227(8)DC1c"
+    },
+    {
+     "NOM": "MICHAOPOULOS",
+     "Prénom": "ZAPHIRIOS",
+     "Filière": "ETI",
+     "LV1": "113(8)CC1a",
+     "LV2": "441(8)LP2c",
+     "LV3": "230(8)DC2b"
+    },
+    {
+     "NOM": "MICHAU",
+     "Prénom": "THÉOPHILE",
+     "Filière": "4CGP",
+     "LV1": "109(8)JC1b",
+     "LV2": "600(8)ND3a"
+    },
+    {
+     "NOM": "MICHELI",
+     "Prénom": "SÉBASTIEN",
+     "Filière": "ETI",
+     "LV1": "122(8)MB2b",
+     "LV2": "300(8)MCV2a"
+    },
+    {
+     "NOM": "MICHON",
+     "Prénom": "JULIE",
+     "Filière": "CGP",
+     "LV1": "105(8)CC2b",
+     "LV2": "300(8)MCV2a"
+    },
+    {
+     "NOM": "MINGRET",
+     "Prénom": "ARTHUR",
+     "Filière": "CGP",
+     "LV1": "113(8)JL3c",
+     "LV2": "900(8)IM1b"
+    },
+    {
+     "NOM": "MITTOUX",
+     "Prénom": "ARTHUR",
+     "Filière": "CGP",
+     "LV1": "116(8)AB2c",
+     "LV2": "449(8)EA1b"
+    },
+    {
+     "NOM": "MONNET DE LORBEAU",
+     "Prénom": "LOIC",
+     "Filière": "CGP",
+     "LV1": "122(8)MB2b",
+     "LV2": "445(8)ST1a"
+    },
+    {
+     "NOM": "MOREAU--NEIDHARDT",
+     "Prénom": "PAUL",
+     "Filière": "4ETI",
+     "LV1": "109(8)JC1b",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "MOREIRA DA SILVA",
+     "Prénom": "ADRIEN",
+     "Filière": "ETI",
+     "LV1": "104(8)JL1a",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "MOURER",
+     "Prénom": "YANN",
+     "Filière": "CGP",
+     "LV1": "113(8)JL2b",
+     "LV2": "900(8)IM2a"
+    },
+    {
+     "NOM": "MU",
+     "Prénom": "YUXIN",
+     "Filière": "4ETI Inter",
+     "LV1": "106(8)MB1a",
+     "LV2": "FLE(8)IM(jeudis)"
+    },
+    {
+     "NOM": "NALEWAJEK",
+     "Prénom": "EVANN",
+     "Filière": "ETI",
+     "LV1": "122(8)MB3c",
+     "LV2": "802(8)MS1b"
+    },
+    {
+     "NOM": "NATSIS",
+     "Prénom": "ANGELOS",
+     "Filière": "4CGP",
+     "LV1": "107(8)TD1a",
+     "LV2": "441(8)LP1b"
+    },
+    {
+     "NOM": "NENACH",
+     "Prénom": "MATHIS",
+     "Filière": "ETI",
+     "LV1": "116(8)AB2c",
+     "LV2": "300(8)MCV1b"
+    },
+    {
+     "NOM": "NGOUNDA MANGA",
+     "Prénom": "LOUISA",
+     "Filière": "CGP",
+     "LV1": "106(8)MB1a",
+     "LV2": "445(8)ST1a"
+    },
+    {
+     "NOM": "NGUYEN",
+     "Prénom": "THI-KHANH-LINH",
+     "Filière": "4CGP",
+     "LV1": "105(8)CC2b",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "NGUYEN&nbsp; L",
+     "Prénom": "LUCAS",
+     "Filière": "ETI",
+     "LV1": "105(8)CC1c",
+     "LV2": "801(8)MS1a"
+    },
+    {
+     "NOM": "NGUYEN H",
+     "Prénom": "HOANG HIEN",
+     "Filière": "ETI",
+     "LV1": "106(8)MB1a",
+     "LV2": "222(8)CB1c"
+    },
+    {
+     "NOM": "NGUYEN M",
+     "Prénom": "MÉLANIE",
+     "Filière": "CGP",
+     "LV1": "108(8)TD1b",
+     "LV2": "445(8)ST1a"
+    },
+    {
+     "NOM": "NGUYEN X",
+     "Prénom": "XUAN AN",
+     "Filière": "CGP",
+     "LV1": "113(8)CC1a",
+     "LV2": "227(8)DC1c"
+    },
+    {
+     "NOM": "NICOLLE",
+     "Prénom": "AUDREY",
+     "Filière": "ETI",
+     "LV1": "117(8)JC1c",
+     "LV2": "234(8)EB1b"
+    },
+    {
+     "NOM": "NIE",
+     "Prénom": "WEIJIAN",
+     "Filière": "CGP",
+     "LV1": "117(8)JC1c",
+     "LV2": "FLE(8)IM(jeudis)"
+    },
+    {
+     "NOM": "NIVEAU",
+     "Prénom": "MATHIS",
+     "Filière": "4ETI",
+     "LV1": "109(8)JC1b",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "OUENADIO",
+     "Prénom": "ALEXANDRE",
+     "Filière": "ETI",
+     "LV1": "105(8)CC1c",
+     "LV2": "234(8)EB1b"
+    },
+    {
+     "NOM": "OZIER-LAFONTAINE",
+     "Prénom": "MAXENCE",
+     "Filière": "CGP",
+     "LV1": "109(8)CLS2c",
+     "LV2": "446(8)ST1b"
+    },
+    {
+     "NOM": "PAIN",
+     "Prénom": "MATEO",
+     "Filière": "ETI",
+     "LV1": "109(8)CLS2c",
+     "LV2": "448(8)NH2b"
+    },
+    {
+     "NOM": "PAULET-DUPRAT",
+     "Prénom": "GABRIEL",
+     "Filière": "ETI",
+     "LV1": "107(8)TD1a",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "PEROL",
+     "Prénom": "JULIEN",
+     "Filière": "ETI",
+     "LV1": "106(8)MB1a",
+     "LV2": "443(8)ST1c"
+    },
+    {
+     "NOM": "PERRICHET",
+     "Prénom": "THÉOTIME",
+     "Filière": "4ETI",
+     "LV1": "108(8)TD2c",
+     "LV2": "801(8)MS1a",
+     "LV3": "230(8)EB1a"
+    },
+    {
+     "NOM": "PEY",
+     "Prénom": "ARTHUR",
+     "Filière": "ETI",
+     "LV1": "110(8)AB1b",
+     "LV2": "445(8)ST1a"
+    },
+    {
+     "NOM": "PICHAT",
+     "Prénom": "CORENTIN",
+     "Filière": "ETI",
+     "LV1": "109(8)JC1b",
+     "LV2": "445(8)ST1a"
+    },
+    {
+     "NOM": "PILLOT",
+     "Prénom": "ANNE",
+     "Filière": "CGP",
+     "LV1": "115(8)AB1a",
+     "LV2": "448(8)NH2b"
+    },
+    {
+     "NOM": "PLEUVRY",
+     "Prénom": "PERNELLE",
+     "Filière": "4ETI",
+     "LV1": "108(8)TD2c",
+     "LV2": "801(8)MS1a"
+    },
+    {
+     "NOM": "PONCEBLANC",
+     "Prénom": "LÉA",
+     "Filière": "CGP",
+     "LV1": "104(8)JL1a",
+     "LV2": "227(8)DC1c"
+    },
+    {
+     "NOM": "POURADIER-DUTEIL",
+     "Prénom": "JOSEPH",
+     "Filière": "4ETI",
+     "LV1": "109(8)JC1b",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "PROUVOST",
+     "Prénom": "ALICE",
+     "Filière": "CGP",
+     "LV1": "106(8)MB1a",
+     "LV2": "600(8)ND1c"
+    },
+    {
+     "NOM": "PRUDHON",
+     "Prénom": "MAXIME",
+     "Filière": "ETI",
+     "LV1": "102(8)CLS1a",
+     "LV2": "700(8)ZE(CM)"
+    },
+    {
+     "NOM": "RAMON",
+     "Prénom": "RÉMI",
+     "Filière": "ETI",
+     "LV1": "102(8)CLS1a",
+     "LV2": "441(8)LP2c"
+    },
+    {
+     "NOM": "RECHE",
+     "Prénom": "TOM",
+     "Filière": "ETI",
+     "LV1": "110(8)AB1b",
+     "LV2": "900(8)IM2a"
+    },
+    {
+     "NOM": "REMILLIEUX",
+     "Prénom": "MAXIMILIEN",
+     "Filière": "ETI",
+     "LV1": "109(8)JC1b",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "RENOUARD",
+     "Prénom": "BAPTISTE",
+     "Filière": "ETI",
+     "LV1": "108(8)TD1b",
+     "LV2": "300(8)MCV2a"
+    },
+    {
+     "NOM": "REROLE",
+     "Prénom": "ALEXANDRE",
+     "Filière": "4CGP RED",
+     "LV1": "102(8)CLS1a",
+     "LV2": "227(8)DC1c"
+    },
+    {
+     "NOM": "REVIL BAUDARD",
+     "Prénom": "LIANA",
+     "Filière": "CGP",
+     "LV1": "109(8)CLS2c",
+     "LV2": "300(8)MCV2a"
+    },
+    {
+     "NOM": "RICHAUD",
+     "Prénom": "AURIANE",
+     "Filière": "CGP",
+     "LV1": "109(8)JC1b",
+     "LV2": "448(8)NH3c"
+    },
+    {
+     "NOM": "RICHER",
+     "Prénom": "LOUIS",
+     "Filière": "CGP",
+     "LV1": "105(8)CC2b",
+     "LV2": "445(8)ST1a"
+    },
+    {
+     "NOM": "ROLLAND A",
+     "Prénom": "ALEXIS",
+     "Filière": "CGP",
+     "LV1": "106(8)MB1a",
+     "LV2": "448(8)NH3c",
+     "LV3": "230(8)DC2b"
+    },
+    {
+     "NOM": "ROLLAND G",
+     "Prénom": "GAUTIER",
+     "Filière": "ETI",
+     "LV1": "113(8)JL2b",
+     "LV2": "441(8)LP2c"
+    },
+    {
+     "NOM": "ROMIER",
+     "Prénom": "MARIE",
+     "Filière": "CGP",
+     "LV1": "113(8)CC1a",
+     "LV2": "227(8)DC1c"
+    },
+    {
+     "NOM": "ROUCOU",
+     "Prénom": "LUCAS",
+     "Filière": "CGP",
+     "LV1": "115(8)AB1a",
+     "LV2": "448(8)NH2b"
+    },
+    {
+     "NOM": "ROURE",
+     "Prénom": "ALEXIS",
+     "Filière": "4CGP",
+     "LV1": "113(8)JL2b",
+     "LV2": "801(8)MS1a"
+    },
+    {
+     "NOM": "ROUSSEAU",
+     "Prénom": "MARGAUX",
+     "Filière": "CGP",
+     "LV1": "122(8)MB3c",
+     "LV2": "300(8)MCV1b"
+    },
+    {
+     "NOM": "SAMMUT",
+     "Prénom": "MARIE",
+     "Filière": "CGP",
+     "LV1": "108(8)TD2c",
+     "LV2": "446(8)ST1b"
+    },
+    {
+     "NOM": "SAYAQUE",
+     "Prénom": "BENJAMIN",
+     "Filière": "ETI",
+     "LV1": "106(8)MB1a",
+     "LV2": "900(8)IM1b"
+    },
+    {
+     "NOM": "SCARPA",
+     "Prénom": "AMANDINE",
+     "Filière": "CGP",
+     "LV1": "106(8)MB1a",
+     "LV2": "448(8)NH2b"
+    },
+    {
+     "NOM": "SEIGNEURET",
+     "Prénom": "MAŸLIS",
+     "Filière": "CGP",
+     "LV1": "113(8)CC1a",
+     "LV2": "600(8)ND1c"
+    },
+    {
+     "NOM": "SELLAMI",
+     "Prénom": "NADIM",
+     "Filière": "4ETI",
+     "LV1": "102(8)CLS1a",
+     "LV2": "700(8)ZE(CM)"
+    },
+    {
+     "NOM": "SERPYTYTE",
+     "Prénom": "AGNÉ",
+     "Filière": "CGP",
+     "LV1": "113(8)JL2b",
+     "LV2": "444(8)NH1a"
+    },
+    {
+     "NOM": "SERRUS",
+     "Prénom": "THOMAS",
+     "Filière": "ETI",
+     "LV1": "108(8)TD1b",
+     "LV2": "801(8)MS1a"
+    },
+    {
+     "NOM": "SHANG",
+     "Prénom": "WENRUI",
+     "Filière": "CGP",
+     "LV1": "102(8)CLS1a",
+     "LV2": "FLE(8)IM(jeudis)",
+     "LV3": "230(8)DC2b"
+    },
+    {
+     "NOM": "SIBENALER",
+     "Prénom": "ARNAUD",
+     "Filière": "ETI",
+     "LV1": "110(8)AB1b",
+     "LV2": "801(8)MS1a",
+     "LV3": "230(8)EB1a"
+    },
+    {
+     "NOM": "SIDOPOULOU",
+     "Prénom": "ELENA",
+     "Filière": "4CGP",
+     "LV1": "102(8)CLS1a",
+     "LV2": "FLE(8)IM(jeudis)"
+    },
+    {
+     "NOM": "SIMON",
+     "Prénom": "EMMA",
+     "Filière": "CGP",
+     "LV1": "108(8)TD1b",
+     "LV2": "441(8)LP2c"
+    },
+    {
+     "NOM": "SIROT",
+     "Prénom": "JEAN-CHARLES",
+     "Filière": "CGP",
+     "LV1": "113(8)JL2b",
+     "LV2": "444(8)NH1a"
+    },
+    {
+     "NOM": "SKRZYPCZAK",
+     "Prénom": "PAUL",
+     "Filière": "CGP",
+     "LV1": "106(8)MB1a",
+     "LV2": "234(8)EB1b"
+    },
+    {
+     "NOM": "SOARES",
+     "Prénom": "NATHAN",
+     "Filière": "CGP",
+     "LV1": "105(8)CC1c",
+     "LV2": "449(8)EA1b"
+    },
+    {
+     "NOM": "SPAY",
+     "Prénom": "VICTOR",
+     "Filière": "CGP",
+     "LV1": "113(8)JL2b",
+     "LV2": "448(8)NH3c"
+    },
+    {
+     "NOM": "STROBEL",
+     "Prénom": "LISA CÉLINE",
+     "Filière": "CGP",
+     "LV1": "122(8)MB2b",
+     "LV2": "FLE(8)IM(jeudis)"
+    },
+    {
+     "NOM": "SUROWKA",
+     "Prénom": "EMMA",
+     "Filière": "CGP",
+     "LV1": "122(8)MB2b",
+     "LV2": "440(8)LP1a"
+    },
+    {
+     "NOM": "TAP",
+     "Prénom": "SYLVAIN",
+     "Filière": "CGP",
+     "LV1": "104(8)JL1a",
+     "LV2": "222(8)CB1c"
+    },
+    {
+     "NOM": "TELEP",
+     "Prénom": "PIERRE-LOUIS",
+     "Filière": "ETI",
+     "LV1": "113(8)JL2b",
+     "LV2": "801(8)MS1a"
+    },
+    {
+     "NOM": "THEVENON",
+     "Prénom": "LÉA",
+     "Filière": "CGP",
+     "LV1": "116(8)AB2c",
+     "LV2": "300(8)MCV2a"
+    },
+    {
+     "NOM": "TRANCHARD",
+     "Prénom": "ROMANE",
+     "Filière": "CGP",
+     "LV1": "116(8)AB2c",
+     "LV2": "801(8)MS1a"
+    },
+    {
+     "NOM": "TSOUTSAS",
+     "Prénom": "CHLOÉ",
+     "Filière": "CGP",
+     "LV1": "105(8)CC2b",
+     "LV2": "448(8)EA1a"
+    },
+    {
+     "NOM": "TUZIO",
+     "Prénom": "LORENZO",
+     "Filière": "ETI",
+     "LV1": "113(8)CC1a",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "UCEDA",
+     "Prénom": "AMANDINE",
+     "Filière": "CGP",
+     "LV1": "110(8)AB1b",
+     "LV2": "900(8)IM2a"
+    },
+    {
+     "NOM": "VALLADON",
+     "Prénom": "LUCAS",
+     "Filière": "ETI",
+     "LV1": "105(8)CC1c",
+     "LV2": "802(8)MS1b"
+    },
+    {
+     "NOM": "VASSAIL",
+     "Prénom": "PAUL",
+     "Filière": "CGP",
+     "LV1": "117(8)JC1c",
+     "LV2": "801(8)MS1a"
+    },
+    {
+     "NOM": "VERHEYDE",
+     "Prénom": "LISA",
+     "Filière": "CGP",
+     "LV1": "108(8)TD1b",
+     "LV2": "448(8)EA1a"
+    },
+    {
+     "NOM": "VERNET",
+     "Prénom": "ALEXANDRE",
+     "Filière": "ETI",
+     "LV1": "110(8)AB1b",
+     "LV2": "800(8)MS1c"
+    },
+    {
+     "NOM": "VINCENT",
+     "Prénom": "SAMUEL",
+     "Filière": "CGP",
+     "LV1": "110(8)AB1b",
+     "LV2": "440(8)LP1a"
+    },
+    {
+     "NOM": "VITA",
+     "Prénom": "THOMAS",
+     "Filière": "ETI",
+     "LV1": "113(8)CC1a",
+     "LV2": "441(8)LP2c"
+    },
+    {
+     "NOM": "VOGE",
+     "Prénom": "ALICIA",
+     "Filière": "CGP",
+     "LV1": "115(8)AB1a",
+     "LV2": "222(8)CB1c"
+    },
+    {
+     "NOM": "VUILLEMEY",
+     "Prénom": "GHERLAIN",
+     "Filière": "CGP",
+     "LV1": "113(8)CC1a",
+     "LV2": "449(8)EA1b"
+    },
+    {
+     "NOM": "VULIN",
+     "Prénom": "ANTOINE",
+     "Filière": "CGP",
+     "LV1": "122(8)MB2b",
+     "LV2": "227(8)DC1c"
+    },
+    {
+     "NOM": "WANG",
+     "Prénom": "FUKANG",
+     "Filière": "ETI",
+     "LV1": "111(8)JC1a",
+     "LV2": "222(8)CB1c"
+    },
+    {
+     "NOM": "WANG",
+     "Prénom": "TIANQI",
+     "Filière": "4ETI Inter",
+     "LV1": "109(8)CLS2c",
+     "LV2": "FLE(8)IM(jeudis)"
+    },
+    {
+     "NOM": "WEBER",
+     "Prénom": "THIBAUT",
+     "Filière": "ETI",
+     "LV1": "108(8)TD1b",
+     "LV2": "600(8)ND3a"
+    },
+    {
+     "NOM": "WLAZLOWSKI",
+     "Prénom": "MATEUSZ",
+     "Filière": "ETI",
+     "LV1": "113(8)JL3c",
+     "LV2": "221(8)CB1b"
+    },
+    {
+     "NOM": "YAHIA",
+     "Prénom": "SIWAR",
+     "Filière": "CGP",
+     "LV1": "106(8)MB1a",
+     "LV2": "700(8)ZE(CM)"
+    },
+    {
+     "NOM": "YUN",
+     "Prénom": "YE SEUL",
+     "Filière": "CGP",
+     "LV1": "106(8)MB1a",
+     "LV2": "221(8)CB1b"
+    },
+    {
+     "NOM": "ZEMAN",
+     "Prénom": "MATHIEU",
+     "Filière": "ETI",
+     "LV1": "122(8)MB3c",
+     "LV2": "801(8)MS1a"
+    }
+   ]

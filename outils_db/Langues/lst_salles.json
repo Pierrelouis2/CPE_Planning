@@ -1,0 +1,331 @@
+[
+    {
+     "TAG": "102(8)CLS1a",
+     "COURS": "102 Getting ready for the UK",
+     "PROF": "Claire",
+     "SALLE": "F001",
+     "HORAIRE": "13h10-14h40"
+    },
+    {
+     "TAG": "104(8)JL1a",
+     "COURS": "104 Environmental Challenges\/Speaking the Enviornment",
+     "PROF": "Jessica",
+     "SALLE": "H002",
+     "HORAIRE": "13h10-14h40"
+    },
+    {
+     "TAG": "106(8)MB1a",
+     "COURS": "106 English for Business &amp; Management",
+     "PROF": "Mairi",
+     "SALLE": "F002",
+     "HORAIRE": "13h10-14h40"
+    },
+    {
+     "TAG": "107(8)TD1a",
+     "COURS": "107 Speaking out Internationally",
+     "PROF": "Tim",
+     "SALLE": "F003",
+     "HORAIRE": "13h10-14h40"
+    },
+    {
+     "TAG": "111(8)JC1a",
+     "COURS": "111 CAE",
+     "PROF": "Jenny",
+     "SALLE": "F004",
+     "HORAIRE": "13h10-14h40"
+    },
+    {
+     "TAG": "113(8)CC1a",
+     "COURS": "113 Science and the Movies",
+     "PROF": "Christine",
+     "SALLE": "F005",
+     "HORAIRE": "13h10-14h40"
+    },
+    {
+     "TAG": "115(8)AB1a",
+     "COURS": "115 Psychological Mechanisms of Behaviour",
+     "PROF": "Alicja",
+     "SALLE": "G109",
+     "HORAIRE": "13h10-14h40"
+    },
+    {
+     "TAG": "230(8)EB1a",
+     "COURS": "230 Start in Deutschland",
+     "PROF": "Ebba",
+     "SALLE": "F006",
+     "HORAIRE": "13h10-14h40"
+    },
+    {
+     "TAG": "440(8)LP1a",
+     "COURS": "440 Espagnol Practica de la lengua DELE",
+     "PROF": "Lourdes",
+     "SALLE": "F007",
+     "HORAIRE": "13h10-14h40"
+    },
+    {
+     "TAG": "444(8)NH1a",
+     "COURS": "444 Espagnole pour l’ex debutants",
+     "PROF": "Norma",
+     "SALLE": "F008",
+     "HORAIRE": "13h10-14h40"
+    },
+    {
+     "TAG": "445(8)ST1a",
+     "COURS": "445 Espagnol Vie professionnelle en Espagne",
+     "PROF": "Socorro",
+     "SALLE": "F101",
+     "HORAIRE": "13h10-14h40"
+    },
+    {
+     "TAG": "448(8)EA1a",
+     "COURS": "448 Espagnol Mejorar la fluidez en español",
+     "PROF": "Edgar",
+     "SALLE": "F102",
+     "HORAIRE": "13h10-14h40"
+    },
+    {
+     "TAG": "300(8)MCV2a",
+     "COURS": "Italien",
+     "PROF": "Maria Carmela",
+     "SALLE": "Pt Source",
+     "HORAIRE": "13h10-14h40"
+    },
+    {
+     "TAG": "600(8)ND3a",
+     "COURS": "Chinois",
+     "PROF": "Nan",
+     "SALLE": "Gd Conseil",
+     "HORAIRE": "13h10-14h40"
+    },
+    {
+     "TAG": "801(8)MS1a",
+     "COURS": "Japonais",
+     "PROF": "Michie",
+     "SALLE": "H001",
+     "HORAIRE": "13h10-14h40"
+    },
+    {
+     "TAG": "900(8)IM1a",
+     "COURS": "Russe",
+     "PROF": "Ivanna",
+     "SALLE": "H003",
+     "HORAIRE": "13h10-14h41"
+    },
+    {
+     "TAG": "113(8)JL2b",
+     "COURS": "113 Science and the Movies",
+     "PROF": "Jessica",
+     "SALLE": "H002",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "122(8)MB2b",
+     "COURS": "122 English through creating art",
+     "PROF": "Mairi",
+     "SALLE": "F002",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "108(8)TD1b",
+     "COURS": "108 English in Professional Contexts (Meetings)",
+     "PROF": "Tim",
+     "SALLE": "F003",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "109(8)JC1b",
+     "COURS": "109 Intensive English Workshop",
+     "PROF": "Jenny",
+     "SALLE": "F004",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "105(8)CC2b",
+     "COURS": "105 English through singing\/music",
+     "PROF": "Christine",
+     "SALLE": "F005",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "110(8)AB1b",
+     "COURS": "110 Proficiency",
+     "PROF": "Alicja",
+     "SALLE": "G109",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "234(8)EB1b",
+     "COURS": "234 Allemand Deutsch fuer IT",
+     "PROF": "Ebba",
+     "SALLE": "F006",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "230(8)DC2b",
+     "COURS": "230 Start in Deutschland",
+     "PROF": "Dagmar",
+     "SALLE": "E302",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "221(8)CB1b",
+     "COURS": "221 Allemand Fit fur Deutschland",
+     "PROF": "Christian",
+     "SALLE": "H004",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "441(8)LP1b",
+     "COURS": "441 Cine",
+     "PROF": "Lourdes",
+     "SALLE": "F007",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "448(8)NH2b",
+     "COURS": "448 Espagnol Mejorar la fluidez en español",
+     "PROF": "Norma",
+     "SALLE": "F008",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "446(8)ST1b",
+     "COURS": "446 Espagnol l Vie professionnelle en Espagnol (pays de habla hispana)",
+     "PROF": "Socorro",
+     "SALLE": "F101",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "449(8)EA1b",
+     "COURS": "449 Espagnol Debatir la ciencia en español",
+     "PROF": "Edgar",
+     "SALLE": "F102",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "300(8)MCV1b",
+     "COURS": "Italien",
+     "PROF": "Maria Carmela",
+     "SALLE": "Pt Source",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "600(8)ND2b",
+     "COURS": "Chinois",
+     "PROF": "Nan",
+     "SALLE": "Gd Conseil",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "802(8)MS1b",
+     "COURS": "Japonais",
+     "PROF": "Michie",
+     "SALLE": "H001",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "900(8)IM1b",
+     "COURS": "Russe",
+     "PROF": "Ivanna",
+     "SALLE": "H003",
+     "HORAIRE": "14h50-16h20"
+    },
+    {
+     "TAG": "109(8)JC1c",
+     "COURS": "109 Intensive English Workshop",
+     "PROF": "Claire",
+     "SALLE": "F001",
+     "HORAIRE": "16h30-18h00"
+    },
+    {
+     "TAG": "113(8)JL3c",
+     "COURS": "113 Science and the Movies",
+     "PROF": "Jessica",
+     "SALLE": "H002",
+     "HORAIRE": "16h30-18h00"
+    },
+    {
+     "TAG": "122(8)MB3c",
+     "COURS": "122 English through creating art",
+     "PROF": "Mairi",
+     "SALLE": "F002",
+     "HORAIRE": "16h30-18h00"
+    },
+    {
+     "TAG": "108(8)TD2c",
+     "COURS": "108 English in Professional Contexts (Meetings)",
+     "PROF": "Tim",
+     "SALLE": "F003",
+     "HORAIRE": "16h30-18h00"
+    },
+    {
+     "TAG": "117(8)JC1c",
+     "COURS": "117 TALKING TECHNOLOGY",
+     "PROF": "Jenny",
+     "SALLE": "F004",
+     "HORAIRE": "16h30-18h00"
+    },
+    {
+     "TAG": "105(8)CC1c",
+     "COURS": "105 English through singing\/music",
+     "PROF": "Christine",
+     "SALLE": "F005",
+     "HORAIRE": "16h30-18h00"
+    },
+    {
+     "TAG": "116(8)AB2c",
+     "COURS": "116 Music and Society",
+     "PROF": "Alicja",
+     "SALLE": "G109",
+     "HORAIRE": "16h30-18h00"
+    },
+    {
+     "TAG": "227(8)DC1c",
+     "COURS": "227 Allemand Activités Langagieres en Allemand",
+     "PROF": "Dagmar",
+     "SALLE": "E302",
+     "HORAIRE": "16h30-18h00"
+    },
+    {
+     "TAG": "222(8)CB1c",
+     "COURS": "222 Allemand ex-débutants",
+     "PROF": "Christian",
+     "SALLE": "H004",
+     "HORAIRE": "16h30-18h00"
+    },
+    {
+     "TAG": "441(8)LP2c",
+     "COURS": "441 Cine",
+     "PROF": "Lourdes",
+     "SALLE": "F007",
+     "HORAIRE": "16h30-18h00"
+    },
+    {
+     "TAG": "448(8)NH3c",
+     "COURS": "448 Espagnol Mejorar la fluidez en español",
+     "PROF": "Norma",
+     "SALLE": "F008",
+     "HORAIRE": "16h30-18h00"
+    },
+    {
+     "TAG": "443(8)ST1c",
+     "COURS": "443 Espagnol Civilisation latino-americaine",
+     "PROF": "Socorro",
+     "SALLE": "F101",
+     "HORAIRE": "16h30-18h00"
+    },
+    {
+     "TAG": "600(8)ND1c",
+     "COURS": "Chinois",
+     "PROF": "Nan",
+     "SALLE": "Gd Conseil",
+     "HORAIRE": "16h30-18h00"
+    },
+    {
+     "TAG": "800(8)MS1c",
+     "COURS": "Japonais",
+     "PROF": "Michie",
+     "SALLE": "H001",
+     "HORAIRE": "16h30-18h00"
+    }
+   ]
