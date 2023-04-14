@@ -58,7 +58,7 @@ app.get("/", (req, res) => {
 });
 
 app.get('/login',function(req, res){
-  if (req.body.user == myusername && req.body.password == mypassword){
+  if (req.session.userid){
       let session = req.session;
       session.userid = req.body.email;
       res.redirect('/admin');
