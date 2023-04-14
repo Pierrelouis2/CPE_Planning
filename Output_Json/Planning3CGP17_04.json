@@ -1,0 +1,185 @@
+{
+    "Unnamed: 0-Matin": {
+        "Matin": {
+            "Groupe 1": [],
+            "Groupe 2": [],
+            "Groupe 3": [],
+            "Pour tous": [
+                "10h00",
+                "10h15",
+                "Ap-midi",
+                "15h30",
+                "15h45"
+            ]
+        },
+        "Aprem": {
+            "Groupe 1": [],
+            "Groupe 2": [],
+            "Groupe 3": [],
+            "Pour tous": []
+        }
+    },
+    "LUNDI-17-avr": {
+        "Matin": {
+            "Groupe 1": [],
+            "Groupe 2": [],
+            "Groupe 3": [],
+            "Pour tous": [
+                "8h00 - 10h00",
+                "Travail Libre",
+                "10h15 - 12h15",
+                "Electrochimie",
+                "R. FERRIGNO",
+                "Grand Amphi"
+            ]
+        },
+        "Aprem": {
+            "Groupe 1": [
+                "Groupe 1",
+                "Sciences Analytiques",
+                "B\u00e2t. D - 2\u00e8me \u00e9tage"
+            ],
+            "Groupe 2": [
+                "Groupe 2",
+                "G\u00e9nie des Proc\u00e9d\u00e9s",
+                "B\u00e2t. G - RdC"
+            ],
+            "Groupe 3": [
+                "Groupe 3",
+                "Math\u00e9matiques Informatique",
+                "Gr. TP 3A : 13h30 - 15h30",
+                "Gr. TP 3B : 15h45 - 17h45",
+                "N. CHAUSSARD / ML. ZANOTA",
+                "Salle I306"
+            ],
+            "Pour tous": [
+                "13h30 - 17h45",
+                "T.P.",
+                "(Voir planning",
+                "sp\u00e9cifique)"
+            ]
+        }
+    },
+    "MARDI -18-avr": {
+        "Matin": {
+            "Groupe 1": [],
+            "Groupe 2": [],
+            "Groupe 3": [],
+            "Pour tous": [
+                "8h00 - 10h00",
+                "Examen 1\u00e8re session",
+                "M\u00e9canique Quantique - Chimie",
+                "Th\u00e9orique Ecrit 1",
+                "Salles F001 + F002/003 + F008 +",
+                "F004/005 + F006/007",
+                "(Voir r\u00e9partition sur tableau d'affichage",
+                "3CGP pr\u00e8s des amphis)",
+                "10h15 - 12h15",
+                "TD Thermodynamique",
+                "(groupes : voir affichage TD GP)",
+                "Grpe 1 : C. NIKITINE",
+                "Amphi H001",
+                "Grpe 2 : M. DE MONTIGNY",
+                "Amphi H002",
+                "Grpe 3 : E. FOURNIER",
+                "Amphi H003",
+                "Grpe 4 : C. JALLUT",
+                "Salle F008"
+            ]
+        },
+        "Aprem": {
+            "Groupe 1": [],
+            "Groupe 2": [],
+            "Groupe 3": [],
+            "Pour tous": [
+                "13h30 - 17h45",
+                "PCE",
+                "(Travail Libre)",
+                "* * * * * * * * *",
+                "Travail Libre",
+                "* Les horaires de SHES sont",
+                "compl\u00e9mentaires \u00e0 ceux de LV2.",
+                "Si SHES 13h30-15h30 --> LV2 15h45-17h45",
+                "Si LV2 13h30-15h30 --> SHES 15h45-17h45"
+            ]
+        }
+    },
+    "MERCREDI-19-avr": {
+        "Matin": {
+            "Groupe 1": [],
+            "Groupe 2": [],
+            "Groupe 3": [],
+            "Pour tous": [
+                "8h00 - 10h00",
+                "Travail Libre",
+                "10h15 - 12h15",
+                "TD Chimie Organom\u00e9tallique",
+                "(Groupes : voir affichage TD GP)",
+                "Grpe 1 : A. RENAUDAT",
+                "Salle F008",
+                "Grpe 2 : J. BREUZARD",
+                "Salle F006/007",
+                "Grpe 3 : F. FACHE",
+                "Salle F004/005",
+                "Grpe 4 : C. CAMP",
+                "Salle F002/003"
+            ]
+        },
+        "Aprem": {
+            "Groupe 1": [],
+            "Groupe 2": [],
+            "Groupe 3": [],
+            "Pour tous": [
+                "13h30 - 15h30",
+                "Chimie Organique",
+                "B. ANDRIOLETTI",
+                "Grand Amphi",
+                "15h45 - 16h45",
+                "Chimie Organique",
+                "B. ANDRIOLETTI",
+                "Grand Amphi"
+            ]
+        }
+    },
+    "JEUDI-20-avr": {
+        "Matin": {
+            "Groupe 1": [
+                "Groupe 1",
+                "Math\u00e9matiques Informatique",
+                "Gr. TP 1A : 8h00 - 10h00",
+                "Gr. TP 1B : 10h15 - 12h15",
+                "E. JEANNEAU / E. ESPINOSA",
+                "Salle I306"
+            ],
+            "Groupe 2": [
+                "Groupe 2",
+                "Sciences Analytiques",
+                "B\u00e2t. D - 2\u00e8me \u00e9tage"
+            ],
+            "Groupe 3": [
+                "Groupe 3",
+                "G\u00e9nie des Proc\u00e9d\u00e9s",
+                "B\u00e2t. G - RdC"
+            ],
+            "Pour tous": [
+                "8h00 - 12h15",
+                "T.P.",
+                "(Voir planning",
+                "sp\u00e9cifique)"
+            ]
+        },
+        "Aprem": {
+            "Groupe 1": [],
+            "Groupe 2": [],
+            "Groupe 3": [],
+            "Pour tous": [
+                "13h30 - 17h45",
+                "Atelier de relecture de CV",
+                "Sur inscription",
+                "13h30 - 17h30",
+                "L. FORGEOT D'ARC",
+                "Salles F003 + F004"
+            ]
+        }
+    }
+}

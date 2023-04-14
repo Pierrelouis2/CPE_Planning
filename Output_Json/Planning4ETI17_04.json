@@ -1,0 +1,282 @@
+{
+    "LUNDI-17-avr": {
+        "Matin": {
+            "CONCEP.LOGICIELLE/BIG DATA": [
+                "CONCEP.LOGICIELLE/BIG DATA",
+                "TIDAL",
+                "Y. JOLY",
+                "Salle G105"
+            ],
+            "ROBOTIQUE": [
+                "ROBOTIQUE",
+                "TIDAL",
+                "Y. JOLY",
+                "Salle G103"
+            ],
+            "ELECTRONIQUE ET SYST EMB": [
+                "ELECTRONIQUE ET SYST EMB",
+                "Communications num\u00e9riques",
+                "N.LEBEDEV",
+                "Salle G108"
+            ],
+            "INFRA DES RESEAUX": [
+                "INFRA DES RESEAUX",
+                "Communications num\u00e9riques",
+                "N.LEBEDEV",
+                "Salle G108"
+            ],
+            "IMAGE": [
+                "IMAGE",
+                "10h15-12h15",
+                "Modelisation",
+                "T.DUPONT",
+                "Salle E109"
+            ],
+            "Pour tous": [
+                "8h-12h15"
+            ]
+        },
+        "Aprem": {
+            "CONCEP.LOGICIELLE/BIG DATA": [],
+            "ROBOTIQUE": [],
+            "ELECTRONIQUE ET SYST EMB": [],
+            "INFRA DES RESEAUX": [],
+            "IMAGE": [],
+            "Pour tous": [
+                "13h10-18h",
+                "LV",
+                "(Voir planning)"
+            ]
+        }
+    },
+    "MARDI-18-avr": {
+        "Matin": {
+            "CONCEP.LOGICIELLE/BIG DATA": [
+                "CONCEP.LOGICIELLE/BIG DATA",
+                "GROUPE C &D",
+                "Conception Orient\u00e9e Objet et",
+                "Design Patterns",
+                "GROUPE C&D",
+                "Interaction Homme/Robot",
+                "F.JUMEL"
+            ],
+            "ROBOTIQUE": [],
+            "ELECTRONIQUE ET SYST EMB": [],
+            "INFRA DES RESEAUX": [],
+            "IMAGE": [],
+            "Pour tous": [
+                "8h-12h15",
+                "GROUPE B",
+                "Projet",
+                "F. JOLY"
+            ]
+        },
+        "Aprem": {
+            "CONCEP.LOGICIELLE/BIG DATA": [
+                "CONCEP.LOGICIELLE/BIG DATA",
+                "GROUPE A & B",
+                "Conception Orient\u00e9e Objet et",
+                "Design Patterns"
+            ],
+            "ROBOTIQUE": [
+                "ROBOTIQUE",
+                "GROUPE A&B",
+                "Interaction Homme/Robot",
+                "F.JUMEL"
+            ],
+            "ELECTRONIQUE ET SYST EMB": [
+                "ELECTRONIQUE ET SYST EMB",
+                "GROUPE A&B",
+                "Electronique analogique int\u00e9gr\u00e9e",
+                "R.CELLIER"
+            ],
+            "INFRA DES RESEAUX": [],
+            "IMAGE": [],
+            "Pour tous": [
+                "13h30-17h45",
+                "GROUPE C&D",
+                "Projet",
+                "F. JOLY"
+            ]
+        }
+    },
+    "MERCREDI-19-avr": {
+        "Matin": {
+            "CONCEP.LOGICIELLE/BIG DATA": [
+                "CONCEP.LOGICIELLE/BIG DATA",
+                "GROUPE C&D",
+                "TIDAL",
+                "Y. JOLY",
+                "Salle G103"
+            ],
+            "ROBOTIQUE": [
+                "ROBOTIQUE",
+                "GROUPE C&D",
+                "TIDAL",
+                "Y. JOLY",
+                "Salle G103"
+            ],
+            "ELECTRONIQUE ET SYST EMB": [
+                "ELECTRONIQUE ET SYST EMB",
+                "GROUPE C&D",
+                "Electronique analogique",
+                "int\u00e9gr\u00e9e",
+                "R.CELLIER",
+                "CIMIRLY (INSA)",
+                "Grp C-D"
+            ],
+            "INFRA DES RESEAUX": [],
+            "IMAGE": [],
+            "Pour tous": [
+                "8h-12h15",
+                "GROUPE A & B",
+                "Projet",
+                "F. JOLY",
+                "Salle I105 - Groupe B",
+                "Salle I200 - Groupe A"
+            ]
+        },
+        "Aprem": {
+            "CONCEP.LOGICIELLE/BIG DATA": [
+                "CONCEP.LOGICIELLE/BIG DATA",
+                "GROUPE A & B",
+                "TIDAL",
+                "Y. JOLY",
+                "Salle G103",
+                "13h30-15h30"
+            ],
+            "ROBOTIQUE": [
+                "ROBOTIQUE",
+                "GROUPE A & B",
+                "TIDAL",
+                "Y. JOLY",
+                "Salle G103",
+                "13h30-15h30"
+            ],
+            "ELECTRONIQUE ET SYST EMB": [
+                "ELECTRONIQUE ET SYST EMB",
+                "Communications num\u00e9riques",
+                "N.LEBEDEV",
+                "Salle G108"
+            ],
+            "INFRA DES RESEAUX": [
+                "INFRA DES RESEAUX",
+                "Communications num\u00e9riques",
+                "N.LEBEDEV",
+                "Salle G108"
+            ],
+            "IMAGE": [
+                "IMAGE",
+                "13h30-15h30",
+                "Analyse d'images",
+                "P.GONCALVES",
+                "Salle E109",
+                "15h45-17h45",
+                "Modelisation",
+                "T.DUPONT",
+                "Salle E109"
+            ],
+            "Pour tous": [
+                "13h30-17h45"
+            ]
+        }
+    },
+    "JEUDI-20-avr": {
+        "Matin": {
+            "CONCEP.LOGICIELLE/BIG DATA": [],
+            "ROBOTIQUE": [
+                "ROBOTIQUE",
+                "GROUPE A&B",
+                "TIDAL",
+                "Y. JOLY",
+                "ROBOTIQUE",
+                "GROUPE A&B",
+                "TIDAL",
+                "Y. JOLY"
+            ],
+            "ELECTRONIQUE ET SYST EMB": [],
+            "INFRA DES RESEAUX": [],
+            "IMAGE": [],
+            "Pour tous": [
+                "8h-12h15",
+                "GROUPE D",
+                "Projet",
+                "F. JOLY"
+            ]
+        },
+        "Aprem": {
+            "CONCEP.LOGICIELLE/BIG DATA": [],
+            "ROBOTIQUE": [],
+            "ELECTRONIQUE ET SYST EMB": [],
+            "INFRA DES RESEAUX": [],
+            "IMAGE": [],
+            "Pour tous": [
+                "13h30-15h30",
+                "Groupe C",
+                "TD Droit",
+                "C.ROBINNEAU",
+                "15h45-17h45",
+                "Groupe D",
+                "TD Droit",
+                "C.ROBINNEAU"
+            ]
+        }
+    },
+    "VENDREDI-21-avr": {
+        "Matin": {
+            "CONCEP.LOGICIELLE/BIG DATA": [
+                "CONCEP.LOGICIELLE/BIG DATA",
+                "Architecture des Syst\u00e8mes",
+                "d'Information"
+            ],
+            "ROBOTIQUE": [
+                "ROBOTIQUE",
+                "Interaction Homme/Robot",
+                "F.JUMEL",
+                "Salle I302"
+            ],
+            "ELECTRONIQUE ET SYST EMB": [
+                "ELECTRONIQUE ET SYST EMB",
+                "Communications num\u00e9riques",
+                "N.LEBEDEV"
+            ],
+            "INFRA DES RESEAUX": [
+                "INFRA DES RESEAUX",
+                "Communications num\u00e9riques",
+                "N.LEBEDEV"
+            ],
+            "IMAGE": [
+                "IMAGE",
+                "Programmation en C++",
+                "T.DUPONT",
+                "Salle F001"
+            ],
+            "Pour tous": [
+                "8h-12h15"
+            ]
+        },
+        "Aprem": {
+            "CONCEP.LOGICIELLE/BIG DATA": [],
+            "ROBOTIQUE": [],
+            "ELECTRONIQUE ET SYST EMB": [],
+            "INFRA DES RESEAUX": [],
+            "IMAGE": [],
+            "Pour tous": [
+                "13h30-17h45",
+                "MSO1 OUVERTURE",
+                "AWS Cloud Foundations",
+                "T.AUFORT / Y.COSSIN/",
+                "Information g\u00e9ographique",
+                "13h00-17h00",
+                "Conception architecture",
+                "syst\u00e8me",
+                "Information quantique",
+                "B. FEDRICI",
+                "Algorithmique et Informatique",
+                "Th\u00e9orique",
+                "G.MOREL",
+                "Salle G103"
+            ]
+        }
+    }
+}
