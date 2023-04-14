@@ -50,9 +50,6 @@ db.on("error", function(error) {
 }); 
 const queryDB = promisify(db.all).bind(db); // used for get info from db
 
-// ----- TO CHANGE PASSWORD AND USERNAME TEST ----- //
-const myusername = 'user1'
-const mypassword = 'mypassword'
 
 // ----- ROUTES ----- //
 

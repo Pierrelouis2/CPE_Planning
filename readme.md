@@ -88,9 +88,9 @@ The database is composed of 3 tables:
 <img src="./Docs/ReadmeImages/confidential-ge984ebf2f_1280.png"  width="400" height="250">
 
 ## TODO
-- [ ] to link bot and website use sender PSID 
-- [ ] create send psid button
-- [ ] create subscribe page
+- [X] to link bot and website use sender PSID 
+- [X] create send psid button
+- [X] create subscribe page
 - [ ] Change readCsv with more parameters to get more use to the function
 - [ ] Manage LV lessons
 - [ ] Manage database backup and restore (cron?)
