@@ -53,19 +53,49 @@ const queryDB = promisify(db.all).bind(db); // used for get info from db
 
 // ----- ROUTES ----- //
 
-app.get("/", (req, res) => {
-  res.redirect('/login');
+app.get("/", async function (req, res) {
+  let session = req.session;
+    if (session.userid){
+      var countPromo = await webFunctions.getStatPromo();
+      var countFilliere = await webFunctions.getStatFilliere();
+      var countPromoFilliere = await webFunctions.getStatFillierePromo();
+      let variables = {
+        page : "planning",
+        labels : ["Promo", "Filliere", "Promo_Filliere"],
+        xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
+        ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere}
+      };
+      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+    }
+    else {
+      res.redirect('/login');
+    }
 });
 
+// Connect to the website
 app.get('/login',function(req, res){
   if (req.session.userid){
       let session = req.session;
       session.userid = req.body.email;
-      res.redirect('/admin');
+      res.redirect('/');
   } else {
     res.render(path.join(initpath , 'ejs/login.ejs')); 
   }
 });
+
+app.post('/login-form',async function(req, res) {  
+  let form = JSON.parse(JSON.stringify(req.body));
+  let result = await account.comparePassword(form.password, form.email)
+  if (result){
+      let session = req.session;
+      session.userid = req.body.email;
+      res.redirect('/');
+  } else {
+    res.render(path.join(initpath , 'ejs/login.ejs'), {error: "Erreur de connexion"}); 
+  }
+});
+
+// create a new account
 app.get("/register", (req, res) => {
     res.render(path.join(initpath , 'ejs/register.ejs'));
 });
@@ -84,24 +114,13 @@ app.post('/register-form', async function(req, res){
     console.log("register success");
     let session = req.session;
     session.userid = req.body.email;
-    res.redirect('/admin'); //change this redirection?
+    res.redirect('/'); 
   } else {
     console.log("register failed");
     res.render(path.join(initpath , 'ejs/register.ejs'), {error: "Erreur de code inattendue, réessayez"});
   }
 });
 
-app.post('/login-form',async function(req, res) {  
-  let form = JSON.parse(JSON.stringify(req.body));
-  let result = await account.comparePassword(form.password, form.email)
-  if (result){
-      let session = req.session;
-      session.userid = req.body.email;
-      res.redirect('/admin');
-  } else {
-    res.render(path.join(initpath , 'ejs/login.ejs'), {error: "Erreur de connexion"}); 
-  }
-});
 
 app.post('/profile_form', async function(req, res) {
   let session = req.session;
@@ -128,33 +147,7 @@ app.post('/profile_form', async function(req, res) {
   }
 });
 
-app.post('/profile_change' , async function(req, res) {
-  let session = req.session;
-  if (session.userid){
-    let variables = { page : "profileForm",};
-    res.render(path.join(initpath , 'ejs/home.ejs'), variables);
-  }
-});
-
-app.get("/admin", async function (req, res) {
-  let session = req.session;
-    if (session.userid){
-      var countPromo = await webFunctions.getStatPromo();
-      var countFilliere = await webFunctions.getStatFilliere();
-      var countPromoFilliere = await webFunctions.getStatFillierePromo();
-      let variables = { 
-        page : "planning",
-        labels : ["Promo", "Filliere", "Promo_Filliere"],
-        xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
-        ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere}
-      }; 
-      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
-    }
-    else {
-      res.redirect('/login');
-    }
-});
-
+// get yout profile info
 app.get("/profile", async function (req, res) {
   let session = req.session;
   if (session.userid){
@@ -167,6 +160,15 @@ app.get("/profile", async function (req, res) {
   }
 });
 
+app.post('/profile_change' , async function(req, res) {
+  let session = req.session;
+  if (session.userid){
+    let variables = { page : "profileForm",};
+    res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+  }
+});
+
+// get your timetable
 app.get("/planning", async function (req, res) {
   let session = req.session;
   if (session.userid){
@@ -177,20 +179,6 @@ app.get("/planning", async function (req, res) {
     res.redirect('/login');
   }
 });
-
-app.get("/depot", async function (req, res) {
-  let session = req.session;
-    if (await account.isAllow(session.userid)){
-      let variables = {
-        page : "depot"
-      };
-      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
-    }
-    else {
-      res.redirect('/admin');
-    }
-  });
-  
 
 app.post("/planning/:payload", async function (req, res) {
   console.log(`got planning ${req.params.payload} request`);
@@ -214,10 +202,29 @@ app.post("/planning/:payload", async function (req, res) {
   }
 });
 
+// for CPE administation to send timetables
+app.get("/depot", async function (req, res) {
+  let session = req.session;
+    if (await account.isAllow(session.userid)){
+      let variables = {
+        page : "depot"
+      };
+      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+    }
+    else {
+      res.redirect('/');  //change this ? or make an alert
+    }
+  });
+
+// create a route for images to be sent in websites
 app.get('/png/:imageName', function(req, res) {
   let image = req.params.imageName;
   console.log("got png request : ", image);
-  res.sendFile(path.join(__dirname,`./Plannings/planningPng/${image}`));   
+  if (image == "logo.png"){
+    res.sendFile(path.join(__dirname,`./Docs/Logo/logo.png`));
+  } else {
+  res.sendFile(path.join(__dirname,`./Plannings/planningPng/${image}`)); 
+  }
 });
 
 // Creates the endpoint for our webhook to facebook
