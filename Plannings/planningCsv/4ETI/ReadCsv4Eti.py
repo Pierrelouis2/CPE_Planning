@@ -1,10 +1,13 @@
 import pandas as pd
 import json
 from numpyencoder import NumpyEncoder
+import sys
 
+path = 'Plannings/planningCsv/4ETI/'
 # Read csv file
-date = input("Entrez la date du planning csv (ex: 01_04) : ")
-Df = pd.read_csv(f'./{date}.csv', sep=';')
+# date = input("Entrez la date du planning csv (ex: 01_04) : ")
+date = sys.argv[1]
+Df = pd.read_csv(f'{path}/{date}.csv', sep=';')
 # Filter columns and rows
 Df.reset_index()
 Df.fillna(0, inplace=True)
@@ -59,7 +62,6 @@ def createSchedule(Df):
 
 LstSemaine = createSchedule(Df)
 df_semaine = pd.DataFrame( LstSemaine)
-#df_semaine #Decommenter pour voir le tableau
 
 # ----------------------------------------------------------------
 # On filtres les majeurs de chaque jours
@@ -88,7 +90,6 @@ def filtreMaj(pLstSemaine):
                 dicMaj[Majeur].append(Case)
             Semaine[jour["jour"]][dj] = copy.deepcopy(dicMaj)
 
-    print('fin')
     return Semaine
 
 PlanningMajeur = filtreMaj(copy.deepcopy(LstSemaine)) # KK
@@ -97,5 +98,6 @@ df_planningMaj = pd.DataFrame(PlanningMajeur)
 
 # ----------------------------------------------------------------
 # on envoyer le planning au format json
-with open(f"../../../Output_Json/Planning4ETI{date}.json", 'w+') as f:
+print('fin')
+with open(f"./Output_Json/Planning4ETI{date}.json", 'w+') as f:
     json.dump(PlanningMajeur, f, indent=4, cls=NumpyEncoder)

@@ -1,10 +1,13 @@
 import pandas as pd
 import json
 from numpyencoder import NumpyEncoder
+import sys
 
+path = 'Plannings/planningCsv/3ETI/'
 # Read csv file
-date = input("Entrez la date du planning csv (ex: 01_04) : ")
-Df = pd.read_csv(f'./{date}.csv', sep=';')
+# date = input("Entrez la date du planning csv (ex: 01_04) : ")
+date = sys.argv[1]
+Df = pd.read_csv(f'{path}/{date}.csv', sep=';')
 # Filter columns and rows
 Df.reset_index()
 Df.fillna(0, inplace=True)
@@ -70,7 +73,6 @@ def filtreMaj(pLstSemaine):
     # parcours des jours de la semaine
     for jour in pLstSemaine :
 
-        print(f'{jour["jour"]=}')
         Semaine[jour["jour"]] = {}
         demi_jour = ("Matin", "Aprem")
         # parcours de la matinée et on les ajoute au majeur correspondant 
@@ -97,11 +99,11 @@ def filtreMaj(pLstSemaine):
                 # print(f'{Majeur} - {grp} - {Case}')
                 dicGrp[Groupe].append(Case)
             Semaine[jour["jour"]][dj] = copy.deepcopy(dicGrp)
-    print('fin')
     return Semaine
 
 PlanningGroupe = filtreMaj(copy.deepcopy(LstSemaine)) # KK
 
-with open(f'../../../Output_Json/Planning3ETI{date}.json', 'w+') as f:
+print('fin')
+with open(f'./Output_Json/Planning3ETI{date}.json', 'w+') as f:
     json.dump(PlanningGroupe, f, indent=4, cls=NumpyEncoder)
 
