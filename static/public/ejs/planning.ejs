@@ -8,49 +8,19 @@
 <h2>Mon Planning</h2>
 <% } %>
 
-<div class="container-select">
-    <div class="dropdown">
-        <button type="submit">
-            <% if (locals.payload){ %>
-                <%= payload %>
-            <% } else { %>
-            Jour
-            <% } %>
-        </button>
-        <ul class="dropdown-options" >
-        <li class="option">
-            <form action="/planning/LUNDI" method="post">
-               <input class="input-payload" type="submit" name="payload" value="LUNDI" />
-           </form>
-        </li>
-        <li class="option">
-            <form action="/planning/MARDI" method="post">
-               <input class="input-payload" type="submit" name="payload" value="MARDI" />
-           </form>
-        </li>
-        <li class="option">
-            <form action="/planning/MERCREDI" method="post">
-               <input class="input-payload" type="submit" name="payload" value="MERCREDI" />
-           </form>
-        </li>
-        <li class="option">
-            <form action="/planning/JEUDI" method="post">
-               <input class="input-payload" type="submit" name="payload" value="JEUDI" />
-           </form>
-        </li>
-        <li class="option">
-            <form action="/planning/VENDREDI" method="post">
-                <input class="input-payload" type="submit" name="payload" value="VENDREDI" />
-           </form>
-        </li>
-        <li class="option">
-            <form action="/planning/TOUT" method="post">
-                <input class="input-payload" type="submit" name="payload" value="TOUT" />
-            </form>
-         </li>
-       </ul>
-    </div>
+<br>
+
+<div class="button-container-select">
+    <form action="/planning" method="post">
+      <button type="submit" name="payload" class="select-button" value="LUNDI">LUNDI</button>
+      <button type="submit" name="payload" class="select-button" value="MARDI">MARDI</button>
+      <button type="submit" name="payload" class="select-button" value="MERCREDI">MERCREDI</button>
+      <button type="submit" name="payload" class="select-button" value="JEUDI">JEUDI</button>
+      <button type="submit" name="payload" class="select-button" value="VENDREDI">VENDREDI</button>
+      <button type="submit" name="payload" class="select-button" value="TOUT">TOUT</button>
+    </form>
 </div>
+  
 
 <!-- Timetable -->
  <% if (locals.timetable) { %>
@@ -68,8 +38,21 @@
 
 <!-- Image timetable (TOUT) -->
 <% if (locals.timetableImage) { %>
-    <img class="timetable-image" src="<%= timetableImage %>" alt="timetable">
+    <img class="timetable-image" src=<%= timetableImage %> alt="timetable">
 <% } %>
 
  <script src="https://cdn.jsdelivr.net/npm/less" ></script>
  <script src="../js/planning.js"></script>
+ <% if (locals.payload){ %>
+    <script type="text/javascript">
+        let btn = document.querySelectorAll(".select-button");
+    let payload = "<%= payload %>";
+    for (var i = 0; i < btn.length; i++) {
+        if(btn[i].value == payload){
+            // change color of button
+            btn[i].style.color = "#bd1050";
+            btn[i].style.borderBottom = "2px solid #bd1050";
+        }
+    }
+    </script>
+<% } %>
