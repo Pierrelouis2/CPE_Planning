@@ -19,7 +19,8 @@ const express = require("express"),
   sessions = require('express-session'),
   sqlite3 = require("sqlite3"),
   fs = require("fs"),
-  webFunctions = require("./modules/webFunctions.js");
+  webFunctions = require("./modules/webFunctions.js"),
+  multer  = require('multer');
   
 
 // ----- INIT APP ----- //
@@ -41,7 +42,17 @@ app.use(sessions({
 let initpath = path.join(__dirname,'static','public');
 app.use(express.static(initpath));
 app.use(cookieParser());
-app.use('/Docs', express.static(__dirname + '/Docs'));
+app.use('./Docs', express.static(__dirname + '/Docs'));
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './Plannings/planningXls/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+const upload = multer({ storage: storage });
 
 // ----- INIT DB ----- //
 let db = new sqlite3.Database("users.db");
@@ -120,7 +131,6 @@ app.post('/register-form', async function(req, res){
     res.render(path.join(initpath , 'ejs/register.ejs'), {error: "Erreur de code inattendue, réessayez"});
   }
 });
-
 
 app.post('/profile_form', async function(req, res) {
   let session = req.session;
@@ -215,6 +225,22 @@ app.get("/depot", async function (req, res) {
       res.redirect('/');  //change this ? or make an alert
     }
   });
+
+app.post("/depot-form", upload.single('file'), async function (req, res) {
+  let session = req.session;
+  if (session.userid){
+    console.log(req.file);
+    fs.rename(req.file.path, './Plannings/planningXls/test' + req.file.originalname, function (err) {
+      if (err) {
+        console.log(err);
+        res.send('Error uploading file.');
+      } else {
+        res.send('File uploaded successfully!');
+      }
+    });
+  }
+});
+
 
 // create a route for images to be sent in websites
 app.get('/png/:imageName', function(req, res) {

@@ -2,6 +2,9 @@
 
 <label for="pic">
     <span>Click To Upload File ;D</span>
-    <input type="file" id="pic">
+    <form action="/depot-form" enctype="multipart/form-data" method="post">
+        <input type="file" name="file" accept=".xls, .xlsx">
+        <input type="submit" value="Upload">
+    </form>
 </label>
   
