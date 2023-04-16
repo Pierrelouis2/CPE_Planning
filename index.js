@@ -221,8 +221,15 @@ app.post("/planning", async function (req, res) {
 app.get('/message', async function(req, res) {
   let session = req.session;
   if (session.userid){
-    let variables = { page : "message" };
-    res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+    if (await account.isAllow(session.userid)){
+      let variables = {
+        page : "message"
+      };
+      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+    }
+    else {
+      res.redirect('/');  //change this ? or make an alert
+    }
   }
   else {
     res.redirect('/login');
