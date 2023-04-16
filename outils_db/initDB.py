@@ -72,7 +72,7 @@ def main():
                                     );"""
     sql_insert_langue_table = """INSERT INTO langue (id_langue, Nom, Prenom, LV1, LV2, LV3) VALUES (?, ?, ?, ?, ?, ?)"""
 
-    sql_delete_mso_table = """DROP TABLE profile;"""
+    sql_delete_mso_table = """DROP TABLE mso;"""
     # create a database connection
     conn = create_connection(database)
     # create tables
