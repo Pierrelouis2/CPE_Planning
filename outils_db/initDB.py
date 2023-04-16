@@ -80,15 +80,15 @@ def main():
         # create projects table
         # create_table(conn, sql_create_user_table)
         # create tasks table
-        create_table(conn, sql_create_tj_user_mso_table)
+        # create_table(conn, sql_create_tj_user_mso_table)
         #delete mso table
         create_table(conn, sql_delete_mso_table)
         # create tasks table
         create_table(conn, sql_create_mso_table)
         # create tasks table
-        create_table(conn, sql_create_profile_table)
-        # insert data
-        create_table(conn, sql_create_langue_table)
+        # create_table(conn, sql_create_profile_table)
+        # # insert data
+        # create_table(conn, sql_create_langue_table)
         mso = {
             "SSO": "Stratégie de Synthèse Organique",
             "IM": "Ingéniérie Macromoléculaire",
