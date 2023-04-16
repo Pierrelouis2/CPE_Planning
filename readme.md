@@ -93,7 +93,6 @@ The database is composed of 3 tables:
 - [X] to link bot and website use sender PSID 
 - [X] create send psid button
 - [X] create subscribe page
-
 - [ ] Change readCsv with more parameters to get more use to the function
 - [ ] Manage LV lessons
 - [ ] Manage database backup and restore (cron?)
