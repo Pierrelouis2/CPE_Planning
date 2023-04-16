@@ -20,7 +20,8 @@ const express = require("express"),
   sqlite3 = require("sqlite3"),
   fs = require("fs"),
   webFunctions = require("./modules/webFunctions.js"),
-  multer  = require('multer');
+  multer  = require('multer'),
+  {spawn} = require('child_process');
   
 
 // ----- INIT APP ----- //
@@ -229,21 +230,17 @@ app.get("/depot", async function (req, res) {
 app.post("/depot-form", upload.single('file'), async function (req, res) {
   let session = req.session;
   if (session.userid){
+    console.log(`got file ${req.file.originalname} request at ${writeMessage.getCurrentDate()}`)
     console.log(req.file);
-    fs.rename(req.file.path, './Plannings/planningXls/test' + req.file.originalname, function (err) {
+    let filepath = './Plannings/planningXls/';
+    let newName = req.body.payload;
+
+    fs.rename(req.file.path, `${filepath}${newName}.xls`, function (err) {
       if (err) {
         console.log(err);
         let variables = {
           page : "depot",
           error: "Il y a eu une erreur lors de l'envoi du fichier, merci de réessayer"
-        };
-        res.render(path.join(initpath , 'ejs/home.ejs'), variables);
-        return
-        
-      } else {
-        let variables = {
-          page : "depot",
-          error: "Merci nous avons bien reçu votre fichier"
         };
         res.render(path.join(initpath , 'ejs/home.ejs'), variables);
         return
@@ -254,6 +251,15 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
       error: "Merci nous avons bien reçu votre fichier"
     };
     res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+    // convert the xls to csv
+    console.log("node: (python) xls2csv.py");
+    let pythonXls2Csv = spawn('python3', ['./Plannings/planningXls/xls2csv.py', `${filepath}${newName}.xls`]);
+    pythonXls2Csv.stdout.on('data', (data) => {
+      console.log('node: (python stdout) ' + data.toString());
+    });
+
+  } else {
+    res.redirect('/login');
   }
 });
 
