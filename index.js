@@ -541,11 +541,17 @@ async function handlePostback(sender_psid, received_postback) {
       r = await writeMessage.callSendAPI(sender_psid, response[1]);
       break;
     case "CODE":
-      message = {text: `Ton code de liaison est :`};
-      await writeMessage.callSendAPI(sender_psid, message);
-      message = {text: `${sender_psid}`};
-      await writeMessage.callSendAPI(sender_psid, message);
-      break;
+      user = await userInfo.getUser(sender_psid);
+      if (user.status == "Inscrit") {
+        message = {text: `Ton code de liaison est :`};
+        await writeMessage.callSendAPI(sender_psid, message);
+        message = {text: `${sender_psid}`};
+        await writeMessage.callSendAPI(sender_psid, message);
+      } else {
+        message = {text: `Tu n'es pas encore inscrit, fini ton inscription d'abord`};
+        await writeMessage.callSendAPI(sender_psid, message);
+      }
+        break;
     default:
       // let's not make a long switch case with CGP MSO
       if (Object.keys(variables.constant.MSO).includes(payload)) {
