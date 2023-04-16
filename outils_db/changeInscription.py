@@ -5,7 +5,7 @@ import sqlite3
 conn = sqlite3.connect('users.db')
 cur = conn.cursor()
 
-init = input("delete all inscription status 1 \n delete user 2 \nchange from inscription to inscrit 3 \n insert pl into profile database 4 \n change rigths pl jo 5 \n :")
+init = input("delete all inscription status 1 \n delete user 2 \nchange from inscription to inscrit 3 \n delete profile database 4 \n change rigths pl jo 5 \n :")
 if init == "1":
     sql_delete_iscriptions = 'DELETE FROM user where status = "Inscription"'
     cur.execute(sql_delete_iscriptions)
@@ -23,8 +23,9 @@ elif init == "3":
     conn.commit()
     print("Inscription changé en inscrit")
 elif init == "4":
-    sql_inscription_profile = "INSERT INTO profile VALUES ('Pierre-Louis', 'TELEP', 'pl.telep@cpe.fr', 'password','S', 1)"
-    cur.execute(sql_inscription_profile)
+    psid = input("Id user a supprimer : ")
+    sql_inscription_profile = "DELETE FROM profile WHERE psid=?"
+    cur.execute(sql_inscription_profile,[psid])
     conn.commit()
     print("Inscription changé en inscrit")
 elif init == "5":
