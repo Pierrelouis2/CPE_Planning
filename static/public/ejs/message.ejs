@@ -1,0 +1,38 @@
+<head>
+    <link rel="stylesheet/less" type="text/css" href="../css/message.less" />
+</head>
+
+<div class="depot-container">
+    <h2>Envoie message</h2>
+    <div class="file-container-select">
+        <form action="/depot-form" method="post" enctype="multipart/form-data">
+            <div id="filliere">
+                <input type="checkbox" name="payload" class="select-button" value="3ETI" id="3ETI" required>
+                <label for="3ETI">3ETI</label>
+                <input type="checkbox" name="payload" class="select-button" value="4ETI" id="4ETI">
+                <label for="4ETI">4ETI</label>
+                <input type="checkbox" name="payload" class="select-button" value="3CGP" id="3CGP">
+                <label for="3CGP">3CGP</label>
+                <input type="checkbox" name="payload" class="select-button" value="4CGP" id="4CGP">
+                <label for="4CGP">4CGP</label>
+            </div>
+            <div id="message-input" class="input-container">
+                <input type="text" name="message" id="message" placeholder="Message" required>
+            </div>
+
+            <div id="upload-file">
+                <input class ="button-like" type="submit" id="send-button">
+                <label for="send-button">Envoyer</label>
+            </div>
+        </form>
+    </div>
+</div>
+
+<% if (locals.error){ %>
+    <div>
+        <p id="message"> <%= error %> </p>
+    </div>
+<% } %>
+
+<script src="https://cdn.jsdelivr.net/npm/less" ></script>
+<script src="../js/depot.js"></script>

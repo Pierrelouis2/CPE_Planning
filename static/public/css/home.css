@@ -65,3 +65,14 @@ footer {
     height: 100%;
     padding: 0 20px;
 }
+
+a{
+    text-decoration: none;
+    color: #bd1050;
+}
+
+a:hover {
+    color: #fafafa;
+    background-color: #bd1050;
+    border-radius: 8px;
+}

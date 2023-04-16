@@ -213,6 +213,17 @@ app.post("/planning", async function (req, res) {
   }
 });
 
+app.get('/message', async function(req, res) {
+  let session = req.session;
+  if (session.userid){
+    let variables = { page : "message" };
+    res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+  }
+  else {
+    res.redirect('/login');
+  }
+});
+
 // for CPE administation to send timetables
 app.get("/depot", async function (req, res) {
   let session = req.session;
