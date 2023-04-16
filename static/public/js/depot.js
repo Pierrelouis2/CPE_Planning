@@ -1,9 +1,6 @@
 const fileInput = document.getElementById('file');
 const fileLabel = document.getElementById('file-label');
 
-console.log(fileInput);
-console.log(fileLabel);
-
 fileInput.addEventListener('change', (event) => {
   const fileName = event.target.value.split('\\').pop(); // get the file name
   if (fileName){

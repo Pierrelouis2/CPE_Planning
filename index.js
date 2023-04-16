@@ -231,10 +231,8 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
   let session = req.session;
   if (session.userid){
     console.log(`got file ${req.file.originalname} request at ${writeMessage.getCurrentDate()}`)
-    console.log(req.file);
-    let filepath = './Plannings/planningXls/';
-    let newName = req.body.payload;
-
+    let filepath = './Plannings/planningXls/' + req.body.payload;
+    let newName = req.body.date;
     fs.rename(req.file.path, `${filepath}${newName}.xls`, function (err) {
       if (err) {
         console.log(err);
@@ -252,8 +250,7 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
     };
     res.render(path.join(initpath , 'ejs/home.ejs'), variables);
     // convert the xls to csv
-    console.log("node: (python) xls2csv.py");
-    let pythonXls2Csv = spawn('python3', ['./Plannings/planningXls/xls2csv.py', `${filepath}${newName}.xls`]);
+    let pythonXls2Csv = spawn('python3', ['./Plannings/planningXls/xls2csv.py', `${filepath}${newName}.xls`, `./Plannings/planningCSV/${req.body.payload}/${newName}.csv`]);
     pythonXls2Csv.stdout.on('data', (data) => {
       console.log('node: (python stdout) ' + data.toString());
     });
