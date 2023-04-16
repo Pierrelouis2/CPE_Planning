@@ -2,10 +2,13 @@ import pandas as pd
 import json
 from numpyencoder import NumpyEncoder
 import copy
+import sys
 
+path = 'Plannings/planningCsv/4CGP/'
 # Read csv file
-date = input("Entrez la date du planning csv (ex: 01_04) : ")
-Df = pd.read_csv(f'./{date}.csv', sep=';')
+# date = input("Entrez la date du planning csv (ex: 01_04) : ")
+date = sys.argv[1]
+Df = pd.read_csv(f'{path}/{date}.csv', sep=';')
 # Filter columns and rows
 Df.reset_index()
 Df.fillna(0, inplace=True)
@@ -91,7 +94,6 @@ def filtre4CGP(LstSemaine) :
 
     # loop on the days of the week
     for jour in LstSemaine :
-        print(jour["jour"])
         Semaine[jour["jour"]] = {}
         # loop on each cells of the half days (cells because it is an xls file at the beginning)
         for dj in demi_jour :
@@ -133,12 +135,11 @@ def filtre4CGP(LstSemaine) :
             
             Semaine[jour["jour"]][dj]["Pour tous"] = copy.deepcopy(dicPT["Pour tous"])
     
-    print('fin')
-    print(Semaine)
     return Semaine
 
         
 PlanningGroupe = filtre4CGP(LstSemaine)
 
-with open(f'../../../Output_Json/Planning4CGP{date}.json', 'w+') as f:
+print('fin')
+with open(f'./Output_Json/Planning4CGP{date}.json', 'w+') as f:
     json.dump(PlanningGroupe, f, indent=4, cls=NumpyEncoder)

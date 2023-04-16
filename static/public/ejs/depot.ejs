@@ -1,7 +1,38 @@
+<head>
+    <link rel="stylesheet/less" type="text/css" href="../css/depot.less" />
+</head>
 
+<div class="depot-container">
+    <h2>Click To Upload File ;D</h2>
+    <div class="file-container-select">
+        <form action="/depot-form" method="post" enctype="multipart/form-data">
+            <div id="filliere">
+                <input type="radio" name="payload" class="select-button" value="3ETI" id="3ETI" required>
+                <label for="3ETI">3ETI</label>
+                <input type="radio" name="payload" class="select-button" value="4ETI" id="4ETI">
+                <label for="4ETI">4ETI</label>
+                <input type="radio" name="payload" class="select-button" value="3CGP" id="3CGP">
+                <label for="3CGP">3CGP</label>
+                <input type="radio" name="payload" class="select-button" value="4CGP" id="4CGP">
+                <label for="4CGP">4CGP</label>
+            </div>
+            <div id="upload-file">
+                <input class ="button-like" id="file" type="file" name="file" accept=".xls, .xlsx" id="file" required>
+                <label for="file" id="file-label">Choissisez un fichier</label>
+                <input type="text" id="input-date" name="date" placeholder="Date du lundi (ex: lundi 17 mars -> 17_04)" required>
+                <input class ="button-like" type="submit" id="send-button">
+                <label for="send-button">Envoyer</label>
+            </div>
+        </form>
+    </div>
+</div>
 
-<label for="pic">
-    <span>Click To Upload File ;D</span>
-    <input type="file" id="pic">
-</label>
+<% if (locals.error){ %>
+    <div>
+        <p> <%= error %> </p>
+    </div>
+<% } %>
+
+<script src="https://cdn.jsdelivr.net/npm/less" ></script>
+<script src="../js/depot.js"></script>
   

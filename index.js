@@ -19,7 +19,9 @@ const express = require("express"),
   sessions = require('express-session'),
   sqlite3 = require("sqlite3"),
   fs = require("fs"),
-  webFunctions = require("./modules/webFunctions.js");
+  webFunctions = require("./modules/webFunctions.js"),
+  multer  = require('multer'),
+  {spawn} = require('child_process');
   
 
 // ----- INIT APP ----- //
@@ -41,7 +43,17 @@ app.use(sessions({
 let initpath = path.join(__dirname,'static','public');
 app.use(express.static(initpath));
 app.use(cookieParser());
-app.use('/Docs', express.static(__dirname + '/Docs'));
+app.use('./Docs', express.static(__dirname + '/Docs'));
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './Plannings/planningXls/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+const upload = multer({ storage: storage });
 
 // ----- INIT DB ----- //
 let db = new sqlite3.Database("users.db");
@@ -53,19 +65,49 @@ const queryDB = promisify(db.all).bind(db); // used for get info from db
 
 // ----- ROUTES ----- //
 
-app.get("/", (req, res) => {
-  res.redirect('/login');
+app.get("/", async function (req, res) {
+  let session = req.session;
+    if (session.userid){
+      var countPromo = await webFunctions.getStatPromo();
+      var countFilliere = await webFunctions.getStatFilliere();
+      var countPromoFilliere = await webFunctions.getStatFillierePromo();
+      let variables = {
+        page : "planning",
+        labels : ["Promo", "Filliere", "Promo_Filliere"],
+        xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
+        ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere}
+      };
+      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+    }
+    else {
+      res.redirect('/login');
+    }
 });
 
+// Connect to the website
 app.get('/login',function(req, res){
   if (req.session.userid){
       let session = req.session;
       session.userid = req.body.email;
-      res.redirect('/admin');
+      res.redirect('/');
   } else {
     res.render(path.join(initpath , 'ejs/login.ejs')); 
   }
 });
+
+app.post('/login-form',async function(req, res) {  
+  let form = JSON.parse(JSON.stringify(req.body));
+  let result = await account.comparePassword(form.password, form.email)
+  if (result){
+      let session = req.session;
+      session.userid = req.body.email;
+      res.redirect('/');
+  } else {
+    res.render(path.join(initpath , 'ejs/login.ejs'), {error: "Erreur de connexion"}); 
+  }
+});
+
+// create a new account
 app.get("/register", (req, res) => {
     res.render(path.join(initpath , 'ejs/register.ejs'));
 });
@@ -84,22 +126,10 @@ app.post('/register-form', async function(req, res){
     console.log("register success");
     let session = req.session;
     session.userid = req.body.email;
-    res.redirect('/admin'); //change this redirection?
+    res.redirect('/'); 
   } else {
     console.log("register failed");
     res.render(path.join(initpath , 'ejs/register.ejs'), {error: "Erreur de code inattendue, réessayez"});
-  }
-});
-
-app.post('/login-form',async function(req, res) {  
-  let form = JSON.parse(JSON.stringify(req.body));
-  let result = await account.comparePassword(form.password, form.email)
-  if (result){
-      let session = req.session;
-      session.userid = req.body.email;
-      res.redirect('/admin');
-  } else {
-    res.render(path.join(initpath , 'ejs/login.ejs'), {error: "Erreur de connexion"}); 
   }
 });
 
@@ -128,33 +158,7 @@ app.post('/profile_form', async function(req, res) {
   }
 });
 
-app.post('/profile_change' , async function(req, res) {
-  let session = req.session;
-  if (session.userid){
-    let variables = { page : "profileForm",};
-    res.render(path.join(initpath , 'ejs/home.ejs'), variables);
-  }
-});
-
-app.get("/admin", async function (req, res) {
-  let session = req.session;
-    if (session.userid){
-      var countPromo = await webFunctions.getStatPromo();
-      var countFilliere = await webFunctions.getStatFilliere();
-      var countPromoFilliere = await webFunctions.getStatFillierePromo();
-      let variables = { 
-        page : "planning",
-        labels : ["Promo", "Filliere", "Promo_Filliere"],
-        xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
-        ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere}
-      }; 
-      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
-    }
-    else {
-      res.redirect('/login');
-    }
-});
-
+// get yout profile info
 app.get("/profile", async function (req, res) {
   let session = req.session;
   if (session.userid){
@@ -167,6 +171,15 @@ app.get("/profile", async function (req, res) {
   }
 });
 
+app.post('/profile_change' , async function(req, res) {
+  let session = req.session;
+  if (session.userid){
+    let variables = { page : "profileForm",};
+    res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+  }
+});
+
+// get your timetable
 app.get("/planning", async function (req, res) {
   let session = req.session;
   if (session.userid){
@@ -178,6 +191,29 @@ app.get("/planning", async function (req, res) {
   }
 });
 
+app.post("/planning", async function (req, res) {
+  console.log(`got planning ${req.body.payload} request`);
+  let session = req.session;
+  if (session.userid){
+    // get the user psid
+    let sender_psid = (await account.getProfile(session.userid)).psid;
+    let user = await userInfo.getUser(sender_psid);
+    let variable = { page: "planning", payload: req.body.payload };
+    if (req.body.payload == "TOUT"){
+      let imgName = user.promo + user.filliere + variables.constant.DATE;
+      let timetableImage = `https://messenger.jo-pouradier.fr/png/${imgName}.png`;
+      variable.timetableImage = timetableImage;
+    } else {
+      let message = await writeMessage.constructMessage(await writeMessage.readCsv(`./Output_Json/Planning${user.promo}${user.filliere}${variables.constant.DATE}.json`, req.body.payload, user.id_user, user));
+      variable.timetable = message;
+    }
+    res.render(path.join(initpath , 'ejs/home.ejs'), variable);
+  } else {
+    res.redirect('/login');
+  }
+});
+
+// for CPE administation to send timetables
 app.get("/depot", async function (req, res) {
   let session = req.session;
     if (await account.isAllow(session.userid)){
@@ -187,37 +223,53 @@ app.get("/depot", async function (req, res) {
       res.render(path.join(initpath , 'ejs/home.ejs'), variables);
     }
     else {
-      res.redirect('/admin');
+      res.redirect('/');  //change this ? or make an alert
     }
   });
-  
 
-app.post("/planning/:payload", async function (req, res) {
-  console.log(`got planning ${req.params.payload} request`);
+app.post("/depot-form", upload.single('file'), async function (req, res) {
   let session = req.session;
   if (session.userid){
-    // get the user psid
-    let sender_psid = (await account.getProfile(session.userid)).psid;
-    let user = await userInfo.getUser(sender_psid);
-    let variable = { page: "planning", payload: req.params.payload };
-    if (req.params.payload == "TOUT"){
-      let imgName = user.promo + user.filliere + variables.constant.DATE;
-      let timetableImage = `https://messenger.jo-pouradier.fr/png/${imgName}.png`;
-      variable.timetableImage = timetableImage;
-    } else {
-      let message = await writeMessage.constructMessage(await writeMessage.readCsv(`./Output_Json/Planning${user.promo}${user.filliere}${variables.constant.DATE}.json`, req.params.payload, user.id_user, user));
-      variable.timetable = message;
-    }
-    res.render(path.join(initpath , 'ejs/home.ejs'), variable);
+    console.log(`got file ${req.file.originalname} request at ${writeMessage.getCurrentDate()}`)
+    let filepath = './Plannings/planningXls/' + req.body.payload;
+    let newName = req.body.date;
+    fs.rename(req.file.path, `${filepath}${newName}.xls`, function (err) {
+      if (err) {
+        console.log(err);
+        let variables = {
+          page : "depot",
+          error: "Il y a eu une erreur lors de l'envoi du fichier, merci de réessayer"
+        };
+        res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+        return
+      }
+    });
+    let variables = {
+      page : "depot",
+      error: "Merci nous avons bien reçu votre fichier"
+    };
+    res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+    // convert the xls to csv
+    let pythonXls2Csv = spawn('python3', ['./Plannings/planningXls/xls2csv.py', `${filepath}${newName}.xls`, `./Plannings/planningCSV/${req.body.payload}/${newName}.csv`]);
+    pythonXls2Csv.stdout.on('data', (data) => {
+      console.log('node: (python stdout) ' + data.toString());
+    });
+
   } else {
     res.redirect('/login');
   }
 });
 
+
+// create a route for images to be sent in websites
 app.get('/png/:imageName', function(req, res) {
   let image = req.params.imageName;
   console.log("got png request : ", image);
-  res.sendFile(path.join(__dirname,`./Plannings/planningPng/${image}`));   
+  if (image == "logo.png"){
+    res.sendFile(path.join(__dirname,`./Docs/Logo/logo.png`));
+  } else {
+  res.sendFile(path.join(__dirname,`./Plannings/planningPng/${image}`)); 
+  }
 });
 
 // Creates the endpoint for our webhook to facebook

@@ -1,24 +1,4 @@
 {
-    "Unnamed: 0-Matin": {
-        "Matin": {
-            "Groupe 1": [],
-            "Groupe 2": [],
-            "Groupe 3": [],
-            "Pour tous": [
-                "10h00",
-                "10h15",
-                "Ap-midi",
-                "15h30",
-                "15h45"
-            ]
-        },
-        "Aprem": {
-            "Groupe 1": [],
-            "Groupe 2": [],
-            "Groupe 3": [],
-            "Pour tous": []
-        }
-    },
     "LUNDI-17-avr": {
         "Matin": {
             "Groupe 1": [],
@@ -179,6 +159,47 @@
                 "13h30 - 17h30",
                 "L. FORGEOT D'ARC",
                 "Salles F003 + F004"
+            ]
+        }
+    },
+    "VENDREDI-21-avr": {
+        "Matin": {
+            "Groupe 1": [],
+            "Groupe 2": [],
+            "Groupe 3": [],
+            "Pour tous": [
+                "8h00 - 10h00",
+                "Travail Libre",
+                "10h15 - 12h15",
+                "Techniques Chromatographiques",
+                "S. BURTIN",
+                "Grand Amphi"
+            ]
+        },
+        "Aprem": {
+            "Groupe 1": [
+                "Groupe 1",
+                "G\u00e9nie des Proc\u00e9d\u00e9s",
+                "B\u00e2t. G - RdC"
+            ],
+            "Groupe 2": [
+                "Groupe 2",
+                "Math\u00e9matiques Informatique",
+                "Gr. TP 2B : 13h30 - 15h30",
+                "Gr. TP 2A : 15h45 - 17h45",
+                "E. JEANNEAU / F. BRUNEL",
+                "Salle I306"
+            ],
+            "Groupe 3": [
+                "Groupe 3",
+                "Sciences Analytiques",
+                "B\u00e2t. D - 2\u00e8me \u00e9tage"
+            ],
+            "Pour tous": [
+                "13h30 - 17h45",
+                "T.P.",
+                "(Voir planning",
+                "sp\u00e9cifique)"
             ]
         }
     }

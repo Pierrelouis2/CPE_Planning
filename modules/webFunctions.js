@@ -1,6 +1,6 @@
 
 let sqlite3 = require("sqlite3"),
-    { promisify } = require("util")
+    { promisify } = require("util");
 
 let db = new sqlite3.Database("users.db");
 const queryDB = promisify(db.all).bind(db);
