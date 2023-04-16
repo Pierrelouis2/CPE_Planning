@@ -154,8 +154,7 @@ async function callSendAPI(sender_psid, response) {
 async function sendPlanningWeek() {
   let sql_get_user_table = "SELECT * FROM user";
   let user_table = await queryDB(sql_get_user_table);
-  console.log(getCurrentDate, " ", user_table)
-  user_table.forEach(user => async function() {
+  user_table.forEach( async (user) => {
     if(user.id_user == 5810016312430121 || user.id_user == 6271457816218293) {
       let message = { text: "Il est Dimache 20h ! Voici le planning de la semaine: " };
       r = await writeMessage.callSendAPI(user.id_user, message);
