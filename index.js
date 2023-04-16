@@ -284,6 +284,7 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
 });
 
 app.post('/send-message', async function(req, res) {
+  console.log(`got message ${req.body.payload} request`);
   let session = req.session;
   if (session.userid){
     if (await account.isAllow(session.userid)){
