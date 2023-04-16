@@ -5,6 +5,7 @@ let userInfo = require("./userInfo"),
   sqlite3 = require("sqlite3"),
   { promisify } = require("util"),
   request = require("request");
+  templates = require("./templates");
 
 let db = new sqlite3.Database("users.db");
 const queryDB = promisify(db.all).bind(db);
