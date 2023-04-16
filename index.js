@@ -283,6 +283,14 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
   }
 });
 
+app.post('/message-send', async function(req, res) {
+  let session = req.session;
+  if (session.userid){
+    if (await account.isAllow(session.userid)){
+      await writeMessage.sendPlanningWeek()
+    }
+  }
+});
 
 app.get('/about', function(req, res) {
   let session = req.session;
@@ -401,7 +409,7 @@ async function handlePostback(sender_psid, received_postback) {
       response = templates.askTemplateImage();
       user = await userInfo.getUser(sender_psid);
       let imgName = user.promo + user.filliere + variables.constant.DATE;
-      response.attachment.payload.url = `https://messenger.jo-pouradier.fr/png/${imgName}.png`;
+      response.attachment.payload.url = `/png/${imgName}.png`;
       r = await writeMessage.callSendAPI(sender_psid, response);
       break;
     case "LUNDI":
