@@ -487,8 +487,9 @@ async function handlePostback(sender_psid, received_postback) {
       await writeMessage.sleep(400);
       if (await userInfo.is4ETI(sender_psid)) {
         console.log("4ETI");
-        message = { "text": "Vous êtes bien inscrit en 4ETI, vous pouvez maintenant utiliser ce chat bot ou le site: cpe-planning.jo-pouradier.fr avec votre code de liaison que vous trouverez ici (bouton)" };
-        r = await writeMessage.callSendAPI(sender_psid, message);
+        response = templates.askTemplateMajeureETI();
+        r = await writeMessage.callSendAPI(sender_psid, response[0]);
+        r = await writeMessage.callSendAPI(sender_psid, response[1]);
       }
       // give days menu
       else {
@@ -536,16 +537,21 @@ async function handlePostback(sender_psid, received_postback) {
       let inscriptionMaj = "Inscrit";
       let sql_uptade_statusMaj = "UPDATE user SET status=? WHERE id_user=?";
       await db.run(sql_uptade_statusMaj, [inscriptionMaj, sender_psid]);
-      response = templates.askTemplateJour();
-      r = await writeMessage.callSendAPI(sender_psid, response[0]);
-      r = await writeMessage.callSendAPI(sender_psid, response[1]);
+      message = { "text": "Vous êtes bien inscrit en 4ETI, vous pouvez maintenant utiliser ce chat bot ou le site: cpe-planning.jo-pouradier.fr avec votre code de liaison que vous trouverez ici (bouton)" };
+      r = await writeMessage.callSendAPI(sender_psid, message);
       break;
     case "CODE":
-      message = {text: `Ton code de liaison est :`};
-      await writeMessage.callSendAPI(sender_psid, message);
-      message = {text: `${sender_psid}`};
-      await writeMessage.callSendAPI(sender_psid, message);
-      break;
+      user = await userInfo.getUser(sender_psid);
+      if (user.status == "Inscrit") {
+        message = {text: `Ton code de liaison est :`};
+        await writeMessage.callSendAPI(sender_psid, message);
+        message = {text: `${sender_psid}`};
+        await writeMessage.callSendAPI(sender_psid, message);
+      } else {
+        message = {text: `Tu n'es pas encore inscrit, fini ton inscription d'abord`};
+        await writeMessage.callSendAPI(sender_psid, message);
+      }
+        break;
     default:
       // let's not make a long switch case with CGP MSO
       if (Object.keys(variables.constant.MSO).includes(payload)) {
