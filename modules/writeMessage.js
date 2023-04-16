@@ -161,5 +161,6 @@ module.exports = {
     readCsv,
     constructMessage,
     getCurrentDate,
-    callSendAPI
+    callSendAPI,
+    sleep
 };
