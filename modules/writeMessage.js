@@ -161,7 +161,8 @@ async function sendPlanningWeek() {
       r = await callSendAPI(user.id_user, message);
       response = templates.askTemplateImage();
       let imgName = user.promo + user.filliere + variables.constant.DATE;
-      response.attachment.payload.url = `/png/${imgName}.png`;
+      response.attachment.payload.url = `cpe-planning.jo-pouradier.fr/png/${imgName}.png`;
+      console.log(response);
       r = await callSendAPI(user.id_user, response);
   }
   });
