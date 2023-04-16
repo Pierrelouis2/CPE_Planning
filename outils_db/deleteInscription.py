@@ -27,6 +27,11 @@ elif init == "4":
     cur.execute(sql_inscription_profile)
     conn.commit()
     print("Inscription changé en inscrit")
+elif init == "5":
+    sql_change_pl_rights = "UPDATE user SET status = 'Admin' WHERE email='pl@cpe.fr'"
+    cur.execute(sql_change_pl_rights)
+    conn.commit()
+    print("Inscription changé en inscrit")
 else:
     print("erreur")
 
