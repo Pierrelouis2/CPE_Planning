@@ -254,6 +254,9 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
     pythonXls2Csv.stdout.on('data', (data) => {
       console.log('node: (python stdout) ' + data.toString());
     });
+    pythonXls2Csv.stderr.on('data', (data) => {
+      console.log('node: (python stderr) ' + data.toString());
+    });
 
   } else {
     res.redirect('/login');
