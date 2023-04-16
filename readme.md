@@ -108,6 +108,7 @@ The database is composed of 3 tables:
 - [ ] autocomplete the re-registration form of the website
 - [ ] make a repport bug or feedback page/form
 - [ ] change url from messenger to cpeplanning
+- [ ] handle 3ETI groups 'X&Y'
 - [X] to link bot and website use sender PSID 
 - [X] create send psid button
 - [X] create subscribe page
