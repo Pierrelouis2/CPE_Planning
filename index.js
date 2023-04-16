@@ -281,7 +281,8 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
 app.get('/about', function(req, res) {
   let session = req.session;
   if (session.userid){
-    res.redirect('/');
+    let variables = { page : "about" };
+    res.render(path.join(initpath , 'ejs/home.ejs'),variables);
   } else {
     res.redirect('/login');
   }
@@ -295,6 +296,9 @@ app.get('/png/:imageName', function(req, res) {
     res.sendFile(path.join(__dirname,`./Docs/Logo/logo.png`));
   } else if(image == "logo-modified.png"){
     res.sendFile(path.join(__dirname,`./Docs/Logo/logo-modified.png`));
+  }
+  else if (image == "baniere.png"){
+    res.sendFile(path.join(__dirname,`./Docs/Logo/baniere.png`));
   } else {
   res.sendFile(path.join(__dirname,`./Plannings/planningPng/${image}`)); 
   }
