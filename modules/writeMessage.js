@@ -156,7 +156,6 @@ async function sendPlanningWeek() {
   let sql_get_user_table = "SELECT * FROM user";
   let user_table = await queryDB(sql_get_user_table);
   user_table.forEach( async (user) => {
-    if(user.id_user == 5810016312430121 || user.id_user == 6271457816218293) {
       let message = { text: "Il est Dimache 21h ! Voici le planning de la semaine: " };
       r = await callSendAPI(user.id_user, message);
       response = templates.askTemplateImage();
@@ -164,7 +163,6 @@ async function sendPlanningWeek() {
       response.attachment.payload.url = `https://cpe-planning.jo-pouradier.fr/png/${imgName}.png`;
       console.log(response);
       r = await callSendAPI(user.id_user, response);
-  }
   });
 }
 function sleep(ms) {
