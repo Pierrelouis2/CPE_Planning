@@ -487,9 +487,8 @@ async function handlePostback(sender_psid, received_postback) {
       await writeMessage.sleep(400);
       if (await userInfo.is4ETI(sender_psid)) {
         console.log("4ETI");
-        response = templates.askTemplateMajeureETI();
-        r = await writeMessage.callSendAPI(sender_psid, response[0]);
-        r = await writeMessage.callSendAPI(sender_psid, response[1]);
+        message = { "text": "Vous êtes bien inscrit en 4ETI, vous pouvez maintenant utiliser ce chat bot ou le site: cpe-planning.jo-pouradier.fr avec votre code de liaison que vous trouverez ici (bouton)" };
+        r = await writeMessage.callSendAPI(sender_psid, message);
       }
       // give days menu
       else {
@@ -497,9 +496,8 @@ async function handlePostback(sender_psid, received_postback) {
         let inscription = "Inscrit";
         let sql_uptade_statusEti = "UPDATE user SET status=? WHERE id_user=?";
         await db.run(sql_uptade_statusEti, [inscription, sender_psid]);
-        response = templates.askTemplateJour();
-        r = await writeMessage.callSendAPI(sender_psid, response[0]);
-        r = await writeMessage.callSendAPI(sender_psid, response[1]);
+        message = { "text": "Vous êtes bien inscrit en 3ETI, vous pouvez maintenant utiliser ce chat bot ou le site: cpe-planning.jo-pouradier.fr avec votre code de liaison que vous trouverez ici (bouton)" };
+        r = await writeMessage.callSendAPI(sender_psid, message);
       }
       break;
     case "CGP":
@@ -519,11 +517,12 @@ async function handlePostback(sender_psid, received_postback) {
           console.log("mso sending");
           r = await writeMessage.callSendAPI(sender_psid, m);
         }
+        message = { "text": "Vous êtes bien inscrit en 4CGP,choisissez bien vos mso. Vous pouvez maintenant utiliser ce chat bot ou le site: cpe-planning.jo-pouradier.fr avec votre code de liaison que vous trouverez ici (bouton)" };
+        r = await writeMessage.callSendAPI(sender_psid, message);
       } else {
         console.log("3CGP");
-        response = templates.askTemplateJour();
-        r = await writeMessage.callSendAPI(sender_psid, response[0]);
-        r = await writeMessage.callSendAPI(sender_psid, response[1]);
+        message = { "text": "Vous êtes bien inscrit en 3CGP, vous pouvez maintenant utiliser ce chat bot ou le site: cpe-planning.jo-pouradier.fr avec votre code de liaison que vous trouverez ici (bouton)" };
+        r = await writeMessage.callSendAPI(sender_psid, message);
       }
       break;
     case "CBD":
