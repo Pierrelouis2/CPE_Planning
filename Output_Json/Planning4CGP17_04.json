@@ -184,9 +184,6 @@
     },
     "JEUDI-20-avr": {
         "Matin": {
-            "Pour tous": []
-        },
-        "Aprem": {
             "Strat\u00e9gie de Synth\u00e8se Organique": [],
             "Ing\u00e9ni\u00e9rie Macromol\u00e9culaire": [],
             "Spectrom\u00e9tries RMN et Masse Avanc\u00e9es": [],
@@ -198,8 +195,7 @@
                 "Gr. E : 8h30 - 10h30",
                 "Gr. F : 10h30 - 12h30",
                 "* * * * * * * * * *",
-                "Gr. A+B+C+D : Travail libre",
-                "13h30 - 17h45"
+                "Gr. A+B+C+D : Travail libre"
             ],
             "Simulation des Proc\u00e9d\u00e9s": [],
             "Chimie Organom\u00e9tallique et Approche Orbitalaire": [],
@@ -218,6 +214,11 @@
                 "8h30 - 12h30",
                 "Modules Semi-Optionnels",
                 "S\u00e9rie 2"
+            ]
+        },
+        "Aprem": {
+            "Pour tous": [
+                "13h30 - 17h45"
             ]
         }
     },

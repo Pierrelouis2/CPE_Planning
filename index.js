@@ -201,6 +201,12 @@ app.post("/planning", async function (req, res) {
       variable.timetableImage = timetableImage;
     } else {
       let message = await writeMessage.constructMessage(await writeMessage.readCsv(`./Output_Json/Planning${user.promo}${user.filliere}${variables.constant.DATE}.json`, req.body.payload, user.id_user, user));
+      if (message[0].length == 0){
+        message[0] = "rien";
+      }
+      if (message[1].length == 0){
+        message[1] = "rien";
+      }
       variable.timetable = message;
     }
     res.render(path.join(initpath , 'ejs/home.ejs'), variable);
