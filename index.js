@@ -492,9 +492,10 @@ async function handlePostback(sender_psid, received_postback) {
       let inscription = "Inscrit";
       let sql_uptade_statusCgp = "UPDATE user SET status=? WHERE id_user=?";
       await db.run(sql_uptade_statusCgp, [inscription, sender_psid]);
+      console.log("test info " ,await userInfo.getUser(sender_psid));
       if (await userInfo.is4CGP(sender_psid)) {
         console.log("4CGP");
-        let messageMso = { "text": "Vous êtes en 4CGP, veuillez choisir vos mso, cliquez sur chacune de vos mso:" };
+        let messageMso = { "text": "V ;ous êtes en 4CGP, veuillez choisir vos mso, cliquez sur chacune de vos mso:" };
         r = await writeMessage.callSendAPI(sender_psid, messageMso);
         response = templates.askTemplateMsoCGP(Object.assign({}, variables.constant.MSO));
         for (let m of response) {
