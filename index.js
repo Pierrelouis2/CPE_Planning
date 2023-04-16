@@ -487,8 +487,9 @@ async function handlePostback(sender_psid, received_postback) {
       await writeMessage.sleep(400);
       if (await userInfo.is4ETI(sender_psid)) {
         console.log("4ETI");
-        message = { "text": "Vous êtes bien inscrit en 4ETI, vous pouvez maintenant utiliser ce chat bot ou le site: cpe-planning.jo-pouradier.fr avec votre code de liaison que vous trouverez ici (bouton)" };
-        r = await writeMessage.callSendAPI(sender_psid, message);
+        response = templates.askTemplateMajeureETI();
+        r = await writeMessage.callSendAPI(sender_psid, response[0]);
+        r = await writeMessage.callSendAPI(sender_psid, response[1]);
       }
       // give days menu
       else {
@@ -536,9 +537,8 @@ async function handlePostback(sender_psid, received_postback) {
       let inscriptionMaj = "Inscrit";
       let sql_uptade_statusMaj = "UPDATE user SET status=? WHERE id_user=?";
       await db.run(sql_uptade_statusMaj, [inscriptionMaj, sender_psid]);
-      response = templates.askTemplateJour();
-      r = await writeMessage.callSendAPI(sender_psid, response[0]);
-      r = await writeMessage.callSendAPI(sender_psid, response[1]);
+      message = { "text": "Vous êtes bien inscrit en 4ETI, vous pouvez maintenant utiliser ce chat bot ou le site: cpe-planning.jo-pouradier.fr avec votre code de liaison que vous trouverez ici (bouton)" };
+      r = await writeMessage.callSendAPI(sender_psid, message);
       break;
     case "CODE":
       user = await userInfo.getUser(sender_psid);
