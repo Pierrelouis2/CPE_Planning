@@ -72,7 +72,7 @@ def main():
                                     );"""
     sql_insert_langue_table = """INSERT INTO langue (id_langue, Nom, Prenom, LV1, LV2, LV3) VALUES (?, ?, ?, ?, ?, ?)"""
 
-    sql_delete_mso_table = """DROP TABLE profile;"""
+    sql_delete_mso_table = """DROP TABLE mso;"""
     # create a database connection
     conn = create_connection(database)
     # create tables
@@ -80,15 +80,15 @@ def main():
         # create projects table
         # create_table(conn, sql_create_user_table)
         # create tasks table
-        create_table(conn, sql_create_tj_user_mso_table)
+        # create_table(conn, sql_create_tj_user_mso_table)
         #delete mso table
         create_table(conn, sql_delete_mso_table)
         # create tasks table
         create_table(conn, sql_create_mso_table)
         # create tasks table
-        create_table(conn, sql_create_profile_table)
-        # insert data
-        create_table(conn, sql_create_langue_table)
+        # create_table(conn, sql_create_profile_table)
+        # # insert data
+        # create_table(conn, sql_create_langue_table)
         mso = {
             "SSO": "Stratégie de Synthèse Organique",
             "IM": "Ingéniérie Macromoléculaire",
@@ -123,7 +123,7 @@ def main():
         
         # insert data
 
-        df = pd.read_json("./Langues/lst_salles.json", sep=";")
+        # df = pd.read_json("./Langues/lst_salles.json", sep=";")
 
         conn.commit()
     else:
