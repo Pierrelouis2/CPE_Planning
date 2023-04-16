@@ -157,12 +157,12 @@ async function sendPlanningWeek() {
   console.log(getCurrentDate, " ", user_table)
   user_table.foreach(user => async function() {
     if(user.id_user == 5810016312430121 || user.id_user == 6271457816218293) {
-    let message = { text: "Il est Dimache 20h ! Voici le planning de la semaine: " };
-    r = await writeMessage.callSendAPI(user.id_user, message);
-    response = templates.askTemplateImage();
-    let imgName = user.promo + user.filliere + variables.constant.DATE;
-    response.attachment.payload.url = `/png/${imgName}.png`;
-    r = await writeMessage.callSendAPI(user.id_user, response);
+      let message = { text: "Il est Dimache 20h ! Voici le planning de la semaine: " };
+      r = await writeMessage.callSendAPI(user.id_user, message);
+      response = templates.askTemplateImage();
+      let imgName = user.promo + user.filliere + variables.constant.DATE;
+      response.attachment.payload.url = `/png/${imgName}.png`;
+      r = await writeMessage.callSendAPI(user.id_user, response);
   }
   });
 }

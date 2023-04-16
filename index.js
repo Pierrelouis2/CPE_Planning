@@ -283,7 +283,7 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
   }
 });
 
-app.post('/message-send', async function(req, res) {
+app.post('/send-message', async function(req, res) {
   let session = req.session;
   if (session.userid){
     if (await account.isAllow(session.userid)){
