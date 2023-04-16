@@ -5,7 +5,7 @@ import sqlite3
 conn = sqlite3.connect('users.db')
 cur = conn.cursor()
 
-init = input("delete all inscription status 1 \n delete user 2 \nchange from inscription to inscrit 3 \n::")
+init = input("delete all inscription status 1 \n delete user 2 \nchange from inscription to inscrit 3 \n insert pl into profile database 4 \n change rigths pl jo 5 \n :")
 if init == "1":
     sql_delete_iscriptions = 'DELETE FROM user where status = "Inscription"'
     cur.execute(sql_delete_iscriptions)
