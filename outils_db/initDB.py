@@ -123,7 +123,7 @@ def main():
         
         # insert data
 
-        df = pd.read_json("./Langues/lst_salles.json", sep=";")
+        # df = pd.read_json("./Langues/lst_salles.json", sep=";")
 
         conn.commit()
     else:
