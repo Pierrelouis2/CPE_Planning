@@ -62,7 +62,16 @@ def main():
                                     rights text,
                                     psid integer PRIMARY KEY
                                     );"""
-    
+    sql_create_langue_table = """CREATE TABLE IF NOT EXISTS langue (
+                                    id_langue integer PRIMARY KEY,
+                                    Nom text,
+                                    Prenom text,
+                                    LV1 text,
+                                    LV2 text,
+                                    LV3 text,
+                                    );"""
+    sql_insert_langue_table = """INSERT INTO langue (id_langue, Nom, Prenom, LV1, LV2, LV3) VALUES (?, ?, ?, ?, ?, ?)"""
+
     sql_delete_mso_table = """DROP TABLE profile;"""
     # create a database connection
     conn = create_connection(database)
@@ -79,6 +88,7 @@ def main():
         # create tasks table
         create_table(conn, sql_create_profile_table)
         # insert data
+        create_table(conn, sql_create_langue_table)
         mso = {
             "SSO": "Stratégie de Synthèse Organique",
             "IM": "Ingéniérie Macromoléculaire",
@@ -110,7 +120,11 @@ def main():
             except sqlite3.IntegrityError as e:
                 print("Value already exists")
                 pass
-            
+        
+        # insert data
+
+        df = pd.read_json("./Langues/lst_salles.json", sep=";")
+
         conn.commit()
     else:
         print("Error! cannot create the database connection.")
