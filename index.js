@@ -261,7 +261,7 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
     };
     res.render(path.join(initpath , 'ejs/home.ejs'), variables);
     // convert the xls to csv
-    let pythonXls2Csv = spawn('python3', ['./Plannings/planningXls/xls2csv.py', `${filepath}${newName}.xls`, `./Plannings/planningCSV/${req.body.payload}/${newName}.csv`]);
+    let pythonXls2Csv = spawn('python3', ['./Plannings/planningXls/xls2csv.py', `${filepath}${newName}.xls`, `./Plannings/planningCsv/${req.body.payload}/${newName}.csv`, `./Plannings/planningPng/${req.body.payload}${newName}.png`]);
     pythonXls2Csv.stdout.on('data', (data) => {
       console.log('node: (python stdout) ' + data.toString());
     });
