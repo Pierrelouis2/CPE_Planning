@@ -468,6 +468,7 @@ async function handlePostback(sender_psid, received_postback) {
       // set the user filliere to payload
       sql_set_filiere = `UPDATE user SET filliere=? WHERE id_user=?`;
       await db.run(sql_set_filiere, [payload, sender_psid]);
+      await writeMessage.sleep(400);
       if (await userInfo.is4ETI(sender_psid)) {
         console.log("4ETI");
         response = templates.askTemplateMajeureETI();
@@ -493,7 +494,6 @@ async function handlePostback(sender_psid, received_postback) {
       let sql_uptade_statusCgp = "UPDATE user SET status=? WHERE id_user=?";
       await db.run(sql_uptade_statusCgp, [inscription, sender_psid]);
       await writeMessage.sleep(400);
-      console.log("test info " ,await userInfo.getUser(sender_psid));
       if (await userInfo.is4CGP(sender_psid)) {
         console.log("4CGP");
         let messageMso = { "text": "V ;ous êtes en 4CGP, veuillez choisir vos mso, cliquez sur chacune de vos mso:" };
