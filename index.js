@@ -68,20 +68,11 @@ const queryDB = promisify(db.all).bind(db); // used for get info from db
 app.get("/", async function (req, res) {
   let session = req.session;
     if (session.userid){
-      // var countPromo = await webFunctions.getStatPromo();
-      // var countFilliere = await webFunctions.getStatFilliere();
-      // var countPromoFilliere = await webFunctions.getStatFillierePromo();
       let sender_psid = (await account.getProfile(session.userid)).psid;
       let user = await userInfo.getUser(sender_psid);
-      let variable = {
-        page : "planning",
-        // labels : ["Promo", "Filliere", "Promo_Filliere"],
-        // xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
-        // ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere}
-      };
       let imgName = user.promo + user.filliere + variables.constant.DATE;
-      let timetableImage = `https://messenger.jo-pouradier.fr/png/${imgName}.png`;
-      variable.timetableImage = timetableImage;
+      let timetableImage = `/png/${imgName}.png`;
+      let variable = { page : "planning", timetableImage: timetableImage };
       res.render(path.join(initpath , 'ejs/home.ejs'), variable);
     }
     else {
@@ -206,7 +197,7 @@ app.post("/planning", async function (req, res) {
     let variable = { page: "planning", payload: req.body.payload };
     if (req.body.payload == "TOUT"){
       let imgName = user.promo + user.filliere + variables.constant.DATE;
-      let timetableImage = `https://messenger.jo-pouradier.fr/png/${imgName}.png`;
+      let timetableImage = `/png/${imgName}.png`;
       variable.timetableImage = timetableImage;
     } else {
       let message = await writeMessage.constructMessage(await writeMessage.readCsv(`./Output_Json/Planning${user.promo}${user.filliere}${variables.constant.DATE}.json`, req.body.payload, user.id_user, user));
@@ -293,6 +284,8 @@ app.get('/png/:imageName', function(req, res) {
   console.log("got png request : ", image);
   if (image == "logo.png"){
     res.sendFile(path.join(__dirname,`./Docs/Logo/logo.png`));
+  } else if(image == "logo-modified.png"){
+    res.sendFile(path.join(__dirname,`./Docs/Logo/logo-modified.png`));
   } else {
   res.sendFile(path.join(__dirname,`./Plannings/planningPng/${image}`)); 
   }

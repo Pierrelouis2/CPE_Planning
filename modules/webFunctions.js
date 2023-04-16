@@ -58,6 +58,13 @@ async function getStatFillierePromo(){
 
     return [count3ETI, count3CGP, count4ETI, count4CGP];
 }
+// var countPromo = await webFunctions.getStatPromo();
+// var countFilliere = await webFunctions.getStatFilliere();
+// var countPromoFilliere = await webFunctions.getStatFillierePromo();
+
+// labels : ["Promo", "Filliere", "Promo_Filliere"],
+// xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
+// ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere}
 
 module.exports = {
     getStatPromo,
