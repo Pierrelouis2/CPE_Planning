@@ -156,7 +156,7 @@ async function sendPlanningWeek() {
   let sql_get_user_table = "SELECT * FROM user";
   let user_table = await queryDB(sql_get_user_table);
   user_table.forEach( async (user) => {
-      let message = { text: "Il est Dimache 21h ! Voici le planning de la semaine: " };
+      let message = { text: "Il est Dimanche 21h ! Voici le planning de la semaine: " };
       r = await callSendAPI(user.id_user, message);
       response = templates.askTemplateImage();
       let imgName = user.promo + user.filliere + variables.constant.DATE;
