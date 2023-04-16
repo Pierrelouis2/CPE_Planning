@@ -82,7 +82,7 @@ async function isAllow(mail) {
     return 0;
   } else {
     allow = allow.rights;
-    if (allow === "S") {
+    if (allow === "F") {
       return 1;
     } else {
       return 0;

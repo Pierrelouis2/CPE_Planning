@@ -233,11 +233,27 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
     fs.rename(req.file.path, './Plannings/planningXls/test' + req.file.originalname, function (err) {
       if (err) {
         console.log(err);
-        res.send('Error uploading file.');
+        let variables = {
+          page : "depot",
+          error: "Il y a eu une erreur lors de l'envoi du fichier, merci de réessayer"
+        };
+        res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+        return
+        
       } else {
-        res.send('File uploaded successfully!');
+        let variables = {
+          page : "depot",
+          error: "Merci nous avons bien reçu votre fichier"
+        };
+        res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+        return
       }
     });
+    let variables = {
+      page : "depot",
+      error: "Merci nous avons bien reçu votre fichier"
+    };
+    res.render(path.join(initpath , 'ejs/home.ejs'), variables);
   }
 });
 
