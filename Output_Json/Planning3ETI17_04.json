@@ -1,0 +1,207 @@
+{
+    "LUNDI-2023-04-17 00:00:00": {
+        "Matin": {
+            "GROUPE A": [],
+            "GROUPE B": [],
+            "GROUPE C": [],
+            "GROUPE D": [],
+            "Pour tous": [
+                "8h-10h",
+                "CS-PC",
+                "Programmation",
+                "concurrente",
+                "T. Limane",
+                "PETIT AMPHI",
+                "10h15-12h15",
+                "ELN3",
+                "Architecture des",
+                "syst\u00e8mes \u00e0",
+                "microprocesseur",
+                "N. Abouchi",
+                "PETIT AMPHI"
+            ]
+        },
+        "Aprem": {
+            "GROUPE A": [],
+            "GROUPE B": [],
+            "GROUPE C": [],
+            "GROUPE D": [],
+            "Pour tous": [
+                "13h30-15h30",
+                "ELN3",
+                "Architecture des",
+                "syst\u00e8mes \u00e0",
+                "microprocesseur",
+                "N. Abouchi",
+                "PETIT AMPHI",
+                "15h45-17h45",
+                "TSI",
+                "Traitement et"
+            ]
+        }
+    },
+    "MARDI-18/04/2023": {
+        "Matin": {
+            "GROUPE A": [],
+            "GROUPE B": [],
+            "GROUPE C": [],
+            "GROUPE D": [],
+            "Pour tous": [
+                "8h-12h15",
+                "P3-CEE-1-Cours/TD",
+                "Conversion de",
+                "l'\u00e9nergie \u00e9lectrique",
+                "Y. Fellah",
+                "GROUPES A & B",
+                "8h-10h",
+                "GROUPES C & D",
+                "10h15-12h15",
+                "PETIT AMPHI"
+            ]
+        },
+        "Aprem": {
+            "GROUPE A": [],
+            "GROUPE B": [],
+            "GROUPE C": [],
+            "GROUPE D": [],
+            "Pour tous": [
+                "13h30-15h30",
+                "ou",
+                "15h45-17h45",
+                "PCE"
+            ]
+        }
+    },
+    "MERCREDI-19/04/2023": {
+        "Matin": {
+            "GROUPE A": [
+                "8h-10h",
+                "GROUPE A",
+                "TD - ELN3",
+                "N. Abouchi",
+                "salle F001"
+            ],
+            "GROUPE B": [
+                "salle F001",
+                "GROUPE B"
+            ],
+            "GROUPE C": [
+                "10h15-12h15",
+                "GROUPE C",
+                "TD - ELN3",
+                "N. Abouchi",
+                "salle F001"
+            ],
+            "GROUPE D": [
+                "salle F001",
+                "GROUPE D"
+            ],
+            "Pour tous": [
+                "8h-10h",
+                "GROUPES C & D",
+                "P3-CEE-2-Cours/TD",
+                "Y. Fellah",
+                "TD - ELN3",
+                "F. Joly",
+                "TD - ELN3",
+                "F. Joly",
+                "salle E109",
+                "10h15-12h15",
+                "GROUPES A & B",
+                "P3-CEE-2-Cours/TD",
+                "Y. Fellah",
+                "PETIT AMPHI"
+            ]
+        },
+        "Aprem": {
+            "GROUPE A": [],
+            "GROUPE B": [],
+            "GROUPE C": [],
+            "GROUPE D": [],
+            "Pour tous": [
+                "13h30-15h30",
+                "TSI",
+                "Traitement et",
+                "synth\u00e8se d'image",
+                "T. Dupond",
+                "PETIT AMPHI",
+                "15h45-17h45",
+                "P3-CEE-3",
+                "Conversion de",
+                "l'\u00e9nergie \u00e9lectrique",
+                "Y. Fellah",
+                "PETIT AMPHI"
+            ]
+        }
+    },
+    "JEUDI-20/04/2023": {
+        "Matin": {
+            "GROUPE A": [],
+            "GROUPE B": [],
+            "GROUPE C": [],
+            "GROUPE D": [],
+            "Pour tous": [
+                "8h-10h",
+                "CS-PC",
+                "Programmation",
+                "concurrente",
+                "T. Limane",
+                "PETIT AMPHI",
+                "10h15-12h30",
+                "ATELIER",
+                "CV",
+                "L. Forgeot d'Arc",
+                "salle F003/F004",
+                "Lien d\u2019inscription pour",
+                "l\u2019atelier de relecture de CV ci-",
+                "dessous",
+                "https://cpelyon.jobteaser.com/fr/",
+                "events/182197-relecture-de-",
+                "votre-cv-30-minutes-avec-des-",
+                "recruteurs-d-entreprises-",
+                "partenaires"
+            ]
+        },
+        "Aprem": {
+            "GROUPE A": [],
+            "GROUPE B": [],
+            "GROUPE C": [],
+            "GROUPE D": [],
+            "Pour tous": []
+        }
+    },
+    "VENDREDI-21/04/2023": {
+        "Matin": {
+            "GROUPE A": [],
+            "GROUPE B": [],
+            "GROUPE C": [],
+            "GROUPE D": [],
+            "Pour tous": [
+                "8h-10h",
+                "GROUPES C & D",
+                "P3-CEE-Cours/TD",
+                "Y. Fellah",
+                "PETIT AMPHI",
+                "10h15-12h15",
+                "GROUPES A & B",
+                "P3-CEE-Cours/TD",
+                "Y. Fellah",
+                "PETIT AMPHI"
+            ]
+        },
+        "Aprem": {
+            "GROUPE A": [],
+            "GROUPE B": [],
+            "GROUPE C": [],
+            "GROUPE D": [],
+            "Pour tous": [
+                "13h30-15h30",
+                "TSI",
+                "Traitement et",
+                "synth\u00e8se d'image",
+                "T. Dupond",
+                "PETIT AMPHI"
+            ]
+        }
+    }
+}
