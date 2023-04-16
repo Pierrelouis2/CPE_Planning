@@ -28,10 +28,10 @@ elif init == "4":
     conn.commit()
     print("Inscription changé en inscrit")
 elif init == "5":
-    sql_change_pl_rights = "UPDATE profile SET status = 'A' WHERE psid=5810016312430121"
+    sql_change_pl_rights = "UPDATE profile SET rights = 'A' WHERE psid=5810016312430121"
     cur.execute(sql_change_pl_rights)
     conn.commit()
-    sql_change_jo_rights = "UPDATE profile SET status = 'A' WHERE psid= 6271457816218293"
+    sql_change_jo_rights = "UPDATE profile SET rights = 'A' WHERE psid= 6271457816218293"
     conn.commit()
     print("Inscription changé en inscrit")
 else:
