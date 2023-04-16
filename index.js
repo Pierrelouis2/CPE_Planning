@@ -278,6 +278,15 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
 });
 
 
+app.get('/about', function(req, res) {
+  let session = req.session;
+  if (session.userid){
+    res.redirect('/');
+  } else {
+    res.redirect('/login');
+  }
+});
+
 // create a route for images to be sent in websites
 app.get('/png/:imageName', function(req, res) {
   let image = req.params.imageName;
