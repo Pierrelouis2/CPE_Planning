@@ -68,16 +68,21 @@ const queryDB = promisify(db.all).bind(db); // used for get info from db
 app.get("/", async function (req, res) {
   let session = req.session;
     if (session.userid){
-      var countPromo = await webFunctions.getStatPromo();
-      var countFilliere = await webFunctions.getStatFilliere();
-      var countPromoFilliere = await webFunctions.getStatFillierePromo();
-      let variables = {
+      // var countPromo = await webFunctions.getStatPromo();
+      // var countFilliere = await webFunctions.getStatFilliere();
+      // var countPromoFilliere = await webFunctions.getStatFillierePromo();
+      let sender_psid = (await account.getProfile(session.userid)).psid;
+      let user = await userInfo.getUser(sender_psid);
+      let variable = {
         page : "planning",
-        labels : ["Promo", "Filliere", "Promo_Filliere"],
-        xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
-        ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere}
+        // labels : ["Promo", "Filliere", "Promo_Filliere"],
+        // xlabels: {Promo: ['Promo 4', 'Promo 3'], Filliere: ['ETI', 'CGP'], Promo_Filliere: ['3 ETI', '3 CGP', '4 ETI', '4 CGP']},
+        // ylabels: {Promo: countPromo, Filliere: countFilliere, Promo_Filliere: countPromoFilliere}
       };
-      res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+      let imgName = user.promo + user.filliere + variables.constant.DATE;
+      let timetableImage = `https://messenger.jo-pouradier.fr/png/${imgName}.png`;
+      variable.timetableImage = timetableImage;
+      res.render(path.join(initpath , 'ejs/home.ejs'), variable);
     }
     else {
       res.redirect('/login');
