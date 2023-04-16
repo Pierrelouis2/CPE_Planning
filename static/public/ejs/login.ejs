@@ -15,8 +15,8 @@
         <h2 class="heading-login-box">Login</h2>
         <form action="/login-form" method="post">
             <div class="user-box">
-                <input class="user-box-input" type="email" required name="email">
-                <label class="user-box-label">Username (email)</label>
+                <input class="user-box-input" type="email" required name="email" pattern="[a-zA-Z0-9._%+-]+@cpe\.fr">
+                <label class="user-box-label">Username (email cpe)</label>
             </div>
             <div class="user-box">
                 <input class="user-box-input" type="password" required name="password"> 
