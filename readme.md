@@ -78,6 +78,7 @@ The database is composed of 3 tables:
   - `first-name`
   - `last-name`
   - `password` (stored in sha256 with salt)
+  - `psid` (=id_user from user table)
   
 ### Database MPD
 
