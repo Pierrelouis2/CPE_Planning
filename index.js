@@ -246,7 +246,7 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
     });
     let variables = {
       page : "depot",
-      error: "Merci nous avons bien reçu votre fichier"
+      error: `Merci nous avons bien reçu votre fichier pour les ${req.body.payload}, la semaine du ${req.body.date}`
     };
     res.render(path.join(initpath , 'ejs/home.ejs'), variables);
     // convert the xls to csv
