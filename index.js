@@ -253,7 +253,7 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
     console.log(`got file ${req.file.originalname} request at ${writeMessage.getCurrentDate()}`)
     let filepath = './Plannings/planningXls/' + req.body.payload;
     let newName = req.body.date;
-    fs.rename(req.file.path, `${filepath}${newName}.xls`, function (err) {
+    fs.rename(req.file.path, `${filepath}${newName}.xls`, function (err) { 
       if (err) {
         console.log(err);
         let variables = {
