@@ -254,7 +254,7 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
     console.log(`got file ${req.file.originalname} request at ${writeMessage.getCurrentDate()}`)
     let filepath = './Plannings/planningXls/' + req.body.payload;
     let newName = req.body.date;
-    fs.rename(req.file.path, `${filepath}${newName}.xls`, function (err) { 
+    fs.rename(req.file.path, `${filepath}${newName}.xlsx`, function (err) { 
       if (err) {
         console.log(err);
         let variables = {
@@ -271,7 +271,7 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
     };
     res.render(path.join(initpath , 'ejs/home.ejs'), variables);
     // convert the xls to csv
-    let pythonXls2Csv = spawn('python3', ['Plannings/planningXls/xls2csv.py', `${filepath}${newName}.xls`, `Plannings/planningCsv/${req.body.payload}/${newName}.csv`, `Plannings/planningPng/${req.body.payload}${newName}.png`]);
+    let pythonXls2Csv = spawn('python3', ['Plannings/planningXls/xls2csv.py', `${filepath}${newName}.xlsx`, `Plannings/planningCsv/${req.body.payload}/${newName}.csv`]);
     pythonXls2Csv.stdout.on('data', (data) => {
       console.log('node: (python stdout) ' + data.toString());
     });
@@ -279,7 +279,7 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
       console.log('node: (python stderr) ' + data.toString());
     });
     // xls to png
-    xlsfct.xls2png(`${filepath}${newName}.xls`, `Plannings/planningPng/${req.body.payload}${newName}.png`, function(err) {
+    xlsfct.xls2png(`${filepath}${newName}.xlsx`, `Plannings/planningPng/${req.body.payload}${newName}.png`, function(err) {
       if (err) {
         console.log(err);
       }

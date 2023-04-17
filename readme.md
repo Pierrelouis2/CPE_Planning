@@ -115,6 +115,7 @@ The database is composed of 3 tables:
 - [ ] make a repport bug or feedback page/form
 - [ ] change url from messenger to cpeplanning
 - [ ] handle 3ETI groups 'X&Y'
+- [ ] change python script xls2csv to a js module
 - [X] to link bot and website use sender PSID 
 - [X] create send psid button
 - [X] create subscribe page
