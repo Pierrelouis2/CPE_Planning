@@ -21,7 +21,8 @@ const express = require("express"),
   fs = require("fs"),
   webFunctions = require("./modules/webFunctions.js"),
   multer  = require('multer'),
-  {spawn} = require('child_process');
+  {spawn} = require('child_process'),
+  xlsfct = require('./modules/xlsfct');
   
 
 // ----- INIT APP ----- //
@@ -276,6 +277,12 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
     });
     pythonXls2Csv.stderr.on('data', (data) => {
       console.log('node: (python stderr) ' + data.toString());
+    });
+    // xls to png
+    xlsfct.xls2png(`${filepath}${newName}.xls`, `Plannings/planningPng/${req.body.payload}${newName}.png`, function(err) {
+      if (err) {
+        console.log(err);
+      }
     });
 
   } else {
