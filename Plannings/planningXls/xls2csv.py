@@ -1,6 +1,5 @@
 import pandas as pd
-# import dataframe_image as dfi
-import excel2image as ex2img
+import dataframe_image as dfi
 import sys
 import os
 
@@ -12,7 +11,6 @@ if 'CGP' in sys.argv[1]:
 if 'ETI' in sys.argv[1]:
     pass
 
-ex2img.export_img(sys.argv[1],sys.argv[3])
-# dfi.export(df, f'{sys.argv[3]}')
+dfi.export(df, f'{sys.argv[3]}')
 df.to_csv(f'{sys.argv[2]}', index=False, header=False, sep=';')
 print('end')
