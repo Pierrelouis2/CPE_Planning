@@ -89,6 +89,12 @@ The database is composed of 3 tables:
 <img src="./Docs/ReadmeImages/confidential-ge984ebf2f_1280.png"  width="400" height="250">
 
 ## TODO
+- [ ] Verification server side for register
+- [ ] make a stat page
+- [ ] change database schema
+- [ ] Fix Change info form
+- [ ] password recovery
+- [ ] remove psid from github
 - [ ] make a admin website a user website and administration website
 - [X] to link bot and website use sender PSID 
 - [X] create send psid button

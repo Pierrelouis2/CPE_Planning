@@ -33,7 +33,10 @@ async function is4CGP(sender_psid) {
    let user = await getUser(sender_psid);
    console.log(`user in is4CGP:`);
    console.log(user);
-   if (user.promo === "4" && user.filliere === "CGP") {
+   if (user === undefined) {
+      return false;
+   }
+   else if (user.promo === "4" && user.filliere === "CGP") {
       return true;
    }
    return false;
