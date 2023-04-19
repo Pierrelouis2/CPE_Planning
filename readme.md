@@ -82,7 +82,7 @@ The database is composed of 3 tables:
   
 ### Database MPD
 
-![Database structure V1](./Docs/ReadmeImages/DBV2.png) (not up to date)
+![Database structure V1](./Docs/ReadmeImages/DBV3.png) (not up to date)
 
 ## Recover timetable data from pdf
 
@@ -91,7 +91,7 @@ The database is composed of 3 tables:
 ## TODO
 - [ ] Verification server side for register
 - [ ] make a stat page
-- [ ] change database schema
+- [X] change database schema
 - [ ] Fix Change info form
 - [ ] password recovery
 - [ ] remove psid from github
