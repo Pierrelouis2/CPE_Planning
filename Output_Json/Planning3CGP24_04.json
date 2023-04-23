@@ -1,0 +1,226 @@
+{
+    "Unnamed: 0-LUNDI": {
+        "Matin": {
+            "Groupe 1": [],
+            "Groupe 2": [],
+            "Groupe 3": [],
+            "Pour tous": [
+                "2023-04-24 00:00:00",
+                "8h00 - 10h00",
+                "TD Chimie Organique",
+                "(Groupes : voir affichage TD CO)",
+                "Grpe 1 : B. PELOTIER / A. RAGO",
+                "Algeco H001",
+                "Grpe 2 : B. ANDRIOLETTI / J. BOYER",
+                "Algeco H002",
+                "Grpe 3 : C. GOZZI / J. BREUZARD",
+                "Algeco H003",
+                "Grpe 4 : G. BORREGO / F. TOULGOAT",
+                "Algeco H004",
+                "10h15 - 12h15",
+                "TD Chimie Organique",
+                "(Groupes : voir affichage TD CO)",
+                "Grpe 1 : B. PELOTIER / A. RAGO",
+                "Algeco H001",
+                "Grpe 2 : B. ANDRIOLETTI / J. BOYER",
+                "Algeco H002",
+                "Grpe 3 : C. GOZZI / J. BREUZARD",
+                "Algeco H003",
+                "Grpe 4 : G. BORREGO / F. TOULGOAT",
+                "Algeco H004"
+            ]
+        },
+        "Aprem": {
+            "Groupe 1": [
+                "Groupe 1",
+                "Sciences Analytiques",
+                "B\u00e2t. D - 2\u00e8me \u00e9tage"
+            ],
+            "Groupe 2": [
+                "Groupe 2",
+                "G\u00e9nie des Proc\u00e9d\u00e9s",
+                "B\u00e2t. G - RdC"
+            ],
+            "Groupe 3": [
+                "Groupe 3",
+                "Math\u00e9matiques Informatique",
+                "Gr. TP 3B : 13h30 - 15h30",
+                "Gr. TP 3A : 15h45 - 17h45",
+                "N. CHAUSSARD / ML. ZANOTA",
+                "Salle I306"
+            ],
+            "Pour tous": [
+                "13h30 - 17h45",
+                "T.P.",
+                "(Voir planning",
+                "sp\u00e9cifique)"
+            ]
+        }
+    },
+    "Unnamed: 1-MARDI": {
+        "Matin": {
+            "Groupe 1": [],
+            "Groupe 2": [],
+            "Groupe 3": [],
+            "Pour tous": [
+                "8h00 - 10h00",
+                "Examen 1\u00e8re session",
+                "Statistiques",
+                "Salles F001 + F002/003 + F008 +",
+                "F004/005 + F006/007",
+                "(Voir r\u00e9partition sur tableau d'affichage",
+                "3CGP pr\u00e8s des amphis)",
+                "10h15 - 12h15",
+                "Biologie",
+                "D. BAAS",
+                "Grand Amphi"
+            ]
+        },
+        "Aprem": {
+            "Groupe 1": [],
+            "Groupe 2": [],
+            "Groupe 3": [],
+            "Pour tous": [
+                "2023-04-25 00:00:00",
+                "13h30 - 17h45",
+                "PCE",
+                "(Travail Libre)",
+                "* * * * * * * * *",
+                "LV2",
+                "(Voir affichage sur tableau des langues",
+                "pr\u00e8s de la salle E109)",
+                "* Les horaires de SHES sont",
+                "compl\u00e9mentaires \u00e0 ceux de LV2.",
+                "Si SHES 13h30-15h30 --> LV2 15h45-17h45",
+                "Si LV2 13h30-15h30 --> SHES 15h45-17h45"
+            ]
+        }
+    },
+    "Unnamed: 2-MERCREDI": {
+        "Matin": {
+            "Groupe 1": [],
+            "Groupe 2": [],
+            "Groupe 3": [],
+            "Pour tous": [
+                "8h00 - 12h15",
+                "Anglais",
+                "8h00 - 10h00",
+                "(Voir affichage sur tableau des langues",
+                "pr\u00e8s de la salle E109)",
+                "* * * * * * * * *",
+                "S\u00e9ance Posters en pr\u00e9sence de",
+                "repr\u00e9sentants de GSK",
+                "8h00 - 11h15",
+                "Pr\u00e9sence indispensable",
+                "(cf. Planning sur e-campus)",
+                "Salles F002 - F003",
+                "* * * * * * * * *",
+                "Conf\u00e9rence GSK et remise de prix",
+                "11h45 - 12h30",
+                "Pr\u00e9sence indispensable",
+                "Grand Amphi"
+            ]
+        },
+        "Aprem": {
+            "Groupe 1": [],
+            "Groupe 2": [],
+            "Groupe 3": [],
+            "Pour tous": [
+                "2023-04-26 00:00:00",
+                "13h30 - 15h30",
+                "Chimie Organom\u00e9tallique",
+                "A. QUADRELLI",
+                "Grand Amphi",
+                "15h45 - 17h45",
+                "M\u00e9canique Quantique - Chimie",
+                "Th\u00e9orique",
+                "S. GAGNEUR",
+                "Grand Amphi"
+            ]
+        }
+    },
+    "Unnamed: 3-JEUDI": {
+        "Matin": {
+            "Groupe 1": [
+                "Groupe 1",
+                "Math\u00e9matiques Informatique",
+                "Gr. TP 1B : 8h00 - 10h00",
+                "Gr. TP 1A : 10h15 - 12h15",
+                "E. JEANNEAU / E. ESPINOSA",
+                "Salle I306"
+            ],
+            "Groupe 2": [
+                "Groupe 2",
+                "Sciences Analytiques",
+                "B\u00e2t. D - 2\u00e8me \u00e9tage"
+            ],
+            "Groupe 3": [
+                "Groupe 3",
+                "G\u00e9nie des Proc\u00e9d\u00e9s",
+                "B\u00e2t. G - RdC"
+            ],
+            "Pour tous": [
+                "8h00 - 12h15",
+                "T.P.",
+                "(Voir planning",
+                "sp\u00e9cifique)"
+            ]
+        },
+        "Aprem": {
+            "Groupe 1": [],
+            "Groupe 2": [],
+            "Groupe 3": [],
+            "Pour tous": [
+                "2023-04-27 00:00:00",
+                "13h30 - 17h45"
+            ]
+        }
+    },
+    "Unnamed: 4-VENDREDI": {
+        "Matin": {
+            "Groupe 1": [],
+            "Groupe 2": [],
+            "Groupe 3": [],
+            "Pour tous": [
+                "8h00 - 10h00",
+                "TD Thermodynamique",
+                "(groupes : voir affichage TD GP)",
+                "Grpe 1 : C. JALLUT",
+                "Salle F002/003",
+                "Grpe 2 : C. NIKITINE",
+                "Algeco H001",
+                "Grpe 3 : M. DE MONTIGNY",
+                "Algeco H002",
+                "Grpe 4 : E. FOURNIER",
+                "Algeco H003",
+                "10h15 - 12h15",
+                "Techniques Chromatographiques",
+                "S. BURTIN",
+                "Grand Amphi"
+            ]
+        },
+        "Aprem": {
+            "Groupe 1": [
+                "Groupe 1",
+                "G\u00e9nie des Proc\u00e9d\u00e9s",
+                "B\u00e2t. G - RdC"
+            ],
+            "Groupe 2": [
+                "Groupe 2",
+                "Travail Libre"
+            ],
+            "Groupe 3": [
+                "Groupe 3",
+                "Sciences Analytiques",
+                "B\u00e2t. D - 2\u00e8me \u00e9tage"
+            ],
+            "Pour tous": [
+                "2023-04-28 00:00:00",
+                "13h30 - 17h45",
+                "T.P.",
+                "(Voir planning",
+                "sp\u00e9cifique)"
+            ]
+        }
+    }
+}
