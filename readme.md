@@ -82,7 +82,7 @@ The database is composed of 3 tables:
   
 ### Database MPD
 
-![Database structure V1](./Docs/ReadmeImages/DBV2.png) (not up to date)
+![Database structure V1](./Docs/ReadmeImages/DBV3.png) (not up to date)
 
 ## Recover timetable data from pdf
 
@@ -92,14 +92,11 @@ The database is composed of 3 tables:
 - [ ] Verification server side for register
 - [ ] handle spam
 - [ ] make a stat page
-- [ ] change database schema
+- [X] change database schema
 - [ ] Fix Change info form
 - [ ] password recovery
 - [ ] remove psid from github
 - [ ] make a admin website a user website and administration website
-- [X] to link bot and website use sender PSID 
-- [X] create send psid button
-- [X] create subscribe page
 - [ ] Change readCsv with more parameters to get more use to the function
 - [ ] Manage LV lessons
 - [ ] Manage database backup and restore (cron?)
@@ -110,13 +107,16 @@ The database is composed of 3 tables:
 - [ ] Don't share the code to  ETI students !!!!!!!!!
 - [ ] Regex expression for hours  
 - [ ] Interface admin pour gérer les comptes
-- [ ] Interface pour l'administration cpe pour gérer les plannings -> pdf -> json && png -> link
 - [ ] Link the LV lessons website
 - [ ] autocomplete the re-registration form of the website
 - [ ] make a repport bug or feedback page/form
-- [ ] change url from messenger to cpeplanning
 - [ ] handle 3ETI groups 'X&Y'
 - [ ] change python script xls2csv to a js module
+- [ ] check for .isc possibilities
+- [X] change url from messenger to cpeplanning
+- [X] to link bot and website use sender PSID 
+- [X] create send psid button
+- [X] create subscribe page
 - [X] to link bot and website use sender PSID 
 - [X] create send psid button
 - [X] create subscribe page
