@@ -1,0 +1,227 @@
+{
+    "LUNDI-2023-04-24 00:00:00": {
+        "Matin": {
+            "Pour tous": [
+                "8h00 - 10h00",
+                "Examen 1\u00e8re session",
+                "Plans d'Exp\u00e9riences TD",
+                "Salles F002/003 + F004/005 +",
+                "F006/007 + F008",
+                "(Voir r\u00e9partition sur tableau d'affichage",
+                "4CGP pr\u00e8s des amphis)",
+                "10h15 - 12h15"
+            ]
+        },
+        "Aprem": {
+            "Pour tous": [
+                "13h10 - 18h00",
+                "LANGUES",
+                "(Voir planning sp\u00e9cifique sur le tableau",
+                "des langues situ\u00e9 pr\u00e8s de la salle E109)"
+            ]
+        }
+    },
+    "MARDI -2023-04-25 00:00:00": {
+        "Matin": {
+            "Pour tous": [
+                "8h00 - 12h15",
+                "Projet Scientifique",
+                "(cf. planning sp\u00e9cifique sur le e-campus)"
+            ]
+        },
+        "Aprem": {
+            "Pour tous": [
+                "13h30 - 17h45",
+                "Projet Scientifique",
+                "(cf. planning sp\u00e9cifique sur le e-campus)"
+            ]
+        }
+    },
+    "MERCREDI-2023-04-26 00:00:00": {
+        "Matin": {
+            "Pour tous": [
+                "8h00 - 12h15",
+                "Projet Scientifique",
+                "(cf. planning sp\u00e9cifique sur le e-campus)"
+            ]
+        },
+        "Aprem": {
+            "Pour tous": [
+                "13h30 - 17h45",
+                "Projet Scientifique",
+                "(cf. planning sp\u00e9cifique sur le e-campus)"
+            ]
+        }
+    },
+    "JEUDI-2023-04-27 00:00:00": {
+        "Matin": {
+            "Strat\u00e9gie de Synth\u00e8se Organique": [],
+            "Ing\u00e9ni\u00e9rie Macromol\u00e9culaire": [],
+            "Spectrom\u00e9tries RMN et Masse Avanc\u00e9es": [],
+            "Introduction aux Biotechnologies et Bioproc\u00e9d\u00e9s": [],
+            "Simulation des Proc\u00e9d\u00e9s": [],
+            "Chimie Organom\u00e9tallique et Approche Orbitalaire": [],
+            "Conception et Application du M\u00e9dicament": [
+                "Conception et Application du",
+                "M\u00e9dicament",
+                "8h00 - 12h15",
+                "T. BILLARD",
+                "Salle F008"
+            ],
+            "Techniques S\u00e9paratives avanc\u00e9es et Sp\u00e9ciation": [
+                "Techniques S\u00e9paratives avanc\u00e9es",
+                "et Sp\u00e9ciation",
+                "8h00 - 10h00 : C. DEMESMAY",
+                "10h15 - 12h15 : R. ROUX",
+                "Salle F003"
+            ],
+            "Catalyse et D\u00e9veloppement Durable": [
+                "Catalyse et D\u00e9veloppement Durable",
+                "8h00 - 10h00 : J. BOUSQUET",
+                "10h15 - 12h15 : A. QUADRELLI",
+                "Salle F004"
+            ],
+            "G\u00e9nie de la Polym\u00e9risation": [
+                "G\u00e9nie de la Polym\u00e9risation",
+                "8h00 - 10h00",
+                "N. OTHMAN",
+                "Salle F005"
+            ],
+            "M\u00e9thodes Spectroscopiques pour la Synth\u00e8se Organique": [
+                "M\u00e9thodes Spectroscopiques pour la",
+                "Synth\u00e8se Organique",
+                "8h00 - 10h00 : A. BAUDOUIN",
+                "Biblioth\u00e8que",
+                "10h15 - 12h15 : F. TOULGOAT",
+                "Salle F005"
+            ],
+            "M\u00e9thodes Num\u00e9riques": [
+                "M\u00e9thodes Num\u00e9riques",
+                "Pas de Cours"
+            ],
+            "Synth\u00e8se de mol\u00e9cules bioactives": [],
+            "De la mol\u00e9cule aux nanomat\u00e9riaux": [],
+            "Chimie nucl\u00e9aire, mesure, analyse et cycle du combustible": [],
+            "Chimie et Num\u00e9rique": [],
+            "Microbiologie, Immunologie, El\u00e9ments de g\u00e9nie g\u00e9n\u00e9tique": [],
+            "Pour tous": [
+                "8h00 - 12h15",
+                "Modules Semi-Optionnels",
+                "S\u00e9rie 5"
+            ]
+        },
+        "Aprem": {
+            "Pour tous": [
+                "13h30 - 17h45"
+            ]
+        }
+    },
+    "VENDREDI-2023-04-28 00:00:00": {
+        "Matin": {
+            "Strat\u00e9gie de Synth\u00e8se Organique": [],
+            "Ing\u00e9ni\u00e9rie Macromol\u00e9culaire": [],
+            "Spectrom\u00e9tries RMN et Masse Avanc\u00e9es": [],
+            "Introduction aux Biotechnologies et Bioproc\u00e9d\u00e9s": [],
+            "Simulation des Proc\u00e9d\u00e9s": [],
+            "Chimie Organom\u00e9tallique et Approche Orbitalaire": [],
+            "Conception et Application du M\u00e9dicament": [],
+            "Techniques S\u00e9paratives avanc\u00e9es et Sp\u00e9ciation": [],
+            "Catalyse et D\u00e9veloppement Durable": [],
+            "G\u00e9nie de la Polym\u00e9risation": [],
+            "M\u00e9thodes Spectroscopiques pour la Synth\u00e8se Organique": [],
+            "M\u00e9thodes Num\u00e9riques": [],
+            "Synth\u00e8se de mol\u00e9cules bioactives": [
+                "Synth\u00e8se de mol\u00e9cules bioactives",
+                "8h00 - 12h15",
+                "F. TOULGOAT",
+                "Salle F004"
+            ],
+            "De la mol\u00e9cule aux nanomat\u00e9riaux": [
+                "De la mol\u00e9cule aux nanomat\u00e9riaux",
+                "Pas de Cours"
+            ],
+            "Chimie nucl\u00e9aire, mesure, analyse et cycle du combustible": [
+                "Chimie nucl\u00e9aire, mesure, analyse et",
+                "cycle du combustible",
+                "8h00 - 12h15",
+                "N. MONCOFFRE",
+                "Salle F001"
+            ],
+            "Chimie et Num\u00e9rique": [
+                "Chimie et Num\u00e9rique",
+                "8h00 - 12h15",
+                "J. SAMUEL / I. KHEDHER",
+                "Salle I300"
+            ],
+            "Microbiologie, Immunologie, El\u00e9ments de g\u00e9nie g\u00e9n\u00e9tique": [
+                "Microbiologie, Immunologie, El\u00e9ments",
+                "de g\u00e9nie g\u00e9n\u00e9tique",
+                "8h00 - 12h15",
+                "G. WITTMANN",
+                "Salle F008"
+            ],
+            "Pour tous": [
+                "8h00 - 12h15",
+                "Modules Semi-Optionnels",
+                "S\u00e9rie 4"
+            ]
+        },
+        "Aprem": {
+            "Strat\u00e9gie de Synth\u00e8se Organique": [],
+            "Ing\u00e9ni\u00e9rie Macromol\u00e9culaire": [],
+            "Spectrom\u00e9tries RMN et Masse Avanc\u00e9es": [],
+            "Introduction aux Biotechnologies et Bioproc\u00e9d\u00e9s": [],
+            "Simulation des Proc\u00e9d\u00e9s": [],
+            "Chimie Organom\u00e9tallique et Approche Orbitalaire": [],
+            "Conception et Application du M\u00e9dicament": [
+                "Conception et Application du",
+                "M\u00e9dicament",
+                "13h30 - 15h30",
+                "T. BILLARD",
+                "Salle F006/007"
+            ],
+            "Techniques S\u00e9paratives avanc\u00e9es et Sp\u00e9ciation": [
+                "Techniques S\u00e9paratives avanc\u00e9es",
+                "et Sp\u00e9ciation",
+                "13h30 - 15h30",
+                "F. LAGARDE",
+                "Salle F101"
+            ],
+            "Catalyse et D\u00e9veloppement Durable": [
+                "Catalyse et D\u00e9veloppement Durable",
+                "13h30 - 17h45",
+                "A. QUADRELLI",
+                "Salle F003"
+            ],
+            "G\u00e9nie de la Polym\u00e9risation": [
+                "G\u00e9nie de la Polym\u00e9risation",
+                "13h30 - 15h30",
+                "T. MCKENNA",
+                "Salle F004"
+            ],
+            "M\u00e9thodes Spectroscopiques pour la Synth\u00e8se Organique": [
+                "M\u00e9thodes Spectroscopiques pour la",
+                "Synth\u00e8se Organique",
+                "13h30 - 15h30",
+                "G. BORREGO",
+                "Salle F005"
+            ],
+            "M\u00e9thodes Num\u00e9riques": [
+                "M\u00e9thodes Num\u00e9riques",
+                "13h30 - 17h45",
+                "K. FIATY",
+                "Salle I300"
+            ],
+            "Synth\u00e8se de mol\u00e9cules bioactives": [],
+            "De la mol\u00e9cule aux nanomat\u00e9riaux": [],
+            "Chimie nucl\u00e9aire, mesure, analyse et cycle du combustible": [],
+            "Chimie et Num\u00e9rique": [],
+            "Microbiologie, Immunologie, El\u00e9ments de g\u00e9nie g\u00e9n\u00e9tique": [],
+            "Pour tous": [
+                "13h30 - 17h45",
+                "Modules Semi-Optionnels",
+                "S\u00e9rie 5"
+            ]
+        }
+    }
+}

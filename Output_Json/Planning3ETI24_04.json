@@ -1,0 +1,213 @@
+{
+    "LUNDI\n-2023-04-24 00:00:00": {
+        "Matin": {
+            "GROUPE A": [],
+            "GROUPE B": [],
+            "GROUPE C": [],
+            "GROUPE D": [],
+            "Pour tous": [
+                "10h15-12h15",
+                "ELN3",
+                "Architecture des",
+                "syst\u00e8mes \u00e0",
+                "N. Abouchi",
+                "PETIT AMPHI"
+            ]
+        },
+        "Aprem": {
+            "GROUPE A": [
+                "13h30-17h45",
+                "GROUPE A",
+                "TP TSI",
+                "salle I302"
+            ],
+            "GROUPE B": [
+                "salle I302",
+                "GROUPE B",
+                "TP P3-CEE"
+            ],
+            "GROUPE C": [
+                "salle I105",
+                "GROUPE C",
+                "TP CS-PC",
+                "salle I203"
+            ],
+            "GROUPE D": [
+                "salle I203",
+                "GROUPE D",
+                "TP ELN3"
+            ],
+            "Pour tous": [
+                "13h30-17h45",
+                "salle I105",
+                "salle I200"
+            ]
+        }
+    },
+    "MARDI\n-2023-04-25 00:00:00": {
+        "Matin": {
+            "GROUPE A": [
+                "8h-12h15",
+                "GROUPE A",
+                "TP ELN3",
+                "salle I300"
+            ],
+            "GROUPE B": [
+                "salle I300",
+                "GROUPE B",
+                "TP TSI"
+            ],
+            "GROUPE C": [
+                "salle I302",
+                "GROUPE C",
+                "TP P3-CEE",
+                "salle I105"
+            ],
+            "GROUPE D": [
+                "salle I105",
+                "GROUPE D",
+                "TP CS-PC"
+            ],
+            "Pour tous": [
+                "8h-12h15",
+                "salle I302",
+                "salle I304"
+            ]
+        },
+        "Aprem": {
+            "GROUPE A": [],
+            "GROUPE B": [],
+            "GROUPE C": [],
+            "GROUPE D": [],
+            "Pour tous": [
+                "13h30-15h30",
+                "ou",
+                "15h45-17h45",
+                "LV2-2",
+                "(Voir affichage sur tableau des"
+            ]
+        }
+    },
+    "MERCREDI\n-2023-04-26 00:00:00": {
+        "Matin": {
+            "GROUPE A": [],
+            "GROUPE B": [],
+            "GROUPE C": [],
+            "GROUPE D": [],
+            "Pour tous": [
+                "8h-10h",
+                "TSI",
+                "Traitement et",
+                "synth\u00e8se d'image",
+                "T. Dupond",
+                "PETIT AMPHI",
+                "10h15-12h15",
+                "ANGLAIS 1",
+                "(Voir affichage sur tableau des",
+                "langues \u00e0 c\u00f4t\u00e9 de la salle E109)"
+            ]
+        },
+        "Aprem": {
+            "GROUPE A": [],
+            "GROUPE B": [],
+            "GROUPE C": [],
+            "GROUPE D": [],
+            "Pour tous": [
+                "13h30-15h30",
+                "P3-CEE-5",
+                "Conversion de",
+                "l'\u00e9nergie \u00e9lectrique",
+                "D. Chouiter",
+                "PETIT AMPHI"
+            ]
+        }
+    },
+    "JEUDI\n-2023-04-27 00:00:00": {
+        "Matin": {
+            "GROUPE A": [
+                "8h-12h15",
+                "GROUPE A",
+                "TP CS-PC",
+                "salle I304"
+            ],
+            "GROUPE B": [
+                "salle I304",
+                "GROUPE B",
+                "TP ELN3"
+            ],
+            "GROUPE C": [
+                "salle I200",
+                "GROUPE C",
+                "TP TSI",
+                "salle I302"
+            ],
+            "GROUPE D": [
+                "salle I302",
+                "GROUPE D",
+                "TP P3-CEE"
+            ],
+            "Pour tous": [
+                "8h-12h15",
+                "salle I200",
+                "salle I105"
+            ]
+        },
+        "Aprem": {
+            "GROUPE A": [],
+            "GROUPE B": [],
+            "GROUPE C": [],
+            "GROUPE D": [],
+            "Pour tous": []
+        }
+    },
+    "VENDREDI\n-2023-04-28 00:00:00": {
+        "Matin": {
+            "GROUPE A": [
+                "8h-12h15",
+                "GROUPE A",
+                "TP P3-CEE",
+                "salle I105"
+            ],
+            "GROUPE B": [
+                "salle I105",
+                "GROUPE B",
+                "TP CS-PC"
+            ],
+            "GROUPE C": [
+                "salle I304",
+                "GROUPE C",
+                "TP ELN3",
+                "salle I200"
+            ],
+            "GROUPE D": [
+                "salle I200",
+                "GROUPE D",
+                "TP TSI"
+            ],
+            "Pour tous": [
+                "8h-12h15",
+                "salle I304",
+                "salle I207"
+            ]
+        },
+        "Aprem": {
+            "GROUPE A": [],
+            "GROUPE B": [],
+            "GROUPE C": [],
+            "GROUPE D": [],
+            "Pour tous": [
+                "13h30-15h30",
+                "CS-PC",
+                "Programmation",
+                "concurrente",
+                "T. Limane",
+                "PETIT AMPHI",
+                "15h45-17h45",
+                "TD - ELN3",
+                "GROUPES ABCD",
+                "N. Abouchi / F. Joly",
+                "PETIT AMPHI"
+            ]
+        }
+    }
+}

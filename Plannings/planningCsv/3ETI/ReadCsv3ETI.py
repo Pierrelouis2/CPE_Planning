@@ -3,7 +3,7 @@ import json
 from numpyencoder import NumpyEncoder
 import sys
 
-path = 'Plannings/planningCsv/3ETI/'
+path = 'Plannings/planningCsv/3ETI'
 # Read csv file
 # date = input("Entrez la date du planning csv (ex: 01_04) : ")
 date = sys.argv[1]
@@ -89,7 +89,7 @@ def filtreMaj(pLstSemaine):
                     Groupe = Case
                     isGroupe = True
                     dicGrp[Groupe].append(jour[dj][i-1])
-                    dicGrp["Pour tous"].pop(-1)
+                    # dicGrp["Pour tous"].pop(-1)
                 elif count == 3:
                     isGroupe = False
                     count = 0
