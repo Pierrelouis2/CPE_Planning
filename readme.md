@@ -90,6 +90,7 @@ The database is composed of 3 tables:
 
 ## TODO
 - [ ] Verification server side for register
+- [ ] handle spam
 - [ ] make a stat page
 - [ ] change database schema
 - [ ] Fix Change info form
