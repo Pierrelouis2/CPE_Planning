@@ -34,7 +34,7 @@ elif init == "5":
     conn.commit()
     print("Inscription changé en inscrit")
 elif init == "6" :
-    sql_set_sec = "INSERT INTO user (id_user,promo,filliere,groupe,status)VALUES (11001,3,'ETI','S','Inscrit'), (11002,3,'CGP','S','Inscrit'),(11001,4,'ETI','S','Inscrit'),(11001,4,'CGP','S','Inscrit')"
+    sql_set_sec = "INSERT INTO user VALUES (11001,3,'ETI','S','None','Inscrit'), (11002,3,'CGP','Non','S','Inscrit'),(11001,4,'ETI','None','S','Inscrit'),(11001,4,'CGP','None','S','Inscrit')"
     cur.execute(sql_set_sec)
     conn.commit()
     print("Secretaire added")
