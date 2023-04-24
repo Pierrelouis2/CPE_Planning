@@ -38,6 +38,11 @@ elif init == "6" :
     cur.execute(sql_set_sec)
     conn.commit()
     print("Secretaire added")
+elif init == "7" :
+    sql_change_sec_status = "UPDATE profile SET rights = 'B' WHERE psid=11001 OR psid=11002 OR psid=11003 OR psid=11004"
+    cur.execute(sql_change_sec_status)
+    conn.commit()
+    print("rigths sec change to B")
 else:
     print("erreur")
 
