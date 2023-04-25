@@ -219,7 +219,7 @@ app.post("/planning", async function (req, res) {
 app.get('/message', async function(req, res) {
   let session = req.session;
   if (session.userid){
-    if (await account.isAllow(session.userid)){
+    if (await account.isAllow(session.userid,["A"])){
       let variables = {
         page : "message"
       };
@@ -237,7 +237,7 @@ app.get('/message', async function(req, res) {
 // for CPE administation to send timetables
 app.get("/depot", async function (req, res) {
   let session = req.session;
-    if (await account.isAllow(session.userid)){
+    if (await account.isAllow(session.userid,["A","B"])){
       let variables = {
         page : "depot"
       };
