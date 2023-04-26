@@ -69,11 +69,12 @@ const queryDB = promisify(db.all).bind(db); // used for get info from db
 app.get("/", async function (req, res) {
   let session = req.session;
     if (session.userid){
-      let sender_psid = (await account.getProfile(session.userid)).psid;
+      let profile = await account.getProfile(session.userid);
+      let sender_psid = profile.psid;
       let user = await userInfo.getUser(sender_psid);
       let imgName = user.promo + user.filliere + variables.constant.DATE;
       let timetableImage = `/png/${imgName}.png`;
-      let variable = { page : "planning", timetableImage: timetableImage };
+      let variable = { page : "planning", timetableImage: timetableImage, rights: profile.rights };
       res.render(path.join(initpath , 'ejs/home.ejs'), variable);
     }
     else {
@@ -160,7 +161,7 @@ app.get("/profile", async function (req, res) {
   let session = req.session;
   if (session.userid){
     let user = await account.getProfile(session.userid);
-    let variables = { user: user, page : "profile" };
+    let variables = { user: user, page : "profile", rights: user.rights };
     res.render(path.join(initpath , 'ejs/home.ejs'), variables);
   }
   else {
@@ -171,7 +172,7 @@ app.get("/profile", async function (req, res) {
 app.post('/profile_change' , async function(req, res) {
   let session = req.session;
   if (session.userid){
-    let variables = { page : "profileForm",};
+    let variables = { page : "profileForm", rights: user.rights };
     res.render(path.join(initpath , 'ejs/home.ejs'), variables);
   }
 });
@@ -180,7 +181,8 @@ app.post('/profile_change' , async function(req, res) {
 app.get("/planning", async function (req, res) {
   let session = req.session;
   if (session.userid){
-    let variables = { page : "planning" };
+    let profile = await account.getProfile(session.userid);
+    let variables = { page : "planning", rights: profile.rights};
     res.render(path.join(initpath , 'ejs/home.ejs'), variables);
   }
   else {
@@ -195,7 +197,7 @@ app.post("/planning", async function (req, res) {
     // get the user psid
     let sender_psid = (await account.getProfile(session.userid)).psid;
     let user = await userInfo.getUser(sender_psid);
-    let variable = { page: "planning", payload: req.body.payload };
+    let variable = { page: "planning", payload: req.body.payload, rights: user.rights  };
     if (req.body.payload == "TOUT"){
       let imgName = user.promo + user.filliere + variables.constant.DATE;
       let timetableImage = `/png/${imgName}.png`;
@@ -220,9 +222,8 @@ app.get('/message', async function(req, res) {
   let session = req.session;
   if (session.userid){
     if (await account.isAllow(session.userid)){
-      let variables = {
-        page : "message"
-      };
+      let profile = await account.getProfile(session.userid);
+      let variables = { page : "message", rights: profile.rights };
       res.render(path.join(initpath , 'ejs/home.ejs'), variables);
     }
     else {
@@ -238,9 +239,8 @@ app.get('/message', async function(req, res) {
 app.get("/depot", async function (req, res) {
   let session = req.session;
     if (await account.isAllow(session.userid)){
-      let variables = {
-        page : "depot"
-      };
+      let profile = await account.getProfile(session.userid);
+      let variables = { page : "depot", rights: profile.rights };
       res.render(path.join(initpath , 'ejs/home.ejs'), variables);
     }
     else {
@@ -267,7 +267,8 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
     });
     let variables = {
       page : "depot",
-      error: `Merci nous avons bien reçu votre fichier pour les ${req.body.payload}, la semaine du ${req.body.date}`
+      error: `Merci nous avons bien reçu votre fichier pour les ${req.body.payload}, la semaine du ${req.body.date}`,
+      rights: user.rights 
     };
     res.render(path.join(initpath , 'ejs/home.ejs'), variables);
     // convert the xls to csv
@@ -300,10 +301,11 @@ app.post('/send-message', async function(req, res) {
   // }
 });
 
-app.get('/about', function(req, res) {
+app.get('/about',async function(req, res) {
   let session = req.session;
+  let user = await account.getProfile(session.userid);
   if (session.userid){
-    let variables = { page : "about" };
+    let variables = { page : "about" , rights: user.rights };
     res.render(path.join(initpath , 'ejs/home.ejs'),variables);
   } else {
     res.redirect('/login');

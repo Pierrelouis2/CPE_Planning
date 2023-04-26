@@ -20,26 +20,30 @@
           <span class="title-sb">Profile</span>
         </a>
       </li>
-      
-      <li>
-        <a href="/depot">
-          <span class="icon"><i class="fa-solid fa-download"></i></span>
-          <span class="title-sb">Depot EDT</span>
-        </a>
-      </li>
-      </li>
       <li>
         <a href="/planning">
           <span class="icon"><i class="fa-regular fa-calendar-days"></i></span>
           <span class="title-sb">Calendrier</span>
         </a>
       </li>
-      <li>
-        <a href="/message">
-          <span class="icon"><i class="fa-solid fa-message"></i></span>
-          <span class="title-sb">Message</span>
-        </a>
-      </li>
+      <% if (locals.rights) { %>
+        <% if(rights == "A" || rights == "B") { %>
+        <li>
+          <a href="/depot">
+            <span class="icon"><i class="fa-solid fa-download"></i></span>
+            <span class="title-sb">Depot EDT</span>
+          </a>
+        </li>
+        <% } %>
+        <% if(rights == "A") { %>
+        <li>
+          <a href="/message">
+            <span class="icon"><i class="fa-solid fa-message"></i></span>
+            <span class="title-sb">Message</span>
+          </a>
+        </li>
+        <% } %>
+      <% } %>
       <li>
         <a href="/about">
           <span class="icon"><i class="fa-solid fa-circle-info"></i></span>
