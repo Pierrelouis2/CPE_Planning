@@ -310,6 +310,13 @@ app.get('/about', function(req, res) {
   }
 });
 
+app.get('/logout', function(req, res) {
+  req.session.destroy();
+  res.redirect('/');
+});
+
+
+
 // create a route for images to be sent in websites
 app.get('/png/:imageName', function(req, res) {
   let image = req.params.imageName;
