@@ -74,7 +74,7 @@ async function register(user) {
   }
 }
 
-async function isAllow(mail) {
+async function isAllow(mail,allowed) {
   console.log("mail : ", mail);
   let sql_is_allow = "SELECT rights FROM profile WHERE email=?";
   let allow = (await queryDB(sql_is_allow, mail))[0];
@@ -82,7 +82,7 @@ async function isAllow(mail) {
     return 0;
   } else {
     allow = allow.rights;
-    if (allow == "A") {
+    if (allowed.includes(allow)){
       return 1;
     } else {
       return 0;

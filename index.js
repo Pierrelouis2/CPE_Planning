@@ -221,7 +221,7 @@ app.post("/planning", async function (req, res) {
 app.get('/message', async function(req, res) {
   let session = req.session;
   if (session.userid){
-    if (await account.isAllow(session.userid)){
+    if (await account.isAllow(session.userid, ["A"])){
       let profile = await account.getProfile(session.userid);
       let variables = { page : "message", rights: profile.rights };
       res.render(path.join(initpath , 'ejs/home.ejs'), variables);
@@ -238,7 +238,7 @@ app.get('/message', async function(req, res) {
 // for CPE administation to send timetables
 app.get("/depot", async function (req, res) {
   let session = req.session;
-    if (await account.isAllow(session.userid)){
+    if (await account.isAllow(session.userid, ["A","B"])){
       let profile = await account.getProfile(session.userid);
       let variables = { page : "depot", rights: profile.rights };
       res.render(path.join(initpath , 'ejs/home.ejs'), variables);
@@ -311,6 +311,13 @@ app.get('/about',async function(req, res) {
     res.redirect('/login');
   }
 });
+
+app.get('/logout', function(req, res) {
+  req.session.destroy();
+  res.redirect('/');
+});
+
+
 
 // create a route for images to be sent in websites
 app.get('/png/:imageName', function(req, res) {
