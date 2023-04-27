@@ -264,13 +264,21 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
         return
       }
     });
+    let profile = await account.getProfile(session.userid);
+
     let variables = {
       page : "depot",
       error: `Merci nous avons bien reçu votre fichier pour les ${req.body.payload}, la semaine du ${req.body.date}`,
-      rights: user.rights 
+      rights: profile.rights 
     };
     res.render(path.join(initpath , 'ejs/home.ejs'), variables);
-    // convert the xls to csv
+    //send msg to notify when planning is posted
+    let message = { text: `Le planning pour les ${req.body.payload} de la semaine du ${req.body.date} est disponible, merci de vérifier qu'il est correctement rempli` };
+    let personal_psid  =  config.get("id");
+    let r = await writeMessage.callSendAPI(personal_psid.pl, message);
+    r = await writeMessage.callSendAPI(personal_psid.jo, message);
+
+      // convert the xls to csv
     let pythonXls2Csv = spawn('python3', ['Plannings/planningXls/xls2csv.py', `${filepath}${newName}.xlsx`, `Plannings/planningCsv/${req.body.payload}/${newName}.csv`]);
     pythonXls2Csv.stdout.on('data', (data) => {
       console.log('node: (python stdout) ' + data.toString());
