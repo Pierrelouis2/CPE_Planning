@@ -5,7 +5,7 @@ import sqlite3
 conn = sqlite3.connect('users.db')
 cur = conn.cursor()
 
-init = input("delete all inscription status 1 \n delete user 2 \nchange from inscription to inscrit 3 \n delete profile database 4 \n change rigths pl jo 5 \n  inscription secreataires 6 :")
+init = input("delete all inscription status 1 \ndelete user 2 \nchange from inscription to inscrit 3 \ndelete profile database 4 \nchange rigths pl jo 5 \ninscription secreataires 6 :")
 if init == "1":
     sql_delete_iscriptions = 'DELETE FROM user where status = "Inscription"'
     cur.execute(sql_delete_iscriptions)
@@ -29,7 +29,10 @@ elif init == "4":
     conn.commit()
     print("Inscription changé en inscrit")
 elif init == "5":
-    sql_change_pl_rights = "UPDATE profile SET rights = 'A' WHERE psid=5810016312430121 OR psid = 6271457816218293"
+    import json
+    with open('./config/default.json') as json_file:
+        data = json.load(json_file)
+    sql_change_pl_rights = f"UPDATE profile SET rights = 'A' WHERE psid={data['id']['jo']} OR psid = {data['id']['pl']}"
     cur.execute(sql_change_pl_rights)
     conn.commit()
     print("Inscription changé en inscrit")

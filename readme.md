@@ -89,30 +89,29 @@ The database is composed of 3 tables:
 <img src="./Docs/ReadmeImages/confidential-ge984ebf2f_1280.png"  width="400" height="250">
 
 ## TODO
+
 - [ ] Verification server side for register
 - [ ] handle spam
 - [ ] make a stat page
-- [X] change database schema
 - [ ] Fix Change info form
 - [ ] password recovery
-- [ ] remove psid from github
-- [ ] make a admin website a user website and administration website
-- [ ] Change readCsv with more parameters to get more use to the function
 - [ ] Manage LV lessons
 - [ ] Manage database backup and restore (cron?)
 - [ ] Script to send planning automatically at 7h30am
 - [ ] Make a better code
-- [ ] For the future : make a web interface for CPE admin to post the planning (manage timetable)
 - [ ] Don't share the token on github !!!!!!!!!
 - [ ] Don't share the code to  ETI students !!!!!!!!!
 - [ ] Regex expression for hours  
-- [ ] Interface admin pour gérer les comptes
 - [ ] Link the LV lessons website
 - [ ] autocomplete the re-registration form of the website
 - [ ] make a repport bug or feedback page/form
 - [ ] handle 3ETI groups 'X&Y'
 - [ ] change python script xls2csv to a js module
 - [ ] check for .isc possibilities
+- [X] remove psid from github
+- [X] Interface admin pour gérer les comptes
+- [X] change database schema
+- [X] For the future : make a web interface for CPE admin to post the planning (manage timetable)
 - [X] change url from messenger to cpeplanning
 - [X] to link bot and website use sender PSID 
 - [X] create send psid button
