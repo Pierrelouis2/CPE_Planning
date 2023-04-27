@@ -1,7 +1,5 @@
 "use strict";
 
-const { profile } = require("console");
-
 // ----- ALL THE IMPORTS AND CONFIGS HERE ----- //
 const express = require("express"),
   bodyParser = require("body-parser"),
