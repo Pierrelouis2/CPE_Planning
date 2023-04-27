@@ -68,3 +68,5 @@ async function display(lst_salles){
         }
     }
 }
+
+module.exports = {filtre}
