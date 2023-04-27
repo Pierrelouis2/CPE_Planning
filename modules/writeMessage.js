@@ -84,9 +84,13 @@ async function constructMessage(planning) {
             ) {
               message[i] += planning[dj][matiere][cellule] + ".\n\n";
             } else {
+              if (planning[dj][matiere][cellule].includes("LV")){
+                message[i] += langues.filtre()
+
+              }
               message[i] += planning[dj][matiere][cellule] + ",\n";
             }
-          }
+          } 
         }
         i++;
       }
@@ -101,7 +105,8 @@ async function sendPlanningDay(payload, sender_psid,user) {
     let promo = user.promo;
     let filliere = user.filliere;
     let planningJour = await readCsv(`./Output_Json/Planning${promo}${filliere}${variables.constant.DATE}.json`, payload, sender_psid, user );
-    let rep = await constructMessage(planningJour);
+    let mid_rep = await constructMessage(planningJour);
+    let rep =  await constructMessageLangues(mid_rep, sender_psid, user);
     let message = { text: `Voici le planning de ${payload} :`};
     await callSendAPI(sender_psid, message);
     message = { text: `Matin : ${rep[0]}` };

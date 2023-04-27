@@ -5,7 +5,7 @@ async function recup_data(dir) {
     return donnee
 } 
 
-async function filtre(){
+async function filtre(id){
 
     let ID = String(document.getElementById("name-ef64").value); //on recup le nom par l'id
     ID = ID.toUpperCase(); //on met en majuscule
@@ -32,10 +32,6 @@ async function filtre(){
                 }
                 if(lst_salles[tag].TAG == lst_donnee[id_nom].LV2){  //on compare le tag de la salle avec le tag de la personne LV2
                     lst_salles_ren.push(lst_salles[tag]) 
-                    console.log("coucou");
-                    const xhttp = new XMLHttpRequest();
-                    xhttp.open("GET", "store.php?nom=" + String(document.getElementById("name-ef64").value));
-                    xhttp.send();
                 }
                 console.log("fin lv2")
                 if(lst_salles[tag].TAG == lst_donnee[id_nom].LV3){  //on compare le tag de la salle avec le tag de la personne LV3
