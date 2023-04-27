@@ -193,9 +193,10 @@ app.post("/planning", async function (req, res) {
   let session = req.session;
   if (session.userid){
     // get the user psid
-    let sender_psid = (await account.getProfile(session.userid)).psid;
+    let profile = await account.getProfile(session.userid);
+    let sender_psid = profile.psid;
     let user = await userInfo.getUser(sender_psid);
-    let variable = { page: "planning", payload: req.body.payload, rights: user.rights  };
+    let variable = { page: "planning", payload: req.body.payload, rights: profile.rights  };
     if (req.body.payload == "TOUT"){
       let imgName = user.promo + user.filliere + variables.constant.DATE;
       let timetableImage = `/png/${imgName}.png`;
