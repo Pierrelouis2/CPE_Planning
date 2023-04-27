@@ -75,8 +75,8 @@ The database is composed of 3 tables:
   - `name_mso`
 - `profile`:
   - `email`
-  - `first-name`
-  - `last-name`
+  - `prenom`
+  - `nom`
   - `password` (stored in sha256 with salt)
   - `psid` (=id_user from user table)
   

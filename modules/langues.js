@@ -1,51 +1,41 @@
-let sqlite3 = require("sqlite3");
+let sqlite3 = require("sqlite3"),
+{ promisify } = require("util"),
+fs = require("fs");
 
 let db = new sqlite3.Database("users.db");
 const queryDB = promisify(db.all).bind(db);
 
 async function recup_data(dir) {
     //renvoi une liste avec tout (dico)
-    const response = await fetch(dir);
-    const  donnee = await response.json();
-    return donnee
+    let rawdata = fs.readFileSync(dir);
+    let student = JSON.parse(rawdata);
+    return student
 } 
 
 async function filtre(psid){
-
-    let sql_get_name = "select name,last_name from profile where psid = ?"; //on recup le nom et le prenom de la personne
+    let sql_get_name = "SELECT prenom,nom FROM profile WHERE psid = ?"; //on recup le nom et le prenom de la personne
     let ID = (await queryDB(sql_get_name, psid))[0]; //on recup l'id de la personne
-    let lst_donnee = await recup_data("../Langues/lst_personne.json"); //on recup la liste de data des personnes 
-    let lst_salles = await recup_data("../Langues/lst_salles.json"); //on recup la liste de data des salles
-    
-    let nom = ID.last_name. toUpperCase();
-    let prenom = ID.name.toUpperCase();
-    let lst_salles_ren =""; //on crée la liste des salles
+    let lst_donnee = await recup_data("./Langues/lst_personne.json"); //on recup la liste de data des personnes 
+    let lst_salles = await recup_data("./Langues/lst_salles.json"); //on recup la liste de data des salles
+    let nom = ID.nom. toUpperCase();
+    let prenom = ID.prenom.toUpperCase();
+    let lst_salles_ren ="\n"; //on crée la liste des salles
     let id_nom;
     let tag;
-    console.log(nom) 
-    console.log(prenom)
     for(id_nom in lst_donnee){
         if(lst_donnee[id_nom].NOM == nom && lst_donnee[id_nom].Prénom == prenom){ //si le nom et le prenom sont dans la liste
-          console.log(ID)
           for(tag in lst_salles){ //oncherche la salle avec le TAG
-                
-                if(lst_salles[tag].TAG == lst_donnee[id_nom].LV1){  //on compare le tag de la salle avec le tag de la personne LV1
-                    lst_salles_ren += lst_salles[tag] + '\n'; //on  ajoute le cour dans la liste des cours
-                }
-                if(lst_salles[tag].TAG == lst_donnee[id_nom].LV2){  //on compare le tag de la salle avec le tag de la personne LV2
-                    lst_salles_ren += lst_salles[tag] + '\n'
-                }
-                console.log("fin lv2")
-                if(lst_salles[tag].TAG == lst_donnee[id_nom].LV3){  //on compare le tag de la salle avec le tag de la personne LV3
-                    lst_salles_ren += lst_salles[tag] + '\n'
-                    console.log("LV3");
-              }
+            if(lst_salles[tag].TAG == lst_donnee[id_nom].LV1){  //on compare le tag de la salle avec le tag de la personne LV1
+                lst_salles_ren += [lst_salles[tag].HORAIRE, lst_salles[tag].COURS, lst_salles[tag].SALLE].join("\n") + '\n\n'; //on  ajoute le cour dans la liste des cours
+            }else if(lst_salles[tag].TAG == lst_donnee[id_nom].LV2){  //on compare le tag de la salle avec le tag de la personne LV2
+                lst_salles_ren += [lst_salles[tag].HORAIRE, lst_salles[tag].COURS, lst_salles[tag].SALLE].join("\n") + '\n\n';
+            }else if(lst_salles[tag].TAG == lst_donnee[id_nom].LV3){  //on compare le tag de la salle avec le tag de la personne LV3
+                lst_salles_ren += [lst_salles[tag].HORAIRE, lst_salles[tag].COURS, lst_salles[tag].SALLE].join("\n") + '\n\n';
+            }
         }
-        console.log("test fct display")
-        display(lst_salles_ren) //on affiche la liste des salles si il est dans la liste
     }
-
   }
+  return lst_salles_ren;
 }
 
 async function display(lst_salles){

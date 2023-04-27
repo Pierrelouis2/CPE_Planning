@@ -202,7 +202,7 @@ app.post("/planning", async function (req, res) {
       let timetableImage = `/png/${imgName}.png`;
       variable.timetableImage = timetableImage;
     } else {
-      let message = await writeMessage.constructMessage(await writeMessage.readCsv(`./Output_Json/Planning${user.promo}${user.filliere}${variables.constant.DATE}.json`, req.body.payload, user.id_user, user));
+      let message = await writeMessage.constructMessage(await writeMessage.readCsv(`./Output_Json/Planning${user.promo}${user.filliere}${variables.constant.DATE}.json`, req.body.payload, user.id_user, user), sender_psid);
       if (message[0].length == 0){
         message[0] = "rien";
       }
