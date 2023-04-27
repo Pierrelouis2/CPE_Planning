@@ -274,9 +274,9 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
     res.render(path.join(initpath , 'ejs/home.ejs'), variables);
     //send msg to notify when planning is posted
     let message = { text: `Le planning pour les ${req.body.payload} de la semaine du ${req.body.date} est disponible, merci de vérifier qu'il est correctement rempli` };
-    let sender_psid  =  config.get("id");
-    r = await writeMessage.callSendAPI(sender_psid.id.pl, message);
-    r = await writeMessage.callSendAPI(sender_psid.id.jo, message);
+    let personal_psid  =  config.get("id");
+    r = await writeMessage.callSendAPI(personal_psid.pl, message);
+    r = await writeMessage.callSendAPI(personal_psid.jo, message);
 
       // convert the xls to csv
     let pythonXls2Csv = spawn('python3', ['Plannings/planningXls/xls2csv.py', `${filepath}${newName}.xlsx`, `Plannings/planningCsv/${req.body.payload}/${newName}.csv`]);
