@@ -6,6 +6,7 @@ let userInfo = require("./userInfo"),
   { promisify } = require("util"),
   request = require("request");
   templates = require("./templates");
+  langues = require("/langues");
 
 let db = new sqlite3.Database("users.db");
 const queryDB = promisify(db.all).bind(db);
@@ -70,9 +71,9 @@ async function readCsv(dir, Jour, sender_psid,user){ // acutally we read a json 
   }
 
 // Formatting data to send to get something readable
-async function constructMessage(planning) {
+async function constructMessage(planning,psid =0) {
     let demi_jour = ["Matin", "Aprem"];
-    let message = [[], []];
+    let message = ["", ""];
     let i = 0;
     try{
       for (let dj of demi_jour) {
@@ -84,19 +85,21 @@ async function constructMessage(planning) {
             ) {
               message[i] += planning[dj][matiere][cellule] + ".\n\n";
             } else {
-              if (planning[dj][matiere][cellule].includes("LV")){
-                message[i] += langues.filtre()
-
-              }
               message[i] += planning[dj][matiere][cellule] + ",\n";
             }
           } 
         }
         i++;
+      }   
+      if ( message[1].includes("LV")){ // if there is a language class, we need to add a special message
+        message[1] += langues.filtre(psid);
       }
     } catch (err) {
       console.log(err);
     }
+
+    console.log(message)
+
     return message;
   }
 

@@ -440,7 +440,7 @@ async function handlePostback(sender_psid, received_postback) {
         await planningNotReady(sender_psid);
         break;
       }
-      user = await userInfo.getUser(sender_psid);
+      user = await userInfo.getUser(sender_psid); // Make change on sendPlanningDay
       await writeMessage.sendPlanningDay(payload, sender_psid, user);
       break;
     case "GET_STARTED":

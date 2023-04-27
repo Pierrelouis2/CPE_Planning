@@ -1,3 +1,8 @@
+let sqlite3 = require("sqlite3");
+
+let db = new sqlite3.Database("users.db");
+const queryDB = promisify(db.all).bind(db);
+
 async function recup_data(dir) {
     //renvoi une liste avec tout (dico)
     const response = await fetch(dir);
@@ -5,22 +10,19 @@ async function recup_data(dir) {
     return donnee
 } 
 
-async function filtre(id){
+async function filtre(psid){
 
-    let ID = String(document.getElementById("name-ef64").value); //on recup le nom par l'id
-    ID = ID.toUpperCase(); //on met en majuscule
-    let lst_donnee = await recup_data("/json/lst_personne.json"); //on recup la liste de data des personnes 
-    let lst_salles = await recup_data("/json/lst_salles.json"); //on recup la liste de data des salles
-
-    let nom = ID.split(" ")[1]; //on recup le nom
-    let prenom = ID.split(" ")[0]; //on recup le prenom
-
+    let sql_get_name = "select name,last_name from profile where psid = ?"; //on recup le nom et le prenom de la personne
+    let ID = (await queryDB(sql_get_name, psid))[0]; //on recup l'id de la personne
+    let lst_donnee = await recup_data("../Langues/lst_personne.json"); //on recup la liste de data des personnes 
+    let lst_salles = await recup_data("../Langues/lst_salles.json"); //on recup la liste de data des salles
     
-    let lst_salles_ren =[]; //on crée la liste des salles
+    let nom = ID.last_name. toUpperCase();
+    let prenom = ID.name.toUpperCase();
+    let lst_salles_ren =""; //on crée la liste des salles
     let id_nom;
     let tag;
     console.log(nom) 
- 
     console.log(prenom)
     for(id_nom in lst_donnee){
         if(lst_donnee[id_nom].NOM == nom && lst_donnee[id_nom].Prénom == prenom){ //si le nom et le prenom sont dans la liste
@@ -28,14 +30,14 @@ async function filtre(id){
           for(tag in lst_salles){ //oncherche la salle avec le TAG
                 
                 if(lst_salles[tag].TAG == lst_donnee[id_nom].LV1){  //on compare le tag de la salle avec le tag de la personne LV1
-                    lst_salles_ren.push(lst_salles[tag]) //on  ajoute le cour dans la liste des cours
+                    lst_salles_ren += lst_salles[tag] + '\n'; //on  ajoute le cour dans la liste des cours
                 }
                 if(lst_salles[tag].TAG == lst_donnee[id_nom].LV2){  //on compare le tag de la salle avec le tag de la personne LV2
-                    lst_salles_ren.push(lst_salles[tag]) 
+                    lst_salles_ren += lst_salles[tag] + '\n'
                 }
                 console.log("fin lv2")
                 if(lst_salles[tag].TAG == lst_donnee[id_nom].LV3){  //on compare le tag de la salle avec le tag de la personne LV3
-                    lst_salles_ren.push(lst_salles[tag])
+                    lst_salles_ren += lst_salles[tag] + '\n'
                     console.log("LV3");
               }
         }
