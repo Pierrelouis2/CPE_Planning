@@ -291,13 +291,37 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
 });
 
 app.post('/send-message', async function(req, res) {
-  console.log(`got message ${req.body.payload} request`);
+  console.log(`got send message request`);
+  console.log(req.body);
   let session = req.session;
-  // if (session.userid){
-  //   if (await account.isAllow(session.userid)){
-  //     await writeMessage.sendPlanningWeek()
-  //   }
-  // }
+  let user = await account.getProfile(session.userid);
+  if (session.userid){
+    if (await account.isAllow(session.userid, "A")){
+      if (typeof req.body.payload === 'string') {
+        req.body.payload = [req.body.payload];
+        console.log(req.body.payload, "changed to array: ", [req.body.payload]);
+      }
+      let variables = { page : "message", rights: user.rights, message: "Message envoyé" };
+      req.body.payload.forEach(PF =>  {
+        let promo = PF.substring(0,1);
+        let filliere = PF.substring(1,4);
+        try{
+          if (req.body.planning == "send_planning"){
+            // writeMessage.sendMessageUsers(promo, filliere, req.body.message);
+            variables.message = "Planning envoyé";
+          }
+        } catch (err) {
+          console.log(err);
+        }
+        res.render(path.join(initpath , 'ejs/home.ejs'), variables);
+      });
+    } else{
+      console.log("not allowed");
+      res.redirect('/');
+    }
+  } else{
+    res.redirect('/');
+  }
 });
 
 app.get('/about',async function(req, res) {

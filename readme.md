@@ -108,6 +108,7 @@ The database is composed of 3 tables:
 - [ ] handle 3ETI groups 'X&Y'
 - [ ] change python script xls2csv to a js module
 - [ ] check for .isc possibilities
+- [ ] show error message for invalid form
 - [X] remove psid from github
 - [X] Interface admin pour gérer les comptes
 - [X] change database schema

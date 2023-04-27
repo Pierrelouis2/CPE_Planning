@@ -156,18 +156,23 @@ async function callSendAPI(sender_psid, response) {
   await sleep(400);
   return;
 }
-async function sendPlanningWeek() {
-  let sql_get_user_table = "SELECT * FROM user";
-  let user_table = await queryDB(sql_get_user_table);
-  user_table.forEach( async (user) => {
-      let message = { text: "Il est Dimanche 21h ! Voici le planning de la semaine: " };
-      r = await callSendAPI(user.id_user, message);
-      response = templates.askTemplateImage();
-      let imgName = user.promo + user.filliere + variables.constant.DATE;
-      response.attachment.payload.url = `https://cpe-planning.jo-pouradier.fr/png/${imgName}.png`;
-      console.log(response);
-      r = await callSendAPI(user.id_user, response);
-  });
+async function sendMessageUsers(promo, filliere, message, planning=false) {
+  let sql_get_user_table = "SELECT * FROM user WHERE promo=? AND filliere=?";
+  let user_table = await queryDB(sql_get_user_table, [promo, filliere]);
+  try{
+    user_table.forEach( async (user) => {
+        let message = { text: message };
+        r = await callSendAPI(user.id_user, message);
+        if (planning) {
+          response = templates.askTemplateImage();
+          let imgName = user.promo + user.filliere + variables.constant.DATE;
+          response.attachment.payload.url = `https://cpe-planning.jo-pouradier.fr/png/${imgName}.png`;
+          r = await callSendAPI(user.id_user, response);
+        }
+    });
+  } catch (err) {
+    console.log(err);
+  }
 }
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -180,5 +185,5 @@ module.exports = {
     getCurrentDate,
     callSendAPI,
     sleep,
-    sendPlanningWeek
+    sendMessageUsers
 };
