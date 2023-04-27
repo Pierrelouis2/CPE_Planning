@@ -274,8 +274,7 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
     res.render(path.join(initpath , 'ejs/home.ejs'), variables);
     //send msg to notify when planning is posted
     let message = { text: `Le planning pour les ${req.body.payload} de la semaine du ${req.body.date} est disponible, merci de vérifier qu'il est correctement rempli` };
-    let response = await fetch("./config/default.json");
-    let sender_psid  = await response.json();
+    let sender_psid  =  config.get("id");
     r = await writeMessage.callSendAPI(sender_psid.id.pl, message);
     r = await writeMessage.callSendAPI(sender_psid.id.jo, message);
 
