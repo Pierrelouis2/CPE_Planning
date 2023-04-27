@@ -6,7 +6,7 @@ let userInfo = require("./userInfo"),
   { promisify } = require("util"),
   request = require("request");
   templates = require("./templates");
-  langues = require("/langues");
+  langues = require("./langues");
 
 let db = new sqlite3.Database("users.db");
 const queryDB = promisify(db.all).bind(db);
@@ -92,14 +92,11 @@ async function constructMessage(planning,psid =0) {
         i++;
       }   
       if ( message[1].includes("LV")){ // if there is a language class, we need to add a special message
-        message[1] += langues.filtre(psid);
+        message[1] += await langues.filtre(psid);
       }
     } catch (err) {
       console.log(err);
     }
-
-    console.log(message)
-
     return message;
   }
 
@@ -108,8 +105,7 @@ async function sendPlanningDay(payload, sender_psid,user) {
     let promo = user.promo;
     let filliere = user.filliere;
     let planningJour = await readCsv(`./Output_Json/Planning${promo}${filliere}${variables.constant.DATE}.json`, payload, sender_psid, user );
-    let mid_rep = await constructMessage(planningJour);
-    let rep =  await constructMessageLangues(mid_rep, sender_psid, user);
+    let rep = await constructMessage(planningJour, sender_psid);
     let message = { text: `Voici le planning de ${payload} :`};
     await callSendAPI(sender_psid, message);
     message = { text: `Matin : ${rep[0]}` };
