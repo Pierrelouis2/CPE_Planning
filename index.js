@@ -264,10 +264,12 @@ app.post("/depot-form", upload.single('file'), async function (req, res) {
         return
       }
     });
+    let profile = await account.getProfile(session.userid);
+
     let variables = {
       page : "depot",
       error: `Merci nous avons bien reçu votre fichier pour les ${req.body.payload}, la semaine du ${req.body.date}`,
-      rights: user.rights 
+      rights: profile.rights 
     };
     res.render(path.join(initpath , 'ejs/home.ejs'), variables);
     //send msg to notify when planning is posted
