@@ -47,7 +47,7 @@ async function getProfile(mail) {
   let sql_get_profile = `SELECT * FROM profile WHERE email=?`;
   let profile = (await queryDB(sql_get_profile, mail))[0];
   return profile;
-}
+} 
 
 async function register(user) {
   let sql_verify_user = "SELECT * FROM user WHERE id_user=?";
