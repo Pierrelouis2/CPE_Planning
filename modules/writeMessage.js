@@ -161,8 +161,8 @@ async function sendMessageUsers(promo, filliere, message, planning=false) {
   let user_table = await queryDB(sql_get_user_table, [promo, filliere]);
   try{
     user_table.forEach( async (user) => {
-        let message = { text: message };
-        r = await callSendAPI(user.id_user, message);
+        let message2send = { text: message };
+        r = await callSendAPI(user.id_user, message2send);
         if (planning) {
           response = templates.askTemplateImage();
           let imgName = user.promo + user.filliere + variables.constant.DATE;
