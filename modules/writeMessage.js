@@ -169,7 +169,7 @@ async function sendMessageUsers(promo, filliere, message, planning=true) {
           let response = templates.askTemplateImage();
           let imgName = user.promo + user.filliere + variables.constant.DATE;
           response.attachment.payload.url = `https://cpe-planning.jo-pouradier.fr/png/${imgName}.png`;
-          r = await callSendAPI(user.id_user, response);
+          let r = await callSendAPI(user.id_user, response);
         }
     });
   } catch (err) {
