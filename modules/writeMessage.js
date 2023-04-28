@@ -161,6 +161,7 @@ async function sendMessageUsers(promo, filliere, message, planning=true) {
   promo = "4";
   filliere = "ETI";
   let user_table = await queryDB(sql_get_user_table, [promo, filliere]);
+  console.log(user_table);
   try{
     user_table.forEach( async (user) => {
         //let message2send = { text: message };
