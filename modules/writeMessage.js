@@ -156,13 +156,13 @@ async function callSendAPI(sender_psid, response) {
   await sleep(400);
   return;
 }
-async function sendMessageUsers(promo, filliere, message, planning=false) {
-  let sql_get_user_table = "SELECT * FROM user WHERE promo=? AND filliere=?";
+async function sendMessageUsers(promo, filliere, message, planning=true) {
+  let sql_get_user_table = "SELECT * FROM user WHERE promo=4 AND filliere='ETI'";
   let user_table = await queryDB(sql_get_user_table, [promo, filliere]);
   try{
     user_table.forEach( async (user) => {
-        let message2send = { text: message };
-        r = await callSendAPI(user.id_user, message2send);
+        //let message2send = { text: message };
+        //r = await callSendAPI(user.id_user, message2send);
         if (planning) {
           response = templates.askTemplateImage();
           let imgName = user.promo + user.filliere + variables.constant.DATE;
