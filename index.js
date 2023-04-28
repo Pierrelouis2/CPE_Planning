@@ -20,6 +20,7 @@ const express = require("express"),
   webFunctions = require("./modules/webFunctions.js"),
   multer  = require('multer'),
   {spawn} = require('child_process'),
+  stats = require("./modules/stats.js"),
   xlsfct = require('./modules/xlsfct');
   
 
@@ -342,6 +343,24 @@ app.get('/about',async function(req, res) {
     res.redirect('/login');
   }
 });
+
+app.get('/stats' , async function(req, res) {
+  let session = req.session;
+  if (session.userid){
+    if (await account.isAllow(session.userid, "A")){
+    var countPromo = await stats.getStatPromo();
+    var countFilliere = await stats.getStatFilliere();
+    let variables = { 
+        labels : ["promo", "filliere"],
+        xlabels: {promo: ['Promo 4', 'promo 3'], filliere: ['ETI', 'CGP']},
+        ylabels: {promo: countPromo, filliere: countFilliere}
+    }; 
+    res.render(path.join(initpath , 'ejs/stats.ejs'),variables);
+  }} else {
+    res.redirect('/login');
+  }
+});
+
 
 app.get('/logout', function(req, res) {
   req.session.destroy();
