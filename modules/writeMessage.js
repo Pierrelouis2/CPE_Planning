@@ -157,8 +157,10 @@ async function callSendAPI(sender_psid, response) {
   return;
 }
 async function sendMessageUsers(promo, filliere, message, planning=true) {
-  let sql_get_user_table = "SELECT * FROM user WHERE promo=4 AND filliere='ETI'";
-  let user_table = await queryDB(sql_get_user_table);
+  let sql_get_user_table = "SELECT * FROM user WHERE promo=? AND filliere=?";
+  promo = 4;
+  filliere = "ETI";
+  let user_table = await queryDB(sql_get_user_table, [promo, filliere]);
   try{
     user_table.forEach( async (user) => {
         //let message2send = { text: message };
