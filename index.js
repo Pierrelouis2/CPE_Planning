@@ -351,11 +351,12 @@ app.get('/stats' , async function(req, res) {
     var countPromo = await stats.getStatPromo();
     var countFilliere = await stats.getStatFilliere();
     let variables = { 
+        page : "stats",
         labels : ["promo", "filliere"],
         xlabels: {promo: ['Promo 4', 'promo 3'], filliere: ['ETI', 'CGP']},
         ylabels: {promo: countPromo, filliere: countFilliere}
     }; 
-    res.render(path.join(initpath , 'ejs/stats.ejs'),variables);
+    res.render(path.join(initpath , 'ejs/home.ejs'),variables);
   }} else {
     res.redirect('/login');
   }
