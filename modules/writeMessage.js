@@ -163,7 +163,7 @@ async function sendMessageUsers(promo, filliere, message, planning=true) {
   let user_table = await queryDB(sql_get_user_table, [promo, filliere]);
   console.log(user_table);
   try{
-    for (let user of user_table) {
+    user_table.forEach( async (user) => {
         //let message2send = { text: message };
         //r = await callSendAPI(user.id_user, message2send);
         if (planning) {
@@ -172,7 +172,7 @@ async function sendMessageUsers(promo, filliere, message, planning=true) {
           response.attachment.payload.url = `https://cpe-planning.jo-pouradier.fr/png/${imgName}.png`;
           let r = await callSendAPI(user.id_user, response);
         }
-    };
+    });
   } catch (err) {
     console.log(err);
   }
