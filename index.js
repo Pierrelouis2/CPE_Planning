@@ -306,10 +306,10 @@ app.post('/send-message', async function(req, res) {
   let user = await account.getProfile(session.userid);
   if (session.userid){
     if (await account.isAllow(session.userid, "A")){
-      // if (typeof req.body.payload === 'string') {
-      //   req.body.payload = [req.body.payload];
-      //   console.log(req.body.payload, "changed to array: ", [req.body.payload]);
-      // }
+      if (typeof req.body.payload === 'string') {
+        console.log(req.body.payload, "changed to array: ", [req.body.payload]);
+        req.body.payload = [req.body.payload];
+      }
       let variables = { page : "message", rights: user.rights, message: "Message envoyé" };
       if (req.body.planning != undefined){
         req.body.payload.forEach(PF =>  {
