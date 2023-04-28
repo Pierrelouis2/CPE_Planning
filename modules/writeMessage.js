@@ -172,7 +172,7 @@ async function sendMessageUsers(promo, filliere, message, planning=true) {
           response.attachment.payload.url = `https://cpe-planning.jo-pouradier.fr/png/${imgName}.png`;
           let r = await callSendAPI(user.id_user, response);
         }
-    });
+    };
   } catch (err) {
     console.log(err);
   }
