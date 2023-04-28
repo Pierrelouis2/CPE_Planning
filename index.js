@@ -316,7 +316,7 @@ app.post('/send-message', async function(req, res) {
         let filliere = PF.substring(1,4);
         try{
           if (req.body.planning == "send_planning"){
-            // writeMessage.sendMessageUsers(promo, filliere, req.body.message);
+            writeMessage.sendMessageUsers(promo, filliere, req.body.message);
             variables.message = "Planning envoyé";
           }
         } catch (err) {

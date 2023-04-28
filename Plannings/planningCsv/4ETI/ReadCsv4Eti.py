@@ -37,7 +37,7 @@ def createSchedule(Df):
                 # on ajoute le jour
                 DicoJour["jour"] = obj +"-" + value
             else :
-                if value in {'13h-14h30','13h30-17h45','13h10-18h', '13h30-15h30', '15h45-17h45', '13h30 - 14h30','13h30 - 17h45','13h30 - 17h30'} :
+                if value in {'13h-14h30','13h30-17h45','13h10-18h', '13h30-15h30', '15h45-17h45', '13h30 - 14h30','13h30 - 17h45','13h30 - 17h30', '13h30-14h30'} :
                   IsAprem = True
                 elif value in {'8h-12h15','8h - 12h15', '8h30 - 10h00', '8h-10h', '10h15-12h15','10h15 - 12h15', '8h- 10h'}:
                     IsAprem = False
