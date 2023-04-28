@@ -351,7 +351,7 @@ app.get('/stats' , async function(req, res) {
     var countPromo = await stats.getStatPromo();
     var countFilliere = await stats.getStatFilliere();
     let variables = { 
-        rights: user.rights 
+        rights: user.rights, 
         page : "stats",
         labels : ["promo", "filliere"],
         xlabels: {promo: ['Promo 4', 'promo 3'], filliere: ['ETI', 'CGP']},
