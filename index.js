@@ -346,6 +346,7 @@ app.get('/about',async function(req, res) {
 
 app.get('/stats' , async function(req, res) {
   let session = req.session;
+  let user = await account.getProfile(session.userid);
   if (session.userid){
     if (await account.isAllow(session.userid, "A")){
     var countPromo = await stats.getStatPromo();
