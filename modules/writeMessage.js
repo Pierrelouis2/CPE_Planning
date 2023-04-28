@@ -163,7 +163,7 @@ async function sendMessageUsers(promo, filliere, message, planning=true) {
   let user_table = await queryDB(sql_get_user_table, [promo, filliere]);
   console.log(user_table);
   try{
-    user_table.forEach( async (user) => {
+    for (let user of user_table) {
         //let message2send = { text: message };
         //r = await callSendAPI(user.id_user, message2send);
         if (planning) {
