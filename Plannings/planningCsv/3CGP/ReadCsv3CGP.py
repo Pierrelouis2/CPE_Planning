@@ -3,7 +3,7 @@ import json
 from numpyencoder import NumpyEncoder
 import sys
 
-path = 'Plannings/planningCsv/3CGP/'
+path = 'Plannings/planningCsv/3CGP'
 
 # Read csv file
 # date = input("Date du planning (ex: 01_04) : ")
